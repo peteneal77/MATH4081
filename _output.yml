@@ -1,0 +1,17 @@
+bookdown::gitbook:
+  css: style.css
+  config:
+    toc:
+      before: |
+        <li><a href="./">MATH4081: Foundations of Statistics</a></li>
+      after: |
+        <li><a href="https://moodle.nottingham.ac.uk/course/view.php?id=134982" target="blank">MATH4081 Moodle Page</a></li>
+    edit: https://github.com/USERNAME/REPO/edit/BRANCH/%s
+    download: ["pdf", "epub"]
+bookdown::pdf_book:
+  includes:
+    in_header: preamble2.tex
+  latex_engine: xelatex
+  citation_package: natbib
+  keep_tex: yes
+bookdown::epub_book: default

@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Visualising data | Foundations of Statistics</title>
+  <meta name="description" content="Lecture Notes for Foundations of Statistics" />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Visualising data | Foundations of Statistics" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Lecture Notes for Foundations of Statistics" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Visualising data | Foundations of Statistics" />
+  
+  <meta name="twitter:description" content="Lecture Notes for Foundations of Statistics" />
+  
+
+<meta name="author" content="Prof Peter Neal and Dr Daniel Cavey" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="summary.html"/>
+<link rel="next" href="prob.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">MATH4081: Foundations of Statistics</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preliminaries</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#overview"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#tasks"><i class="fa fa-check"></i>Tasks</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#intro_stats"><i class="fa fa-check"></i><b>1.1</b> What is Statistics?</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#intro_population"><i class="fa fa-check"></i><b>1.2</b> Populations and samples</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#intro_data"><i class="fa fa-check"></i><b>1.3</b> Types of Data</a></li>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#intro_example"><i class="fa fa-check"></i><b>1.4</b> Some example datasets</a></li>
+<li class="chapter" data-level="1.5" data-path="intro.html"><a href="intro.html#intro_computing"><i class="fa fa-check"></i><b>1.5</b> Statistical Computing</a></li>
+<li class="chapter" data-level="1.6" data-path="intro.html"><a href="intro.html#intro_paradigm"><i class="fa fa-check"></i><b>1.6</b> The statistical paradigm</a></li>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#intro:R"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 1</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>2</b> Summary Statistics</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="summary.html"><a href="summary.html#summary_location"><i class="fa fa-check"></i><b>2.1</b> Measures of location</a></li>
+<li class="chapter" data-level="2.2" data-path="summary.html"><a href="summary.html#summary_spread"><i class="fa fa-check"></i><b>2.2</b> Measures of spread</a></li>
+<li class="chapter" data-level="2.3" data-path="summary.html"><a href="summary.html#summary_robust"><i class="fa fa-check"></i><b>2.3</b> Robustness of summary statistics</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="visual.html"><a href="visual.html"><i class="fa fa-check"></i><b>3</b> Visualising data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="visual.html"><a href="visual.html#visual_intro"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="visual.html"><a href="visual.html#visual_data-features"><i class="fa fa-check"></i><b>3.2</b> Some data features</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="visual.html"><a href="visual.html#visual_data-features_multi"><i class="fa fa-check"></i><b>3.2.1</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Multimodal distributions</strong></span></a></li>
+<li class="chapter" data-level="3.2.2" data-path="visual.html"><a href="visual.html#visual_data-features_symmetry"><i class="fa fa-check"></i><b>3.2.2</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Symmetry</strong></span></a></li>
+<li class="chapter" data-level="3.2.3" data-path="visual.html"><a href="visual.html#visual_data-features_outliers"><i class="fa fa-check"></i><b>3.2.3</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Outliers</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="visual.html"><a href="visual.html#visual_plot"><i class="fa fa-check"></i><b>3.3</b> Basic plot types</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="visual.html"><a href="visual.html#visual_plot_histo"><i class="fa fa-check"></i><b>3.3.1</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Histogram and bar charts</strong></span></a></li>
+<li class="chapter" data-level="3.3.2" data-path="visual.html"><a href="visual.html#visual_plot_density"><i class="fa fa-check"></i><b>3.3.2</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Density plots</strong></span></a></li>
+<li class="chapter" data-level="3.3.3" data-path="visual.html"><a href="visual.html#visual_plot_boxplot"><i class="fa fa-check"></i><b>3.3.3</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Boxplot</strong></span></a></li>
+<li class="chapter" data-level="3.3.4" data-path="visual.html"><a href="visual.html#visual_plot_cdf"><i class="fa fa-check"></i><b>3.3.4</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Cumulative frequency diagrams, and the empirical CDF</strong></span></a></li>
+<li class="chapter" data-level="3.3.5" data-path="visual.html"><a href="visual.html#visual_plot_stem"><i class="fa fa-check"></i><b>3.3.5</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Stem and leaf</strong></span></a></li>
+<li class="chapter" data-level="3.3.6" data-path="visual.html"><a href="visual.html#visual_plot_pie"><i class="fa fa-check"></i><b>3.3.6</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Pie charts</strong></span></a></li>
+<li class="chapter" data-level="3.3.7" data-path="visual.html"><a href="visual.html#visual_plot_dot"><i class="fa fa-check"></i><b>3.3.7</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Dotplots</strong></span></a></li>
+<li class="chapter" data-level="3.3.8" data-path="visual.html"><a href="visual.html#visual_plot_scatter"><i class="fa fa-check"></i><b>3.3.8</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Scatterplots</strong></span></a></li>
+<li class="chapter" data-level="3.3.9" data-path="visual.html"><a href="visual.html#visual_plot_summary"><i class="fa fa-check"></i><b>3.3.9</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Summary</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="visual.html"><a href="visual.html#visual_data"><i class="fa fa-check"></i><b>3.4</b> Commenting on data</a></li>
+<li class="chapter" data-level="" data-path="visual.html"><a href="visual.html#visual:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 2</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="prob.html"><a href="prob.html"><i class="fa fa-check"></i><b>4</b> Probability</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="prob.html"><a href="prob.html#prob:overview"><i class="fa fa-check"></i><b>4.1</b> Overview</a></li>
+<li class="chapter" data-level="4.2" data-path="prob.html"><a href="prob.html#prob:motivation"><i class="fa fa-check"></i><b>4.2</b> Motivation</a></li>
+<li class="chapter" data-level="4.3" data-path="prob.html"><a href="prob.html#prob:sample_space"><i class="fa fa-check"></i><b>4.3</b> Sample Space</a></li>
+<li class="chapter" data-level="4.4" data-path="prob.html"><a href="prob.html#prob:events"><i class="fa fa-check"></i><b>4.4</b> Events</a></li>
+<li class="chapter" data-level="4.5" data-path="prob.html"><a href="prob.html#prob:defn"><i class="fa fa-check"></i><b>4.5</b> Probability</a></li>
+<li class="chapter" data-level="4.6" data-path="prob.html"><a href="prob.html#prob:Conditional_Probability"><i class="fa fa-check"></i><b>4.6</b> Conditional probability</a></li>
+<li class="chapter" data-level="4.7" data-path="prob.html"><a href="prob.html#prob:mutual"><i class="fa fa-check"></i><b>4.7</b> Mutual Independence</a></li>
+<li class="chapter" data-level="" data-path="prob.html"><a href="prob.html#rv:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 3</strong></span></a></li>
+<li class="chapter" data-level="" data-path="prob.html"><a href="prob.html#prob:stud"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="rv.html"><a href="rv.html"><i class="fa fa-check"></i><b>5</b> Random Variables</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="rv.html"><a href="rv.html#rv:overview"><i class="fa fa-check"></i><b>5.1</b> Overview</a></li>
+<li class="chapter" data-level="5.2" data-path="rv.html"><a href="rv.html#rv:des"><i class="fa fa-check"></i><b>5.2</b> Random variables</a></li>
+<li class="chapter" data-level="5.3" data-path="rv.html"><a href="rv.html#rv:expect"><i class="fa fa-check"></i><b>5.3</b> Expectation</a></li>
+<li class="chapter" data-level="5.4" data-path="rv.html"><a href="rv.html#rv:bernoulli"><i class="fa fa-check"></i><b>5.4</b> Bernoulli distribution and its extension</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="rv.html"><a href="rv.html#rv:Bernoulli:bern"><i class="fa fa-check"></i><b>5.4.1</b> Bernoulli distribution</a></li>
+<li class="chapter" data-level="5.4.2" data-path="rv.html"><a href="rv.html#rv:Bernoulli:bin"><i class="fa fa-check"></i><b>5.4.2</b> Binomial Distribution</a></li>
+<li class="chapter" data-level="5.4.3" data-path="rv.html"><a href="rv.html#rv:Bernoulli:geom"><i class="fa fa-check"></i><b>5.4.3</b> Geometric Distribution</a></li>
+<li class="chapter" data-level="5.4.4" data-path="rv.html"><a href="rv.html#rv:Bernoulli:negbin"><i class="fa fa-check"></i><b>5.4.4</b> Negative binomial Distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="rv.html"><a href="rv.html#rv:Poisson"><i class="fa fa-check"></i><b>5.5</b> Poisson distribution</a></li>
+<li class="chapter" data-level="5.6" data-path="rv.html"><a href="rv.html#rv:exponential"><i class="fa fa-check"></i><b>5.6</b> Exponential distribution and its extensions</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="rv.html"><a href="rv.html#rv:exponential:exp"><i class="fa fa-check"></i><b>5.6.1</b> Exponential distribution</a></li>
+<li class="chapter" data-level="5.6.2" data-path="rv.html"><a href="rv.html#rv:exponential:gamma"><i class="fa fa-check"></i><b>5.6.2</b> Gamma distribution</a></li>
+<li class="chapter" data-level="5.6.3" data-path="rv.html"><a href="rv.html#rv:exponential:chi"><i class="fa fa-check"></i><b>5.6.3</b> Chi squared distribution</a></li>
+<li class="chapter" data-level="5.6.4" data-path="rv.html"><a href="rv.html#rv:exponential:beta"><i class="fa fa-check"></i><b>5.6.4</b> Beta distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="rv.html"><a href="rv.html#rv:normal"><i class="fa fa-check"></i><b>5.7</b> Normal (Gaussian) Distribution</a></li>
+<li class="chapter" data-level="" data-path="rv.html"><a href="rv.html#prob:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="jointdis.html"><a href="jointdis.html"><i class="fa fa-check"></i><b>6</b> Joint Distribution Functions</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="jointdis.html"><a href="jointdis.html#jointdis:intro"><i class="fa fa-check"></i><b>6.1</b> Overview</a></li>
+<li class="chapter" data-level="6.2" data-path="jointdis.html"><a href="jointdis.html#jointdis:cdf"><i class="fa fa-check"></i><b>6.2</b> Joint c.d.f. and p.d.f.</a></li>
+<li class="chapter" data-level="6.3" data-path="jointdis.html"><a href="jointdis.html#jointdis:marginal"><i class="fa fa-check"></i><b>6.3</b> Marginal c.d.f. and p.d.f.</a></li>
+<li class="chapter" data-level="6.4" data-path="jointdis.html"><a href="jointdis.html#jointdis:independent"><i class="fa fa-check"></i><b>6.4</b> Independent random variables</a></li>
+<li class="chapter" data-level="" data-path="jointdis.html"><a href="jointdis.html#jointdis:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercise</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="Sec_CLT.html"><a href="Sec_CLT.html"><i class="fa fa-check"></i><b>7</b> Central Limit Theorem and law of large numbers</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="Sec_CLT.html"><a href="Sec_CLT.html#Sec_CLT:intro"><i class="fa fa-check"></i><b>7.1</b> Introduction</a></li>
+<li class="chapter" data-level="7.2" data-path="Sec_CLT.html"><a href="Sec_CLT.html#Sec_CLT:statement"><i class="fa fa-check"></i><b>7.2</b> Statement of Central Limit Theorem</a></li>
+<li class="chapter" data-level="7.3" data-path="Sec_CLT.html"><a href="Sec_CLT.html#Sec_CLT:discrete"><i class="fa fa-check"></i><b>7.3</b> Central limit theorem for discrete random variables</a></li>
+<li class="chapter" data-level="7.4" data-path="Sec_CLT.html"><a href="Sec_CLT.html#Sec_CLT:LLN"><i class="fa fa-check"></i><b>7.4</b> Law of Large Numbers</a></li>
+<li class="chapter" data-level="" data-path="Sec_CLT.html"><a href="Sec_CLT.html#Sec_clt:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 4</strong></span></a></li>
+<li class="chapter" data-level="" data-path="Sec_CLT.html"><a href="Sec_CLT.html#Sec_clt:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="motivate.html"><a href="motivate.html"><i class="fa fa-check"></i><b>8</b> Motivation for Statistical Inference</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="motivate.html"><a href="motivate.html#motivate:intro"><i class="fa fa-check"></i><b>8.1</b> Introduction</a></li>
+<li class="chapter" data-level="8.2" data-path="motivate.html"><a href="motivate.html#motivate:example"><i class="fa fa-check"></i><b>8.2</b> Motivating example</a></li>
+<li class="chapter" data-level="8.3" data-path="motivate.html"><a href="motivate.html#motivate:assumption"><i class="fa fa-check"></i><b>8.3</b> Modelling assumptions</a></li>
+<li class="chapter" data-level="8.4" data-path="motivate.html"><a href="motivate.html#motivate:parametric"><i class="fa fa-check"></i><b>8.4</b> Parametric models</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="paraestimate.html"><a href="paraestimate.html"><i class="fa fa-check"></i><b>9</b> Parameter Estimation</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="paraestimate.html"><a href="paraestimate.html#paraestimate:intro"><i class="fa fa-check"></i><b>9.1</b> Introduction</a></li>
+<li class="chapter" data-level="9.2" data-path="paraestimate.html"><a href="paraestimate.html#paraestimate:prelim"><i class="fa fa-check"></i><b>9.2</b> Preliminaries</a></li>
+<li class="chapter" data-level="9.3" data-path="paraestimate.html"><a href="paraestimate.html#paraestimate:judge"><i class="fa fa-check"></i><b>9.3</b> Judging estimators</a></li>
+<li class="chapter" data-level="9.4" data-path="paraestimate.html"><a href="paraestimate.html#paraestimate:variance"><i class="fa fa-check"></i><b>9.4</b> Sample Variance</a></li>
+<li class="chapter" data-level="" data-path="paraestimate.html"><a href="paraestimate.html#paraestimate:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 5</strong></span></a></li>
+<li class="chapter" data-level="" data-path="paraestimate.html"><a href="paraestimate.html#paraestimate:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="MLE.html"><a href="MLE.html"><i class="fa fa-check"></i><b>10</b> Techniques for Deriving Estimators</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="MLE.html"><a href="MLE.html#MLE:intro"><i class="fa fa-check"></i><b>10.1</b> Introduction</a></li>
+<li class="chapter" data-level="10.2" data-path="MLE.html"><a href="MLE.html#MLE:moments"><i class="fa fa-check"></i><b>10.2</b> Method of Moments</a></li>
+<li class="chapter" data-level="10.3" data-path="MLE.html"><a href="MLE.html#MLE:MLE"><i class="fa fa-check"></i><b>10.3</b> Maximum likelihood estimation</a></li>
+<li class="chapter" data-level="10.4" data-path="MLE.html"><a href="MLE.html#MLE:comments"><i class="fa fa-check"></i><b>10.4</b> Comments on the Maximum Likelihood Estimator</a></li>
+<li class="chapter" data-level="" data-path="MLE.html"><a href="MLE.html#MLE:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="MLEprop.html"><a href="MLEprop.html"><i class="fa fa-check"></i><b>11</b> Additional Properties of Estimators</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:intro"><i class="fa fa-check"></i><b>11.1</b> Introduction</a></li>
+<li class="chapter" data-level="11.2" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:sufficient"><i class="fa fa-check"></i><b>11.2</b> Sufficiency</a></li>
+<li class="chapter" data-level="11.3" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:MVE"><i class="fa fa-check"></i><b>11.3</b> Minimum variance estimators</a></li>
+<li class="chapter" data-level="11.4" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:asymptotic"><i class="fa fa-check"></i><b>11.4</b> Asymptotic normality of the MLE</a></li>
+<li class="chapter" data-level="11.5" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:invariance"><i class="fa fa-check"></i><b>11.5</b> Invariance property</a></li>
+<li class="chapter" data-level="" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 6</strong></span></a></li>
+<li class="chapter" data-level="" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="CondDis.html"><a href="CondDis.html"><i class="fa fa-check"></i><b>12</b> Conditional Distribution and Conditional Expectation</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="CondDis.html"><a href="CondDis.html#CondDis:CondDis"><i class="fa fa-check"></i><b>12.1</b> Conditional distribution</a></li>
+<li class="chapter" data-level="12.2" data-path="CondDis.html"><a href="CondDis.html#CondDis:CondExpect"><i class="fa fa-check"></i><b>12.2</b> Conditional expectation</a></li>
+<li class="chapter" data-level="12.3" data-path="CondDis.html"><a href="CondDis.html#CondDis:Independence"><i class="fa fa-check"></i><b>12.3</b> Independent random variables</a></li>
+<li class="chapter" data-level="" data-path="CondDis.html"><a href="CondDis.html#CondDis:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercise</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="Correlation.html"><a href="Correlation.html"><i class="fa fa-check"></i><b>13</b> Expectation, Covariance and Correlation</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="Correlation.html"><a href="Correlation.html#Correlation:Expectation"><i class="fa fa-check"></i><b>13.1</b> Expectation of a function of random variables</a></li>
+<li class="chapter" data-level="13.2" data-path="Correlation.html"><a href="Correlation.html#Correlation:Covariance"><i class="fa fa-check"></i><b>13.2</b> Covariance</a></li>
+<li class="chapter" data-level="13.3" data-path="Correlation.html"><a href="Correlation.html#Correlation:Correlation"><i class="fa fa-check"></i><b>13.3</b> Correlation</a></li>
+<li class="chapter" data-level="" data-path="Correlation.html"><a href="Correlation.html#Correlation:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 7</strong></span></a></li>
+<li class="chapter" data-level="" data-path="Correlation.html"><a href="Correlation.html#Correlation:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="Transform.html"><a href="Transform.html"><i class="fa fa-check"></i><b>14</b> Transformations of random variables</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="Transform.html"><a href="Transform.html#Transform:intro"><i class="fa fa-check"></i><b>14.1</b> Introduction</a></li>
+<li class="chapter" data-level="14.2" data-path="Transform.html"><a href="Transform.html#Transform:univariate"><i class="fa fa-check"></i><b>14.2</b> Univariate case</a></li>
+<li class="chapter" data-level="14.3" data-path="Transform.html"><a href="Transform.html#Transform:bivariate"><i class="fa fa-check"></i><b>14.3</b> Bivariate case</a></li>
+<li class="chapter" data-level="" data-path="Transform.html"><a href="Transform.html#Transform:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercise</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="MV_Normal.html"><a href="MV_Normal.html"><i class="fa fa-check"></i><b>15</b> Multivariate Normal Distribution</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="MV_Normal.html"><a href="MV_Normal.html#MV_Normal:intro"><i class="fa fa-check"></i><b>15.1</b> Introduction</a></li>
+<li class="chapter" data-level="15.2" data-path="MV_Normal.html"><a href="MV_Normal.html#MV_Normal:multi"><i class="fa fa-check"></i><b>15.2</b> <span class="math inline">\(n\)</span>-Dimensional Normal Distribution</a></li>
+<li class="chapter" data-level="" data-path="MV_Normal.html"><a href="MV_Normal.html#MV_Normal:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 8</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html"><i class="fa fa-check"></i><b>16</b> Introduction to Linear Models</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:intro"><i class="fa fa-check"></i><b>16.1</b> Introduction</a></li>
+<li class="chapter" data-level="16.2" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:stat"><i class="fa fa-check"></i><b>16.2</b> Statistical models</a></li>
+<li class="chapter" data-level="16.3" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:linear"><i class="fa fa-check"></i><b>16.3</b> The linear model</a></li>
+<li class="chapter" data-level="16.4" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:Gauss"><i class="fa fa-check"></i><b>16.4</b> The Normal (Gaussian) linear model</a></li>
+<li class="chapter" data-level="16.5" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:residuals"><i class="fa fa-check"></i><b>16.5</b> Residuals</a></li>
+<li class="chapter" data-level="16.6" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:line"><i class="fa fa-check"></i><b>16.6</b> Straight Line, Horizontal Line and Quadratic Models</a></li>
+<li class="chapter" data-level="16.7" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:Examples"><i class="fa fa-check"></i><b>16.7</b> Examples</a></li>
+<li class="chapter" data-level="16.8" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:Prediction"><i class="fa fa-check"></i><b>16.8</b> Prediction</a></li>
+<li class="chapter" data-level="16.9" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:Nested"><i class="fa fa-check"></i><b>16.9</b> Nested Models</a></li>
+<li class="chapter" data-level="" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercise</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html"><i class="fa fa-check"></i><b>17</b> Least Squares Estimation for Linear Models</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:intro"><i class="fa fa-check"></i><b>17.1</b> Introduction</a></li>
+<li class="chapter" data-level="17.2" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:algebra"><i class="fa fa-check"></i><b>17.2</b> Linear algebra review</a></li>
+<li class="chapter" data-level="17.3" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:derive"><i class="fa fa-check"></i><b>17.3</b> Deriving the least squares estimator</a></li>
+<li class="chapter" data-level="17.4" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:examples"><i class="fa fa-check"></i><b>17.4</b> Examples</a></li>
+<li class="chapter" data-level="17.5" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:beta"><i class="fa fa-check"></i><b>17.5</b> Properties of the estimator of <span class="math inline">\(\mathbf{\beta}\)</span></a></li>
+<li class="chapter" data-level="17.6" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:GaussMarkov"><i class="fa fa-check"></i><b>17.6</b> Gauss-Markov Theorem</a></li>
+<li class="chapter" data-level="" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 9</strong></span></a></li>
+<li class="chapter" data-level="" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="Interval_Estimation.html"><a href="Interval_Estimation.html"><i class="fa fa-check"></i><b>18</b> Interval Estimation</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="Interval_Estimation.html"><a href="Interval_Estimation.html#Interval_Estimation:intro"><i class="fa fa-check"></i><b>18.1</b> Introduction</a></li>
+<li class="chapter" data-level="18.2" data-path="Interval_Estimation.html"><a href="Interval_Estimation.html#Interval_Estimation:confident"><i class="fa fa-check"></i><b>18.2</b> Confident?</a></li>
+<li class="chapter" data-level="18.3" data-path="Interval_Estimation.html"><a href="Interval_Estimation.html#Interval_Estimation:CI"><i class="fa fa-check"></i><b>18.3</b> Confidence intervals</a></li>
+<li class="chapter" data-level="18.4" data-path="Interval_Estimation.html"><a href="Interval_Estimation.html#Interval_Estimation:MLE"><i class="fa fa-check"></i><b>18.4</b> Asymptotic distribution of the MLE</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html"><i class="fa fa-check"></i><b>19</b> Hypothesis Testing</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:intro"><i class="fa fa-check"></i><b>19.1</b> Introduction to hypothesis testing</a></li>
+<li class="chapter" data-level="19.2" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:errors"><i class="fa fa-check"></i><b>19.2</b> Type I and Type II errors</a></li>
+<li class="chapter" data-level="19.3" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:normal_known"><i class="fa fa-check"></i><b>19.3</b> Tests for normal means, <span class="math inline">\(\sigma\)</span> known</a></li>
+<li class="chapter" data-level="19.4" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:p_values"><i class="fa fa-check"></i><b>19.4</b> <span class="math inline">\(p\)</span> values</a></li>
+<li class="chapter" data-level="19.5" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:normal_unknown"><i class="fa fa-check"></i><b>19.5</b> Tests for normal means, <span class="math inline">\(\sigma\)</span> unknown</a></li>
+<li class="chapter" data-level="19.6" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:twosided"><i class="fa fa-check"></i><b>19.6</b> Confidence intervals and two-sided tests</a></li>
+<li class="chapter" data-level="19.7" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:variance"><i class="fa fa-check"></i><b>19.7</b> Distribution of the variance</a></li>
+<li class="chapter" data-level="19.8" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:other"><i class="fa fa-check"></i><b>19.8</b> Other types of tests</a></li>
+<li class="chapter" data-level="19.9" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:samplesize"><i class="fa fa-check"></i><b>19.9</b> Sample size calculation</a></li>
+<li class="chapter" data-level="" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 10</strong></span></a></li>
+<li class="chapter" data-level="" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html"><i class="fa fa-check"></i><b>20</b> Hypothesis Testing Discrete Data</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html#Hypo_Test_Discrete:intro"><i class="fa fa-check"></i><b>20.1</b> Introduction</a></li>
+<li class="chapter" data-level="20.2" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html#Hypo_Test_Discrete:motivate"><i class="fa fa-check"></i><b>20.2</b> Goodness-of-fit motivating example</a></li>
+<li class="chapter" data-level="20.3" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html#Hypo_Test_Discrete:GoF"><i class="fa fa-check"></i><b>20.3</b> Goodness-of-fit</a></li>
+<li class="chapter" data-level="20.4" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html#Hypo_Test_Discrete:Independence"><i class="fa fa-check"></i><b>20.4</b> Testing Independence</a></li>
+<li class="chapter" data-level="" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html#Hypo_Test_Discrete:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 11</strong></span></a></li>
+<li class="chapter" data-level="" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html#Hypo_Test_Discrete:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="Sec_Linear_hypo_test.html"><a href="Sec_Linear_hypo_test.html"><i class="fa fa-check"></i><b>21</b> Basic Hypothesis Tests for Linear Models</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="Sec_Linear_hypo_test.html"><a href="Sec_Linear_hypo_test.html#Sec_Linear_hypo_test:intro"><i class="fa fa-check"></i><b>21.1</b> Introduction</a></li>
+<li class="chapter" data-level="21.2" data-path="Sec_Linear_hypo_test.html"><a href="Sec_Linear_hypo_test.html#Sec_Linear_hypo_test:single"><i class="fa fa-check"></i><b>21.2</b> Tests on a single parameter</a></li>
+<li class="chapter" data-level="21.3" data-path="Sec_Linear_hypo_test.html"><a href="Sec_Linear_hypo_test.html#Sec_Linear_hypo_test:CI"><i class="fa fa-check"></i><b>21.3</b> Confidence intervals for parameters</a></li>
+<li class="chapter" data-level="21.4" data-path="Sec_Linear_hypo_test.html"><a href="Sec_Linear_hypo_test.html#Sec_Linear_hypo_test:F"><i class="fa fa-check"></i><b>21.4</b> Tests for the existence of regression</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html"><i class="fa fa-check"></i><b>22</b> ANOVA Tables and F Tests</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:Intro"><i class="fa fa-check"></i><b>22.1</b> Introduction</a></li>
+<li class="chapter" data-level="22.2" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:residuals"><i class="fa fa-check"></i><b>22.2</b> The residuals</a></li>
+<li class="chapter" data-level="22.3" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:SS"><i class="fa fa-check"></i><b>22.3</b> Sums of squares</a></li>
+<li class="chapter" data-level="22.4" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:ANOVA"><i class="fa fa-check"></i><b>22.4</b> Analysis of Variance (ANOVA)</a></li>
+<li class="chapter" data-level="22.5" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:Compare"><i class="fa fa-check"></i><b>22.5</b> Comparing models</a></li>
+<li class="chapter" data-level="22.6" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:seq"><i class="fa fa-check"></i><b>22.6</b> Sequential sum of squares</a></li>
+<li class="chapter" data-level="" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 12</strong></span></a></li>
+<li class="chapter" data-level="" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="introR.html"><a href="introR.html"><i class="fa fa-check"></i><b>23</b> Introduction to R</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="introR.html"><a href="introR.html#introR_what"><i class="fa fa-check"></i><b>23.1</b> What are R, RStudio and R Markdown?</a></li>
+<li class="chapter" data-level="23.2" data-path="introR.html"><a href="introR.html#introR_UoN"><i class="fa fa-check"></i><b>23.2</b> Starting RStudio on the UoN Network</a></li>
+<li class="chapter" data-level="23.3" data-path="introR.html"><a href="introR.html#introR_download"><i class="fa fa-check"></i><b>23.3</b> Downloading R and RStudio</a></li>
+<li class="chapter" data-level="23.4" data-path="introR.html"><a href="introR.html#introR_start"><i class="fa fa-check"></i><b>23.4</b> Getting started in R</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="Rmark.html"><a href="Rmark.html"><i class="fa fa-check"></i><b>24</b> What is R Markdown?</a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="Rmark.html"><a href="Rmark.html#Rmark_start"><i class="fa fa-check"></i><b>24.1</b> Getting started</a></li>
+<li class="chapter" data-level="24.2" data-path="Rmark.html"><a href="Rmark.html#Rmark_R"><i class="fa fa-check"></i><b>24.2</b> R in R Markdown</a></li>
+<li class="chapter" data-level="24.3" data-path="Rmark.html"><a href="Rmark.html#Rmark_text"><i class="fa fa-check"></i><b>24.3</b> Text in R markdown</a></li>
+<li class="chapter" data-level="24.4" data-path="Rmark.html"><a href="Rmark.html#Rmark_maths"><i class="fa fa-check"></i><b>24.4</b> Mathematics in R Markdown</a></li>
+<li class="chapter" data-level="24.5" data-path="Rmark.html"><a href="Rmark.html#Rmark_work"><i class="fa fa-check"></i><b>24.5</b> Worked Example</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://moodle.nottingham.ac.uk/course/view.php?id=128925" target="blank">MATH4081 Moodle Page</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Foundations of Statistics</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="visual" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Visualising data<a href="visual.html#visual" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="visual_intro" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Introduction<a href="visual.html#visual_intro" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We have seen different ways of creating numerical summaries:</p>
+<ul>
+<li><a href="summary.html#summary_location">Measures of location</a>: Mean, median, mode.<br />
+</li>
+<li><a href="summary.html#summary_spread">Measures of spread</a>: Variance, standard deviation, interquartile range.</li>
+</ul>
+<p>A numerical summary is useful but a single number (or a few numbers) can only tell us so much about the data.</p>
+<p>Studying the data values if there are hundreds or thousands of observations is going to be hard to take in.</p>
+<p>Therefore, “if a picture paints a thousand words” then <strong>“a plot captures a thousand data points”!</strong></p>
+<p>In this chapter we’ll start by talking about some data features to look out for,
+then some particular types of plots. In <a href="visual.html#visual_data-features">Section 3.2</a>, we discuss basic features of the data such as <a href="visual.html#visual_data-features_multi">multimodality</a>, <a href="visual.html#visual_data-features_symmetry">symmetry</a> and <a href="visual.html#visual_data-features_outliers">outliers</a>. In <a href="visual.html#visual_plot">Section 3.3</a>, we present a wide range of different graphical ways of presenting data and we summarise the pros and cons of the different methods in a <a href="visual.html#visual_plot_summary">summary</a>. Finally, in <a href="visual.html#visual_data">Section 3.4</a>, we draw together the considerations in summarising and visualising data.</p>
+</div>
+<div id="visual_data-features" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Some data features<a href="visual.html#visual_data-features" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In describing either the way in which observations in a sample are
+dispersed, or the features of a random variable, we talk about the
+<strong>distribution</strong> of the observations or random variable.</p>
+<p>The observations are our <strong>sample</strong> of data, whereas the random variable
+represents the <strong>population</strong> from which the data are drawn.</p>
+<p>It is important
+at this stage to distinguish between describing the sample of data and making
+inferences about the population from which the data are drawn.
+Plotting
+the data and obtaining numerical summaries for the data should give some
+idea of the equivalent features in the population, provided the sample
+size is large enough.</p>
+<p>Hence when describing features in plots, the description should pick out
+features of the data itself but it should also include inferences about
+the population distribution the data are drawn from. If the sample size
+is very small then we may comment that few or no inferences can be made.
+When displaying data graphically we can see not only where the data are
+located and how they are dispersed but also the general shape of the
+distribution and if there are any interesting features.</p>
+<div id="visual_data-features_multi" class="section level3 hasAnchor" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> <span style="color: rgba(207, 0, 15, 1);"><strong>Multimodal distributions</strong></span><a href="visual.html#visual_data-features_multi" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We also use the word <strong>mode</strong> to describe where a distribution has a <em>local</em> maximum. Then we can call a distribution unimodal (one peak),
+bimodal (two peaks) or
+multimodal (multiple peaks), e.g. as shown in Figure <a href="visual.html#fig:figUniBiMultiModal">3.1</a>.</p>
+<center>
+<div class="figure"><span style="display:block;" id="fig:figUniBiMultiModal"></span>
+<img src="_main_files/figure-html/figUniBiMultiModal-1.png" alt="Distributions with different numbers of modes." width="80%" />
+<p class="caption">
+Figure 3.1: Distributions with different numbers of modes.
+</p>
+</div>
+</center>
+<p>Sometimes there are gaps in the data, like in Figure <a href="visual.html#fig:figGappy">3.2</a></p>
+<center>
+<div class="figure"><span style="display:block;" id="fig:figGappy"></span>
+<img src="_main_files/figure-html/figGappy-1.png" alt="A bimodal distribution with a gap." width="80%" />
+<p class="caption">
+Figure 3.2: A bimodal distribution with a gap.
+</p>
+</div>
+</center>
+<p>This can suggest the data are grouped in some way and it may be difficult
+to summarise the data with single summary statistics. (Imagine Figure <a href="visual.html#fig:figGappy">3.2</a> represents heights of people on a school trip—what could explain the distribution looking gappy like that?)</p>
+<p>In such cases, then it may be appropriate to give, for example, more than one measure of location.</p>
+</div>
+<div id="visual_data-features_symmetry" class="section level3 hasAnchor" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> <span style="color: rgba(207, 0, 15, 1);"><strong>Symmetry</strong></span><a href="visual.html#visual_data-features_symmetry" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The summary statistics we looked at previously were all measures of location or
+spread—they tell us nothing about the symmetry of the distribution.</p>
+<p>There is another summary statistic called <strong>skewness</strong> which measures the
+<em>assymmetry</em> of a distribution.</p>
+The sample skewness for a sample
+<span class="math inline">\(x_1 , x_2 , \ldots , x_n\)</span>, of observations is defined as:
+<center>
+<span class="math display">\[ g = \frac{1}{n} \sum\limits_{i=1}^n \left( \frac{x_i - {\bar{x}}}{s} \right) ^3 ,\]</span>
+</center>
+<p>where <span class="math inline">\(\bar{x}\)</span> and <span class="math inline">\(s\)</span> are the sample mean and standard deviation
+respectively.</p>
+<p>A perfectly symmetric distribution has a skewness of zero.</p>
+<p>A distribution with skewness greater than zero is said to be positively
+skewed, or skewed to the right (meaning the right ‘tail’ is longer).</p>
+<p>A distribution with skewness less than zero is said to be negatively skewed,
+or skewed to the left (the left ‘tail’ is longer).</p>
+<center>
+<div class="figure"><span style="display:block;" id="fig:figSkewness"></span>
+<img src="_main_files/figure-html/figSkewness-1.png" alt="Symmetric and asymmetric (skewed) distributions." width="80%" />
+<p class="caption">
+Figure 3.3: Symmetric and asymmetric (skewed) distributions.
+</p>
+</div>
+</center>
+</div>
+<div id="visual_data-features_outliers" class="section level3 hasAnchor" number="3.2.3">
+<h3><span class="header-section-number">3.2.3</span> <span style="color: rgba(207, 0, 15, 1);"><strong>Outliers</strong></span><a href="visual.html#visual_data-features_outliers" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>An outlier is an observation which is in some sense extreme. In the
+context of a single sample of observations on one random variable,
+outliers are observations that are well above or well below the other
+values in the data. For example, the observation of 3.83 in the <a href="intro.html#intro_example">Cavendish dataset</a> considered in <a href="summary.html#summary_robust">Section 2.3</a>. All such extreme observations should be checked if
+possible to ensure they are correct values. It is important to identify
+any outliers in a data set as they can considerably distort numeric
+summaries or analytical methods (robustness).</p>
+<p>In cases when an observation appears to be an outlier and no reason for
+the extreme measurement is found, the data could be analysed both with
+the outlier included and once it has been removed. Thus the distortion
+due to the outlier can be fully assessed.</p>
+</div>
+</div>
+<div id="visual_plot" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Basic plot types<a href="visual.html#visual_plot" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="visual_plot_histo" class="section level3 hasAnchor" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> <span style="color: rgba(207, 0, 15, 1);"><strong>Histogram and bar charts</strong></span><a href="visual.html#visual_plot_histo" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Whenever more than about twenty observations are involved, it is often
+helpful to group the observations in a <strong>frequency table</strong>. Frequency
+tables are also helpful when constructing histograms as we shall see in
+a moment. We write <span class="math inline">\(f_i\)</span> for the frequency of observation <span class="math inline">\(x_i\)</span>
+(<span class="math inline">\(i = 1,\ldots,k)\)</span>. A frequency table shows how many observations fall
+into various classes defined by categorising the observations into
+groups, see the <a href="intro.html#intro_example">Coursework marks</a> example. The choice of which classes to use is somewhat arbitrary, but
+since it affects the visual impression given by the data when forming a
+histogram, the choice should be made with care.</p>
+<p>The following are guidelines:</p>
+<ol style="list-style-type: decimal">
+<li><p>For continuous data, we usually choose consecutive intervals of the
+same width. For discrete data, the individual values are used if
+this is reasonable, but if the data are sparse it may be necessary
+to classify the observations into consecutive groups of values with
+the same number of values in each group. In either case, care is
+needed when specifying the intervals so that ambiguities are
+avoided.</p></li>
+<li><p>Interval or group sizes should be chosen so that most frequencies
+(of observations in a class) are of a moderate size compared with
+the total number of observations. For example, data on the heights
+of 100 individuals which range from 160cm to 190cm might be grouped
+easily in intervals of 2cm or possibly 5cm but not 1mm or 50cm.</p></li>
+</ol>
+<p>Once we have constructed a frequency table we can construct a
+<strong>histogram</strong> easily as the data have already been grouped. When drawing
+a histogram the classification intervals are represented by the scale on
+the abscissa (‘x-axis’) of a graph (N.B. sometimes the midpoints of the
+intervals are used as the scale on the abscissa) and rectangles are
+drawn on this base so that the <em>area</em> of the rectangle is <em>proportional
+to the frequency</em> of observations in the class. The unit on the ordinate
+(‘y-axis’) is the number of observations per unit class interval. Note
+that the <em>heights</em> of the rectangle will be <em>proportional to
+frequencies</em> if and only if class intervals of <em>equal</em> size are used.</p>
+<p>Histograms are usually given in terms of <em>frequency</em> (number of occurrences) but can alternatively be given in terms of <em>density</em>. Density rescales the histogram so that the area in the rectangles sum to one. The shape of the histogram is thus not affected but the y-axis is rescaled. Frequency has a simple interpretation whereas density allows us to compare two samples of different size (heights of the population of Nottingham, approximately 337,000 individuals with heights of the population of Long Eaton, approximately 39,000 individuals) and to compare with probability distributions.</p>
+<div id="example007" class="ex">
+<p><span style="color: rgba(207, 0, 15, 1);"> <strong>IQ Scores</strong> </span> The I.Q. of 100 people chosen at random was
+measured, resulting in the following frequency table:</p>
+<table>
+<tbody>
+<tr class="odd">
+<td align="center">I.Q.</td>
+<td align="right"># of people (frequency)</td>
+</tr>
+<tr class="even">
+<td align="center">IQ <span class="math inline">\(\leq\)</span> 80</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="center">80 <span class="math inline">\(&lt;\)</span> IQ <span class="math inline">\(\leq\)</span> 90</td>
+<td align="right">12</td>
+</tr>
+<tr class="even">
+<td align="center">90 <span class="math inline">\(&lt;\)</span> IQ <span class="math inline">\(\leq\)</span> 100</td>
+<td align="right">37</td>
+</tr>
+<tr class="odd">
+<td align="center">100 <span class="math inline">\(&lt;\)</span> IQ <span class="math inline">\(\leq\)</span> 110</td>
+<td align="right">30</td>
+</tr>
+<tr class="even">
+<td align="center">110 <span class="math inline">\(&lt;\)</span> IQ <span class="math inline">\(\leq\)</span> 120</td>
+<td align="right">19</td>
+</tr>
+<tr class="odd">
+<td align="center">120 <span class="math inline">\(&lt;\)</span> IQ <span class="math inline">\(\leq\)</span> 130</td>
+<td align="right">2</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>A histogram of these data is:</p>
+<center>
+<div class="figure"><span style="display:block;" id="fig:figIQHistogram"></span>
+<img src="_main_files/figure-html/figIQHistogram-1.png" alt="Histogram of the IQ data" width="80%" />
+<p class="caption">
+Figure 3.4: Histogram of the IQ data
+</p>
+</div>
+</center>
+<p>Remember: frequency should be <em>proportional to area</em>, and so for unequal
+class widths one should plot the frequency density. For the IQ data, if we wanted 110-130 to be one class, compare:</p>
+<center>
+<div class="figure"><span style="display:block;" id="fig:fig-IQ-histogram-2"></span>
+<img src="_main_files/figure-html/fig-IQ-histogram-2-1.png" alt="Histogram of IQ data with unequal bar widths: wrong and right versions" width="45%" /><img src="_main_files/figure-html/fig-IQ-histogram-2-2.png" alt="Histogram of IQ data with unequal bar widths: wrong and right versions" width="45%" />
+<p class="caption">
+Figure 3.5: Histogram of IQ data with unequal bar widths: wrong and right versions
+</p>
+</div>
+</center>
+<p>When the data are discrete an alternative and better form of
+graphical representation is a <strong>bar chart</strong> with the heights of the bars
+representing frequencies, see Figure <a href="visual.html#fig:barg">3.6</a>.</p>
+<center>
+<div class="figure"><span style="display:block;" id="fig:barg"></span>
+<img src="_main_files/figure-html/barg-1.png" alt="Goals scored in each of 32 FA Cup third round matches" width="80%" />
+<p class="caption">
+Figure 3.6: Goals scored in each of 32 FA Cup third round matches
+</p>
+</div>
+</center>
+</div>
+<div id="visual_plot_density" class="section level3 hasAnchor" number="3.3.2">
+<h3><span class="header-section-number">3.3.2</span> <span style="color: rgba(207, 0, 15, 1);"><strong>Density plots</strong></span><a href="visual.html#visual_plot_density" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>For continuous data, the histogram gives an approximation of the underlying distribution. The width and choice of endpoints of the intervals for the histogram affect the plot. Also for most continuous distributions we assume that a small change in value leads to a small change, up or down, in the likelihood of the value occurring. For example, the chance of an adult male being 169.9cm tall is unlikely to be very different to the chance of being 170.1cm tall. However, if we break the histogram into 5cm intervals with intervals 165cm-170cm and 170cm-175cm the height of the bars could be significantly different suggesting a big change in the likelihood of the heights.</p>
+<p>In Figure <a href="visual.html#fig:histograms-intervals">3.7</a> are 3 histograms for the same data, a sample of heights (<em>cm</em>) of 100 UK adult males. Histograms 1 and 3 use intervals of length 5<em>cm</em> but different starting points for the intervals. Histogram 2 uses intervals of length 2<em>cm</em>.</p>
+<center>
+<div class="figure"><span style="display:block;" id="fig:histograms-intervals"></span>
+<img src="_main_files/figure-html/histograms-intervals-1.png" alt="Histograms with different intervals" width="33%" /><img src="_main_files/figure-html/histograms-intervals-2.png" alt="Histograms with different intervals" width="33%" /><img src="_main_files/figure-html/histograms-intervals-3.png" alt="Histograms with different intervals" width="33%" />
+<p class="caption">
+Figure 3.7: Histograms with different intervals
+</p>
+</div>
+</center>
+<p>The heights (frequencies) differ between histograms 1 and 3 and histogram 2 due to the different interval widths. In Figure <a href="visual.html#fig:histograms-intervals-den">3.8</a> we re-plot the histograms using density so the areas sum to 1 and we can perform a direct comparison.</p>
+<center>
+<div class="figure"><span style="display:block;" id="fig:histograms-intervals-den"></span>
+<img src="_main_files/figure-html/histograms-intervals-den-1.png" alt="Histograms with different intervals" width="33%" /><img src="_main_files/figure-html/histograms-intervals-den-2.png" alt="Histograms with different intervals" width="33%" /><img src="_main_files/figure-html/histograms-intervals-den-3.png" alt="Histograms with different intervals" width="33%" />
+<p class="caption">
+Figure 3.8: Histograms with different intervals
+</p>
+</div>
+</center>
+<p>An alternative to the histogram is a density plot. A density plot uses the data to estimate the distribution of the population using an approach known as <em>kernel smoothing</em>. Kernel smoothing estimates the probability density function (pdf) of the distribution of the population which is a measure of how likely a particular value is to occur. We will give a formal definition of the pdf in <a href="#rv_des">Section 5.2</a>.
+This approach removes the need to specify intervals for values as for the histogram and produces a continuous approximation of the density, how likely values are. In Figure <a href="visual.html#fig:density-height">3.9</a>, we illustrate with the UK adult male height data and also superimpose the density plot on histogram 1 to show the similarities.</p>
+<center>
+<div class="figure"><span style="display:block;" id="fig:density-height"></span>
+<img src="_main_files/figure-html/density-height-1.png" alt="Histograms with different intervals" width="40%" /><img src="_main_files/figure-html/density-height-2.png" alt="Histograms with different intervals" width="40%" />
+<p class="caption">
+Figure 3.9: Histograms with different intervals
+</p>
+</div>
+</center>
+<p><strong>NB.</strong> Histograms and density plots of data may not bear much resemblance to distribution
+of population when the sample size, <span class="math inline">\(n\)</span>, is <em>small</em>, although as <span class="math inline">\(n\)</span>
+increases the histogram and density plot should resemble the population distribution
+more closely.</p>
+<p>In Figure <a href="visual.html#fig:histograms-various-n">3.10</a>, we plot histograms of random samples of sizes <span class="math inline">\(n = 15, 100, 1000\)</span> of UK adult males with the true population distribution’s pdf superimposed (red).</p>
+<center>
+<div class="figure"><span style="display:block;" id="fig:histograms-various-n"></span>
+<img src="_main_files/figure-html/histograms-various-n-1.png" alt="Histograms with different intervals" width="33%" /><img src="_main_files/figure-html/histograms-various-n-2.png" alt="Histograms with different intervals" width="33%" /><img src="_main_files/figure-html/histograms-various-n-3.png" alt="Histograms with different intervals" width="33%" />
+<p class="caption">
+Figure 3.10: Histograms with different intervals
+</p>
+</div>
+</center>
+<p>The plots in Figure <a href="visual.html#fig:histograms-various-n">3.10</a> are repeated in Figure <a href="visual.html#fig:density-various-n">3.11</a> using density plot instead of histogram. We note that for small <span class="math inline">\(n\)</span> the density plot (estimate of the pdf) is rather bumpy with multiple modes and we would probably prefer the stability and unimodality of the histogram, whereas for large <span class="math inline">\(n\)</span>, the density plot (estimate of the pdf) offers a better approximation for the underlying continuous distribution (true population pdf).</p>
+<center>
+<div class="figure"><span style="display:block;" id="fig:density-various-n"></span>
+<img src="_main_files/figure-html/density-various-n-1.png" alt="Density plots - sample (black) and population (red)" width="33%" /><img src="_main_files/figure-html/density-various-n-2.png" alt="Density plots - sample (black) and population (red)" width="33%" /><img src="_main_files/figure-html/density-various-n-3.png" alt="Density plots - sample (black) and population (red)" width="33%" />
+<p class="caption">
+Figure 3.11: Density plots - sample (black) and population (red)
+</p>
+</div>
+</center>
+<p>The following <strong>R</strong> Shiny app allows you to investigate data features along with histograms and density plots further for a data set comprising of marks of 3 groups of students on a maths test.</p>
+<details>
+<summary>
+A summary of Maths Test data
+</summary>
+<p>The <strong>R</strong> Shiny app allows you to explore the data for the score (out of 120) on a Maths test for 1500 students.</p>
+<p>The data is comprised of 500 students in each of three categories:</p>
+<ul>
+<li>A-level mathematics students;<br />
+</li>
+<li>No A-level mathematics students;<br />
+</li>
+<li>Undergraduate students in mathematics.</li>
+</ul>
+<p>Any combination of the three groups of students can be viewed with a histogram and/or density plot of the marks shown. The histogram and/or density plots can be plotted using frequency (counts of observations in each bin of the histogram) or density (the area in the histogram/under the density plot sums to 1).</p>
+<p>The mean, median and interquartile range of the data can also be plotted.</p>
+<p>This data exhibits a range of behaviours depending upon what subsets of the data are considered. These include:</p>
+<ul>
+<li>Symmetry<br />
+</li>
+<li>Skewness (positive and negative)<br />
+</li>
+<li>Unimodality<br />
+</li>
+<li>Bi and multiple-modality</li>
+</ul>
+We observe that if we exclude the A-level mathematics students then the mean and median are <em>atypical</em> values falling between the two modes.
+</details>
+<p>R Shiny app: <a href="https://shiny-new.maths.nottingham.ac.uk/pmzpn/DataFeatures/">Data Features</a></p>
+</div>
+<div id="visual_plot_boxplot" class="section level3 hasAnchor" number="3.3.3">
+<h3><span class="header-section-number">3.3.3</span> <span style="color: rgba(207, 0, 15, 1);"><strong>Boxplot</strong></span><a href="visual.html#visual_plot_boxplot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We have already seen that the lower quartile, median and upper quartile
+split the data into four portions. Together with the lowest value in the
+sample and the highest value in the sample, these statistics form the
+<em>five-number summary</em>:</p>
+<div id="example008" class="ex">
+<p><span style="color: rgba(207, 0, 15, 1);"> <strong>Coursework marks</strong> </span><br />
+The <em>five-number summary</em> for the coursework marks data given in <a href="intro.html#intro_example">Section 1.4</a> are:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">min</th>
+<th align="center"><span class="math inline">\(Q_1\)</span></th>
+<th align="center">median</th>
+<th align="center"><span class="math inline">\(Q_3\)</span></th>
+<th align="center">max</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">34</td>
+<td align="center">44</td>
+<td align="center">46</td>
+<td align="center">48</td>
+<td align="center">50</td>
+</tr>
+</tbody>
+</table>
+<p>Between each statistic fall 25% of the observations. The simplest form
+of the <strong>boxplot</strong> is simply a visual presentation of the five number
+summary as follows:</p>
+</div>
+<center>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-18"></span>
+<img src="_main_files/figure-html/unnamed-chunk-18-1.png" alt="A boxplot depicting the five-number summary" width="672" />
+<p class="caption">
+Figure 3.12: A boxplot depicting the five-number summary
+</p>
+</div>
+</center>
+<p>Here the box is drawn with its left hand edge at the lower quartile
+and right hand edge at the upper quartile. A line is drawn at the median
+that divides the box in two. From the centre of each end of the box, a
+line is drawn to the minimum and maximum of the values in the sample.
+These lines are sometimes called <strong>whiskers</strong> and the plots are
+sometimes called box-and-whisker plots. There are other variations of
+the boxplot but this is the simplest version. Sometimes
+extreme observations called <strong>outliers</strong> (see later) are picked out and denoted
+with either a ‘*’ or ‘o’ to stop them from influencing the whiskers too
+much. In fact, the <code>boxplot</code> function in <strong>R</strong> does this by default:</p>
+<center>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-20"></span>
+<img src="_main_files/figure-html/unnamed-chunk-20-1.png" alt="A boxplot with an outlier picked out" width="672" />
+<p class="caption">
+Figure 3.13: A boxplot with an outlier picked out
+</p>
+</div>
+</center>
+</div>
+<div id="visual_plot_cdf" class="section level3 hasAnchor" number="3.3.4">
+<h3><span class="header-section-number">3.3.4</span> <span style="color: rgba(207, 0, 15, 1);"><strong>Cumulative frequency diagrams, and the empirical CDF</strong></span><a href="visual.html#visual_plot_cdf" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The <strong>cumulative frequency</strong> at <span class="math inline">\(x\)</span> is defined as the number of
+observations less than or equal to <span class="math inline">\(x\)</span>. The <em>relative</em> cumulative
+frequency, often written as <span class="math inline">\(\hat{F}(x)\)</span>, is the cumulative frequency of <span class="math inline">\(x\)</span> divided by the total number of
+observations <span class="math inline">\(n\)</span>.</p>
+<p><span class="math inline">\(\hat{ F}(x)\)</span> is also called the <strong>empirical cumulative distribution
+function</strong> (empirical cdf). The cumulative distribution function (cdf) for the population, denoted <span class="math inline">\(F(x)\)</span>, is the probability of observing an observation in the population taking a value less than or equal to <span class="math inline">\(x\)</span>. <span class="math inline">\(F(x)\)</span> is an increasing (strictly non-decreasing) function in <span class="math inline">\(x\)</span> with the rate of change in the cdf determined by the pdf introduced in discussions of the <a href="visual.html#visual_plot_density">density plot</a>.
+We will introduce the cdf formally in <a href="rv.html#rv:des">Section 5.2</a>.</p>
+<p>A cumulative frequency diagram involves plotting the cumulative
+frequency at <span class="math inline">\(x\)</span> versus <span class="math inline">\(x\)</span>. If the data are grouped continuous data (<a href="visual.html#example007">IQ scores</a>)
+then straight lines are drawn between the upper class boundaries, and if
+the data are discrete,goals per FA cup match, Figure <a href="visual.html#fig:barg">3.6</a>, or ungrouped data then a step function is used. This is illustrated in Figure <a href="visual.html#fig:fig-ecdfs">3.14</a>.</p>
+<div id="example007a" class="ex">
+<p><span style="color: rgba(207, 0, 15, 1);"> <strong>IQ Scores (revisited)</strong> </span><br />
+The cumulative frequency and relative cumulative
+frequency for the I.Q. data above are:</p>
+<table>
+<tbody>
+<tr class="odd">
+<td align="right"><span class="math inline">\(x\)</span></td>
+<td align="right">Cum. freq.</td>
+<td align="right"><span class="math inline">\(\hat F(x)\)</span></td>
+</tr>
+<tr class="even">
+<td align="right">80</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="right">90</td>
+<td align="right">12</td>
+<td align="right">0.12</td>
+</tr>
+<tr class="even">
+<td align="right">100</td>
+<td align="right">49</td>
+<td align="right">0.49</td>
+</tr>
+<tr class="odd">
+<td align="right">110</td>
+<td align="right">79</td>
+<td align="right">0.79</td>
+</tr>
+<tr class="even">
+<td align="right">120</td>
+<td align="right">98</td>
+<td align="right">0.98</td>
+</tr>
+<tr class="odd">
+<td align="right">130</td>
+<td align="right">100</td>
+<td align="right">1.00</td>
+</tr>
+</tbody>
+</table>
+</div>
+<center>
+<div class="figure"><span style="display:block;" id="fig:fig-ecdfs"></span>
+<img src="_main_files/figure-html/fig-ecdfs-1.png" alt="Empirical cdf plots for the 'Goals' and 'IQ' data sets" width="45%" /><img src="_main_files/figure-html/fig-ecdfs-2.png" alt="Empirical cdf plots for the 'Goals' and 'IQ' data sets" width="45%" />
+<p class="caption">
+Figure 3.14: Empirical cdf plots for the ‘Goals’ and ‘IQ’ data sets
+</p>
+</div>
+</center>
+<p>The median can be estimated from a cumulative frequency diagram by
+finding the value <span class="math inline">\(x\)</span> corresponding to cumulative frequency of <span class="math inline">\(n/2\)</span> (or
+<span class="math inline">\(\hat F(x) = 0.5\)</span> if using the empirical CDF).</p>
+<p>In <a href="visual.html#video5">Video 5</a> we study comparing the empriical distribution (pdf and cdf) with the random variable (population) the observations come from. This comparison is done using an <strong>R Shiny</strong> app which gives the histogram and estimate of the probability density function. A link to the <strong>R Shiny</strong> app is provided after the video to allow you to explore these features for yourself.</p>
+<div id="video5" class="des">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Video 5: Empirical pdf and cdf</strong></span></p>
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1355621/sp/135562100/embedIframeJs/uiconf_id/13188771/partner_id/1355621?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_ge0o82fd&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_k78bxj6f" width="640" height="420" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Empirical PDF and CDF FINAL VERSION">
+</iframe>
+</div>
+<p>R Shiny app: <a href="https://shiny-new.maths.nottingham.ac.uk/pmzpn/pdf_cdf_QQ/">pdf-cdf-QQ</a></p>
+</div>
+<div id="visual_plot_stem" class="section level3 hasAnchor" number="3.3.5">
+<h3><span class="header-section-number">3.3.5</span> <span style="color: rgba(207, 0, 15, 1);"><strong>Stem and leaf</strong></span><a href="visual.html#visual_plot_stem" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>One way of representing both discrete or continuous data is to use a
+<strong>stem-and-leaf plot</strong>. This plot is similar to a bar chart/histogram
+but contains more information. It is best described by way of an
+example.</p>
+<div id="example009" class="ex">
+<p><span style="color: rgba(207, 0, 15, 1);"> <strong>Seeds data</strong> </span><br />
+In the routine testing of consignments of seeds,
+the following procedure is used. From a consignment 100 seeds are
+selected and kept under controlled conditions. The number of seeds which
+have germinated after 14 days is counted. This procedure is repeated 40
+times with the following results:</p>
+<table>
+<tbody>
+<tr class="odd">
+<td align="center">88</td>
+<td align="center">87</td>
+<td align="center">85</td>
+<td align="center">91</td>
+<td align="center">93</td>
+<td align="center">91</td>
+<td align="center">94</td>
+<td align="center">87</td>
+<td align="center">90</td>
+<td align="center">91</td>
+</tr>
+<tr class="even">
+<td align="center">92</td>
+<td align="center">87</td>
+<td align="center">91</td>
+<td align="center">89</td>
+<td align="center">87</td>
+<td align="center">90</td>
+<td align="center">88</td>
+<td align="center">85</td>
+<td align="center">90</td>
+<td align="center">92</td>
+</tr>
+<tr class="odd">
+<td align="center">89</td>
+<td align="center">86</td>
+<td align="center">91</td>
+<td align="center">92</td>
+<td align="center">91</td>
+<td align="center">91</td>
+<td align="center">93</td>
+<td align="center">93</td>
+<td align="center">87</td>
+<td align="center">90</td>
+</tr>
+<tr class="even">
+<td align="center">91</td>
+<td align="center">91</td>
+<td align="center">89</td>
+<td align="center">90</td>
+<td align="center">90</td>
+<td align="center">91</td>
+<td align="center">91</td>
+<td align="center">93</td>
+<td align="center">92</td>
+<td align="center">85</td>
+</tr>
+</tbody>
+</table>
+<p>The range of data is <span class="math inline">\(94 - 85 = 9\)</span> and we divide this range into
+intervals of fixed length as we would for a histogram.</p>
+</div>
+<p>For a stem-and-leaf plot we usually make the class interval either 0.5,
+1 or 2 times a power of ten and aim for between 4 and 10 intervals. Of
+course, this is sometimes not possible for very small data sets. For
+these data an interval of two seems appropriate as this will give us 5
+or 6 intervals. Next we draw a vertical line. On the left of this
+vertical line we mark the interval boundaries in increasing order but
+note only the first few digits that are in common to the observation in
+the interval. This is called the <strong>stem</strong>. We then go through the
+observations one by one, noting down the next significant digit on the
+right-hand side of the appropriate stem. This forms the <strong>leaves</strong>. Here
+we obtain:</p>
+<table>
+<tbody>
+<tr class="odd">
+<td>8</td>
+<td>|</td>
+<td>5</td>
+<td>5</td>
+<td>5</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>|</td>
+<td>7</td>
+<td>7</td>
+<td>7</td>
+<td>7</td>
+<td>6</td>
+<td>7</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>8</td>
+<td>|</td>
+<td>8</td>
+<td>9</td>
+<td>8</td>
+<td>9</td>
+<td>9</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>9</td>
+<td>|</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>|</td>
+<td>3</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>2</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>9</td>
+<td>|</td>
+<td>4</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>The first stem (line) contains any values of 84 and 85, the second stem
+of 86 and 87, and so on. Note that by allowing the first stem to
+represent 84 &amp; 85 we have ensured that there are stems for 88 &amp; 89 and
+90 &amp; 91 and no stem for 89 &amp; 90 — a stem which would be very difficult
+to enter on a plot! A final version of the plot is found by ordering the
+digits within each stem. For these data the final stem-and-leaf plot is</p>
+<table>
+<tbody>
+<tr class="odd">
+<td>8</td>
+<td>|</td>
+<td>5</td>
+<td>5</td>
+<td>5</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>|</td>
+<td>6</td>
+<td>7</td>
+<td>7</td>
+<td>7</td>
+<td>7</td>
+<td>7</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>8</td>
+<td>|</td>
+<td>8</td>
+<td>8</td>
+<td>9</td>
+<td>9</td>
+<td>9</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>9</td>
+<td>|</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>|</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>9</td>
+<td>|</td>
+<td>4</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="visual_plot_pie" class="section level3 hasAnchor" number="3.3.6">
+<h3><span class="header-section-number">3.3.6</span> <span style="color: rgba(207, 0, 15, 1);"><strong>Pie charts</strong></span><a href="visual.html#visual_plot_pie" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>When we wish to display proportions of observations in a sample that take each of a discrete
+number of values, a <strong>pie chart</strong> is sometimes used:</p>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-piechart"></span>
+<img src="_main_files/figure-html/fig-piechart-1.png" alt="Pie chart of eye colour of people in Britain" width="90%" />
+<p class="caption">
+Figure 3.15: Pie chart of eye colour of people in Britain
+</p>
+</div>
+</center>
+<p>However, there are many drawbacks with pie charts, especially when the
+number of categories is large, or when some categories have small frequencies,
+and the comparison of groups with similar proportions is difficult.
+If you’re thinking about using a pie chart then I suggest: stop, and ask yourself whether
+a bar chart would be clearer!</p>
+<p>Figure <a href="visual.html#fig:opec-example-pie">3.16</a> is a pie chart showing the proportion of oil production by different
+OPEC countries in 2016.</p>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:opec-example-pie"></span>
+<img src="_main_files/figure-html/opec-example-pie-1.png" alt="Pie chart of oil production by OPEC members" width="90%" />
+<p class="caption">
+Figure 3.16: Pie chart of oil production by OPEC members
+</p>
+</div>
+</center>
+<p>And Figure <a href="visual.html#fig:opec-example-bar">3.17</a> is a bar chart showing the same data. Which do you find the clearer?</p>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:opec-example-bar"></span>
+<img src="_main_files/figure-html/opec-example-bar-1.png" alt="Bar chart of oil production by OPEC members" width="80%" />
+<p class="caption">
+Figure 3.17: Bar chart of oil production by OPEC members
+</p>
+</div>
+</center>
+</div>
+<div id="visual_plot_dot" class="section level3 hasAnchor" number="3.3.7">
+<h3><span class="header-section-number">3.3.7</span> <span style="color: rgba(207, 0, 15, 1);"><strong>Dotplots</strong></span><a href="visual.html#visual_plot_dot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A <strong>dotplot</strong> displays each data value as a dot, and is used for both continuous and discrete data. It is usually used only
+when the sample size is small, otherwise the plot quickly gets overcrowded.
+Here is a dotplot for the <span class="math inline">\(n=29\)</span> Cavendish data values.</p>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-dotplot1"></span>
+<img src="_main_files/figure-html/fig-dotplot1-1.png" alt="Simple dot plot of the Cavendish data" width="95%" />
+<p class="caption">
+Figure 3.18: Simple dot plot of the Cavendish data
+</p>
+</div>
+</center>
+<p>The ‘overplotting’ makes it
+difficult to see how many data values there are in the middle of the data set. Sometimes to make things a bit clear some ‘jitter’ (randomness) is added in the y direction and/or the points are made slightly transparent, both of which help a lot in this case:</p>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-dotplot1jittered"></span>
+<img src="_main_files/figure-html/fig-dotplot1jittered-1.png" alt="Dot plot of the Cavendish data with some jitter and transparency" width="95%" />
+<p class="caption">
+Figure 3.19: Dot plot of the Cavendish data with some jitter and transparency
+</p>
+</div>
+</center>
+<p>For discrete data the dots are stacked above the
+horizontal axis. The result is something
+similar to a bar chart, but showing individual points.
+Here is a dotplot for the
+seed data:</p>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-dotplot2"></span>
+<img src="_main_files/figure-html/fig-dotplot2-1.png" alt="Dot plot of some discrete seed count data" width="65%" />
+<p class="caption">
+Figure 3.20: Dot plot of some discrete seed count data
+</p>
+</div>
+</center>
+</div>
+<div id="visual_plot_scatter" class="section level3 hasAnchor" number="3.3.8">
+<h3><span class="header-section-number">3.3.8</span> <span style="color: rgba(207, 0, 15, 1);"><strong>Scatterplots</strong></span><a href="visual.html#visual_plot_scatter" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In addition to displaying the data on each random variable as above,
+when we have data that consists of observations on two or more random
+variables, it is useful to try and assess any relationships between
+random variables by using a <strong>scatterplot</strong>. A scatterplot is simply a
+graph with one random variable as abscissa and another random variable
+as ordinate. A point is plot on the graph for each element of data at
+the observed values of the two random variables,see Figure
+<a href="visual.html#fig:fig-scatterplot1">3.21</a>.</p>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-scatterplot1"></span>
+<img src="_main_files/figure-html/fig-scatterplot1-1.png" alt="Scatter plot of number of seeds versus average temperature (40 observations)" width="70%" />
+<p class="caption">
+Figure 3.21: Scatter plot of number of seeds versus average temperature (40 observations)
+</p>
+</div>
+</center>
+<p>This is very useful for exploring the relationship between two variables. In the above example we observe that the number of seeds which germinate increases linearly with temperature. We can extend the approach to comparing more than two variables by producing
+a <strong>scatterplot matrix</strong>
+which consists of scatterplots for every pair of random variables, see
+Figure <a href="visual.html#fig:fig-scatterplot2">3.22</a>.</p>
+<center>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-scatterplot2"></span>
+<img src="_main_files/figure-html/fig-scatterplot2-1.png" alt="A scatterplot matrix for three variables (100 observations)" width="95%" />
+<p class="caption">
+Figure 3.22: A scatterplot matrix for three variables (100 observations)
+</p>
+</div>
+</center>
+</div>
+<div id="visual_plot_summary" class="section level3 hasAnchor" number="3.3.9">
+<h3><span class="header-section-number">3.3.9</span> <span style="color: rgba(207, 0, 15, 1);"><strong>Summary</strong></span><a href="visual.html#visual_plot_summary" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Histogram/Dotplot</strong></span></p>
+<p><em>Pros:</em> Gives a good impression of the distribution of the data.</p>
+<p><em>Cons:</em> The histogram is sensitive to the classes chosen to group
+observations – giving only a vague impression of the data.</p>
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Density plot</strong></span></p>
+<p><em>Pros:</em> Represents continuous distribution by a continuous function (density) aoviding the discretisation of histograms.</p>
+<p><em>Cons:</em> Over-interprets individual observations for small sample sizes often leading to erroneous multi-modality.</p>
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Boxplot</strong></span></p>
+<p><em>Pros:</em> Good for comparing different samples or groups of observations on
+the same random variable. Gives a good quick summary of the data.</p>
+<p><em>Cons:</em> Gives no feel for the number of observations involved. Hides
+multiple modes.</p>
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Stem and leaf plot</strong></span></p>
+<p><em>Pros:</em> Gives indication of general shape and other distributional
+features while allowing actual data values to be recovered.</p>
+<p><em>Cons:</em> Difficult to use for comparative purposes – suffers from lack of
+clarity.</p>
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Pie chart</strong></span></p>
+<p><em>Pros:</em> Looks nice.</p>
+<p><em>Cons:</em> Only useful for comparing the relative proportions of observations
+in a small number of categories. Difficult to compare categories with
+similar frequencies, or very small frequencies.</p>
+</div>
+</div>
+<div id="visual_data" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Commenting on data<a href="visual.html#visual_data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>When we describe a data set in words, often to complement a plot, here are some things worth commenting about:</p>
+<ul>
+<li><em>Location</em> - what is a typical value?<br />
+</li>
+<li><em>Spread</em> - how dispersed are the observations?<br />
+</li>
+<li><em>Multiple modes</em> - is there one or more ‘peaks’ (and why)?<br />
+</li>
+<li><em>Symmetry/skewness</em> - is skewness positive, negative, roughly zero?<br />
+</li>
+<li><em>Outliers</em> - are there any unusual observations?<br />
+</li>
+<li><em>Any other interesting patterns or features</em> - e.g. are two variables related?</li>
+</ul>
+<p>We have given an overview of summarising data, both numerically (location and spread) and graphically. We are now in position to consider the mathematical underpinnings of statistics through the introduction of probability.</p>
+</div>
+<div id="visual:lab" class="section level2 unnumbered hasAnchor">
+<h2><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 2</strong></span><a href="visual.html#visual:lab" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In <a href="Rmark.html#Rmark">Section 24</a>, an introduction using to <strong>R Markdown</strong> is given.</p>
+<p>Work through <a href="Rmark.html#Rmark">Section 24</a> and then attempt to complete the <strong>R Markdown</strong> file for Session 2:<br />
+<a href="https://moodle.nottingham.ac.uk/course/view.php?id=134982#section-2">Session 2: Plots in R</a></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="summary.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="prob.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/03-visualising-data.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

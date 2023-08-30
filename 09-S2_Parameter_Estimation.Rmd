@@ -1,0 +1,439 @@
+# Parameter Estimation {#paraestimate}
+
+## Introduction {#paraestimate:intro}
+
+In this section, we consider the general definition of a statistic as a summary of a random sample. Statistics are used as [*estimators*](#paraestimate:def:estimator) of population quantities with an [*estimate*](#paraestimate:def:estimate) denoting a given realisation of an estimator. We explore key properties that we wish estimators to have such as [*unbiasedness*](#paraestimate:def:def_unbiased), [*efficiency*](#paraestimate:def:efficient) and [*consistency*](#paraestimate:def:consistent). We study the properties of the sample mean and sample variance as estimators of the population mean and variance, respectively.
+
+
+## Preliminaries {#paraestimate:prelim}
+
+:::{.def #paraestimate:def:statistic}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Definition 9.2.1.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Statistic**</span>  
+
+A *statistic*, $T(\mathbf{X})$, is any function of the random sample.
+:::
+
+Note that since $T(\mathbf{X})$ is a function of random variables, it is also a random variable. Hence it will also have all the properties of a random variable.  Most importantly, it has a distribution associated with it.
+
+:::{.def #paraestimate:def:estimator}  
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Definition 9.2.2.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Estimator**</span>  
+
+A statistic that is used for the purpose of estimating an unknown population parameter is called an *estimator*.
+:::
+
+:::{.def #paraestimate:def:estimate}  
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Definition 9.2.3.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Estimate**</span>  
+
+A realised value of an estimator, $T(\mathbf{x})$, that is the value of $T(\mathbf{X})$ evaluated at a particular outcome of the random sample, is called an *estimate*.
+:::
+
+That is, if we let $Y = T (\mathbf{X})$ then $Y$ is a random variable and $y= T (\mathbf{x})$ is a realisation of the random variable $Y$ based on the sample $\mathbf{x} = (x_1, x_2, \ldots, x_n)$. The properties of the estimator $T (\mathbf{X})$ will typically depend upon $n$, the number of observations in the random sample. 
+
+
+:::{.ex #paraestimate:ex:income_ex}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Example 9.2.4.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Average Income**</span> 
+
+Suppose that we want to estimate the average annual income in the U.K.  Let $X_1,X_2,\dots,X_n$ be a random sample of annual incomes.  Possible estimators might include:
+
+- $T_1(\mathbf{X}) = \frac{X_1 + X_2 + \cdots + X_n}{n}$;
+- $T_2(\mathbf{X}) = \min \{X_1,X_2,\dots,X_n\}$;
+- $T_3(\mathbf{X}) = X_1$.
+
+Which of these is the best choice of estimator?
+:::
+
+
+## Judging estimators {#paraestimate:judge}
+
+Let $\theta$ be a population parameter we wish to estimate.  Since any function of the sample data is a potential estimator of $\theta$, how should we determine whether an estimator is good or not?  What qualities should our estimator have?
+
+<span style="color: rgba(207, 0, 15, 1);">**Quality 1:** Unbiasedness</span> 
+
+:::{.def #paraestimate:def:def_unbiased}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Definition 9.3.1.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Unbiased**</span>  
+
+The estimator $T(\mathbf{X})$ is an *unbiased* estimate of $\theta$ if
+$$E \left[ T(\mathbf{X}) \right] = \theta.$$
+Otherwise, we say that the estimator $T(\mathbf{X})$ is biased and we define $$B(T) = E \left[  T(\mathbf{X}) \right] - \theta$$ to be the *bias* of $T$.
+:::
+
+:::{.def #paraestimate:def:asym_unbiased}  
+<span style="color: rgba(207, 0, 15, 1);">**Asymptotically unbiased**</span>  
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Definition 9.3.2.}
+```
+If $B(T) \rightarrow 0$ as the sample size $n \rightarrow \infty$, then we say that $T(\mathbf{X})$ is *asymptotically unbiased* for $\theta$.
+:::
+
+<span style="color: rgba(207, 0, 15, 1);">**Quality 2:** Small variance</span> 
+
+:::{.def #paraestimate:def:efficient}  
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Definition 9.3.3.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Efficiency**</span>  
+
+If two estimators $T_1(\mathbf{X})$ and $T_2(\mathbf{X})$ are both unbiased for $\theta$, then $T_1(\mathbf{X})$ is said to be *more efficient* than $T_2(\mathbf{X})$ if
+<center>
+$$var \left( T_1(\mathbf{X}) \right) < var \left( T_2(\mathbf{X}) \right).$$
+</center>
+:::
+
+We would ideally like an estimator that is unbiased with a small variance.  So given multiple unbiased estimators, we choose the most efficient estimator (the estimator with the smallest variance).  
+
+
+For comparing an estimator with a biased estimator, we can use the mean-square error to quantify the trade-off between bias and variance:
+
+:::{.def #paraestimate:def:MSE} 
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Definition 9.3.1.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Mean-square error**</span>  
+
+The *mean-square error* of an estimator is defined by
+
+<center>
+$$\text{MSE}(T) = E \left[ \left( T(\mathbf{X}) - \theta \right) ^2 \right].$$
+</center>
+:::
+
+:::{.ex #paraesimate:exer:MSE}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Example 9.3.5.}
+```
+Prove $\text{MSE}(T) = \text{var} (T) + \left( B(T) \right)^2$.
+:::
+
+
+Watch [Video 16](#video16) for the proof of [Example 9.3.5](#paraesimate:exer:MSE). 
+
+```{asis, include=knitr::is_html_output()}
+:::{.des #video16}
+<span style="color: rgba(207, 0, 15, 1);">**Video 16: Derivation of MSE**</span>  
+
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1355621/sp/135562100/embedIframeJs/uiconf_id/13188771/partner_id/1355621?iframeembed=true&playerId=kaltura_player&entry_id=1_l2469xgp&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_w54rxh9f" width="640" height="420" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Mean Square Error FINAL VERSION"></iframe>
+:::
+```
+
+```{asis, include=knitr::is_latex_output()}
+Watch [\textcolor{blue}{Video 16: Derivation of MSE}](https://mediaspace.nottingham.ac.uk/media/Mean+Square+Error+FINAL+VERSION/1_l2469xgp)
+```  
+
+<details><summary>Proof of Example 9.3.5.</summary>
+:::{.prf}
+The first step is to note that we can write  
+<center>  
+\begin{eqnarray*} 
+T (\mathbf{X}) - \theta &=& T (\mathbf{X}) - E[T (\mathbf{X})] + E[T (\mathbf{X})] - \theta \\ 
+&=& T (\mathbf{X}) - E[T (\mathbf{X})] + B(T). 
+\end{eqnarray*}  
+</center>  
+Therefore  
+<center>  
+\begin{eqnarray*} E \left[ \left( T(\mathbf{X}) - \theta \right) ^2 \right] &=& 
+E \left[ \left( T (\mathbf{X}) - E[T (\mathbf{X})] + B(T) \right) ^2 \right] \\
+&=& 
+E \left[ \left( T (\mathbf{X}) - E[T (\mathbf{X})] \right)^2 + 2 B(T) \left( T (\mathbf{X}) - E[T (\mathbf{X})] \right) + B(T)^2\right] \\
+&=& E \left[ \left( T (\mathbf{X}) - E[T (\mathbf{X})] \right)^2 \right] + 2 E \left[ B(T) \left( T (\mathbf{X}) - E[T (\mathbf{X})] \right) \right] + E \left[ B(T)^2\right]. 
+\end{eqnarray*}  
+</center>  
+Since $B(T)$ is a constant, the middle term in the above equation is  
+<center>  
+\begin{eqnarray*} 
+2 E \left[ B(T) \left( T (\mathbf{X}) - E[T (\mathbf{X})] \right) \right]  &=& 2 B(T) E \left[ T (\mathbf{X}) - E[T (\mathbf{X})] \right] \\ &=& 2 B(T) \left\{E[T (\mathbf{X})] -E[T (\mathbf{X})] \right\} =0. 
+\end{eqnarray*}   
+</center>  
+Therefore, since $E \left[ \left( T (\mathbf{X}) - E[T (\mathbf{X})] \right)^2 \right] = var (T (\mathbf{X}))$, we have that  
+<center>
+$$ E \left[ \left( T(\mathbf{X}) - \theta \right) ^2 \right]  = var (T (\mathbf{X})) + 0 + B(T)^2 $$  
+</center>
+as required.  
+:::
+</details>
+
+<span style="color: rgba(207, 0, 15, 1);">**Quality 3:** Consistency</span> 
+
+:::{.def #paraestimate:def:consistent}  
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Definition 9.3.6.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Consistency**</span>  
+
+An estimator $T(\mathbf{X})$ is said to be a *consistent* estimator for $\theta$ if
+
+<center>
+$$T(\mathbf{X}) \stackrel{p}{\longrightarrow} \theta, \qquad \text{ as } n \rightarrow \infty.$$
+</center>
+:::
+
+Remember convergence in probability ($\stackrel{p}{\longrightarrow}$) is defined in [Section 7.4](#Sec_CLT:LLN), and the definition of [consistency](#paraestimate:def:consistent) implies that, for any $\epsilon >0$,  
+<center>
+$$ P (|T (\mathbf{X})- \theta|> \epsilon) \rightarrow 0 \qquad \text{ as } n \rightarrow \infty.$$  
+</center>
+That is, as $n$ becomes large the probability that $T(\mathbf{X})$ differs from $\theta$ by more than $\epsilon$, for any positive $\epsilon$, becomes small and goes to 0 as $n \rightarrow \infty$.
+
+This third desirable property can sometimes be established using the following theorem:
+
+:::{.thm #paraestimate:thm:consistent_estimator_thm}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Theorem 9.3.7.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Consistency Theorem**</span> 
+
+If $E \left[ T(\mathbf{X}) \right] \rightarrow \theta$ and $\text{Var} \left( T(\mathbf{X}) \right) \rightarrow 0$ as $n \rightarrow \infty$, then $T(\mathbf{X})$ is a consistent estimator for $\theta$.
+:::
+
+Note that the [**Consistency Theorem**](#paraestimate:thm:consistent_estimator_thm) gives sufficient but not necessary conditions for consistency.  Since by [Example 9.3.5](#paraesimate:exer:MSE) $\text{MSE}(T) = \text{var} (T) + \left( B(T) \right)^2$, the [**Consistency Theorem**](#paraestimate:thm:consistent_estimator_thm) implies that if $\text{MSE}(T) \rightarrow 0$ as $n \rightarrow \infty$, then $T(\mathbf{X})$ is a consistent estimator for $\theta$.
+
+
+:::{.ex #paraestimate:exer:xbar}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Example 9.3.8.}
+```
+\
+Suppose $X_1,X_2,\ldots,X_n$ is a random sample from any population with mean $\mu$ and variance $\sigma^2$. The sample mean is $\bar{X} = \frac{1}{n} \sum_{i=1}^n X_i$ and is an estimator of $\mu$.  What are the properties of $\bar{X}$?
+:::
+
+:::{.ans}
+Firstly, we can show that $\bar{X}$ is unbiased:
+<center>
+\begin{align*}
+E[\bar{X}] &= E \left[ \frac{1}{n} \left( X_1 + X_2 + \ldots + X_n \right) \right] \\
+&= \frac{1}{n} \left\{ E [X_1] + E[X_2] + \ldots + E[X_n] \right\} \\
+&= \frac{1}{n} \left\{ \mu + \mu + \ldots + \mu \right\} \\
+&= \frac{1}{n} n \mu \\
+&= \mu.
+\end{align*}
+</center>
+
+The variance of $\bar{X}$ is $\frac{\sigma^2}{n}$ since:  
+<center>
+\begin{align*}
+var(\bar{X}) &= var \left( \frac{1}{n} \sum_{i=1}^n X_i \right) \\ 
+&= \frac{1}{n^2} \sum_{i=1}^n \text{Var}(X_i) \\
+&= \frac{1}{n^2} \sum_{i=1}^n \sigma^2 \\
+&= \frac{1}{n^2} n\sigma^2 \\
+&= \frac{\sigma^2}{n}.
+\end{align*}
+</center>
+
+Given that $\bar{X}$ is an unbiased estimator the mean-square error of $\bar{X}$ is equal to $var(\bar{X})=\frac{\sigma^2}{n}$.
+
+
+Since $E[\bar{X}] \rightarrow \mu$ and $var(\bar{X}) \rightarrow 0$ as $n \rightarrow \infty$, it follows from the [**Consistency Theorem**](#paraestimate:thm:consistent_estimator_thm) that $\bar{X}$ is a consistent estimator for $\mu$.
+:::
+\
+
+We return to [Average Income Example](#paraestimate:ex:income_ex) concerning the average annual income in the UK. 
+
+It follows from [Example 9.3.8](#paraestimate:exer:xbar) that  
+<center>  
+$$T_1 (\mathbf{X}) = \frac{X_1 + X_2 +\ldots + X_n}{n}$$  
+</center>  
+is an unbiased and consistent estimator of the mean annual income. 
+
+Let $L$ denote the lowest annual income in the UK. Then 
+<center>
+$$ T_2 (\mathbf{X}) = \min \{ X_1, X_2, \ldots, X_n \} \rightarrow L \qquad \mbox{ as } n \rightarrow \infty. $$  
+</center>  
+Except in the case $n=1$, the mean of $T_2 (\mathbf{X})$ will be below the mean annual income (the exact value will depend on the distribution of annual incomes) and will become smaller as $n$ increases with the limit $L$ as $n \rightarrow \infty$.
+
+The final estimator $T_3 (\mathbf{X}) =X_1$ is unbiased as $E[X_1]$ is the average annual income. However, for all $n =1,2,\ldots$, $var (T_3 (\mathbf{X})) = var (X_1)$ and unless the annual income is constant, $var (X_1)>0$. Therefore $T_3 (\mathbf{X})$ is not a consistent estimator since the estimator, and hence its variance, does not change as we increase the sample size.
+
+
+
+## Sample Variance {#paraestimate:variance}
+
+:::{.ex #paraestimate:ex:variance_estimator_ex}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Example 9.4.1.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Variance Estimator**</span> 
+
+Suppose $X_1,X_2,\ldots,X_n$ is a random sample from any population with mean $\mu$ and variance $\sigma^2$. Consider the estimator  
+<center>
+$$ \hat{\sigma}^2\ = \frac{1}{n} \sum\limits_{i=1}^{n} \left( X_i - \bar{X} \right)^2.$$  
+</center>  
+:::
+
+
+
+
+Before considering the estimator $\hat{\sigma}^2$ in [Example 9.4.1](#paraestimate:ex:variance_estimator_ex) we prove [Lemma 9.4.2](#paraestimate:lem:square_split) which is useful in manipulating sums of squares.
+
+:::{.lem #paraestimate:lem:square_split}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Lemma 9.4.2.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Splitting square**</span> 
+
+<center>
+\begin{eqnarray*}
+\sum\limits_{i=1}^{n} (X_i - \mu)^2 &=& \sum\limits_{i=1}^{n} (X_i - \bar{X})^2 + \sum\limits_{i=1}^{n} (\bar{X} - \mu)^2 \\ &=& \sum\limits_{i=1}^{n} (X_i - \bar{X})^2 + n (\bar{X} - \mu)^2.
+\end{eqnarray*}
+</center>
+:::
+
+:::{.prf #paraestimate:lemprf:square_split}
+The proof uses the same approach to that given for the $MSE (T)$ in [Example 9.3.5](#paraesimate:exer:MSE) in that we can write
+<center>
+\begin{eqnarray*} \sum\limits_{i=1}^{n} (X_i - \mu)^2 &=& \sum\limits_{i=1}^{n} (X_i - \bar{X} + \bar{X} - \mu)^2  \\
+&=& \sum\limits_{i=1}^{n} \left\{ (X_i - \bar{X})^2 + 2 (X_i - \bar{X}) (\bar{X}-\mu) + (\bar{X} - \mu)^2 \right\} \\
+&=& \sum\limits_{i=1}^{n}  (X_i - \bar{X})^2 + 2 (\bar{X} - \mu ) \sum\limits_{i=1}^{n} (X_i - \bar{X}) + \sum\limits_{i=1}^{n} (\bar{X} - \mu )^2.
+\end{eqnarray*}
+</center>
+Note that 
+<center>
+$$ \sum\limits_{i=1}^{n} (X_i - \bar{X}) = \sum\limits_{i=1}^{n} X_i - n \bar{X} = n \bar{X} - n \bar{X} =0,$$ 
+</center>
+and the Lemma follows. 
+:::
+\
+
+[Lemma 9.4.2](#paraestimate:lem:square_split) is an example of a common trick in statistics. Suppose that we have $A_i = B_i +K$ $(i=1,2,\ldots, n)$ such that $\sum_{i=1}^n B_i=0$, then  
+<center>
+$$ \sum_{i=1}^n A_i^2 = \sum_{i=1}^n (B_i +K)^2 = \sum_{i=1}^n B_i^2 + n K^2.$$  
+</center>  
+
+We check whether the [variance estimator](#paraestimate:ex:variance_estimator_ex) $\hat{\sigma}^2$ is biased or unbiased:
+
+<center>
+\begin{align*}
+E[\hat{\sigma}^2] &= E \left[ \frac{1}{n} \sum\limits_{i=1}^{n} (X_i - \bar{X})^2 \right] \\
+&= E\left[\frac{1}{n} \sum\limits_{i=1}^{n} (X_i - \mu)^2 - \frac{1}{n} \sum\limits_{i=1}^{n} (\bar{X} - \mu)^2 \right] \\
+&= \frac{1}{n} \sum\limits_{i=1}^{n} E \left[ (X_i - \mu)^2 \right] - \frac{1}{n} \sum\limits_{i=1}^{n} E \left[ (\bar{X} - \mu)^2 \right] \\
+&= \frac{1}{n} \sum\limits_{i=1}^{n} \text{Var} (X_i) - \frac{1}{n} \sum\limits_{i=1}^{n} \text{Var} (\bar{X}) \\
+&= \frac{1}{n} n\sigma^2 - \frac{1}{n} n \frac{\sigma^2}{n} \\
+&= \frac{(n-1)\sigma^2}{n}.
+\end{align*}
+</center>
+
+Hence $E[\hat{\sigma}^2] \neq \sigma^2 = Var(X_i)$ and so $\hat{\sigma}^2$ is a **biased**, although asymptotically unbiased, estimator for $\sigma^2$. Under weak additional conditions, such as $E [X_1^4] < \infty$, it can be shown that $\hat{\sigma}^2$ is a consistent estimator.
+
+
+It follows from [Variance Estimator](#paraestimate:ex:variance_estimator_ex) that given a random sample $X_1, X_2, \ldots, X_n$, the quantity,  
+<center>
+$$s^2 = \frac{n}{n-1} \hat{\sigma}^2 = \frac{1}{n-1} \sum\limits_{i=1}^n (X_i - \bar{X})^2$$  
+</center>
+is an unbiased estimator of $\sigma^2$. This is the definition of the sample variance that we gave in [Section 2.3](#summary_spread).
+
+It can be shown that
+$$ s^2 = \frac{1}{n-1} \left( \sum_{i=1}^n X_i^2 - \frac{\left( \sum_{i=1}^n X_i \right)^2}{n} \right) = \frac{1}{n-1}  \left( \sum_{i=1}^n X_i^2 - n \bar{X}^2 \right). $$
+
+:::{.def #paraestimate:def:var_cov}  
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Definition 9.4.3.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Sample variance and covariance**</span>  
+\
+Given observed data $x_1, x_2, \ldots, x_n$, then we define the *sample variance* by  
+<center>
+$$ s_{x}^2 = \frac{1}{n-1} \sum\limits_{i=1}^n (\bar{x}_i - \bar{x})^2 = \frac{1}{n-1} \left( \sum\limits_{i=1}^n x_i^2 - \frac{\left( \sum\limits_{i=1}^n x_i \right)^2}{n} \right) = \frac{1}{n-1} \left(\sum\limits_{i=1}^n x_i^2 - n \bar{x}^2 \right).$$  
+</center>  
+Similarly, if we have data pairs $(x_1, y_1), (x_2, y_2), \ldots, (x_n,y_n)$ we define the *sample covariance* by:
+<center>
+$$ s_{xy} = \frac{1}{n-1} \sum\limits_{i=1}^n (x_i - \bar{x})(y_i -\bar{y}). $$  
+</center>  
+:::
+
+
+## <span style="color: rgba(15, 0, 207, 1);">**Task: Session 5**</span>  {- #paraestimate:lab}
+
+Attempt the **R Markdown** file for Session 5:  
+[Session 5: Estimators](https://moodle.nottingham.ac.uk/course/view.php?id=134982#section-2)
+
+\
+
+## <span style="color: rgba(15, 0, 207, 1);">**Student Exercises**</span>  {- #paraestimate:exer}
+
+Attempt the exercises below. 
+
+:::{.exer #exer9:1}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Exercise 9.1.}
+```
+\
+Suggest a reasonable statistical model for each of the following situations, and say which parameter or function of the parameter(s) in the model is likely to be of main interest:  
+
+(a) The number of reportable accidents that occur in the University in the month of October is ascertained, with a view to estimating the overall accident rate for the academic year;  
+(b) In a laboratory test the times to failure of 10 computer hard disk units are measured, to enable the manufacturer to quote for the *mean time to failure* in sales literature.  
+
+Of course in practice one needs to check whether the suggested models are reasonable, e.g. by examining a histogram.   
+:::
+
+```{asis, include=knitr::is_html_output()}
+<details><summary>Solution to Exercise 9.1.</summary>
+:::{.ans #Question02_1}
+(a) The number of October accidents could be ${\rm Po}(\theta)$ (if accidents occurred at random and independently).  
+Parameter: $\theta$, the expected number of accidents per month.  
+Function of parameter of interest is $12 \theta$.  
+(b) Failure times $T_1,T_2,\dots,T_{10}$ could be independent ${\rm Exp} (\theta)$ (if disk failures occurred at random and independently).  
+Function of parameter of interest is the mean failure time, $1/\theta$.  
+:::
+</details>
+```
+\
+
+:::{.exer #exer9:2}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Exercise 9.2.}
+```
+\
+Suppose that a surveyor is trying to determine the area of a rectangular field, in which the measured length $Y_1$ and the measured width $Y_2$ are independent random variables taking
+values according to the following distributions:
+<center>
+\[ \begin{array}{l|lll}
+y_1 & 8 & 10 & 11 \\ \hline
+p(y_1) & 0.25 & 0.25 & 0.5
+\end{array} \hspace{2cm} \begin{array}{l|ll}
+y_2 & 4 & 6 \\ \hline
+p(y_2) & 0.5 & 0.5
+\end{array} \]
+</center>
+
+The calculated area $A = Y_1 Y_2$ is also a random variable, and is used to estimate the true area.
+If the true length and width are 10 and 5, respectively.
+
+(a) Is $Y_1$ an unbiased estimator of the true length?  
+(b) Is $Y_2$ an unbiased estimator of the true width?  
+(c) Is $A$ an unbiased estimator of the true area?  
+:::
+
+
+```{asis, include=knitr::is_html_output()}
+<details><summary>Solution to Exercise 9.2.</summary>
+:::{.ans #Question02_2}
+(a) Yes $Y_1$ is an unbiased estimator, since 
+<center>
+$$E[Y_1] = 8 \times 0.25 + 10 \times 0.25 + 11 \times 0.5 = 10.$$
+</center>
+(b) Yes $Y_2$ is an unbiased estimator, since 
+<center>
+$$E[Y_2] = 4 \times 0.5 + 6 \times 0.5 = 5.$$
+</center>
+(c) Yes $A$ is an unbiased estimator, since by independence
+<center>  
+$$ E[A] = E[Y_1 Y_2] = E[Y_1] E[Y_2]$$ 
+</center>   
+and therefore 
+<center>
+$$ E[A] = 10 \times 5 = 50.$$  
+</center>
+:::
+</details>
+```

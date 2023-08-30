@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Probability | Foundations of Statistics</title>
+  <meta name="description" content="Lecture Notes for Foundations of Statistics" />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Probability | Foundations of Statistics" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Lecture Notes for Foundations of Statistics" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Probability | Foundations of Statistics" />
+  
+  <meta name="twitter:description" content="Lecture Notes for Foundations of Statistics" />
+  
+
+<meta name="author" content="Prof Peter Neal and Dr Daniel Cavey" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="visual.html"/>
+<link rel="next" href="rv.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">MATH4081: Foundations of Statistics</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preliminaries</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#overview"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#tasks"><i class="fa fa-check"></i>Tasks</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#intro_stats"><i class="fa fa-check"></i><b>1.1</b> What is Statistics?</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#intro_population"><i class="fa fa-check"></i><b>1.2</b> Populations and samples</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#intro_data"><i class="fa fa-check"></i><b>1.3</b> Types of Data</a></li>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#intro_example"><i class="fa fa-check"></i><b>1.4</b> Some example datasets</a></li>
+<li class="chapter" data-level="1.5" data-path="intro.html"><a href="intro.html#intro_computing"><i class="fa fa-check"></i><b>1.5</b> Statistical Computing</a></li>
+<li class="chapter" data-level="1.6" data-path="intro.html"><a href="intro.html#intro_paradigm"><i class="fa fa-check"></i><b>1.6</b> The statistical paradigm</a></li>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#intro:R"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 1</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>2</b> Summary Statistics</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="summary.html"><a href="summary.html#summary_location"><i class="fa fa-check"></i><b>2.1</b> Measures of location</a></li>
+<li class="chapter" data-level="2.2" data-path="summary.html"><a href="summary.html#summary_spread"><i class="fa fa-check"></i><b>2.2</b> Measures of spread</a></li>
+<li class="chapter" data-level="2.3" data-path="summary.html"><a href="summary.html#summary_robust"><i class="fa fa-check"></i><b>2.3</b> Robustness of summary statistics</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="visual.html"><a href="visual.html"><i class="fa fa-check"></i><b>3</b> Visualising data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="visual.html"><a href="visual.html#visual_intro"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="visual.html"><a href="visual.html#visual_data-features"><i class="fa fa-check"></i><b>3.2</b> Some data features</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="visual.html"><a href="visual.html#visual_data-features_multi"><i class="fa fa-check"></i><b>3.2.1</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Multimodal distributions</strong></span></a></li>
+<li class="chapter" data-level="3.2.2" data-path="visual.html"><a href="visual.html#visual_data-features_symmetry"><i class="fa fa-check"></i><b>3.2.2</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Symmetry</strong></span></a></li>
+<li class="chapter" data-level="3.2.3" data-path="visual.html"><a href="visual.html#visual_data-features_outliers"><i class="fa fa-check"></i><b>3.2.3</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Outliers</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="visual.html"><a href="visual.html#visual_plot"><i class="fa fa-check"></i><b>3.3</b> Basic plot types</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="visual.html"><a href="visual.html#visual_plot_histo"><i class="fa fa-check"></i><b>3.3.1</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Histogram and bar charts</strong></span></a></li>
+<li class="chapter" data-level="3.3.2" data-path="visual.html"><a href="visual.html#visual_plot_density"><i class="fa fa-check"></i><b>3.3.2</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Density plots</strong></span></a></li>
+<li class="chapter" data-level="3.3.3" data-path="visual.html"><a href="visual.html#visual_plot_boxplot"><i class="fa fa-check"></i><b>3.3.3</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Boxplot</strong></span></a></li>
+<li class="chapter" data-level="3.3.4" data-path="visual.html"><a href="visual.html#visual_plot_cdf"><i class="fa fa-check"></i><b>3.3.4</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Cumulative frequency diagrams, and the empirical CDF</strong></span></a></li>
+<li class="chapter" data-level="3.3.5" data-path="visual.html"><a href="visual.html#visual_plot_stem"><i class="fa fa-check"></i><b>3.3.5</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Stem and leaf</strong></span></a></li>
+<li class="chapter" data-level="3.3.6" data-path="visual.html"><a href="visual.html#visual_plot_pie"><i class="fa fa-check"></i><b>3.3.6</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Pie charts</strong></span></a></li>
+<li class="chapter" data-level="3.3.7" data-path="visual.html"><a href="visual.html#visual_plot_dot"><i class="fa fa-check"></i><b>3.3.7</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Dotplots</strong></span></a></li>
+<li class="chapter" data-level="3.3.8" data-path="visual.html"><a href="visual.html#visual_plot_scatter"><i class="fa fa-check"></i><b>3.3.8</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Scatterplots</strong></span></a></li>
+<li class="chapter" data-level="3.3.9" data-path="visual.html"><a href="visual.html#visual_plot_summary"><i class="fa fa-check"></i><b>3.3.9</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Summary</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="visual.html"><a href="visual.html#visual_data"><i class="fa fa-check"></i><b>3.4</b> Commenting on data</a></li>
+<li class="chapter" data-level="" data-path="visual.html"><a href="visual.html#visual:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 2</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="prob.html"><a href="prob.html"><i class="fa fa-check"></i><b>4</b> Probability</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="prob.html"><a href="prob.html#prob:overview"><i class="fa fa-check"></i><b>4.1</b> Overview</a></li>
+<li class="chapter" data-level="4.2" data-path="prob.html"><a href="prob.html#prob:motivation"><i class="fa fa-check"></i><b>4.2</b> Motivation</a></li>
+<li class="chapter" data-level="4.3" data-path="prob.html"><a href="prob.html#prob:sample_space"><i class="fa fa-check"></i><b>4.3</b> Sample Space</a></li>
+<li class="chapter" data-level="4.4" data-path="prob.html"><a href="prob.html#prob:events"><i class="fa fa-check"></i><b>4.4</b> Events</a></li>
+<li class="chapter" data-level="4.5" data-path="prob.html"><a href="prob.html#prob:defn"><i class="fa fa-check"></i><b>4.5</b> Probability</a></li>
+<li class="chapter" data-level="4.6" data-path="prob.html"><a href="prob.html#prob:Conditional_Probability"><i class="fa fa-check"></i><b>4.6</b> Conditional probability</a></li>
+<li class="chapter" data-level="4.7" data-path="prob.html"><a href="prob.html#prob:mutual"><i class="fa fa-check"></i><b>4.7</b> Mutual Independence</a></li>
+<li class="chapter" data-level="" data-path="prob.html"><a href="prob.html#rv:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 3</strong></span></a></li>
+<li class="chapter" data-level="" data-path="prob.html"><a href="prob.html#prob:stud"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="rv.html"><a href="rv.html"><i class="fa fa-check"></i><b>5</b> Random Variables</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="rv.html"><a href="rv.html#rv:overview"><i class="fa fa-check"></i><b>5.1</b> Overview</a></li>
+<li class="chapter" data-level="5.2" data-path="rv.html"><a href="rv.html#rv:des"><i class="fa fa-check"></i><b>5.2</b> Random variables</a></li>
+<li class="chapter" data-level="5.3" data-path="rv.html"><a href="rv.html#rv:expect"><i class="fa fa-check"></i><b>5.3</b> Expectation</a></li>
+<li class="chapter" data-level="5.4" data-path="rv.html"><a href="rv.html#rv:bernoulli"><i class="fa fa-check"></i><b>5.4</b> Bernoulli distribution and its extension</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="rv.html"><a href="rv.html#rv:Bernoulli:bern"><i class="fa fa-check"></i><b>5.4.1</b> Bernoulli distribution</a></li>
+<li class="chapter" data-level="5.4.2" data-path="rv.html"><a href="rv.html#rv:Bernoulli:bin"><i class="fa fa-check"></i><b>5.4.2</b> Binomial Distribution</a></li>
+<li class="chapter" data-level="5.4.3" data-path="rv.html"><a href="rv.html#rv:Bernoulli:geom"><i class="fa fa-check"></i><b>5.4.3</b> Geometric Distribution</a></li>
+<li class="chapter" data-level="5.4.4" data-path="rv.html"><a href="rv.html#rv:Bernoulli:negbin"><i class="fa fa-check"></i><b>5.4.4</b> Negative binomial Distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="rv.html"><a href="rv.html#rv:Poisson"><i class="fa fa-check"></i><b>5.5</b> Poisson distribution</a></li>
+<li class="chapter" data-level="5.6" data-path="rv.html"><a href="rv.html#rv:exponential"><i class="fa fa-check"></i><b>5.6</b> Exponential distribution and its extensions</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="rv.html"><a href="rv.html#rv:exponential:exp"><i class="fa fa-check"></i><b>5.6.1</b> Exponential distribution</a></li>
+<li class="chapter" data-level="5.6.2" data-path="rv.html"><a href="rv.html#rv:exponential:gamma"><i class="fa fa-check"></i><b>5.6.2</b> Gamma distribution</a></li>
+<li class="chapter" data-level="5.6.3" data-path="rv.html"><a href="rv.html#rv:exponential:chi"><i class="fa fa-check"></i><b>5.6.3</b> Chi squared distribution</a></li>
+<li class="chapter" data-level="5.6.4" data-path="rv.html"><a href="rv.html#rv:exponential:beta"><i class="fa fa-check"></i><b>5.6.4</b> Beta distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="rv.html"><a href="rv.html#rv:normal"><i class="fa fa-check"></i><b>5.7</b> Normal (Gaussian) Distribution</a></li>
+<li class="chapter" data-level="" data-path="rv.html"><a href="rv.html#prob:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="jointdis.html"><a href="jointdis.html"><i class="fa fa-check"></i><b>6</b> Joint Distribution Functions</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="jointdis.html"><a href="jointdis.html#jointdis:intro"><i class="fa fa-check"></i><b>6.1</b> Overview</a></li>
+<li class="chapter" data-level="6.2" data-path="jointdis.html"><a href="jointdis.html#jointdis:cdf"><i class="fa fa-check"></i><b>6.2</b> Joint c.d.f. and p.d.f.</a></li>
+<li class="chapter" data-level="6.3" data-path="jointdis.html"><a href="jointdis.html#jointdis:marginal"><i class="fa fa-check"></i><b>6.3</b> Marginal c.d.f. and p.d.f.</a></li>
+<li class="chapter" data-level="6.4" data-path="jointdis.html"><a href="jointdis.html#jointdis:independent"><i class="fa fa-check"></i><b>6.4</b> Independent random variables</a></li>
+<li class="chapter" data-level="" data-path="jointdis.html"><a href="jointdis.html#jointdis:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercise</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="Sec_CLT.html"><a href="Sec_CLT.html"><i class="fa fa-check"></i><b>7</b> Central Limit Theorem and law of large numbers</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="Sec_CLT.html"><a href="Sec_CLT.html#Sec_CLT:intro"><i class="fa fa-check"></i><b>7.1</b> Introduction</a></li>
+<li class="chapter" data-level="7.2" data-path="Sec_CLT.html"><a href="Sec_CLT.html#Sec_CLT:statement"><i class="fa fa-check"></i><b>7.2</b> Statement of Central Limit Theorem</a></li>
+<li class="chapter" data-level="7.3" data-path="Sec_CLT.html"><a href="Sec_CLT.html#Sec_CLT:discrete"><i class="fa fa-check"></i><b>7.3</b> Central limit theorem for discrete random variables</a></li>
+<li class="chapter" data-level="7.4" data-path="Sec_CLT.html"><a href="Sec_CLT.html#Sec_CLT:LLN"><i class="fa fa-check"></i><b>7.4</b> Law of Large Numbers</a></li>
+<li class="chapter" data-level="" data-path="Sec_CLT.html"><a href="Sec_CLT.html#Sec_clt:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 4</strong></span></a></li>
+<li class="chapter" data-level="" data-path="Sec_CLT.html"><a href="Sec_CLT.html#Sec_clt:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="motivate.html"><a href="motivate.html"><i class="fa fa-check"></i><b>8</b> Motivation for Statistical Inference</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="motivate.html"><a href="motivate.html#motivate:intro"><i class="fa fa-check"></i><b>8.1</b> Introduction</a></li>
+<li class="chapter" data-level="8.2" data-path="motivate.html"><a href="motivate.html#motivate:example"><i class="fa fa-check"></i><b>8.2</b> Motivating example</a></li>
+<li class="chapter" data-level="8.3" data-path="motivate.html"><a href="motivate.html#motivate:assumption"><i class="fa fa-check"></i><b>8.3</b> Modelling assumptions</a></li>
+<li class="chapter" data-level="8.4" data-path="motivate.html"><a href="motivate.html#motivate:parametric"><i class="fa fa-check"></i><b>8.4</b> Parametric models</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="paraestimate.html"><a href="paraestimate.html"><i class="fa fa-check"></i><b>9</b> Parameter Estimation</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="paraestimate.html"><a href="paraestimate.html#paraestimate:intro"><i class="fa fa-check"></i><b>9.1</b> Introduction</a></li>
+<li class="chapter" data-level="9.2" data-path="paraestimate.html"><a href="paraestimate.html#paraestimate:prelim"><i class="fa fa-check"></i><b>9.2</b> Preliminaries</a></li>
+<li class="chapter" data-level="9.3" data-path="paraestimate.html"><a href="paraestimate.html#paraestimate:judge"><i class="fa fa-check"></i><b>9.3</b> Judging estimators</a></li>
+<li class="chapter" data-level="9.4" data-path="paraestimate.html"><a href="paraestimate.html#paraestimate:variance"><i class="fa fa-check"></i><b>9.4</b> Sample Variance</a></li>
+<li class="chapter" data-level="" data-path="paraestimate.html"><a href="paraestimate.html#paraestimate:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 5</strong></span></a></li>
+<li class="chapter" data-level="" data-path="paraestimate.html"><a href="paraestimate.html#paraestimate:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="MLE.html"><a href="MLE.html"><i class="fa fa-check"></i><b>10</b> Techniques for Deriving Estimators</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="MLE.html"><a href="MLE.html#MLE:intro"><i class="fa fa-check"></i><b>10.1</b> Introduction</a></li>
+<li class="chapter" data-level="10.2" data-path="MLE.html"><a href="MLE.html#MLE:moments"><i class="fa fa-check"></i><b>10.2</b> Method of Moments</a></li>
+<li class="chapter" data-level="10.3" data-path="MLE.html"><a href="MLE.html#MLE:MLE"><i class="fa fa-check"></i><b>10.3</b> Maximum likelihood estimation</a></li>
+<li class="chapter" data-level="10.4" data-path="MLE.html"><a href="MLE.html#MLE:comments"><i class="fa fa-check"></i><b>10.4</b> Comments on the Maximum Likelihood Estimator</a></li>
+<li class="chapter" data-level="" data-path="MLE.html"><a href="MLE.html#MLE:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="MLEprop.html"><a href="MLEprop.html"><i class="fa fa-check"></i><b>11</b> Additional Properties of Estimators</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:intro"><i class="fa fa-check"></i><b>11.1</b> Introduction</a></li>
+<li class="chapter" data-level="11.2" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:sufficient"><i class="fa fa-check"></i><b>11.2</b> Sufficiency</a></li>
+<li class="chapter" data-level="11.3" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:MVE"><i class="fa fa-check"></i><b>11.3</b> Minimum variance estimators</a></li>
+<li class="chapter" data-level="11.4" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:asymptotic"><i class="fa fa-check"></i><b>11.4</b> Asymptotic normality of the MLE</a></li>
+<li class="chapter" data-level="11.5" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:invariance"><i class="fa fa-check"></i><b>11.5</b> Invariance property</a></li>
+<li class="chapter" data-level="" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 6</strong></span></a></li>
+<li class="chapter" data-level="" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="CondDis.html"><a href="CondDis.html"><i class="fa fa-check"></i><b>12</b> Conditional Distribution and Conditional Expectation</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="CondDis.html"><a href="CondDis.html#CondDis:CondDis"><i class="fa fa-check"></i><b>12.1</b> Conditional distribution</a></li>
+<li class="chapter" data-level="12.2" data-path="CondDis.html"><a href="CondDis.html#CondDis:CondExpect"><i class="fa fa-check"></i><b>12.2</b> Conditional expectation</a></li>
+<li class="chapter" data-level="12.3" data-path="CondDis.html"><a href="CondDis.html#CondDis:Independence"><i class="fa fa-check"></i><b>12.3</b> Independent random variables</a></li>
+<li class="chapter" data-level="" data-path="CondDis.html"><a href="CondDis.html#CondDis:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercise</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="Correlation.html"><a href="Correlation.html"><i class="fa fa-check"></i><b>13</b> Expectation, Covariance and Correlation</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="Correlation.html"><a href="Correlation.html#Correlation:Expectation"><i class="fa fa-check"></i><b>13.1</b> Expectation of a function of random variables</a></li>
+<li class="chapter" data-level="13.2" data-path="Correlation.html"><a href="Correlation.html#Correlation:Covariance"><i class="fa fa-check"></i><b>13.2</b> Covariance</a></li>
+<li class="chapter" data-level="13.3" data-path="Correlation.html"><a href="Correlation.html#Correlation:Correlation"><i class="fa fa-check"></i><b>13.3</b> Correlation</a></li>
+<li class="chapter" data-level="" data-path="Correlation.html"><a href="Correlation.html#Correlation:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 7</strong></span></a></li>
+<li class="chapter" data-level="" data-path="Correlation.html"><a href="Correlation.html#Correlation:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="Transform.html"><a href="Transform.html"><i class="fa fa-check"></i><b>14</b> Transformations of random variables</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="Transform.html"><a href="Transform.html#Transform:intro"><i class="fa fa-check"></i><b>14.1</b> Introduction</a></li>
+<li class="chapter" data-level="14.2" data-path="Transform.html"><a href="Transform.html#Transform:univariate"><i class="fa fa-check"></i><b>14.2</b> Univariate case</a></li>
+<li class="chapter" data-level="14.3" data-path="Transform.html"><a href="Transform.html#Transform:bivariate"><i class="fa fa-check"></i><b>14.3</b> Bivariate case</a></li>
+<li class="chapter" data-level="" data-path="Transform.html"><a href="Transform.html#Transform:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercise</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="MV_Normal.html"><a href="MV_Normal.html"><i class="fa fa-check"></i><b>15</b> Multivariate Normal Distribution</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="MV_Normal.html"><a href="MV_Normal.html#MV_Normal:intro"><i class="fa fa-check"></i><b>15.1</b> Introduction</a></li>
+<li class="chapter" data-level="15.2" data-path="MV_Normal.html"><a href="MV_Normal.html#MV_Normal:multi"><i class="fa fa-check"></i><b>15.2</b> <span class="math inline">\(n\)</span>-Dimensional Normal Distribution</a></li>
+<li class="chapter" data-level="" data-path="MV_Normal.html"><a href="MV_Normal.html#MV_Normal:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 8</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html"><i class="fa fa-check"></i><b>16</b> Introduction to Linear Models</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:intro"><i class="fa fa-check"></i><b>16.1</b> Introduction</a></li>
+<li class="chapter" data-level="16.2" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:stat"><i class="fa fa-check"></i><b>16.2</b> Statistical models</a></li>
+<li class="chapter" data-level="16.3" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:linear"><i class="fa fa-check"></i><b>16.3</b> The linear model</a></li>
+<li class="chapter" data-level="16.4" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:Gauss"><i class="fa fa-check"></i><b>16.4</b> The Normal (Gaussian) linear model</a></li>
+<li class="chapter" data-level="16.5" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:residuals"><i class="fa fa-check"></i><b>16.5</b> Residuals</a></li>
+<li class="chapter" data-level="16.6" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:line"><i class="fa fa-check"></i><b>16.6</b> Straight Line, Horizontal Line and Quadratic Models</a></li>
+<li class="chapter" data-level="16.7" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:Examples"><i class="fa fa-check"></i><b>16.7</b> Examples</a></li>
+<li class="chapter" data-level="16.8" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:Prediction"><i class="fa fa-check"></i><b>16.8</b> Prediction</a></li>
+<li class="chapter" data-level="16.9" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:Nested"><i class="fa fa-check"></i><b>16.9</b> Nested Models</a></li>
+<li class="chapter" data-level="" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercise</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html"><i class="fa fa-check"></i><b>17</b> Least Squares Estimation for Linear Models</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:intro"><i class="fa fa-check"></i><b>17.1</b> Introduction</a></li>
+<li class="chapter" data-level="17.2" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:algebra"><i class="fa fa-check"></i><b>17.2</b> Linear algebra review</a></li>
+<li class="chapter" data-level="17.3" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:derive"><i class="fa fa-check"></i><b>17.3</b> Deriving the least squares estimator</a></li>
+<li class="chapter" data-level="17.4" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:examples"><i class="fa fa-check"></i><b>17.4</b> Examples</a></li>
+<li class="chapter" data-level="17.5" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:beta"><i class="fa fa-check"></i><b>17.5</b> Properties of the estimator of <span class="math inline">\(\mathbf{\beta}\)</span></a></li>
+<li class="chapter" data-level="17.6" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:GaussMarkov"><i class="fa fa-check"></i><b>17.6</b> Gauss-Markov Theorem</a></li>
+<li class="chapter" data-level="" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 9</strong></span></a></li>
+<li class="chapter" data-level="" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="Interval_Estimation.html"><a href="Interval_Estimation.html"><i class="fa fa-check"></i><b>18</b> Interval Estimation</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="Interval_Estimation.html"><a href="Interval_Estimation.html#Interval_Estimation:intro"><i class="fa fa-check"></i><b>18.1</b> Introduction</a></li>
+<li class="chapter" data-level="18.2" data-path="Interval_Estimation.html"><a href="Interval_Estimation.html#Interval_Estimation:confident"><i class="fa fa-check"></i><b>18.2</b> Confident?</a></li>
+<li class="chapter" data-level="18.3" data-path="Interval_Estimation.html"><a href="Interval_Estimation.html#Interval_Estimation:CI"><i class="fa fa-check"></i><b>18.3</b> Confidence intervals</a></li>
+<li class="chapter" data-level="18.4" data-path="Interval_Estimation.html"><a href="Interval_Estimation.html#Interval_Estimation:MLE"><i class="fa fa-check"></i><b>18.4</b> Asymptotic distribution of the MLE</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html"><i class="fa fa-check"></i><b>19</b> Hypothesis Testing</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:intro"><i class="fa fa-check"></i><b>19.1</b> Introduction to hypothesis testing</a></li>
+<li class="chapter" data-level="19.2" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:errors"><i class="fa fa-check"></i><b>19.2</b> Type I and Type II errors</a></li>
+<li class="chapter" data-level="19.3" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:normal_known"><i class="fa fa-check"></i><b>19.3</b> Tests for normal means, <span class="math inline">\(\sigma\)</span> known</a></li>
+<li class="chapter" data-level="19.4" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:p_values"><i class="fa fa-check"></i><b>19.4</b> <span class="math inline">\(p\)</span> values</a></li>
+<li class="chapter" data-level="19.5" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:normal_unknown"><i class="fa fa-check"></i><b>19.5</b> Tests for normal means, <span class="math inline">\(\sigma\)</span> unknown</a></li>
+<li class="chapter" data-level="19.6" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:twosided"><i class="fa fa-check"></i><b>19.6</b> Confidence intervals and two-sided tests</a></li>
+<li class="chapter" data-level="19.7" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:variance"><i class="fa fa-check"></i><b>19.7</b> Distribution of the variance</a></li>
+<li class="chapter" data-level="19.8" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:other"><i class="fa fa-check"></i><b>19.8</b> Other types of tests</a></li>
+<li class="chapter" data-level="19.9" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:samplesize"><i class="fa fa-check"></i><b>19.9</b> Sample size calculation</a></li>
+<li class="chapter" data-level="" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 10</strong></span></a></li>
+<li class="chapter" data-level="" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html"><i class="fa fa-check"></i><b>20</b> Hypothesis Testing Discrete Data</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html#Hypo_Test_Discrete:intro"><i class="fa fa-check"></i><b>20.1</b> Introduction</a></li>
+<li class="chapter" data-level="20.2" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html#Hypo_Test_Discrete:motivate"><i class="fa fa-check"></i><b>20.2</b> Goodness-of-fit motivating example</a></li>
+<li class="chapter" data-level="20.3" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html#Hypo_Test_Discrete:GoF"><i class="fa fa-check"></i><b>20.3</b> Goodness-of-fit</a></li>
+<li class="chapter" data-level="20.4" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html#Hypo_Test_Discrete:Independence"><i class="fa fa-check"></i><b>20.4</b> Testing Independence</a></li>
+<li class="chapter" data-level="" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html#Hypo_Test_Discrete:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 11</strong></span></a></li>
+<li class="chapter" data-level="" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html#Hypo_Test_Discrete:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="Sec_Linear_hypo_test.html"><a href="Sec_Linear_hypo_test.html"><i class="fa fa-check"></i><b>21</b> Basic Hypothesis Tests for Linear Models</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="Sec_Linear_hypo_test.html"><a href="Sec_Linear_hypo_test.html#Sec_Linear_hypo_test:intro"><i class="fa fa-check"></i><b>21.1</b> Introduction</a></li>
+<li class="chapter" data-level="21.2" data-path="Sec_Linear_hypo_test.html"><a href="Sec_Linear_hypo_test.html#Sec_Linear_hypo_test:single"><i class="fa fa-check"></i><b>21.2</b> Tests on a single parameter</a></li>
+<li class="chapter" data-level="21.3" data-path="Sec_Linear_hypo_test.html"><a href="Sec_Linear_hypo_test.html#Sec_Linear_hypo_test:CI"><i class="fa fa-check"></i><b>21.3</b> Confidence intervals for parameters</a></li>
+<li class="chapter" data-level="21.4" data-path="Sec_Linear_hypo_test.html"><a href="Sec_Linear_hypo_test.html#Sec_Linear_hypo_test:F"><i class="fa fa-check"></i><b>21.4</b> Tests for the existence of regression</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html"><i class="fa fa-check"></i><b>22</b> ANOVA Tables and F Tests</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:Intro"><i class="fa fa-check"></i><b>22.1</b> Introduction</a></li>
+<li class="chapter" data-level="22.2" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:residuals"><i class="fa fa-check"></i><b>22.2</b> The residuals</a></li>
+<li class="chapter" data-level="22.3" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:SS"><i class="fa fa-check"></i><b>22.3</b> Sums of squares</a></li>
+<li class="chapter" data-level="22.4" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:ANOVA"><i class="fa fa-check"></i><b>22.4</b> Analysis of Variance (ANOVA)</a></li>
+<li class="chapter" data-level="22.5" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:Compare"><i class="fa fa-check"></i><b>22.5</b> Comparing models</a></li>
+<li class="chapter" data-level="22.6" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:seq"><i class="fa fa-check"></i><b>22.6</b> Sequential sum of squares</a></li>
+<li class="chapter" data-level="" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 12</strong></span></a></li>
+<li class="chapter" data-level="" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="introR.html"><a href="introR.html"><i class="fa fa-check"></i><b>23</b> Introduction to R</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="introR.html"><a href="introR.html#introR_what"><i class="fa fa-check"></i><b>23.1</b> What are R, RStudio and R Markdown?</a></li>
+<li class="chapter" data-level="23.2" data-path="introR.html"><a href="introR.html#introR_UoN"><i class="fa fa-check"></i><b>23.2</b> Starting RStudio on the UoN Network</a></li>
+<li class="chapter" data-level="23.3" data-path="introR.html"><a href="introR.html#introR_download"><i class="fa fa-check"></i><b>23.3</b> Downloading R and RStudio</a></li>
+<li class="chapter" data-level="23.4" data-path="introR.html"><a href="introR.html#introR_start"><i class="fa fa-check"></i><b>23.4</b> Getting started in R</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="Rmark.html"><a href="Rmark.html"><i class="fa fa-check"></i><b>24</b> What is R Markdown?</a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="Rmark.html"><a href="Rmark.html#Rmark_start"><i class="fa fa-check"></i><b>24.1</b> Getting started</a></li>
+<li class="chapter" data-level="24.2" data-path="Rmark.html"><a href="Rmark.html#Rmark_R"><i class="fa fa-check"></i><b>24.2</b> R in R Markdown</a></li>
+<li class="chapter" data-level="24.3" data-path="Rmark.html"><a href="Rmark.html#Rmark_text"><i class="fa fa-check"></i><b>24.3</b> Text in R markdown</a></li>
+<li class="chapter" data-level="24.4" data-path="Rmark.html"><a href="Rmark.html#Rmark_maths"><i class="fa fa-check"></i><b>24.4</b> Mathematics in R Markdown</a></li>
+<li class="chapter" data-level="24.5" data-path="Rmark.html"><a href="Rmark.html#Rmark_work"><i class="fa fa-check"></i><b>24.5</b> Worked Example</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://moodle.nottingham.ac.uk/course/view.php?id=134982" target="blank">MATH4081 Moodle Page</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Foundations of Statistics</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="prob" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Probability<a href="prob.html#prob" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="prob:overview" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Overview<a href="prob.html#prob:overview" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this Chapter we introduce <strong>probability</strong> as a <strong>measure</strong> associated with a <strong>random experiment</strong>. After providing a short motivation for probability (<a href="prob.html#prob:motivation">Section 4.2</a>), we begin in <a href="prob.html#prob:sample_space">Section 4.3</a> with the notion of a <strong>Sample space</strong> (<a href="prob.html#prob:sample_space">Section 4.3</a>), the set of possible outcomes of a random experiment and <strong>Events</strong> (<a href="prob.html#prob:events">Section 4.4</a>), the outcome(s) which occur. This enables us in <a href="prob.html#prob:defn">Section 4.5</a> to define <a href="prob.html#prob:def:prob"><strong>probability</strong></a> as a finite measure which uses the scale 0 (impossible) to 1 (certain) to define the likelihood of an event. We conclude the chapter by introducing the concept of <a href="prob.html#prob:def:cond"><strong>conditional probability</strong></a> (<a href="prob.html#prob:Conditional_Probability">Section 4.6</a>), the probability of one event <strong>given</strong> (conditional upon) another event (or events) having occurred. We present the key results of the <a href="prob.html#prob:thm:totalprob">Theorem of total probability</a> and <a href="prob.html#prob:thm:bayes">Bayes’ formula</a>.
+The discussion of conditional probability leads us naturally to consider the dependence between two (or more) events and the notion of <a href="prob.html#prob:def:independence"><strong>independence</strong></a>, where the probability of an event occurring is not affected by whether or not another event has occurred and we explore this further in <a href="prob.html#prob:mutual">Section 4.7</a>.</p>
+</div>
+<div id="prob:motivation" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Motivation<a href="prob.html#prob:motivation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>There are many situations where we have uncertainty and want to quantify that uncertainty.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Manchester United will win the Premier League this season.<br />
+</li>
+<li>The Labour Party will win the next general election.<br />
+</li>
+<li>The £ will rise against the $ today.<br />
+</li>
+<li>Coin tossed repeatedly - a head will turn up eventually.<br />
+</li>
+<li>In 5 throws of a dart, I will hit the Bull’s eye once.<br />
+</li>
+<li>If I play the lottery every week I will win a prize next year.</li>
+</ol>
+<p>(a)-(c) are subjective probabilities, whereas (d)-(f) are objective/statistical/physical probabilities.</p>
+<p>The general idea is:</p>
+<ol style="list-style-type: lower-alpha">
+<li>A conceptual random experiment <span class="math inline">\(\mathcal{E}\)</span>.<br />
+</li>
+<li>List all possible outcomes <span class="math inline">\(\Omega\)</span> for the experiment <span class="math inline">\(\mathcal{E}\)</span> but <strong>don’t know</strong> which occurs, has occurred or will occur.<br />
+</li>
+<li>Assign to each possible outcome <span class="math inline">\(\omega\)</span> a real number which is the probability of that outcome.</li>
+</ol>
+</div>
+<div id="prob:sample_space" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Sample Space<a href="prob.html#prob:sample_space" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We begin by defining a <em>set</em>.</p>
+<div id="prob:def:set" class="def">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Set.</strong></span><br />
+A <em>set</em> is a collection of objects. The notation for a set is to simply list every object separated by commas, and to surround this list by curly braces <span class="math inline">\(\{\)</span> and <span class="math inline">\(\}\)</span>. The objects in a set are referred to as the <em>elements</em> of the set.</p>
+</div>
+<p>There is no restrictions on what constitutes as an object in set. A set can have a finite or infinite number of elements. The ordering of the elements in a list is irrelevant. Two sets are equal if and only if they have the same collection of elements.</p>
+<div id="prob:def:samplespace" class="def">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Sample space.</strong></span><br />
+The <em>sample space</em> <span class="math inline">\(\Omega\)</span> for a random experiment <span class="math inline">\(\mathcal{E}\)</span> is the set of all possible outcomes of the random experiment.</p>
+</div>
+<div id="prob:ex:dice" class="ex">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Rolling a die.</strong></span></p>
+<p>The sample space for the roll of a die is</p>
+<center>
+<span class="math display">\[\Omega = \{ 1,2,3,4,5,6 \},\]</span>
+</center>
+<p>that is, the set of the six possible outcomes.</p>
+</div>
+<p><br />
+</p>
+<div id="prob:ex:dart" class="ex">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Dart in a target.</strong></span></p>
+<p>Dart into a circular target, radius 1:</p>
+<center>
+<span class="math display">\[\Omega = \{ (x,y): x^2 + y^2 \leq 1\},\]</span><br />
+
+<div class="figure"><span style="display:block;" id="fig:dart1"></span>
+<img src="Images/dart1.png" alt=" Example: $(x,y) =(-0.25,0.15)$." width="80%" />
+<p class="caption">
+Figure 4.1:  Example: <span class="math inline">\((x,y) =(-0.25,0.15)\)</span>.
+</p>
+</div>
+</center>
+<p>that is, the set of pairs of real numbers that are less than a distance 1 from the origin <span class="math inline">\((0,0)\)</span>.</p>
+</div>
+<p>Note that the examples illustrate how <span class="math inline">\(\Omega\)</span> may be discrete or continuous.</p>
+</div>
+<div id="prob:events" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> Events<a href="prob.html#prob:events" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="prob:def:event" class="def">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Event.</strong></span><br />
+An <em>event</em> relating to an experiment is a subset of <span class="math inline">\(\Omega\)</span>.</p>
+</div>
+<div id="prob:ex:twocoins" class="ex">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Toss two coins.</strong></span></p>
+<p>The sample space for the toss of two fair coins is</p>
+<center>
+<span class="math display">\[\Omega = \{ HH, HT, TH, TT \}.\]</span>
+</center>
+<p>Let <span class="math inline">\(A\)</span> be the event that at least one head occurs, then</p>
+<center>
+<span class="math display">\[A = \{ HH, HT, TH \}.\]</span>
+</center>
+<p>Note that the events <span class="math inline">\(HT\)</span> (Head on coin 1 and Tail on coin 2) and <span class="math inline">\(TH\)</span> (Tail on coin 1 and Head on coin 2) are distinct events.</p>
+</div>
+<p><br />
+</p>
+<div id="prob:ex:volcano" class="ex">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Volcano eruption.</strong></span></p>
+<p>The sample space of time in years until a volcano next erupts is
+<span class="math display">\[ \Omega = \{t: t &gt;0 \} =(0,\infty),\]</span>
+that is, all positive real numbers. Let event <span class="math inline">\(L\)</span> be the volcano erupting in the next <span class="math inline">\(10\)</span> years, then
+<span class="math display">\[L = \{t: 0 &lt; t \leq 10\} =(0,10].\]</span></p>
+</div>
+<p>We summarise key set notation, involving sets <span class="math inline">\(E\)</span> and <span class="math inline">\(F\)</span>, below:</p>
+<ol style="list-style-type: decimal">
+<li>We use <span class="math inline">\(\omega \in E\)</span> to denote that <span class="math inline">\(\omega\)</span> is an element of the set <span class="math inline">\(E\)</span>. Likewise, <span class="math inline">\(\omega \notin E\)</span> denotes that <span class="math inline">\(\omega\)</span> is not an element of <span class="math inline">\(E\)</span>;<br />
+</li>
+<li>The notation <span class="math inline">\(E \subseteq F\)</span> means that if <span class="math inline">\(\omega \in E\)</span>, then <span class="math inline">\(\omega \in F\)</span>. In this case, we say <span class="math inline">\(E\)</span> is a <em>subset</em> of <span class="math inline">\(F\)</span>;<br />
+</li>
+<li><span class="math inline">\(E^{c}\)</span> - complement of <span class="math inline">\(E\)</span>, sometimes written <span class="math inline">\(\bar{E}\)</span>.<br />
+<span class="math inline">\(E^{c}\)</span> consists of all points in <span class="math inline">\(\Omega\)</span> that are not in <span class="math inline">\(E\)</span>. Thus, <span class="math inline">\(E^{c}\)</span> occurs
+if and only if <span class="math inline">\(E\)</span> does not occur, see Figure <a href="prob.html#fig:Set1">4.2</a>.</li>
+</ol>
+<div class="figure"><span style="display:block;" id="fig:Set1"></span>
+<img src="Images/Set1.png" alt=" Complement example." width="80%" />
+<p class="caption">
+Figure 4.2:  Complement example.
+</p>
+</div>
+<ol start="4" style="list-style-type: decimal">
+<li>The <em>intersection</em> of two sets <span class="math inline">\(E\)</span> and <span class="math inline">\(F\)</span>, denoted <span class="math inline">\(E \cap F\)</span>, is the set of all elements that belong to both <span class="math inline">\(E\)</span> and <span class="math inline">\(F\)</span>, see Figure <a href="prob.html#fig:Set2">4.3</a>.</li>
+</ol>
+<div class="figure"><span style="display:block;" id="fig:Set2"></span>
+<img src="Images/Set2.png" alt=" Intersection example." width="80%" />
+<p class="caption">
+Figure 4.3:  Intersection example.
+</p>
+</div>
+<ol start="5" style="list-style-type: decimal">
+<li>If <span class="math inline">\(E \cap F = \emptyset\)</span> then <span class="math inline">\(E\)</span> and <span class="math inline">\(F\)</span> cannot both occur, <em>i.e.</em> <span class="math inline">\(E\)</span> and <span class="math inline">\(F\)</span>
+are <em>disjoint</em> (or <em>exclusive</em>) sets, see Figure <a href="prob.html#fig:Set3">4.4</a>.</li>
+</ol>
+<div class="figure"><span style="display:block;" id="fig:Set3"></span>
+<img src="Images/Set3.png" alt=" Disjoint (exclusive) example." width="80%" />
+<p class="caption">
+Figure 4.4:  Disjoint (exclusive) example.
+</p>
+</div>
+<ol start="6" style="list-style-type: decimal">
+<li>The <em>union</em> of two sets <span class="math inline">\(E\)</span> and <span class="math inline">\(F\)</span>, denoted <span class="math inline">\(E \cup F\)</span>, is the set of all elements that belong to either <span class="math inline">\(E\)</span> or to <span class="math inline">\(F\)</span>, see Figure <a href="prob.html#fig:Set4">4.5</a>.</li>
+</ol>
+<div class="figure"><span style="display:block;" id="fig:Set4"></span>
+<img src="Images/Set4.png" alt=" Union example." width="80%" />
+<p class="caption">
+Figure 4.5:  Union example.
+</p>
+</div>
+<ol start="7" style="list-style-type: decimal">
+<li>The set <span class="math inline">\(\{\}\)</span> with no elements in it is called the <em>empty set</em> and is denoted <span class="math inline">\(\emptyset\)</span>.<br />
+<strong>Note</strong>: <span class="math inline">\(\Omega^c = \emptyset\)</span> and <span class="math inline">\(\emptyset^c = \Omega\)</span>.</li>
+</ol>
+<p>A summary of sets notation using the outcomes from a six sided die are presented in the <a href="prob.html#video6">Video 6</a>.</p>
+<div id="video6" class="des">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Video 6: Set notation</strong></span></p>
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1355621/sp/135562100/embedIframeJs/uiconf_id/13188771/partner_id/1355621?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_cigsltq1&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_kbos8alt" width="640" height="420" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Sets FINAL VERSION">
+</iframe>
+</div>
+</div>
+<div id="prob:defn" class="section level2 hasAnchor" number="4.5">
+<h2><span class="header-section-number">4.5</span> Probability<a href="prob.html#prob:defn" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>There are different possible interpretations of the meaning of a probability:</p>
+<ul>
+<li><p><strong>Classical interpretation.</strong>
+Assuming that all outcomes of an experiment are equally likely, then the probability of an event <span class="math inline">\(A = \frac{n(A)}{n(\Omega)}\)</span>, where <span class="math inline">\(n(A)\)</span> is the number of outcomes satisfying <span class="math inline">\(A\)</span> and <span class="math inline">\(n(\Omega)\)</span> is the number of outcomes in <span class="math inline">\(\Omega\)</span> (total number of possible outcomes).</p></li>
+<li><p><strong>Frequency interpretation.</strong>
+The probability of an event is the relative frequency of observing a particular outcome when an experiment is repeated a large number of times under similar circumstances.</p></li>
+<li><p><strong>Subjective interpretation.</strong>
+The probability of an event is an individual’s perception as to the likelihood of an event’s occurrence.</p></li>
+</ul>
+<div id="prob:def:prob" class="def">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Probability.</strong></span></p>
+<p>A <em>probability</em> (<em>measure</em>) is a real-valued set function <span class="math inline">\(P\)</span> defined on the events (subsets) of a sample space <span class="math inline">\(\Omega\)</span> satisfying the following three axioms (see Kolmogorov, 1933):</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(P(E)\geq0\)</span> for any event <span class="math inline">\(E\)</span>;</li>
+<li><span class="math inline">\(P(\Omega)=1\)</span>;</li>
+<li>If <span class="math inline">\(E_1,E_2,\dots, E_n\)</span> are disjoint events (i.e. <span class="math inline">\(E_i \cap E_j = \emptyset\)</span> for all <span class="math inline">\(i \neq j\)</span>), then
+<span class="math display">\[P \left( \bigcup_{i=1}^n E_i \right) = \sum_{i=1}^n P(E_i).\]</span></li>
+</ol>
+<p>If <span class="math inline">\(\Omega\)</span> is <em>infinite</em> then 3. can be extended to:<br />
+3’. If <span class="math inline">\(E_1,E_2,\dots\)</span> is any infinite sequence of disjoint events (i.e. <span class="math inline">\(E_i \cap E_j = \emptyset\)</span> for all <span class="math inline">\(i\not=j\)</span>), then
+<span class="math display">\[P \left( \bigcup_{i=1}^\infty E_i \right) = \sum_{i=1}^\infty P(E_i).\]</span></p>
+</div>
+<p>Note that all of the other standard properties of probability (measures) that we use are derived from these three axioms.</p>
+<div id="prob:exer:1" class="ex">
+<p><br />
+Using only the axioms above, prove:</p>
+<ul>
+<li><p><span class="math inline">\(0 \leq P(E) \leq 1\)</span> for any event <span class="math inline">\(E\)</span>;</p></li>
+<li><p><span class="math inline">\(P(E^C) = 1 - P(E)\)</span> where <span class="math inline">\(E^C\)</span> is the complement of <span class="math inline">\(E\)</span>;</p></li>
+<li><p><span class="math inline">\(P(\emptyset) = 0\)</span>;</p></li>
+<li><p><span class="math inline">\(P(A \cup B) = P(A) + P(B) - P(A \cap B)\)</span>.<br />
+</p></li>
+</ul>
+</div>
+<p>A summary of probability along with proofs of the results in <a href="prob.html#prob:exer:1">Example 4.5.2</a> are provided in <a href="prob.html#video7">Video 7</a>.</p>
+<div id="video7" class="des">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Video 7: Probability</strong></span></p>
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1355621/sp/135562100/embedIframeJs/uiconf_id/13188771/partner_id/1355621?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_43tb6qxp&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_j0pgiupv" width="640" height="420" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Probability FINAL VERSION">
+</iframe>
+</div>
+<details>
+<summary>
+Solution to Example 4.5.2.
+</summary>
+<div class="prf">
+Since for any event <span class="math inline">\(E\)</span>, <span class="math inline">\(\Omega = E \cup E^c\)</span>, we have by axiom 2 that
+<center>
+<span class="math display">\[ 1 = P (\Omega) = P (E \cup E^c).  \]</span>
+</center>
+By axiom 3, since <span class="math inline">\(E\)</span> and <span class="math inline">\(E^c\)</span> are disjoint events, we have that
+<center>
+<span class="math display">\[ 1 = P (E \cup E^c)= P (E) + P (E^c).  \]</span>
+</center>
+<p>which rearranges to give <span class="math inline">\(P(E^c) = 1-P(E)\)</span>.</p>
+<p><strong>Special cases</strong><br />
+If <span class="math inline">\(E = \emptyset\)</span>, then <span class="math inline">\(E^c = \Omega\)</span> giving <span class="math inline">\(1 = P(\emptyset) +1\)</span> and it follows that <span class="math inline">\(P(\emptyset)=0\)</span>.<br />
+Since <span class="math inline">\(P(E^c) \geq 0\)</span>, we have that <span class="math inline">\(P(E) \leq 1\)</span> and hence <span class="math inline">\(0\leq P(E) \leq 1\)</span>.</p>
+To study <span class="math inline">\(P(A \cup B)\)</span>, we note that <span class="math inline">\(A \cup B\)</span> is formed by the union of the disjoint events: <span class="math inline">\(A \cap B^c\)</span>, <span class="math inline">\(A \cap B\)</span> and <span class="math inline">\(A^c \cap B\)</span>. Therefore using axiom 3,
+<center>
+<span class="math display">\[ P(A \cup B) = P(A \cap B^c) + P(A \cap B)+P(A^c \cap B).   \]</span>
+</center>
+Similarly, we have that
+<center>
+<span class="math display">\[ P(A) = P(A \cap B^c) + P(A \cap B)\]</span>
+</center>
+and
+<center>
+<span class="math display">\[ P(B) =P(A \cap B)+P(A^c \cap B).\]</span>
+</center>
+Since <span class="math inline">\(P(A^c \cap B) = P(B)-P(A \cap B)\)</span>, we have that
+<center>
+<span class="math display">\[\begin{eqnarray*} P(A \cup B) &amp;=&amp; P(A \cap B^c) + P(A \cap B) + P(A^c \cap B)  \\
+&amp;=&amp; P(A) + P(B)-P(A \cap B)   \\
+&amp;=&amp; P(A) + P(B)-P(A \cap B).
+\end{eqnarray*}\]</span>
+</center>
+</div>
+</details>
+<p><br />
+</p>
+<p>In many cases, <span class="math inline">\(\Omega\)</span> consists of <span class="math inline">\(N (=n(\Omega))\)</span> equally likely elements, <em>i.e.</em>
+<span class="math display">\[
+\Omega = \left\{ \omega_{1}, \omega_{2}, \ldots, \omega_{N} \right\},
+\]</span>
+with <span class="math inline">\(P(\omega_i) = \frac{1}{N}\)</span>.</p>
+<p>Then, for any event <span class="math inline">\(E\)</span> (<em>i.e.</em> subset of <span class="math inline">\(\Omega\)</span>),
+<span class="math display">\[
+P(E) = \frac{n(E)}{n(\Omega)} = \frac{n(E)}{N}
+\]</span>
+coinciding with the Classical interpretation of probability.</p>
+<div id="prob:ex:class" class="ex">
+<p><br />
+1. <span style="color: rgba(207, 0, 15, 1);"><strong>Throw a die.</strong></span> <span class="math inline">\(\Omega = \left\{ 1,2,3,4,5,6 \right\}\)</span>.
+<span class="math display">\[ P(\{1\})=P(\{2\})= \ldots = P(\{6\})= \frac{1}{6}. \]</span>
+The probability of throwing an odd number is
+<span class="math display">\[P(\mbox{Odd}) = P( \left\{ 1,3,5 \right\}) = \frac{3}{6} = \frac{1}{2}. \]</span><br />
+2. <span style="color: rgba(207, 0, 15, 1);"><strong>Draw a card at random from a standard pack of 52.</strong></span>
+<span class="math display">\[\Omega = \left\{ A\clubsuit, 2\clubsuit, 3\clubsuit, \ldots, K\diamondsuit \right\}. \]</span>
+<span class="math inline">\(P(\omega) = 1/52\)</span> for all <span class="math inline">\(\omega \in \Omega\)</span>.<br />
+If <span class="math inline">\(E = \left\{ \mbox{Black} \right\}\)</span> and <span class="math inline">\(F = \left\{ \mbox{King} \right\}\)</span>,
+then there are 26 black cards, <span class="math inline">\(n(E) =26\)</span>, 4 kings, <span class="math inline">\(n(F)=4\)</span> and 2 black kings (<span class="math inline">\(K\clubsuit\)</span> and <span class="math inline">\(K\spadesuit\)</span>), <span class="math inline">\(n(E\cap F)=2\)</span>,
+<span class="math display">\[\begin{eqnarray*}
+P(E \cup F) &amp; = &amp; P(E) + P(F) - P(E \cap F) \\
+&amp; = &amp; \frac{26}{52} + \frac{4}{52} - \frac{2}{52} \\
+&amp; = &amp; \frac{7}{13}.
+\end{eqnarray*}\]</span></p>
+</div>
+</div>
+<div id="prob:Conditional_Probability" class="section level2 hasAnchor" number="4.6">
+<h2><span class="header-section-number">4.6</span> Conditional probability<a href="prob.html#prob:Conditional_Probability" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="prob:def:cond" class="def">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Conditional Probability.</strong></span></p>
+<p>The <em>conditional probability</em> of an event <span class="math inline">\(E\)</span> <em>given</em> an event <span class="math inline">\(F\)</span> is</p>
+<center>
+<span class="math display">\[P(E\mid F)=\frac{P(E\cap F)}{P(F)},\quad \mbox{ provided } P(F)&gt;0.\]</span>
+</center>
+</div>
+<p>Note if <span class="math inline">\(P(F)&gt;0\)</span>, then <span class="math inline">\(P(E \cap F) = P(E|F) P(F)\)</span>.</p>
+<p>Moreover, since <span class="math inline">\(E \cap F = F \cap E\)</span>, we have that
+<span class="math display">\[ P(E|F) P(F) = P(E \cap F) = P (F \cap E) = P(F|E) P(E).   \]</span>
+In other words, to compute the probability of both events <span class="math inline">\(E\)</span> and <span class="math inline">\(F\)</span> occurring, we can either:</p>
+<ul>
+<li>Consider first whether <span class="math inline">\(E\)</span> occurs, <span class="math inline">\(P(E)\)</span>, and then whether <span class="math inline">\(F\)</span> occurs <em>given</em> that <span class="math inline">\(E\)</span> has occurred, <span class="math inline">\(P(F|E)\)</span>,<br />
+</li>
+<li>Or consider first whether <span class="math inline">\(F\)</span> occurs, <span class="math inline">\(P(F)\)</span>, and then whether <span class="math inline">\(E\)</span> occurs <em>given</em> that <span class="math inline">\(F\)</span> has occurred, <span class="math inline">\(P(E|F)\)</span>.</li>
+</ul>
+<div id="prob:ex:dice2" class="ex">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Rolling a die.</strong></span></p>
+<p>Consider the experiment of tossing a fair 6-sided die. What is the probability of observing a 2 if the outcome was even?</p>
+<p>Let event <span class="math inline">\(T\)</span> be observing a 2 and let event <span class="math inline">\(E\)</span> be the outcome is even. Find <span class="math inline">\(P(T|E)\)</span>:</p>
+<center>
+<span class="math display">\[P(T|E)=\frac{P(T \cap E)}{P(E)} = \frac{1/6}{1/2} = \frac{1}{3}.\]</span>
+</center>
+</div>
+<div id="prob:def:independence" class="def">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Independence.</strong></span></p>
+Two events <span class="math inline">\(E\)</span> and <span class="math inline">\(F\)</span> are independent if
+<center>
+<span class="math display">\[P(E\cap F)=P(E)P(F).\]</span>
+</center>
+</div>
+<div id="prob:thm:independence" class="thm">
+<p><br />
+If <span class="math inline">\(P(F)&gt;0\)</span>, two events, <span class="math inline">\(E\)</span> and <span class="math inline">\(F\)</span>, are independent if and only if <span class="math inline">\(P(E|F)=P(E)\)</span>.</p>
+</div>
+<div class="prf">
+<center>
+<span class="math display">\[\begin{align*}
+&amp; P(E|F) = P(E) \\
+\iff \quad &amp; \frac{P(E \cap F)}{P(F)} = P(E) \\
+\iff \quad &amp; P(E \cap F) = P(E)P(F) \\
+\iff \quad &amp; E \text{ and } F \text{ are independent.}
+\end{align*}\]</span>
+</center>
+</div>
+<p><br />
+</p>
+<p><strong>Observations on Independence</strong></p>
+<ul>
+<li>If <span class="math inline">\(E\)</span> and <span class="math inline">\(F\)</span> are <strong>NOT</strong> independent then
+<span class="math display">\[
+P( E \cap F) \neq P(E)P (F).
+\]</span><br />
+</li>
+<li><span class="math inline">\(E\)</span> and <span class="math inline">\(F\)</span> being independent is <strong>NOT</strong> the same as <span class="math inline">\(E\)</span> and <span class="math inline">\(F\)</span> being disjoint.</li>
+</ul>
+<p><strong>Independence:</strong> <span class="math inline">\(P( E \cap F) = P(E)P(F)\)</span>.<br />
+<strong>Disjoint (exclusive):</strong> <span class="math inline">\(P( E \cap F) = P (\emptyset) = 0\)</span>.</p>
+<div id="prob:ex:dice3" class="ex">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Rolling a die.</strong></span></p>
+<p>Consider the experiment of tossing a fair 6-sided die.<br />
+Let <span class="math inline">\(E= \{2,4,6\}\)</span>, an even number is rolled on the die and <span class="math inline">\(F= \{3,6\}\)</span>, a multiple of 3 is rolled on the die.</p>
+<p>Are <span class="math inline">\(E\)</span> and <span class="math inline">\(F\)</span> independent?</p>
+<span class="math inline">\(E \cap F = \{6 \}\)</span>, so <span class="math inline">\(P(E \cap F) = \frac{1}{6}\)</span>.<br />
+
+<center>
+<span class="math display">\[P(E) \times P(F) = \frac{3}{6} \times \frac{2}{6} = \frac{1}{6} = P(E \cap F) \]</span>
+</center>
+<p>Therefore <span class="math inline">\(E\)</span> and <span class="math inline">\(F\)</span> are independent.</p>
+</div>
+<div id="prob:partition" class="def">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Partition.</strong></span></p>
+<p>A <em>partition</em> of a sample space <span class="math inline">\(\Omega\)</span> is a collection of events <span class="math inline">\(E_{1}, E_{2}, \ldots,E_n\)</span> in <span class="math inline">\(\Omega\)</span> such that:</p>
+<ol style="list-style-type: lower-roman">
+<li><span class="math inline">\(E_{i} \cap E_{j} = \emptyset\)</span> for all <span class="math inline">\(i \neq j\)</span> (disjoint sets)<br />
+</li>
+<li><span class="math inline">\(E_{1} \cup E_{2} \cup \ldots \cup E_n \; = \bigcup_{i=1}^n E_i = \Omega\)</span>.<br />
+</li>
+</ol>
+</div>
+<p>We can set <span class="math inline">\(n=\infty\)</span> in <a href="prob.html#prob:partition">Definition 4.6.6</a> and have infinitely many events constructed the partition.</p>
+<p>Figure <a href="prob.html#fig:partition1">4.6</a> presents an example of a partition of <span class="math inline">\(\Omega\)</span> using six events
+<span class="math inline">\(E_1,E_2, \ldots, E_6\)</span>.</p>
+<div class="figure"><span style="display:block;" id="fig:partition1"></span>
+<img src="Images/partition1.png" alt="Example of a partition of a sample space using six events." width="80%" />
+<p class="caption">
+Figure 4.6: Example of a partition of a sample space using six events.
+</p>
+</div>
+For an event <span class="math inline">\(F \subseteq \Omega\)</span>,
+<center>
+<span class="math display">\[ F = (F \cap E_1) \cup (F \cap E_2 ) \cup \ldots \cup (F \cap E_n ). \]</span>
+</center>
+<p>This is illustrated in Figure <a href="prob.html#fig:partition2">4.7</a> using the partition given in Figure <a href="prob.html#fig:partition1">4.6</a>.</p>
+<div class="figure"><span style="display:block;" id="fig:partition2"></span>
+<img src="Images/partition2.png" alt="The event *F* expressed in terms of the union of events." width="80%" />
+<p class="caption">
+Figure 4.7: The event <em>F</em> expressed in terms of the union of events.
+</p>
+</div>
+<div id="prob:thm:totalprob" class="thm">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Theorem of Total Probability.</strong></span></p>
+Let <span class="math inline">\(E_1,E_2,\dots, E_n\)</span> be a partition of <span class="math inline">\(\Omega\)</span> (i.e. <span class="math inline">\(E_i\cap E_j=\emptyset\)</span> for all <span class="math inline">\(i\not=j\)</span> and <span class="math inline">\(\bigcup\limits_{i=1}^n E_i=\Omega\)</span>) and let <span class="math inline">\(F\subseteq \Omega\)</span> be any event. Then,
+<center>
+<span class="math display">\[P(F)=\sum_{i=1}^n P(F\mid E_i)\,P(E_i).\]</span>
+</center>
+</div>
+<div id="prob:prf:totalprob" class="prf">
+<p>Since the <span class="math inline">\(E_i\)</span>’s form a partition:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(F = F \cap \Omega = \bigcup_{i=1}^n [ F \cap E_i ]\)</span>.<br />
+</li>
+<li>For each <span class="math inline">\(i \neq j\)</span>, <span class="math inline">\([F \cap E_i] \cap [F \cap E_j] = \emptyset\)</span>.</li>
+</ol>
+Therefore
+<center>
+<span class="math display" id="eq:pp1">\[\begin{eqnarray}
+P(F) = \sum_{i=1}^n P \left(F \cap E_i \right).  
+\tag{4.1}  
+\end{eqnarray}\]</span>
+</center>
+By the definition of conditional probability, for each <span class="math inline">\(i\)</span>,<br />
+
+<center>
+<span class="math display" id="eq:pp2">\[\begin{equation}
+P\left(F \cap E_i \right) = P(F|E_i) P(E_i).  
+\tag{4.2}  
+\end{equation}\]</span>
+</center>
+<p>Substituting <a href="prob.html#eq:pp2">(4.2)</a> into <a href="prob.html#eq:pp1">(4.1)</a> completes the proof.</p>
+</div>
+<div id="prob:ex:factory" class="ex">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Tin can factory.</strong></span></p>
+<p>Suppose that a factory uses three different machines to produce tin cans. Machine I produces 50% of all cans, machine II produces 30% of all cans and machine III produces the rest of the cans. It is known that 4% of cans produced on machine I are defective, 2% of the cans produced on machine II are defective and 5% of the cans produced on machine III are defective. If a can is selected at random, what is the probability that it is defective?</p>
+</div>
+<div class="ans">
+Let event <span class="math inline">\(M_i\)</span> be the can is produced by machine <span class="math inline">\(i\)</span>, <span class="math inline">\(i=1,2,3\)</span>. Let <span class="math inline">\(D\)</span> be the event that the can is defective. From the question, we know
+<center>
+<span class="math display">\[\begin{eqnarray*}
+P(M_1) &amp;=&amp; 0.5, \qquad P(D|M_1) = 0.04,\\
+P(M_2) &amp;=&amp; 0.3, \qquad P(D|M_2) = 0.02,\\
+P(M_3) &amp;=&amp; 0.2, \qquad P(D|M_3) = 0.05.\\
+\end{eqnarray*}\]</span>
+</center>
+Therefore<br />
+
+<center>
+<span class="math display">\[\begin{eqnarray*}
+P(D) &amp;=&amp; \sum_{i=1}^3 P(D|M_i)P(M_i)\\
+&amp;=&amp; (0.04 \times 0.5) + (0.02 \times 0.3) + (0.05 \times 0.2) \\
+&amp;=&amp; 0.036.
+\end{eqnarray*}\]</span>
+</center>
+</div>
+<p><br />
+</p>
+<div id="prob:job_interview" class="ex">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Job interview problem.</strong></span></p>
+<p>A manager interviews 4 candidates for a job. The manager <strong>MUST</strong> make a decision offer/reject
+after each interview. Suppose that candidates are ranked <span class="math inline">\(1,2,3,4\)</span> (1 best) and are
+interviewed in random order.</p>
+<p>The manager interviews and rejects the first candidate. They then offer the job to
+the first candidate that is better than the rejected candidate. If all are worse
+then they offer the job to the last candidate.</p>
+<p>What is the probability that the job is offered to the best candidate?</p>
+</div>
+<p>Attempt <a href="prob.html#prob:job_interview">Example 4.6.9 (Job interview problem)</a> and then watch <a href="prob.html#video8">Video 8</a> for the solution.</p>
+<div id="video8" class="des">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Video 8: Job Interview</strong></span></p>
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1355621/sp/135562100/embedIframeJs/uiconf_id/13188771/partner_id/1355621?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_nzxxre7o&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_5raluq8z" width="640" height="420" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Job Interview FINAL VERSION">
+</iframe>
+</div>
+<details>
+<summary>
+Solution to Example 4.6.9 (Job interview problem).
+</summary>
+<div class="prf">
+<p>Let <span class="math inline">\(F\)</span> be the event that the best candidate is offered the job.</p>
+For <span class="math inline">\(k=1,2,3,4\)</span>, let <span class="math inline">\(E_k\)</span> be the event that candidate <span class="math inline">\(k\)</span> (the <span class="math inline">\(k^{th}\)</span> best candidate) is interviewed first. Note that <span class="math inline">\(E_k\)</span>s form a partition of the sample space and by randomness,
+<center>
+<span class="math display">\[ P(E_1) = P(E_2)=P(E_3)=P(E_4) = \frac{1}{4}. \]</span>
+</center>
+<p>We have that:<br />
+1. <span class="math inline">\(P(F|E_1) =0\)</span>. If the <span class="math inline">\(1^{st}\)</span> ranked candidate is interviewed first they will be rejected and cannot be offered the job.<br />
+2. <span class="math inline">\(P(F|E_2) =1\)</span>. If the <span class="math inline">\(2^{nd}\)</span> ranked candidate is interviewed first then all candidates will be rejected until the best (<span class="math inline">\(1^{st}\)</span> ranked) candidate is interviewed and offered the job.<br />
+3. <span class="math inline">\(P(F|E_3) =\frac{1}{2}\)</span>. If the <span class="math inline">\(3^{rd}\)</span> ranked candidate is interviewed first then whoever is interviewed first out of the <span class="math inline">\(1^{st}\)</span> ranked and <span class="math inline">\(2^{nd}\)</span> ranked candidates will be offered the job. Each of these possibilities is equally likely.<br />
+4. <span class="math inline">\(P(F|E_4) =\frac{1}{3}\)</span>. If the <span class="math inline">\(4^{th}\)</span> ranked (worst) candidate is interviewed first then the <span class="math inline">\(1^{st}\)</span> ranked candidate will only be offered the job if they are interviewed second.</p>
+By the Theorem of Total Probability,
+<center>
+<span class="math display">\[\begin{eqnarray*}
+P(F) &amp;=&amp; \sum_{i=1}^4 P(F|E_i) P(E_i) \\
+&amp;=&amp; P(F |E_1) P(E_1) + P(F |E_2) P(E_2) + P(F |E_3) P(E_3) + P(F |E_4) P(E_4)   \\
+&amp;=&amp; 0 \times \frac{1}{4} + 1 \times \frac{1}{4} + \frac{1}{2} \times \frac{1}{4}+ \frac{1}{3} \times \frac{1}{4} \\
+&amp;=&amp; \frac{11}{24}.
+\end{eqnarray*}\]</span>
+</center>
+</div>
+</details>
+<p><br />
+</p>
+<div id="prob:thm:bayes" class="thm">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Bayes Formula.</strong></span></p>
+Let <span class="math inline">\(E_1,E_2,\dots,E_n\)</span> be a partition of <span class="math inline">\(\Omega\)</span>, <em>i.e.</em> <span class="math inline">\(E_i \cap E_j = \emptyset\)</span> for all <span class="math inline">\(i \not= j\)</span> and <span class="math inline">\(\bigcup\limits_{i=1}^n E_i=\Omega\)</span>, such that <span class="math inline">\(P(E_i)&gt;0\)</span> for all <span class="math inline">\(i=1,\dots,n\)</span>, and let <span class="math inline">\(F\subseteq\Omega\)</span> be any event such that <span class="math inline">\(P(F)&gt;0\)</span>. Then<br />
+
+<center>
+<span class="math display">\[ P(E_k|F) = \frac{P(F|E_k) P(E_k)}{\sum_{i=1}^n P(F|E_i) P(E_i)}.\]</span>
+</center>
+</div>
+<div id="prob:prf:bayes" class="prf">
+If <span class="math inline">\(P(F)&gt;0\)</span> and <span class="math inline">\(P(E_k)&gt;0\)</span>, then by definition<br />
+
+<center>
+<span class="math display">\[P(E_k|F) = \frac{P(E_k \cap F)}{P(F)} = \frac{P(F|E_k) P(E_k)}{P(F)}.\]</span>
+</center>
+Since <span class="math inline">\(E_1,E_2,\dots,E_n\)</span> is a partition of <span class="math inline">\(\Omega\)</span> such that <span class="math inline">\(P(E_i)&gt;0\)</span> for all <span class="math inline">\(i\)</span>, then by the <a href="prob.html#prob:thm:totalprob">Theorem of Total Probability</a> we can rewrite <span class="math inline">\(P(F)\)</span> and obtain<br />
+
+<center>
+<span class="math display">\[P(E_k|F) = \frac{P(F|E_k) P(E_k)}{\sum_{i=1}^n P(F|E_i) P(E_i)}.\]</span>
+</center>
+</div>
+<div id="prob:ex:factory2" class="ex">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Tin can factory (continued).</strong></span></p>
+<p>Consider <a href="prob.html#prob:ex:factory">Example 4.6.8</a>. Suppose now that we randomly select a can and find that it is defective.</p>
+What is the probability that it was produced by machine I?
+<center>
+<span class="math display">\[P(M_1|D)=\frac{P(D|M_1)P(M_1)}{P(D)}=\frac{0.04 \times 0.5}{0.036}=0.55.\]</span>
+</center>
+</div>
+<div id="prob:exer:guilty" class="ex">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Guilty?</strong></span></p>
+<p>At a certain stage of a jury trial a jury member gauges that the probability
+that the defendant is guilty is <span class="math inline">\(7/10\)</span>.</p>
+<p>The prosecution then produces evidence that fibres of the victim’s clothing
+were found on the defendant.</p>
+<p>If the probability of such fibres being found is 1 if the defendant is guilty and
+<span class="math inline">\(1/4\)</span> if the defendant is not guilty, what now should be the jury member’s
+probability that the defendant is guilty?</p>
+</div>
+<p>Attempt <a href="prob.html#prob:exer:guilty">Example 4.6.12 (Guilty?)</a> and then watch <a href="prob.html#video9">Video 9</a> for the solution.</p>
+<div id="video9" class="des">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Video 9: Guilty?</strong></span></p>
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1355621/sp/135562100/embedIframeJs/uiconf_id/13188771/partner_id/1355621?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_e1qr70ho&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_u42jzzuw" width="640" height="420" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Guilty? FINAL VERSION">
+</iframe>
+</div>
+<details>
+<summary>
+Solution to Example 4.6.12 (Guilty?)
+</summary>
+<div class="prf">
+<p>Let <span class="math inline">\(G\)</span> be the event that the defendant is guilty and let <span class="math inline">\(F\)</span> be the event that fibres are found on the victim’s clothing.</p>
+<p>We want <span class="math inline">\(P(G|F)\)</span>, the probability of being guilty <strong>given</strong> fibres are found on the victim’s clothing.</p>
+<p>We have that <span class="math inline">\(P(G)=0.7\)</span>, <span class="math inline">\(P(G^c) = 1- P(G)=0.3\)</span>, <span class="math inline">\(P(F|G)=1\)</span> and <span class="math inline">\(P(F|G^c)=0.25\)</span>.</p>
+Therefore, by Bayes’ Theorem,<br />
+
+<center>
+<span class="math display">\[\begin{eqnarray*}
+P(G|F) &amp;=&amp; \frac{P(F \cap G)}{P(F)}  \\ &amp;=&amp; \frac{P(F|G) P(G)}{P(F|G) P(G) + P(F|G^c) P(G^c)}  \\
+&amp;=&amp; \frac{1 \times 0.7}{1 \times 0.7 + 0.25 \times 0.3}  \\
+&amp;=&amp; 0.9032.
+\end{eqnarray*}\]</span>
+</center>
+</div>
+</details>
+<p><br />
+</p>
+</div>
+<div id="prob:mutual" class="section level2 hasAnchor" number="4.7">
+<h2><span class="header-section-number">4.7</span> Mutual Independence<a href="prob.html#prob:mutual" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We can extend the concept of <a href="prob.html#prob:def:independence">independence</a> from two events to <span class="math inline">\(N\)</span> events.</p>
+<div id="prob:def:mutual" class="def">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Mutual independence.</strong></span></p>
+Events <span class="math inline">\(E_1,E_2,\dots,E_N\)</span> are (mutually) <em>independent</em> if for <em>any</em> finite subset <span class="math inline">\(\{i_1,i_2,\dots,i_n\} \subseteq \{1,\dots,N\}\)</span>,<br />
+
+<center>
+<span class="math display">\[P\left(\bigcap_{j=1}^nE_{i_j}\right)=\prod_{j=1}^nP(E_{i_j}).\]</span>
+</center>
+</div>
+<p><br />
+</p>
+Note, in particular, two events <span class="math inline">\(E\)</span> and <span class="math inline">\(F\)</span> are independent if
+<center>
+<span class="math display">\[P(E\cap F)=P(E)P(F)\]</span>
+</center>
+<div id="prob:aircraft" class="ex">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Aircraft safety.</strong></span></p>
+An aircraft safety system contains <span class="math inline">\(n\)</span> independent components. The aircraft can fly provided at least one of the components is working. The probability
+that the <span class="math inline">\(i\)</span>th component works is <span class="math inline">\(p_{i}\)</span>. Then<br />
+
+<center>
+<span class="math display">\[\begin{eqnarray*}
+P(\mbox{Aircraft can fly})
+&amp; = &amp; 1 - P( \mbox{Aircraft cannot fly}) \\
+&amp; = &amp; 1 - P( \mbox{All components fail}) \\
+&amp; = &amp; 1 - \prod_{i=1}^{n} P( \mbox{Component $i$ fails} ) \\
+&amp; = &amp; 1 - \prod_{i=1}^{n} (1 - p_{i}).
+\end{eqnarray*}\]</span>
+</center>
+</div>
+<p><br />
+</p>
+</div>
+<div id="rv:lab" class="section level2 unnumbered hasAnchor">
+<h2><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 3</strong></span><a href="prob.html#rv:lab" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Attempt the <strong>R Markdown</strong> file for Session 3:<br />
+<a href="https://moodle.nottingham.ac.uk/course/view.php?id=134982#section-2">Session 3: Probability in R</a></p>
+</div>
+<div id="prob:stud" class="section level2 unnumbered hasAnchor">
+<h2><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span><a href="prob.html#prob:stud" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Attempt the exercises below.</p>
+<div id="exer4:1" class="exer">
+<p><br />
+A card is drawn from a standard pack of 52. Let <span class="math inline">\(B\)</span> be the event ‘the card is black’, <span class="math inline">\(NA\)</span> the event ‘the card is not an Ace’ and <span class="math inline">\(H\)</span> the event ‘the card is a Heart’. Calculate the following probabilities:</p>
+<ol style="list-style-type: lower-alpha">
+<li><span class="math inline">\(P(B|NA)\)</span>;<br />
+</li>
+<li><span class="math inline">\(P(NA|B^c)\)</span>;<br />
+</li>
+<li><span class="math inline">\(P(B^c \cap H | NA)\)</span>;<br />
+</li>
+<li><span class="math inline">\(P(NA \cup B | H^c)\)</span>;<br />
+</li>
+<li><span class="math inline">\(P(NA \cup H | NA \cap B)\)</span>.<br />
+</li>
+</ol>
+</div>
+<details>
+<summary>
+Solution to Exercise 4.1.
+</summary>
+<div id="QuestionS4_1" class="ans">
+<ol style="list-style-type: lower-alpha">
+<li><span class="math inline">\(P(B|NA) = \frac{P(B \cap NA)}{P(NA)} = \frac{24/52}{48/52} = \frac{1}{2}\)</span>;<br />
+</li>
+<li><span class="math inline">\(P(NA|B^c) = \frac{P(NA \cap B^c)}{P(B^c)} = \frac{24/52}{26/52} = \frac{12}{13}\)</span>;<br />
+</li>
+<li><span class="math inline">\(P(B^c \cap H|NA) = \frac{P(B^c \cap H \cap NA)}{P(NA)} = \frac{12/52}{48/52} = \frac{1}{4}\)</span>;<br />
+</li>
+<li><span class="math inline">\(P(NA \cup B|H^c) = \frac{P([NA \cup B] \cap H^c)}{P(H^c)} = \frac{38/52}{39/52} = \frac{38}{39}\)</span>;<br />
+</li>
+<li>Since <span class="math inline">\([NA \cup H] \cap [NA \cap B] = NA \cap B\)</span>, we have that<br />
+<span class="math inline">\(P(NA \cup H | NA \cap B) = \frac{P([NA \cup H] \cap [NA \cap B])}{P(NA \cap B)} = \frac{P(NA \cap B)}{P(NA \cap B)} \left(= \frac{24/52}{24/52} \right) = 1\)</span>.<br />
+</li>
+</ol>
+</div>
+</details>
+<p><br />
+</p>
+<div id="exer4:2" class="exer">
+<p><br />
+A diagnostic test has a probability <span class="math inline">\(0.95\)</span> of giving a positive result when
+applied to a person suffering from a certain disease, and a probability <span class="math inline">\(0.10\)</span> of giving
+a (false) positive when applied to a non-sufferer. It is estimated that <span class="math inline">\(0.5\%\)</span> of the population
+are sufferers. Suppose that the test is applied to a person chosen at random from
+the population. Find the probabilities of the following events.</p>
+<ol style="list-style-type: lower-alpha">
+<li>the test result will be positive.<br />
+</li>
+<li>the person is a sufferer, given a positive result.<br />
+</li>
+<li>the person is a non-sufferer, given a negative result.<br />
+</li>
+<li>the person is missclassified.</li>
+</ol>
+</div>
+<details>
+<summary>
+Solution to Exercise 4.2.
+</summary>
+<div id="QuestionS4_2" class="ans">
+<p>Let <span class="math inline">\(T\)</span> denote ‘test positive’ and <span class="math inline">\(S\)</span> denote ‘person is a sufferer’. Then question tells us that
+<span class="math inline">\(P(T | S) = 0.95\)</span>, <span class="math inline">\(P(T | S^c) = 0.1\)</span>, and <span class="math inline">\(P(S) = 0.005\)</span>.</p>
+<ol style="list-style-type: lower-alpha">
+<li><span class="math inline">\(P(T) = P(T|S)P(S) + P(T|S^c)P(S^c) = (0.95)(0.005) + (0.1)(0.995) = 0.10425.\)</span><br />
+</li>
+<li><span class="math inline">\(P(S | T) = \frac{P(T | S) P(S)}{P(T)} = \frac{(0.95)(0.005)}{0.10425} = 0.04556.\)</span><br />
+</li>
+<li><span class="math inline">\(P(S^c | T^c) = \frac{P(T^c | S^c) P(S^c)}{P(T^c)} = \frac{[1 - P(T | S^c)] P(S^c)}{1-P(T)} = \frac{(0.9)(0.995)}{0.89575} =0.9997\)</span>.<br />
+</li>
+<li>Missclassification means either the person is a sufferer and the test is negative, or the person is not
+a sufferer and the test is positive. These are disjoint events, so we require<br />
+
+<center>
+<span class="math display">\[\begin{eqnarray*}
+P(S \cap T^c) + P( S^c \cap T) &amp; = &amp; P(T^c | S)P(S) + P(T | S^c) P(S^c)\\
+&amp; = &amp; [1 - P(T | S)]P(S) + P(T | S^c) P(S^c)\\
+&amp; = &amp; (0.05)(0.005) + (0.1)(0.995) = 0.09975.
+\end{eqnarray*}\]</span>
+</center></li>
+</ol>
+</div>
+</details>
+<p><br />
+</p>
+<div id="exer4:3" class="exer">
+<p><br />
+In areas such as market research, medical research, etc, it is often hard to get people to
+answer embarrassing questions. One way around this is the following. Suppose that <span class="math inline">\(N\)</span> people
+are interviewed, where <span class="math inline">\(N\)</span> is even. Each person is given a card, chosen at random from <span class="math inline">\(N\)</span>
+cards, containing a single question. Half of the cards contain the embarrassing question, to
+which the answer is either ‘Yes’ or ‘No’. The other half of the cards contain the question ‘Is your
+birthday between January and June inclusive?’</p>
+<p>Suppose that of the <span class="math inline">\(N\)</span> people interviewed, <span class="math inline">\(R\)</span> answer ‘Yes’ to the question that they received.
+Let <span class="math inline">\(Y\)</span> be the event that a person gives a ‘Yes’ answer, <span class="math inline">\(E\)</span> the event that they received a card
+asking the embarrassing question. Assuming that half the population have birthdays between
+January and June inclusive, write down:</p>
+<ol style="list-style-type: lower-alpha">
+<li><span class="math inline">\(P(Y)\)</span>;<br />
+</li>
+<li><span class="math inline">\(P(E)\)</span>;<br />
+</li>
+<li><span class="math inline">\(P(Y|E^c)\)</span>.</li>
+</ol>
+<p>Hence calculate the proportion of people who answered `Yes’ to the embarrassing question.</p>
+<p><em>Hint: Try writing down an expression for <span class="math inline">\(P(Y)\)</span> using the Theorem of Total Probability.</em></p>
+<p>Comment on your answer.</p>
+</div>
+<details>
+<summary>
+Solution to Exercise 4.3.
+</summary>
+<div id="QuestionS4_3" class="ans">
+<p>We have that:</p>
+<ol style="list-style-type: lower-alpha">
+<li><span class="math inline">\(P(Y) = \frac{R}{N}\)</span>;<br />
+</li>
+<li><span class="math inline">\(P(E) = \frac{1}{2}\)</span>;<br />
+</li>
+<li><span class="math inline">\(P(Y|E^c) = \frac{1}{2}\)</span>.</li>
+</ol>
+We want <span class="math inline">\(P(Y | E)\)</span>. By the Theorem of total probability<br />
+
+<center>
+<span class="math display">\[P(Y) = P(Y|E)P(E) + P(Y | E^c)P(E^c),\]</span>
+</center>
+which gives<br />
+
+<center>
+<span class="math display">\[P(Y | E) = \frac{2 R}{N} - \frac{1}{2}.\]</span>
+</center>
+<strong>Comment:</strong> This only makes sense if <span class="math inline">\(0 \leq P(Y | E ) \leq 1\)</span>, that is,<br />
+
+<center>
+<span class="math display">\[\frac{N}{4} \leq R \leq \frac{3 N}{4}.\]</span>
+</center>
+<p>A little thought should help you see why.</p>
+</div>
+</details>
+<p><br />
+</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="visual.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="rv.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/04-P1_Probability.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

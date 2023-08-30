@@ -1,0 +1,726 @@
+# Techniques for Deriving Estimators {#MLE}
+
+## Introduction {#MLE:intro}
+
+In this Section we introduce two techniques for deriving estimators:  
+
+- [Method of Moments](#MLE:moments)  
+- [Maximum Likelihood Estimation](#MLE:MLE)  
+
+The [Method of Moments](#MLE:moments)  is a simple, intuitive approach, which has its limitations beyond simple random sampling (*i.i.d.* observations). [Maximum Likelihood Estimation](#MLE:MLE) is an approach which can be extended to complex modelling scenarios and likelihood based estimation will be central to statistical inference procedures throughout not only this module but the whole course.
+
+## Method of Moments {#MLE:moments}
+
+Let $X$ be a random variable.
+
+:::{.def #MLE:def:moments} 
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Definition 10.2.1.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Moments**</span>  
+
+If $E[X^k]$ exists in the sense that it is finite, then $E[X^k]$ is said to be the $k^{th}$ *moment* of the random variable $X$.
+:::
+
+For example,
+
+- $E[X] = \mu$ is the first moment of $X$;
+
+- $E[X^2]$ is the second moment of $X$.
+
+Note that $var(X) = E[X^2] - (E[X])^2$ is a function of the first and second moments.
+
+:::{.def #MLE:def:sample_moments}  
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Definition 10.2.2.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Sample moments**</span>  
+
+Let $X_1, X_2, \ldots, X_n$ be a random sample. The $k^{th}$ *sample moment* is
+
+<center>
+$$\hat{\mu}_k = \frac{1}{n} \sum_{i=1}^n X_i^k.$$
+</center>
+:::
+
+Since,
+<center>  
+\begin{align*}
+E[\hat{\mu}_k] &= E\left[ \frac{1}{n} \sum\limits_{i=1}^n X_i^k \right] \\
+&= \frac{1}{n} \sum_{i=1}^n E\left[ X_i^k \right] \\ 
+&= E\left[ X_i^k \right],
+\end{align*}  
+</center>  
+it follows that the $k^{th}$ sample moment is an unbiased estimator of the $k^{th}$ moment of a distribution.  Therefore, if one wants to estimate the parameters from a particular distribution, one can write the parameters as a function of the moments of the distribution and then estimate them by their corresponding sample moments. This is known as the **method of moments**.
+
+:::{.lem #MLE:lem:moments}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Lemma 10.2.3.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Method of Moments: Mean and Variance**</span> 
+
+Let $X_1,X_2,\dots,X_n$ be a random sample from any distribution with mean $\mu$ and variance $\sigma^2$.  
+The method of moments estimators for $\mu$ and $\sigma^2$ are:
+<center>
+$$ \hat{\mu} = \bar{X} \qquad \mbox{ and } \qquad \hat{\sigma}^2 = \frac{1}{n} \sum_{i=1}^n (X_i - \bar{X})^2. $$  
+</center>
+:::
+
+:::{.prf #MLE:lemprf:moments}
+
+The method of moments estimator for $\mu$ is  
+<center>  
+\begin{align*}
+\hat{\mu} &= \hat{\mu}_1 \\
+&= \frac{1}{n} \sum\limits_{i=1}^n X_i \\
+&= \bar{X}, \end{align*}  
+</center>
+Given that $\sigma^2 = E[X^2] - E[X]^2$, the method of moments estimator for $\sigma^2$ is  
+<center>
+\begin{align*}
+\hat{\sigma}^2 &= \hat{\mu}_2 - (\hat{\mu}_1)^2 \\ 
+&= \frac{1}{n} \sum\limits_{i=1}^n X_i^2 - \left( \frac{1}{n} \sum\limits_{i=1}^n X_i \right)^2 \\
+&= \frac{1}{n} \sum\limits_{i=1}^n (X_i - \bar{X})^2.
+\end{align*}  
+</center>
+:::
+\
+Note that $E[\hat{\mu}] = E[\bar{X}] =\mu$ is an unbiased estimator, whilst 
+<center>
+$$E[\hat{\sigma}^2] = E \left[\frac{1}{n} \sum\limits_{i=1}^n (X_i - \bar{X})^2 \right] = \frac{n-1}{n} \sigma^2$$ 
+</center>
+is a biased estimator, but is asymptotically unbiased. See [Section 9.4](#paraestimate:variance) where the properties of $\hat{\sigma}^2$ are explored further.
+
+
+:::{.ex #MLE:ex:bin_moments} 
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Example 10.2.4.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Method of Moments: Binomial distribution**</span> 
+
+Let $X_1,X_2,\ldots,X_n \sim \text{Bin}(m,\theta)$ where $m$ is known. Find the method of moments estimator for $\theta$.
+
+The first moment (mean) of the Binomial distribution is $m \theta$.  Therefore,
+
+<center>
+$$\hat{\theta} = \frac{\hat{\mu}_1}{m} = \frac{\bar{X}}{m}.$$
+</center>
+:::
+\
+
+:::{.ex #MLE:ex:exp_moments} 
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Example 10.2.5.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Method of Moments: Exponential distribution**</span>  
+
+Let $X_1,X_2,\ldots,X_n \sim \text{Exp}(\theta)$. Find the method of moments estimator for $\theta$.
+
+For $x>0$ and $\theta>0$, 
+<center>
+$$f(x|\theta) = \theta e^{-\theta x}. $$ 
+</center>
+Therefore $E[X] = 1/\theta$, so $1/\hat{\theta} = \bar{X}$ and  
+<center>
+$$\hat{\theta} = 1/\bar{X}.$$
+</center>
+:::
+
+The sampling properties of the $k^{th}$ sample moment are fairly desirable:  
+
+- $\hat{\mu}_k$ is an unbiased estimator of $E[X^k]$;  
+- By the Central Limit Theorem, $\hat{\mu}_k$ is asymptotically normal if $E[X^{2k}]$ exists;  
+- $\hat{\mu}_k$ is a consistent estimator of $E[X^k]$.  
+
+If $h$ is a continuous function, then $\hat{\theta} = h(\hat{\mu}_1, \hat{\mu}_2, \dots, \hat{\mu}_k)$ is a consistent estimator of $\theta = h(\mu_1,\mu_2,\dots,\mu_k)$, but it may not be an unbiased or an asymptotically normal estimator.
+
+There are often difficulties with the method of moments:
+
+- Finding $\theta$ as a function of theoretical moments is not always simple;  
+- For some models, moments may not exist.  
+
+## Maximum likelihood estimation {#MLE:MLE}
+
+In the study of probability, for random variables $X_1,X_2,\dots,X_n$ we consider the joint probability mass function or probability density function as just a function of the random variables $X_1,X_2,\dots,X_n$.  Specifically we assume that the parameter value(s) are completely known.
+
+For example, if $X_1,X_2,\dots,X_n$ is a random sample from a Poisson distribution with mean $\lambda$, then
+<center>
+$$P (X_1 =x_1, X_2 = x_2, \ldots, X_n = x_n) = p_{X_1,X_2,\dots,X_n}(x_1,x_2,\dots,x_n) = \frac{ e^{-n\lambda} \lambda^{\left( \sum\limits_{i=1}^n x_i \right)} }{\prod\limits_{i=1}^n x_i!}$$ 
+</center>
+for $\lambda > 0$. See [Section 6.4](#jointdis:independent) for derivation.
+
+However, in the study of statistics, we assume the parameter values are **unknown**.  Therefore, if we are given a specific random sample $x_1,x_2,\dots,x_n$, then $p(x_1,x_2,\dots,x_n)$ will take on different values for each possible value of the parameters ($\lambda$ in the Poisson example). Hence, we can consider $p(x_1,x_2,\dots,x_n)$ to also be a function of the unknown parameter and write $p(x_1,x_2,\dots,x_n|\lambda)$ to make the dependence on $\lambda$ explicit.  In **maximum likelihood estimation** we choose $\hat{\lambda}$ to be the value of $\lambda$ which most likely produced the random sample $x_1,x_2,\dots,x_n$, that is, the value of $\lambda$ which maximises $p(x_1, x_2, \ldots, x_n |\lambda)$ for the observed $x_1,x_2,\dots,x_n$.
+
+:::{.def #MLE:def:like}  
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Definition 10.3.1.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Likelihood function**</span>   
+\
+The *likelihood function* of the random variables $X_1,X_2,\dots,X_n$ is the joint p.m.f. (discrete case) or joint p.d.f. (continuous case) of the observed data given the parameter $\theta$, that is  
+<center>
+$$L(\theta) = f(x_1,x_2,\dots,x_n | \theta).$$
+</center>  
+:::
+
+Note that if $X_1,X_2,\ldots,X_n$ are a random sample from a distribution with probability function $f(x|\theta)$ then  
+<center>  
+$$ L(\theta) = \prod_{i=1}^n f(x_i|\theta).$$  
+</center>
+
+:::{.def #MLE:def:MLE}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Definition 10.3.2.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Maximum likelihood estimator**</span>  
+
+The *maximum likelihood estimator*, denoted shorthand by MLE or m.l.e., of $\theta$ is the value $\hat{\theta}$ which maximises $L(\theta)$.
+:::
+
+:::{.ex #MLE:ex:Poisson}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Example 10.3.3.}
+```
+Suppose that we collect a random sample from a Poisson distribution such that $X_1=1$, $X_2=2$, $X_3=3$ and $X_4=4$.  Find the maximum likelihood estimator of $\lambda$.
+:::
+\
+
+The likelihood function is  
+<center>  
+\begin{align*}
+L(\lambda) &= p(x_1, x_2, x_3, x_4 |\lambda) \\
+&= p(1,2,3,4| \lambda) \\
+&= \frac{e^{-4\lambda}\lambda^{10}}{1!2!3!4!}.
+\end{align*}  
+</center>  
+Since $\log x$ is a monotonic increasing function, the value $\hat{\lambda}$ that maximises $\log L(\lambda)$ will also maximise $L(\lambda)$.  Hence calculate,  
+<center>   
+$$\log L(\lambda) = -4 \lambda + 10 \log \lambda - \log (1!2!3!4!).$$  
+</center>  
+To maximise $\log L(\lambda)$ we solve  
+<center>  
+$$\frac{d \log L(\lambda)}{d\lambda}=0.$$  
+</center>  
+Now, $\frac{d \log L(\lambda)}{d\lambda} = -4 + \frac{10}{\lambda} = 0$.  Hence, $\hat{\lambda} = \frac{5}{2} = 2.5$.
+
+
+
+
+
+
+:::{.def #MLE:def:log_like}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Definition 10.3.4.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Log likelihood function**</span>  
+
+If $L(\theta)$ is the likelihood function of $\theta$, then $l(\theta)=\log L(\theta)$ is called the *log likelihood function* of $\theta$.
+:::
+
+:::{.ex #MLE:exer:bin_mle}  
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Example 10.3.5.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Binomial MLE**</span>  
+
+Let $X \sim \text{Bin}(m,\theta)$.  Find the MLE of $\theta$ given observation $x$.
+:::
+
+Attempt [Example 10.3.5: Binomial MLE](#MLE:exer:bin_mle) and then watch [Video 17](#video17) for the solutions. 
+
+We will use the case $m=10$ and $x=3$ to illustrate the calculations.
+
+```{asis, include=knitr::is_html_output()}
+:::{.des #video17}
+<span style="color: rgba(207, 0, 15, 1);">**Video 17: Binomial MLE**</span>  
+
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1355621/sp/135562100/embedIframeJs/uiconf_id/13188771/partner_id/1355621?iframeembed=true&playerId=kaltura_player&entry_id=1_5slobzch&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_ht43m4rg" width="640" height="420" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Binomial MLE FINAL VERSION"></iframe>
+:::
+```
+
+```{asis, include=knitr::is_latex_output()}
+Watch [\textcolor{blue}{Video 17: Binomial MLE}](https://mediaspace.nottingham.ac.uk/media/Binomial+MLE+FINAL+VERSION/1_5slobzch)
+```  
+
+<details><summary>Solution to Example 10.3.5: Binomial MLE</summary>
+
+:::{.ans}
+Given $x$ is sampled from the random variable $X$, we have that
+
+<center>
+$$L(\theta) = {m \choose x} \theta^x (1-\theta)^{m-x}, \qquad 0 \leq \theta \leq 1.$$
+</center>
+
+In the case $m=10$ and $x=3$ the likelihood becomes $L(\theta) = 120 \theta^3 (1-\theta)^7$ and this is illustrated in Figure \@ref(fig:binmle1).
+
+<center>
+```{r binmle1, echo = FALSE, out.width= "70%", fig.cap = "Likelihood function."}
+theta=seq(0,1,0.001)
+L=120*theta^3*(1-theta)^7
+
+llaby=expression(paste("L(",theta,")"))
+
+plot(theta,L,xlab=expression(theta),ylab=llaby,type="l",lwd=2)
+```
+</center>
+
+Take the derivative of $L(\theta)$ (using the product rule):
+
+<center>
+\begin{align*}
+\frac{d L(\theta)}{d\theta} &= {m \choose x} x \theta^{x-1} (1-\theta)^{m-x} - {m \choose x} \theta^{x} (m-x) (1-\theta)^{m-x-1} \\[3pt]
+&= {m \choose x} \theta^{x-1} (1-\theta)^{m-x-1} \left[ x(1-\theta) - (m-x)\theta \right].
+\end{align*}
+ </center>
+
+Setting $\frac{d L(\theta)}{d\theta} = 0$, we obtain
+
+<center>
+$$\left[ x(1-\theta) - (m-x)\theta \right] = 0.$$
+</center>
+Hence, $\hat{\theta} = \frac{x}{m}$ is a possible value for the MLE of $\theta$.
+
+Since $L(\theta)$ is a continuous function over $[0,1]$, the maximum must exist at either the stationary point or at one of the endpoints of the interval.  Given, $L(0) = 0$, $L(1) = 0$, and $L\left(\frac{x}{m}\right)>0$, it follows that $\hat{\theta}=\frac{x}{m}$ is the MLE of $\theta.$
+
+In the illustrative example, $m=10$ and $x=3$ giving $\hat{\theta} = \frac{3}{10} =0.3$. In Figure \@ref(fig:binmle2) the MLE is marked on the plot of the likelihood function.
+
+<center>
+```{r binmle2, echo = FALSE, out.width= "70%", fig.cap = "Likelihood function with MLE at 0.3."}
+theta=seq(0,1,0.001)
+L=120*theta^3*(1-theta)^7
+
+llaby=expression(paste("L(",theta,")"))
+
+plot(theta,L,xlab=expression(theta),ylab=llaby,type="l",lwd=2)
+lines(c(0.3,0.3),c(0,max(L)),col=2,lwd=2)
+```
+</center>
+
+It is easier to use the log-likelihood $l(\theta)$ to derive the MLE.
+
+We have that
+
+<center>
+$$l(\theta) = \log \left[ \binom{m}{x} \theta^x (1-\theta)^{m-x} \right] = \log \left[ \binom{m}{x}\right] + x \log \theta + (m-x) \log (1-\theta).$$
+</center>
+
+In the case $m=10$ and $x=3$ the likelihood becomes $l(\theta) = \log 120 + 3 \log \theta + 7 \log (1-\theta)$ and this is illustrated in Figure \@ref(fig:binmle3).
+
+<center>
+```{r binmle3, echo = FALSE, out.width= "70%", fig.cap = "Log-likelihood function."}
+l=log(L)
+
+llab2=expression(paste("l(",theta,")"))
+K=10
+
+plot(theta,l,xlab=expression(theta),ylab=llab2,type="l",lwd=2,ylim=c(-K,max(l)))
+```
+</center>
+
+Take the derivative of $l(\theta)$:
+
+<center>
+\begin{align*}
+\frac{d l(\theta)}{d\theta} &= 0 +\frac{x}{\theta} - \frac{m-x}{1-\theta} \\[3pt]
+&= \frac{x (1-\theta) - (m-x) \theta}{\theta (1-\theta)}.
+\end{align*}
+ </center>
+
+Setting $\frac{d l(\theta)}{d\theta} = 0$, again requires solving 
+<center>
+$$\left[ x(1-\theta) - (m-x)\theta \right] = 0.$$
+</center>
+Giving $\hat{\theta} = \frac{x}{m}$.
+
+In the illustrative example, $m=10$ and $x=3$ giving $\hat{\theta} = \frac{3}{10} =0.3$. In Figure \@ref(fig:binmle4) the MLE is marked on the plot of the likelihood function.
+
+<center>
+```{r binmle4, echo = FALSE, out.width= "70%", fig.cap = "Log-likelihood function with MLE at 0.3."}
+l=log(L)
+
+llab2=expression(paste("l(",theta,")"))
+K=10
+
+plot(theta,l,xlab=expression(theta),ylab=llab2,type="l",lwd=2,ylim=c(-K,max(l)))
+lines(c(0.3,0.3),c(-K,max(l)),col=2,lwd=2)
+```
+</center>
+:::
+</details>
+
+
+\
+The following **R** shiny app allows you to investigate the MLE for data from a geometric distribution, $X \sim {\rm Geom} (p)$. The success probability of the geometric distribution can be varied from 0.01 to 1. The likelihood, log-likelihood and relative likelihood (likelihood divided by its maximum) functions can be plotted. Note that as the number of observations become large the likelihood becomes very small, and equal to, 0 to computer accuracy. You will observe that the likelihood function becomes more focussed about the MLE as the sample size increases. Also the MLE will generally be closer to the *true* value of $p$ used to generate the data as the sample size increases.  
+
+R Shiny app: [MLE Geometric Distribution](https://shiny-new.maths.nottingham.ac.uk/pmzpn/MLE/)
+\
+
+:::{.ex #MLE:ex:poisson_mle}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Example 10.3.6.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Poisson MLE**</span>  
+
+Let $X_1,X_2, \ldots, X_n$ be a random sample from a Poisson distribution with mean $\lambda$. Find the MLE of $\lambda$.
+:::
+\
+
+We have  
+<center>  
+\begin{align*}
+L(\lambda) &= p(x_1,x_2, \ldots, x_n | \lambda) \\[3pt]
+&= \frac{ \text{e}^{-n\lambda} \lambda^{\sum_{i=1}^n x_i}}{\prod_{i=1}^n x_i!},
+\end{align*}  
+</center>  
+where $\lambda>0$.  So,
+<center>  
+$$ l ( \lambda ) = -n \lambda + \sum\limits_{i=1}^n x_i \log \lambda - \log \prod\limits_{i=1}^n x_i!.$$
+</center>  
+Now
+<center> 
+$$ \frac{dl(\lambda)}{d\lambda} = -n + \frac{\sum_{i=1}^n x_i}{\lambda}. $$ 
+</center> 
+Setting $\frac{dl(\lambda)}{d\lambda} =0$ and solving yields
+<center> 
+$$ \hat{\lambda} = \frac{\sum_{i=1}^n x_i}{n} = \bar{x}.$$
+</center> 
+Since $\frac{d^2 l(\lambda)}{d\lambda ^2} = \frac{-\sum_{i=1}^n x_i}{\lambda^2} < 0$, it follows that $\hat{\lambda}=\bar{X}$ is a maximum, so is the MLE of $\lambda$.
+
+\
+
+In both [Example 10.3.5](#MLE:exer:bin_mle) and [Example 10.3.6](#MLE:ex:pois_mle), we note that terms in the likelihood which do not involve the parameter of interest play no role in the calculating of the MLE.  For example, $\binom{m}{x}$ in the binomial and $\left[\prod\limits_{i=1}^n x_i!\right]^{-1}$ in the Poisson. Therefore it is sufficient to consider a function $H(\theta)$ which is proportional to the likelihood, that is, there exists $K >0$ such that
+<center> 
+$$ L(\theta) = K H(\theta) \qquad \mbox{for all } \theta. $$
+</center> 
+We write $L(\theta) \propto H(\theta)$ and note that if $h(\theta) = \log H (\theta)$, then  
+<center>  
+$$ l(\theta) = \log K + h (\theta)$$  
+</center>  
+and  
+<center>  
+$$ \frac{d \;}{d \theta} l (\theta) = \frac{d \;}{d \theta} h (\theta).$$  
+</center> 
+
+:::{.ex #MLE:ex:normal_mean}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Example 10.3.7.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**MLE of mean of a Normal random variable**</span> 
+
+Let $X_1,X_2, \ldots, X_n$ be a random sample of $N(\theta,1)$ with mean $\theta$. Find the MLE of $\theta$ given observations $x_1, x_2, \ldots, x_n$.
+:::
+\
+
+For each of the $x_i$:  
+<center>
+$$ f(x_i|\theta) = \frac{1}{\sqrt{2\pi}} \exp \left\{ -\frac{1}{2} \left(x_i-\theta\right)^2 \right\}.$$
+</center>
+
+Thus:
+<center>
+$$ L(\theta) = \left( 2 \pi\right)^{-n/2} \prod \limits_{i=1}^n \exp \left\{ -\frac{1}{2} \left(x_i-\theta\right)^2 \right\} $$
+</center>
+and so,
+<center>
+$$ L(\theta) \propto \prod \limits_{i=1}^n \exp \left\{ -\frac{1}{2} \left(x_i-\theta\right)^2 \right\} = \exp \left\{ -\frac{1}{2} \sum_{i=1}^n (x_i-\theta)^2\right\} $$
+</center>
+and
+<center>
+$$ l(\theta) = \log L(\theta) = -\frac{1}{2} \sum _{i=1}^n \left(x_i-\theta\right)^2 +
+\text{constant}.$$
+</center>
+
+Hence
+<center>
+$$ \frac{dl(\theta)}{d\theta} = \sum _{i=1}^n (x_i-\theta) = 0$$
+</center>
+gives the stationary point of the likelihood, with 
+<center>
+\begin{equation}
+\hat{\theta} = \frac{\sum x_i}{n} = \bar{x},
+(\#eq:theta)  
+\end{equation}
+</center>
+It is easily verified that $\hat{\theta}$ given in \@ref(eq:theta) is a maximum 
+ since
+<center>
+$$ \frac{d^2 l(\theta)}{d\theta^2} = -n < 0 .$$
+</center>
+So $\hat{\theta}= \bar{x}$ is the MLE of $\theta$.
+\
+
+In [Example 10.3.5](#MLE:exer:bin_mle), [Example 10.3.6](#MLE:ex:pois_mle) and [Example 10.3.7](#MLE:ex:normal_mean) the maximum likelihood estimators correspond with the method of moment estimators. In [Example 10.3.8](#MLE:ex:unif_mle) we consider a situation where the maximum likelihood estimator is very different from the method of moments estimator.
+
+:::{.ex #MLE:exer:unif_mle}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Example 10.3.8.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**MLE for Uniform random variables**</span> 
+
+Let $U_1,U_2, \ldots, U_n$ be i.i.d. samples of $U[0,\theta]$. Given observations $u_1, u_2, \ldots, u_n$:
+
+(a) Find the MLE of $\theta$.  
+(b) Find the method of moments estimator of $\theta$.
+:::
+
+
+Attempt [Example 10.3.8: MLE for Uniform random variables](#MLE:exer:bin_mle) and then watch [Video 18](#video18) for the solutions. 
+
+We will data $\mathbf{u}= (u_1, u_2, \ldots, u_5)= (1.30,2.12,2.40,0.98,1.43)$ as an illustrative example. These 5 observations were simulated from $U(0,3)$.
+
+```{asis, include=knitr::is_html_output()}
+:::{.des #video18}
+<span style="color: rgba(207, 0, 15, 1);">**Video 18: MLE for Uniform random variables**</span>  
+
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1355621/sp/135562100/embedIframeJs/uiconf_id/13188771/partner_id/1355621?iframeembed=true&playerId=kaltura_player&entry_id=1_w4cepvo9&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_jcrw2cnc" width="640" height="420" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Uniform MLE FINAL VERSION"></iframe>
+
+:::
+```
+
+```{asis, include=knitr::is_latex_output()}
+Watch [\textcolor{blue}{Video 18: MLE for Uniform random variables}](https://mediaspace.nottingham.ac.uk/media/Uniform+MLE+FINAL+VERSION/1_w4cepvo9)
+```  
+
+
+
+<details><summary>Solution to Example 10.3.8: MLE for Uniform random variables</summary>
+
+:::{.ans #MLE:exerprf:unif_mle}
+(a) If $U_i \sim U[0,\theta]$, then its p.d.f. is given by  
+<center>  
+$$f(u|\theta) = \begin{cases} \frac{1}{\theta}, & \text{if } 0 \leq u \leq \theta, \\[3pt]
+0, & \text{otherwise.} \end{cases}$$  
+</center>  
+Note that if $\theta< u_i$ for some $i$, then $L(\theta)=0$. Since $L(\theta)$ is always positive and we want to maximise L, we can assume $0 \leq u_i \leq \theta$ for all $i=1,\dots,n$, then 
+<center>  
+$$L(\theta) = \prod_{i=1}^n f(u_i|\theta) = \prod_{i=1}^n \frac{1}{\theta} = \frac{1}{\theta^n}.$$ 
+</center> 
+Hence, $L(\theta)$ is a decreasing function of $\theta$ and its maximum must exist at the smallest value that $\theta$ can obtain.  Since $\theta > \max \{u_1,u_2,\dots,u_n\}$, the MLE of $\theta$ is $\hat{\theta} = \max \{u_1,u_2,\dots,u_n\}$.
+
+Figure \@ref(fig:unifmle1) shows the likelihood function $L(\theta)$ using the data  $\mathbf{u}= (1.30,2.12,2.40,0.98,1.43)$.
+
+<center>
+```{r unifmle1, echo = FALSE, out.width= "70%", fig.cap = "Likelihood function for u = (1.30,2.12,2.40,0.98,1.43)."}
+theta<-seq(2,3,0.001)
+zero<-rep(0,length(theta))
+u=c(1.30,2.12,2.40,0.98,1.43)
+L=1/theta^5
+
+llaby=expression(paste("L(",theta,")"))
+
+plot(theta[theta>=max(u)],L[theta>=max(u)],xlab=expression(theta),ylab=llaby,type="l",lwd=2,xlim=c(2,3),ylim=c(0,max(L[theta>=max(u)])))
+lines(theta[theta<max(u)],zero[theta<max(u)],lwd=2)
+```
+</center>
+
+(b) By comparison the method of moments estimator, $\check{\theta}$, of $\theta$ uses $E[U]= \frac{0 +\theta}{2}$ and hence is given by 
+$$ \check{\theta} = 2 \bar{u}. $$ 
+Note that if $2 \bar{u} <  \max \{u_1,u_2,\dots,u_n\}$ then $\check{\theta}$ will not be consistent with the data, *i.e.* $L(\check{\theta})=0$. 
+
+To observe the difference between the MLE and the method of moments estimator, using $\mathbf{u}= (1.30,2.12,2.40,0.98,1.43)$:
+
+- MLE: $\hat{\theta} = \max \{1.30,2.12,2.40,0.98,1.43 \}  =2.40$;  
+- Method of Moments: $\check{\theta} =2 \bar{u} = 2 (1.646) =3.292$.   
+:::
+</details>
+\
+
+## Comments on the Maximum Likelihood Estimator {#MLE:comments}
+
+The following points on the maximum likelihood estimator are worth noting:
+
+1. When finding the MLE you want to maximise the likelihood function. However it is often more convenient to maximise the log likelihood function instead. Both functions will be maximised by the same parameter values;  
+2. MLEs may not exist, and if they do, they may not be unique;  
+3. The likelihood function is **NOT** the probability distribution for $\theta$. The correct interpretation of the likelihood function is that it is the probability of obtaining the observed data if $\theta$ were the true value of the parameter. We assume $\theta$ is an unknown constant, not a random variable.  In Bayesian statistics we will consider the parameter to be random;  
+4. The MLE has some nice large sample properties, including consistency, asymptotic normality and other optimality properties;  
+5. The MLE can be used for non-independent data or non-identically distributed data as well;  
+6. Often the MLE cannot be found using calculus techniques and must be found numerically. It is often useful, if we can, to plot the likelihood function to find good starting points to find the MLE numerically;  
+7. The MLE satisfies a useful invariance property.  Namely, if $\phi = h(\theta)$, where $h(\theta)$ is a one-to-one function of $\theta$, then the MLE of $\phi$ is given by $\hat{\phi} = h (\hat{\theta})$.  For example, if $\phi = \frac{1}{\theta}$ and $\hat{\theta}=\bar{X}$ then $\hat{\phi} = \frac{1}{\hat{\theta}} = \frac{1}{\bar{X}}$.  
+
+## <span style="color: rgba(15, 0, 207, 1);">**Student Exercises**</span>  {- #MLE:exer}
+
+Attempt the exercises below. 
+
+:::{.exer #exer10:1}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Exercise 10.1.}
+```
+\
+Let $X_1, X_2, \dots, X_n$ be independent random variables, each with pdf
+$$ f(x | \theta) = \theta^2 x \exp(-\theta x),$$
+for $x > 0$.  Use the method of moments to determine an estimator of $\theta$.  
+
+Remember that if $X \sim \text{Gamma}(\alpha,\beta)$ then $E[X]=\alpha/\beta$.  
+:::
+
+```{asis, include=knitr::is_html_output()}
+<details><summary>Solution to Exercise 10.1.</summary>
+:::{.ans #QuestionMLE_1}
+The distribution is ${\rm Gamma} (\alpha, \beta)$ with $\alpha = 2$ and $\beta = \theta$ since  
+<center>
+$$ \frac {{\beta}^{\alpha} x^{\alpha - 1} e^{-\beta x}}{\Gamma (\alpha)} = \frac {{\theta}^{2} x^{2 - 1} e^{-\theta x}}{\Gamma (2)} = {\theta}^2 x e^{-\theta x}. $$  
+</center>  
+For the  ${\rm Gamma} (\alpha, \beta)$ distribution  
+<center>
+$$E[X] = \frac {\alpha}{\beta} = \frac {2}{\theta}.$$  
+</center>  
+Alternatively this can be obtained directly using integration by parts.  
+By the method of moments,
+<center>
+$$ E[X]= \frac {\alpha}{\beta} = \frac {2}{\theta} = \bar{x} \qquad \Rightarrow \qquad \theta = \frac {2}{\bar{x}}.$$ 
+</center>
+:::
+</details>
+```
+\
+
+:::{.exer #exer10:2}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Exercise 10.2.}
+```
+\
+Let $X_1, X_2, \dots, X_n$ be a random sample from the distribution with p.d.f. 
+<center>
+$$ f(x|\theta) = \theta e^{-(x-1)\theta}, \qquad x>1,$$ 
+</center>
+where $\theta > 0$ is an unknown parameter.  Find the MLE of $\theta$.  
+:::
+
+
+```{asis, include=knitr::is_html_output()}
+<details><summary>Solution to Exercise 10.2.</summary>
+:::{.ans #QuestionMLE_2}
+The likelihood is
+<center>
+\begin{eqnarray*}
+L(\theta) = \prod_{i=1}^n f(x_i | \theta) = \prod _{i=1}^n \theta e^{-(x_i-1)\theta} &=& \theta^n \exp \left\{ - \sum_{i=1}^n (x_i-1)\theta \right\} \\
+&=& \theta^n \exp \left\{ - \left( \sum_{i=1}^n x_i-n \right) \theta \right\}.
+\end{eqnarray*}
+</center>
+Thus
+<center>
+$$ l(\theta) = \log L(\theta) = n \log \theta - \left( \sum_{i=1}^n x_i-n \right) \theta, $$
+</center>
+so
+<center>
+$$ l'(\theta)=\frac{n}{\theta}- \sum_{i=1}^n x_i+n.$$
+</center>
+For a stationary point,
+<center>
+\begin{eqnarray*}
+l'(\theta) = 0 \qquad &\Longleftrightarrow& \qquad \frac{n}{\theta}-\sum_{i=1}^n x_i+n=0 \\
+\qquad &\Longleftrightarrow& \qquad \theta = \frac{n}{\sum_{i=1}^n x_i-n} = \frac{1}{\bar{x}-1}.
+\end{eqnarray*}
+</center>
+This corresponds to a maximum since
+<center>
+$$ l''(\theta)=-\frac{n}{\theta ^2}<0. $$
+</center>
+Thus the MLE of $\theta$ is $\hat{\theta}=\frac{1}{\bar{x}-1}$.
+:::
+</details>
+```
+\
+
+:::{.exer #exer10:3}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Exercise 10.3.}
+```
+\
+(a) Let $X_1, X_2, \dots, X_n$ be a random sample from the distribution having pdf
+$$ f(x|\theta) = \frac{1}{2} (1+ \theta x), \qquad -1<x<1,$$
+where $\theta \in (-1,1)$ is an unknown parameter.  Show that the method of moments estimator for $\theta$ is
+<center>  
+$$\tilde{\theta}_1 = 3 \bar{X}$$  
+</center>  
+where $\bar{X} = \frac{1}{n} \sum_{i=1}^n X_i.$  
+(b) Suppose instead that it is observed only whether a given observation is positive or negative. For $i=1,2,\dots,n$, let  
+<center>  
+$$ Y_i = \begin{cases} 1 & \text{if } X_i \geq 0 \\ 0 & \text{if } X_i < 0. \end{cases} $$  
+</center>  
+Show that the method of moments estimator for $\theta$ based on $Y_1, Y_2, \dots, Y_n$ is  
+<center>  
+$$\tilde{\theta}_2 = 4 \bar{Y} - 2,$$  
+</center>  
+where $\bar{Y} = \frac{1}{n} \sum_{i=1}^n Y_i.$   
+(c) Justifying your answers,  
+
+i. which, if either, of the estimators $\tilde{\theta}_1$ and $\tilde{\theta}_2$ are unbiased?   
+ii. which of the estimators $\tilde{\theta}_1$ and $\tilde{\theta}_2$ is more efficient?   
+iii. which, if either, of the estimators $\tilde{\theta}_1$ and $\tilde{\theta}_2$ are mean-square
+consistent?   
+:::
+
+```{asis, include=knitr::is_html_output()}
+<details><summary>Solution to Question 3.</summary>
+:::{.ans #QuestionMLE_3}
+(a) Since,  
+<center>  
+$$ E[X_1] = \int_{-1}^{1} \frac{x}{2}(1+ \theta x) dx = \left[ \frac{x^2}{4} + \theta \frac{x^3}{6} \right]_{-1}^1 = \frac{\theta}{3}, $$  
+</center>
+the method of moments estimator is obtained by solving $\bar{X} = \frac{\theta}{3}$ yielding, $\tilde{\theta}_1 = 3\bar{X}$.  
+(b) First note that,  
+<center> 
+$$ P(X_1 > 0) = \int_0^1 \frac{1}{2} (1+\theta x) dx = \left[ \frac{x}{2} + \theta \frac{x^2}{4} \right]_0^1 = \frac{1}{2} \left(1+\frac{\theta}{2}\right).$$  
+</center> 
+Thus,  
+<center>  
+$$ E[Y_1] = P(X_1 > 0) = \frac{1}{2} \left(1+\frac{\theta}{2}\right), $$  
+</center>  
+so, $\bar{Y} = \frac{1}{2} \left(1+\frac{\theta}{2}\right)$, yielding,  
+<center> 
+$$ \tilde{\theta}_2 = 4\bar{Y} - 2.$$  
+</center>  
+(c)    
+i.  Both estimators are unbiased. 
+<center> 
+$$ E[\tilde{\theta}_1] = E \left[ \frac{3}{n} \sum_{i=1}^n X_i \right] = \frac{3}{n} \sum_{i=1}^n E[X_i] = \frac{3}{n} n \frac{\theta}{3} = \theta, $$  
+</center> 
+so $\tilde{\theta}_1$ is unbiased.  
+<center>  
+$$ E[\tilde{\theta}_2] = E \left[ \frac{4}{n} \sum_{i=1}^n Y_i - 2 \right] = \frac{4}{n} \sum_{i=1}^n E[Y_i] - 2 = \frac{4}{n} n \frac{1}{2} \left(1+ \frac{\theta}{2}\right) - 2 = \theta, $$  
+</center>  
+so $\tilde{\theta}_2$ is unbiased.  
+ii.  
+<center> 
+$$ var(\tilde{\theta}_1) = var\left( \frac{3}{n} \sum_{i=1}^n X_i \right) = \frac{9}{n^2} \sum_{i=1}^n var(X_i) = \frac{9}{n} var(X_1). $$  
+</center> 
+Now,  
+<center>  
+$$ E[X_1^2] = \int_{-1}^1 \frac{x^2}{2} (1+\theta x) dx = \left[ \frac{x^3}{6} + \theta \frac{x^4}{8} \right]_{-1}^1 = \frac{1}{3}. $$  
+</center>  
+Thus,  
+<center> 
+$$ var(X_1) = \frac{1}{3} - \frac{\theta^2}{9} = \frac{1}{9}(3-\theta^2), $$  
+</center> 
+so,  
+<center> 
+$$ var(\tilde{\theta}_1) = \frac{1}{n}(3-\theta^2). $$  
+</center> 
+Similarly,  
+<center> 
+$$ var(\tilde{\theta}_2) = var(4\bar{Y} -2) = 16 var(\bar{Y}) = \frac{16}{n} var(Y_1). $$  
+</center> 
+Now $Y_1 \sim \text{Bin}\left(1,\frac{1}{2}\left(1+\frac{\theta}{2}\right) \right)$ so,  
+<center> 
+$$ var(Y_1) = \frac{1}{2}\left(1+\frac{\theta}{2}\right)\frac{1}{2}\left(1-\frac{\theta}{2}\right) = \frac{1}{4}\left(1-\frac{\theta^2}{4}\right) = \frac{1}{16}(4-\theta^2), $$  
+</center> 
+thus,  
+<center> 
+$$ var(\tilde{\theta}_2) = \frac{1}{n}(4-\theta^2). $$  
+</center> 
+Hence, $var(\tilde{\theta}_1) < var(\tilde{\theta}_2)$, so $\tilde{\theta}_1$ is more efficient than $\tilde{\theta}_2$.  
+iii. 
+Since $\tilde{\theta}_i$ is unbiased, $MSE(\tilde{\theta}_i) = var(\tilde{\theta}_i)$ for $i=1,2$. Thus  
+<center>  
+$$MSE(\tilde{\theta}_1) = \frac{1}{n}(3-\tilde{\theta}_1^2) \rightarrow 0 \qquad \mbox{ as } \; n \rightarrow \infty.$$  
+</center>  
+So $\tilde{\theta}_1$ is consistent.   
+Also, 
+<center>  
+$$MSE(\tilde{\theta}_2) = \frac{1}{n}(4-\tilde{\theta}_2^2) \rightarrow 0 \qquad \mbox{ as } \; n \rightarrow \infty.$$ 
+</center>  
+So $\tilde{\theta}_2$ is consistent.  
+:::
+</details>
+```

@@ -1,0 +1,816 @@
+# Least Squares Estimation for Linear Models {#Sec_Linear_LSE}
+
+## Introduction {#Sec_Linear_LSE:intro}
+
+In [Section 16](#Sec_LinearI) we introduced linear models with particular emphasis on Normal linear models. We derived the *least square estimates* of the model parameters for the straight line model: 
+<center>
+$$ y = \alpha +  \beta x + \epsilon, $$ 
+</center>  
+and showed that if $\epsilon \sim N(0,\sigma^2)$ then the least square estimates coincide with the *maximum likelihood estimates* of the parameters. In this section we consider the mathematics behind least squares estimation for general linear models. This relies heavily on linear algebra (matrix manipulation) and we give a review of key linear algebra results in [Section 17.2](#Sec_Linear_LSE:algebra). The main message is that we can concisely express key quantities such as least square parameter estimates, $\hat{\beta}$, fitted values, $\hat{y}$ and residuals, $\epsilon$ as functions of matrices.
+
+
+## Linear algebra review {#Sec_Linear_LSE:algebra}
+
+:::{.def #Sec_Linear_LSE:def:rank}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Definition 17.2.1.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Rank of a matrix**</span> 
+\
+Let $\mathbf{M}$ be any $n \times m$ matrix. Then the *rank* of $\mathbf{M}$ is the maximum number of linearly independent column vectors of $\mathbf{M}$.
+:::
+
+:::{.def #Sec_Linear_LSE:def:tranpose}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Definition 17.2.2.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Transpose of a matrix**</span> 
+\
+If $\mathbf{M}=(m_{ij})$, then $\mathbf{M}^T=(m_{ji})$ is said to be the *transpose* of the matrix $\mathbf{M}$.
+:::
+
+:::{.def #Sec_Linear_LSE:def:property}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Definition 17.2.3.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Properties of square matrices**</span> 
+\
+Suppose $\mathbf{A}$ is a square $n \times n$ matrix, then
+
+- $\mathbf{A}$ is *symmetric* if and only if $\mathbf{A}^T=\mathbf{A}$;  
+- $\mathbf{A}^{-1}$ is the *inverse* of $\mathbf{A}$ if and only if $\mathbf{A}\mathbf{A}^{-1}=\mathbf{A}^{-1}\mathbf{A}=\mathbf{I}_n$;  
+- The matrix $\mathbf{A}$ is *nonsingular* if and only if $\text{rank}(\mathbf{A})=n$;  
+- $\mathbf{A}$ is *orthogonal* if and only if $\mathbf{A}^{-1}=\mathbf{A}^T$;  
+- $\mathbf{A}$ is *idempotent* if and only if $\mathbf{A}^2=\mathbf{A}\mathbf{A}=\mathbf{A}$;  
+- $\mathbf{A}$ is *positive definite* if and only if $\mathbf{x}^T \mathbf{A} \mathbf{x} > 0$ for all non-zero vectors $\mathbf{x}$.  
+:::
+
+Note the following two important results: 
+
+- $\mathbf{A}$ has an inverse if and only if $\mathbf{A}$ is nonsingular, that is the rows and columns are linearly independent;  
+- $\mathbf{A}^T \mathbf{A}$ is positive definite if $\mathbf{A}$ has an inverse.  
+
+The following computational results are also useful:
+
+- Let $\mathbf{N}$ be an $n \times p$ matrix and $\mathbf{P}$ be a $p \times n$ matrix, then 
+<center>  
+$$(\mathbf{N}\mathbf{P})^T = \mathbf{P}^T \mathbf{N}^T;$$  
+</center>  
+- Suppose $\mathbf{A}$ and $\mathbf{B}$ are two invertible $n \times n$ matrices, then  
+<center>  
+$$(\mathbf{A}\mathbf{B})^{-1} = \mathbf{B}^{-1} \mathbf{A}^{-1};$$  
+</center>  
+- We can write the sum of squares $\sum\limits_{i=1}^n x_i^2 = \mathbf{x}^T \mathbf{x}$, where $\mathbf{x}^T=[x_1, x_2,\dots,x_n]$ is a $1 \times n$ row vector.
+
+Given $n$-dimensional vectors $\mathbf{x}$ and $\mathbf{y} = \mathbf{y}(\mathbf{x})$, we define  
+<center>  
+\[
+\frac{d \mathbf{y}}{d \mathbf{x}} = \left(
+\begin{array}{ccc}
+\frac{\partial y_1}{\partial x_1} & \cdots & \frac{\partial y_n}{\partial x_1}\\
+\frac{\partial y_1}{\partial x_2 }& \cdots & \frac{\partial y_n}{\partial x_2}\\
+\vdots & \vdots & \vdots\\
+\frac{\partial y_1}{\partial x_n }& \cdots & \frac{\partial y_n}{\partial x_n}\\
+\end{array}
+\right) .
+\]  
+</center>  
+
+Then the following results hold in the calculus of matrices:
+
+- $\frac{d}{d\mathbf{x}}(\mathbf{A}\mathbf{x}) = \mathbf{A}^T$, where $\mathbf{A}$ is a matrix of constants;  
+- $\frac{d}{d\mathbf{x}}(\mathbf{x}^T \mathbf{A} \mathbf{x}) = (\mathbf{A}+\mathbf{A}^T)\mathbf{x} = 2\mathbf{A}\mathbf{x}$ whenever $\mathbf{A}$ is symmetric;  
+- If $f(\mathbf{x})$ is a function of several variables the necessary condition to maximise or minimise $f(\mathbf{x})$ is
+<center> 
+$$\frac{\partial f(\mathbf{x}) }{ \partial \mathbf{x} } = 0.$$  
+</center>  
+- Let $\mathbf{H}=\frac{\partial^2 f(\mathbf{x}) }{ \partial \mathbf{x} \partial \mathbf{x}^T}$ be the Hessian of $f$, that is the matrix of second derivatives. Then a maximum will occur if $\mathbf{H}$ is negative definite, and a minimum will occur if $\mathbf{H}$ is positive definite.  
+
+Let $\mathbf{A}$ be a matrix of constants and $\mathbf{Y}$ be a random vector, then we have the following expectation and variance results:
+
+- $E[\mathbf{A}\mathbf{Y}] = \mathbf{A}E[\mathbf{Y}]$;  
+- $\text{Var}(\mathbf{A}\mathbf{Y}) = \mathbf{A} \text{Var}(\mathbf{Y}) \mathbf{A}^T$.  
+
+## Deriving the least squares estimator {#Sec_Linear_LSE:derive}
+
+Recall that a linear model is given in matrix form by $\mathbf{Y}=\mathbf{Z}\mathbf{\beta}+\mathbf{\epsilon}$, where  
+<center>  
+\begin{eqnarray*}
+\mathbf{Y} = \begin{pmatrix} Y_1 \\ Y_2 \\ \vdots \\ Y_n \end{pmatrix}, &\qquad&
+\mathbf{Z} = \begin{pmatrix}
+1 & X_{11} & \cdots & X_{(p-1)1} \\
+1 & X_{12} & \cdots & X_{(p-1)2} \\
+\vdots & \vdots & \ddots & \vdots \\
+1 & X_{1n} & \cdots & X_{(p-1)n} \end{pmatrix}, \\
+\mathbf{\beta} =\begin{pmatrix} \beta_0 \\ \beta_1 \\ \vdots \\ \beta_{p-1} \end{pmatrix}, &\qquad&
+\mathbf{\epsilon} = \begin{pmatrix} \epsilon_1 \\ \epsilon_2 \\ \vdots \\ \epsilon_n \end{pmatrix},
+\end{eqnarray*}  
+</center>  
+where
+
+- $\mathbf{Y}$ is an $n \times 1$ column vector of observations of the response variable;  
+- $\mathbf{Z}$ is the $n \times p$ design matrix whose first column is a column of $1$'s, if there is a constant in the model. The other columns are the observations on the explanatory variables $(X_1,X_2,\dots,X_{p-1})$;  
+- $\mathbf{\beta}$ is a $p \times 1$ column vector of the unknown parameters;  
+- $\mathbf{\epsilon}$ is an $n \times 1$ column vector of the random error terms.  
+
+The general linear regression model assumes that $E[\mathbf{\epsilon}]=\mathbf{0}$ and $\text{Var}(\mathbf{\epsilon}) = \sigma^2 \mathbf{I}_n$.
+
+Our aim is to estimate the unknown vector of parameters, $\mathbf{\beta}$.
+
+:::{.thm #Sec_Linear_LSE:thm:lse}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Theorem 17.3.1.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Least squares estimate**</span> 
+\
+The least squares estimate of $\mathbf{\beta}$ is  
+<center>  
+$$\mathbf{\hat{\beta}} =(\mathbf{Z}^T\mathbf{Z})^{-1} \mathbf{Z}^T\mathbf{y}.$$  
+</center>  
+:::
+
+:::{.prf #Sec_Linear_LSE:prf:lse}
+The least squares estimator is the value of $\mathbf{\beta}$ that minimises the model deviance $D$. Consider
+
+<center>
+\begin{align*}
+D &= \sum\limits_{i=1}^n (\mathbf{y}_i - (\mathbf{Z}\mathbf{\beta})_i)^2 \\[3pt]
+&= (\mathbf{y} - \mathbf{Z} \mathbf{\beta})^T (\mathbf{y} - \mathbf{Z} \mathbf{\beta}) \\[3pt]
+&= \mathbf{y}^T\mathbf{y} - \mathbf{y}^T\mathbf{Z}\mathbf{\beta} - \mathbf{\beta}^T\mathbf{Z}^T\mathbf{y} + \mathbf{\beta}^T\mathbf{Z}^T\mathbf{Z}\mathbf{\beta} \\[3pt]
+&= \mathbf{y}^T\mathbf{y} - 2\mathbf{y}^T\mathbf{Z}\mathbf{\beta} + \mathbf{\beta}^T\mathbf{Z}^T\mathbf{Z}\mathbf{\beta}.
+\end{align*}
+</center>
+
+Taking the derivative of $D$ with respect to $\mathbf{\beta}$ and noticing that $\mathbf{Z}^T\mathbf{Z}$ is a symmetric matrix, we have that  
+
+<center>
+\begin{align*}
+\frac{\partial D}{\partial \mathbf{\beta}} &= (-2\mathbf{y}^T\mathbf{Z})^T + 2\mathbf{Z}^T\mathbf{Z}\mathbf{\beta} \\
+&= -2\mathbf{Z}^T\mathbf{y} + 2\mathbf{Z}^T\mathbf{Z}\mathbf{\beta}.
+\end{align*}
+</center>
+
+Therefore the least squares estimator $\mathbf{\hat{\beta}}$ of $\mathbf{\beta}$ will satisfy $\mathbf{Z}^T\mathbf{Z}\mathbf{\hat{\beta}} =\mathbf{Z}^T\mathbf{y}$.  This system of equations are the *normal equations* for the general linear regression model. To be able to isolate $\mathbf{\hat{\beta}}$ it is necessary for $\mathbf{Z}^T\mathbf{Z}$ to be invertible. Therefore we need $\mathbf{Z}$ to be of full rank, that is, $\text{rank}(\mathbf{Z})=p$.  If $\text{rank}(\mathbf{Z})=p$, then 
+
+<center>
+$$ \mathbf{\hat{\beta}} = (\mathbf{Z}^T\mathbf{Z})^{-1} \mathbf{Z}^T\mathbf{y}.$$
+</center>
+
+We know that $\mathbf{\hat{\beta}}$ minimising $D$ is equivalent to the Hessian of $D$ will be positive definite.  If $\mathbf{Z}$ has full rank, then since $\mathbf{Z}^T\mathbf{Z}$ is a symmetric matrix, we have that  
+
+<center>
+\begin{align*} 
+\mathbf{H} &= \frac{\partial^2 D}{\partial \mathbf{\beta}^2} \\[3pt] 
+&= (2\mathbf{Z}^T\mathbf{Z})^T \\[3pt]
+&= 2\mathbf{Z}^T\mathbf{Z}.
+\end{align*}
+</center>
+
+We know $\mathbf{Z}^T\mathbf{Z}$ is positive definite and hence, $\mathbf{\hat{\beta}}$ is the least squares estimator of $\mathbf{\beta}$.
+:::
+\
+Let $\mathbf{\hat{y}} = \mathbf{Z}\mathbf{\hat{\beta}}$ be the $n \times 1$ vector of *fitted values* of $\mathbf{y}$. Note that  
+<center>  
+$$\mathbf{\hat{y}} = \mathbf{Z} \mathbf{\hat{\beta}} = \mathbf{Z} (\mathbf{Z}^T\mathbf{Z})^{-1} \mathbf{Z}^T \mathbf{y}.$$
+</center>  
+
+If we set $\mathbf{P}=\mathbf{Z}(\mathbf{Z}^T\mathbf{Z})^{-1}\mathbf{Z}^T$, then we can write $$\mathbf{\hat{y}} = \mathbf{P} \mathbf{y}.$$ The matrix $\mathbf{P}$ is therefore often referred to as the *hat matrix*. Note that $P$ is symmetric and idempotent because $\mathbf{P}^T=\mathbf{P}$ and $\mathbf{P}^2=\mathbf{P}$.
+
+The residuals, $\epsilon$, satisfy  
+<center>  
+$$ \epsilon = \mathbf{y} - \hat{\mathbf{y}} = \mathbf{I}_n \mathbf{y} -  \mathbf{P}\mathbf{y} = (\mathbf{I}_n -  \mathbf{P})\mathbf{y}, $$  
+</center>  
+where $\mathbf{I}_n$ is the $n \times n$ identify matrix.
+
+Therefore the sum of the square of the residuals is given by  
+<center>  
+\begin{eqnarray*} \sum_{i=1}^n \epsilon^2_i &=& (\mathbf{y} - \mathbf{Z} \mathbf{\hat{\beta}})^T(\mathbf{y} - \mathbf{Z} \mathbf{\hat{\beta}}) \\ &=& ((\mathbf{I}_n -  \mathbf{P})\mathbf{y})^T (\mathbf{I}_n -  \mathbf{P})\mathbf{y} \\ &=& \mathbf{y}^T (\mathbf{I}_n -  \mathbf{P})^T (\mathbf{I}_n -  \mathbf{P}) \mathbf{y}. 
+\end{eqnarray*}
+</center>  
+
+
+:::{.thm #Sec_Linear_LSE:thm:var}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Theorem 17.3.2.}
+```
+\
+The quantity 
+<center>
+$$s^2 = \frac{1}{n-p} \sum_{i=1}^n \epsilon_i^2= \frac{1}{n-p}(\mathbf{y} - \mathbf{Z} \mathbf{\hat{\beta}})^T(\mathbf{y} - \mathbf{Z} \mathbf{\hat{\beta}})$$  
+</center>  
+is an unbiased estimator of $\sigma^2$.
+:::
+
+Note that to obtain an unbiased estimator of $\sigma^2$, we divide the sum of the square of the residuals by $n-p$. That is, the **number of observations** $(n)$ minus the **number of parameters** $(p)$ estimated in $\beta$. This is in line with the divisor $n-1$ in estimating the variance of a random variable $X$ from data $x_1, x_2, \ldots, x_n$ with $\mu = E[X]$ (one parameter) estimated by $\bar{x} = \frac{1}{n} \sum_{i=1}^n x_i$.
+
+
+
+## Examples {#Sec_Linear_LSE:examples}
+
+:::{.ex #Sec_Linear_LSE:ex:simple}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Example 17.4.1.}
+```
+\
+Suppose we have two observations such that
+
+<center>
+\begin{align*}
+y_1 &= \theta + \epsilon, \\ 
+y_2 &= 2\theta + \epsilon.
+\end{align*}
+</center>
+Calculate the least squares estimator of $\theta$.
+:::
+
+:::{.sol}
+Writing the given linear model in a matrix format, one obtains
+
+<center>
+$$ \mathbf{Z} = \begin{pmatrix} 1 \\ 2 \end{pmatrix}, \qquad \text{and} \qquad \mathbf{y} = \begin{pmatrix} y_1 \\ y_2 \end{pmatrix} $$
+</center>
+Then $(\mathbf{Z}^T\mathbf{Z})^{-1} = \frac{1}{5}$ and by applying [Theorem 17.3.1 (Least squares estimate)](#Sec_Linear_LSE:thm:lse):
+
+<center>
+$$\hat{\theta} = (\mathbf{Z}^T\mathbf{Z})^{-1}\mathbf{Z}^T \mathbf{Y} = \frac{1}{5}(y_1 + 2y_2).$$
+</center>
+:::
+\
+
+:::{.ex #Sec_Linear_LSE:ex:reg}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Example 17.4.2.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Simple Linear Regression**</span> 
+\
+Consider the simple regression model, $y_i =a +b x_i + \epsilon$, for $i \in \{ 1,\ldots ,n
+\}$. Then in matrix terms $\mathbf{Y} = \mathbf{Z} \mathbf{\beta} + \mathbf{\epsilon}$ where,  
+<center>
+\begin{align*}
+\mathbf{Y} = \begin{pmatrix} y_1 \\ y_2 \\ \vdots \\ y_n \end{pmatrix}, &\quad& \mathbf{Z} = \begin{pmatrix} 1 & x_1 \\ 1 & x_2 \\ \vdots & \vdots \\ 1 & x_n \end{pmatrix}, \\[5pt]
+\mathbf{\beta} = \begin{pmatrix} a \\ b \end{pmatrix}, &\quad& \mathbf{\epsilon} = \begin{pmatrix} \epsilon_1 \\ \epsilon_2 \\ \vdots \\ \epsilon_n \end{pmatrix}.
+\end{align*}  
+</center>  
+Calculate the least squares estimator of $\mathbf{\beta}$.
+:::
+
+:::{.sol}
+The least squares estimators of $\mathbf{\beta}$ will be given by,
+
+<center>
+$$ \mathbf{\hat{\beta}} = (\mathbf{Z}^T\mathbf{Z})^{-1}\mathbf{Z}^T\mathbf{y},$$
+</center>
+where,
+
+<center>
+\begin{align*}
+\mathbf{Z}^T\mathbf{Z} &= \begin{pmatrix} 1 & 1 & \cdots 1 \\ x_1 & x_2 & \cdots x_n \end{pmatrix} \begin{pmatrix} 1 & x_1 \\ 1 & x_2 \\ \vdots & \vdots \\ 1 & x_n \end{pmatrix} \\[5pt]
+&=\begin{pmatrix} n & \sum\limits_{i=1}^n x_i \\ \sum\limits_{i=1}^n x_i & \sum\limits_{i=1}^n x_i^2 \end{pmatrix}, \\[5pt]
+\mathbf{Z}^T \mathbf{y} &= \begin{pmatrix} \sum\limits_{i=1}^n y_i \\ \sum\limits_{i=1}^n x_iy_i \end{pmatrix}.
+\end{align*}
+</center>
+Therefore, the inverse of $\mathbf{Z}^T\mathbf{Z}$ is
+<center>
+$$ \left( \mathbf{Z}^T\mathbf{Z} \right) ^{-1} = \frac{1}{\sum\limits_{i=1}^n (x_i-\bar{x})^2} \begin{pmatrix} \frac{1}{n} \sum\limits_{i=1}^{n} x_i^2 & -\bar{x} \\ -\bar{x} & 1 \end{pmatrix},$$
+</center>
+and so
+<center>
+\begin{align*}
+\mathbf{\hat{\beta}} &= \left( \mathbf{Z}^T\mathbf{Z} \right) ^{-1}\mathbf{Z}^T\mathbf{y} \\[5pt]
+&= \frac{1}{\sum\limits_{i=1}^n (x_i-\bar{x})^2} \begin{pmatrix} \frac{1}{n} \sum\limits_{i=1}^{n} x_i^2 & -\bar{x} \\ -\bar{x} & 1 \end{pmatrix} \begin{pmatrix} \sum\limits_{i=1}^n y_i \\ \sum\limits_{i=1}^n x_iy_i \end{pmatrix} \\[5pt]
+&= \frac{1}{\sum\limits_{i=1}^{n} (x_i - \bar{x})^2} \begin{pmatrix} \frac{1}{n} \sum\limits_{i=1}^{n} x_i^2 \sum\limits_{i=1}^{n} y_i - \bar{x} \sum\limits_{i=1}^{n} x_i y_i \\ -\bar{x} \sum\limits_{i=1}^{n} y_i + \sum\limits_{i=1}^{n} x_i y_i \end{pmatrix} \\[5pt]
+&= \frac{1}{\sum\limits_{i=1}^{n} (x_i - \bar{x})^2} \begin{pmatrix} \bar{y} \sum\limits_{i=1}^{n} x_i^2 - \bar{x} \sum\limits_{i=1}^{n} x_i y_i \\ \sum\limits_{i=1}^{n} y_i (x_i - \bar{x}) \end{pmatrix} \\[5pt]
+&= \frac{1}{\sum\limits_{i=1}^{n} (x_i - \bar{x})^2} \begin{pmatrix} \bar{y} \sum\limits_{i=1}^{n} (x_i - \bar{x})^2 - \bar{x} \sum\limits_{i=1}^{n} (x_i - \bar{x})(y_i - \bar{y}) \\ \sum\limits_{i=1}^{n} (x_i - \bar{x})(y_i - \bar{y}) \end{pmatrix} \\[5pt]
+&= \begin{pmatrix} \bar{y} - \bar{x} \frac{ \sum\limits_{i=1}^n (x_i - \bar{x})(y_i - \bar{y}) }{ \sum\limits_{i=1}^n (x_i - \bar{x})^2 } \\ \frac{ \sum\limits_{i=1}^n (x_i - \bar{x})(y_i - \bar{y}) }{ \sum\limits_{i=1}^n (x_i - \bar{x})^2 } \end{pmatrix}.
+\end{align*}
+</center>
+So,
+
+<center>
+$$\begin{pmatrix} \hat{a} \\ \hat{b} \end{pmatrix} = \begin{pmatrix} \bar{y} - \hat{b} \bar{x} \\ \frac{s_{xy}}{s_x^2} \end{pmatrix}.$$
+</center>
+:::
+
+The least square estimates agree with the estimates we obtained in [Section 16.6](#Sec_LinearI:line).
+
+
+## Properties of the estimator of $\mathbf{\beta}$ {#Sec_Linear_LSE:beta}
+
+In this section we give a collection of results about the properties of the estimator of $\mathbf{\beta}$. The properties are given with proofs. It is not important to know the proofs but to know what the key properties are and have an understanding of why they are important.
+
+:::{.lem #Sec_Linear_LSE:lem:unbiased} 
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Lemma 17.5.1.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Unbiasedness of LSE**</span> 
+\
+$\mathbf{\hat{\beta}}$ is an unbiased estimator of $\beta$.
+:::
+
+:::{.prf}
+Since $(\mathbf{Z}^T\mathbf{Z})^{-1}\mathbf{Z}^T$ is a constant,
+<center>
+\begin{align*}
+E \left[ \mathbf{\hat{\beta}} \right] &= E \left[ (\mathbf{Z}^T\mathbf{Z})^{-1}\mathbf{Z}^T\mathbf{y} \right] \\
+&= (\mathbf{Z}^T \mathbf{Z})^{-1} \mathbf{Z}^T E[\mathbf{y}]. 
+\end{align*} </center>
+Substituting in $\mathbf{Z}\mathbf{\beta} + \mathbf{\epsilon}$ for $\mathbf{y}$
+<center>
+\begin{align*}
+E \left[ \mathbf{\hat{\beta}} \right]
+&= (\mathbf{Z}^T \mathbf{Z})^{-1} \mathbf{Z}^T E[\mathbf{Z}\mathbf{\beta} + \mathbf{\epsilon}] \\
+&= (\mathbf{Z}^T \mathbf{Z})^{-1} \mathbf{Z}^T (\mathbf{Z}\mathbf{\beta} + E[\mathbf{\epsilon}]) \\
+&= (\mathbf{Z}^T \mathbf{Z})^{-1} \mathbf{Z}^T (\mathbf{Z}\mathbf{\beta} + \mathbf{0}) \\
+&= \mathbf{I}_p \mathbf{\beta} \\ 
+&= \mathbf{\beta}.
+\end{align*}</center>
+:::
+\
+
+:::{.lem #Sec_Linear_LSE:lem:var} 
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Lemma 17.5.2.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Variance of LSE**</span> 
+\
+The variance of $\mathbf{\hat{\beta}}$ is given by 
+<center>
+$$ \text{Var}(\mathbf{\hat{\beta}}) = \sigma^2 \left( \mathbf{Z}^T \mathbf{Z} \right)^{-1}. $$  
+</center>  
+:::
+
+:::{.prf}
+Since for a constant matrix $\mathbf{A}$, we have that $\text{Var} (\mathbf{A} \mathbf{Y}) = \mathbf{A} \text{Var} ( \mathbf{Y}) \mathbf{A}^T$, it follows that 
+<center>
+\begin{align*}
+\text{Var}(\mathbf{\hat{\beta}}) &= \text{Var} \left( (\mathbf{Z}^T\mathbf{Z})^{-1} \mathbf{Z}^T \mathbf{y} \right) \\
+&= (\mathbf{Z}^T \mathbf{Z})^{-1} \mathbf{Z}^T \text{Var}(\mathbf{y}) \left( (\mathbf{Z}^T \mathbf{Z})^{-1} \mathbf{Z}^T \right)^T 
+\end{align*}
+</center>
+Substituting in $\mathbf{Z}\mathbf{\beta} + \mathbf{\epsilon}$ for $\mathbf{y}$, and noting that $\mathbf{Z}\mathbf{\beta}$ is a constant, we have that
+<center>
+\begin{align*}
+\text{Var}(\mathbf{\hat{\beta}})  &= (\mathbf{Z}^T \mathbf{Z})^{-1} \mathbf{Z}^T \text{Var}(\mathbf{Z}\mathbf{\beta}+\mathbf{\epsilon})  \mathbf{Z}(\mathbf{Z}^T\mathbf{Z})^{-1} \\
+&= (\mathbf{Z}^T \mathbf{Z})^{-1} \mathbf{Z}^T \text{Var}(\mathbf{\epsilon}) \mathbf{Z} (\mathbf{Z}^T\mathbf{Z})^{-1} \\
+&= (\mathbf{Z}^T \mathbf{Z})^{-1} \mathbf{Z}^T \sigma^2 \mathbf{I}_n \mathbf{Z} (\mathbf{Z}^T\mathbf{Z})^{-1} \\
+&= \sigma^2 (\mathbf{Z}^T \mathbf{Z})^{-1} \mathbf{Z}^T \mathbf{Z} (\mathbf{Z}^T\mathbf{Z})^{-1} \\
+&= \sigma^2 (\mathbf{Z}^T \mathbf{Z})^{-1}.
+\end{align*}
+</center>
+:::
+\
+
+Note that $\text{Var}(\mathbf{\hat{\beta}})$ is the $p \times p$ variance-covariance matrix of the vector $\mathbf{\hat{\beta}}$. Specifically the $i^{th}$ diagonal entry is $\text{Var}(\hat{\beta}_i)$ and the $(i,j)^{th}$ entry is $\text{Cov}(\hat{\beta}_i,\hat{\beta}_j)$.
+
+:::{.ex #Sec_Linear_LSE:ex:uncertain} 
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Example 17.5.3.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Uncertainty in simple linear regression**</span> 
+\
+Consider the straight line model: 
+<center>
+$$ y_i= \alpha + \beta x_i + \epsilon, \qquad \qquad i=1,2,\ldots, n, $$  
+</center>
+where $\epsilon \sim N(0,\sigma^2)$.
+:::
+
+Watch [Video 25](#video25) for a run through uncertainty in the estimates of the parameters of a simple linear regression model. A summary of the results are presented after the video.
+
+
+```{asis, include=knitr::is_html_output()}
+:::{.des #video25}
+<span style="color: rgba(207, 0, 15, 1);">**Video 25: Uncertainty in simple linear regression**</span>  
+
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1355621/sp/135562100/embedIframeJs/uiconf_id/13188771/partner_id/1355621?iframeembed=true&playerId=kaltura_player&entry_id=1_7hbhop79&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_88saud42" width="640" height="420" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Uncertainty in Simple Linear Regression FINAL VERSION"></iframe>
+:::
+```
+
+```{asis, include=knitr::is_latex_output()}
+Watch [\textcolor{blue}{Video 25: Uncertainty in simple linear regression}](https://mediaspace.nottingham.ac.uk/media/Uncertainty+in+Simple+Linear+Regression+FINAL+VERSION/1_7hbhop79)
+```  
+
+
+Then  
+<center>  
+$$ \mathbf{Z} = \begin{pmatrix} 1 & x_1 \\ 1 & x_2 \\ \vdots & \vdots \\ 1 & x_n \end{pmatrix}, \qquad \qquad \mathbf{\beta} = \begin{pmatrix} \alpha \\ \beta \end{pmatrix}.$$  
+</center>
+
+We have shown in [Example 17.4.2 (Simple Linear Regression)](#Sec_Linear_LSE:ex:reg) that  
+<center>  
+$$ \left( \mathbf{Z}^T\mathbf{Z} \right)^{-1} = \frac{1}{ \sum\limits_{i=1}^n (x_i - \bar{x})^2 } \begin{pmatrix}
+\frac{1}{n} \sum\limits_{i=1}^n x_i^2 & -\bar{x} \\
+-\bar{x} & 1 \end{pmatrix}. $$  
+</center>
+
+Therefore,  
+<center>  
+\begin{align*}
+\text{Var} \left( \mathbf{\hat{\beta}} \right) &= \sigma^2 \left( \mathbf{Z}^T \mathbf{Z} \right)^{-1} \\
+&= \frac{\sigma^2}{ \sum\limits_{i=1}^n (x_i - \bar{x})^2 } \begin{pmatrix} \frac{1}{n} \sum\limits_{i=1}^n x_i^2 & -\bar{x} \\ -\bar{x} & 1 \end{pmatrix},
+\end{align*}  
+</center>  
+and so,  
+<center>  
+\begin{align*}
+\text{Var}(\hat{\alpha}) &= \frac{ \sigma^2 \sum\limits_{i=1}^n x_i^2 }{ n \sum\limits_{i=1}^n (x_i-\bar{x})^2 }, \\[5pt]
+\text{Var}(\hat{\beta}) &= \frac{\sigma^2}{ \sum\limits_{i=1}^n (x_i-\bar{x})^2 }, \\[5pt]
+\text{Cov}(\hat{\alpha},\hat{\beta}) &= \frac{ - \sigma^2 \bar{x} }{ \sum\limits_{i=1}^n (x_i-\bar{x})^2 }.
+\end{align*}  
+</center> 
+
+
+The variance of the $\hat{\beta}$ does not depend on the values of $\alpha$ and $\beta$ but on $\sigma^2$ (the variance of $\epsilon$) and the design matrix $\mathbf{Z}$. This tells us that if we have input in choosing $x_i$ (constructing the design matrix) then we can construct the design matrix to reduce the variance of the estimator. In particular, the larger $\sum_{i=1}^n (x_i - \bar{x})^2$ (variability in the $x_i$s), the smaller the variance of the estimates. Note that there will often be scientific and practical reasons for choosing $x_i$ within a given range.
+
+Observe that the covariance between $\hat{\alpha}$ and $\hat{\beta}$ has the opposite sign to $\bar{x}$ and becomes larger as $|\bar{x}|$ increases. The correlation between $\hat{\alpha}$ and $\hat{\beta}$ is  
+<center>  
+$$ \text{Cor} (\hat{\alpha},\hat{\beta}) = \frac{\text{Cov}(\hat{\alpha},\hat{\beta})}{\sqrt{\text{Var}(\hat{\alpha}) \text{Var}(\hat{\beta})}}
+=  \frac{- \sqrt{n} \bar{x}}{\sqrt{\sum_{i=1}^n x_i^2}}. $$  
+</center>
+The correlation in the estimates is larger, in absolute value, the larger $\bar{x}^2$ is relative to $\sum_{i=1}^n x_i^2$.
+
+To illustrate the variability in $\hat{\beta}$ we use an example. Suppose that we have ten observations from the model:  
+<center>  
+$$ y = 2 + 0.6 x + \epsilon $$ 
+</center>  
+where $\epsilon \sim N(0,1)$ and for $i=1,2,\ldots, 10$, $x_i =i$. 
+
+Then  
+<center>  
+\begin{eqnarray*} \text{Var} (\hat{\beta}) &=& \frac{1}{\sum_{i=1}^n (x_i -\bar{x})^2} \begin{pmatrix} \frac{1}{n} \sum_{i=1}^n x_i^2 & - \bar{x} \\ -\bar{x} & 1 
+\end{pmatrix} \\ &=& \frac{1}{82.5}  \begin{pmatrix} 38.5 & - 5.5 \\ -5.5 & 1 
+\end{pmatrix}\\  &=&  \begin{pmatrix} `r round(38.5/82.5,5)` & `r round(-5.5/82.5,5)` \\ `r round(-5.5/82.5,5)` & `r round(1/82.5,5)` 
+\end{pmatrix}
+\end{eqnarray*}
+</center>
+
+We simulated 100 sets of data from the model and for each set of data calculate $\hat{\alpha}$ and $\hat{\beta}$. In Figure \@ref(fig:linearvar1), the estimates of $\hat{\beta}$ against $\hat{\alpha}$ are plotted along with the true parameter values $\beta =0.6$ and $\alpha =2$. The estimates show negative correlation.
+
+<center>
+```{r linearvar1,echo=FALSE,fig.cap="Plot of estimates of straight line model parameters with true parameter values denoted by a red dot"}
+x=seq(1,10)
+sigma=1
+alpha=2
+beta=0.6
+
+Z=matrix(1,ncol=2,nrow=10)
+Z[,2]=x
+
+W=solve(t(Z)%*%Z)%*%t(Z)
+
+LSE_beta=matrix(0,ncol=2,nrow=100)
+
+for(i in 1:100)
+{
+  y=rnorm(10,alpha+beta*x,sigma)
+  beta_est=W%*%y
+  LSE_beta[i,]=beta_est
+}
+
+plot(LSE_beta[,1],LSE_beta[,2],xlab=expression(hat(alpha)),ylab=expression(hat(beta)),pch=20)
+points(2,0.6,col=2,pch=20,cex=2)
+```
+</center>
+
+In Figure \@ref(fig:linearvar2), the fitted line $\hat{\alpha}+\hat{\beta} x$ is plotted for each simulated data set along with the true line $2 + 0.6 x$. Observe that the lines with the highest intercepts tend to have the smallest slope and visa-versa. Also note that there is more variability in the estimated lines at the end points ($x=1$ and $x=10$) rather than in the middle of the range (close to $x=5.5$). 
+
+<center>
+```{r linearvar2,echo=FALSE,fig.cap="Estimated lines from 100 simulations with true line in red"}
+plot(x,alpha+beta*x,xlab="x",ylab="y",type="l",col=2,lwd=2,ylim=c(1,10))
+for(i in 1:100) lines(x,LSE_beta[i,1]+LSE_beta[i,2]*x,col="grey75")
+lines(x,alpha+beta*x,col=2,lwd=2)
+```
+</center>
+
+:::{.lem #Sec_Linear_LSE:lem:dist} 
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Lemma 17.5.4.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Distribution of LSE**</span> 
+\
+If additionally $\mathbf{\epsilon} \sim N_n(\mathbf{0},\sigma^2 \mathbf{I}_n)$, then 
+$$\mathbf{\hat{\beta}} \sim N_p \left( \mathbf{\beta},\sigma^2(\mathbf{Z}^T\mathbf{Z})^{-1} \right).$$
+:::
+
+:::{.prf #Sec_Linear_LSE:prf:dist} 
+Note,
+
+<center>
+\begin{align*}
+\mathbf{\hat{\beta}} &= (\mathbf{Z}^T\mathbf{Z})^{-1} \mathbf{Z}^T\mathbf{y} \\
+&= (\mathbf{Z}^T\mathbf{Z})^{-1} \mathbf{Z}^T (\mathbf{Z}\mathbf{\beta}+\mathbf{\epsilon}) \\
+&= (\mathbf{Z}^T\mathbf{Z})^{-1} \mathbf{Z}^T\mathbf{Z}\mathbf{\beta} + (\mathbf{Z}^T\mathbf{Z})^{-1} \mathbf{Z}^T \mathbf{\epsilon} \\
+&= \mathbf{\beta} + (\mathbf{Z}^T\mathbf{Z})^{-1} \mathbf{Z}^T \mathbf{\epsilon}.
+\end{align*}
+</center>
+
+Hence $\mathbf{\hat{\beta}}$ is a linear function of a normally distributed random variable. Using the identities $E[A \mathbf{x} + b] = A E[\mathbf{x}] + b$ and $\text{Var}(A \mathbf{x} + b) = A \text{Var}(\mathbf{x}) A^{T}$, consequently $\mathbf{\hat{\beta}}$ has a normal distribution with mean and variance as required.
+:::
+\
+
+Note that since $\mathbf{\hat{\beta}} \sim N_p(\mathbf{\beta},\sigma^2(\mathbf{Z}^T\mathbf{Z})^{-1})$, then each of the individual parameters has a distribution 
+<center>  
+$$\hat{\beta}_i \sim N \left( \beta_i, \sigma^2 ((\mathbf{Z}^T\mathbf{Z})^{-1})_{ii} \right),$$   
+</center>  
+However the individual $\hat{\beta}_i$ are not independent as we saw in [Example 17.5.3 (Uncertainty in simple linear regression)](#Sec_Linear_LSE:ex:uncertain).
+
+
+## Gauss-Markov Theorem {#Sec_Linear_LSE:GaussMarkov}
+
+The [Gauss-Markov Theorem](#Sec_Linear_LSE:thm:GaussMarkov) shows that a good choice of estimator for $\mathbf{a}^T \beta$, a linear combination of the parameters, is $\mathbf{a}^T\mathbf{\hat{\beta}}$.
+
+:::{.thm #Sec_Linear_LSE:thm:GaussMarkov} 
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Theorem 17.6.1.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Gauss-Markov Theorem**</span> 
+\
+If $\mathbf{\hat{\beta}}$ is the least squares estimator of $\mathbf{\beta}$, then $\mathbf{a}^T \mathbf{\hat{\beta}}$ is the *unique linear unbiased estimator* of $\mathbf{a}^T\mathbf{\beta}$ with minimum variance.
+:::
+
+The details of the proof of [Theorem 17.6.1 (Gauss-Markov Theorem)](#Sec_Linear_LSE:thm:GaussMarkov) are  provided but can be omitted.
+
+<details><summary>Proof of Gauss-Markov Theorem.</summary>
+:::{.prf}
+Consider $\mathbf{\hat{\beta}} = (\mathbf{Z}^T\mathbf{Z})^{-1} \mathbf{Z}^T\mathbf{y}$, the LSE of $\mathbf{\beta}$. Hence, 
+
+<center>
+$$\mathbf{a}^T\mathbf{\hat{\beta}} = \mathbf{a}^T (\mathbf{Z}^T\mathbf{Z})^{-1} \mathbf{Z}^T \mathbf{y} = \mathbf{C}\mathbf{y},$$ 
+</center>
+where $\mathbf{C} = \mathbf{a}^T(\mathbf{Z}^T\mathbf{Z})^{-1} \mathbf{Z}^T$. It follows that $\mathbf{a}^T \mathbf{\hat{\beta}}$ is a linear function of $\mathbf{y}$.
+
+Note that $\mathbf{a}^T \mathbf{\hat{\beta}}$ is an unbiased estimator of $\mathbf{a}^T\mathbf{\beta}$ because,  
+<center>  
+\begin{align*}
+E[\mathbf{a}^T \mathbf{\hat{\beta}}] &= E[\mathbf{C}\mathbf{y}] \\ 
+&= \mathbf{C} E[\mathbf{Z} \mathbf{\beta} + \mathbf{\epsilon}] \\
+&= \mathbf{C} \mathbf{Z} \mathbf{\beta} + \mathbf{C} E[\mathbf{\epsilon}] \\
+&= \mathbf{a}^T(\mathbf{Z}^T\mathbf{Z})^{-1} \mathbf{Z}^T\mathbf{Z} \mathbf{\beta} + \mathbf{0} \\
+&= \mathbf{a}^T\mathbf{\beta}.
+\end{align*}
+</center>  
+
+Suppose there exists another linear unbiased estimator of $\mathbf{a}^T\mathbf{\beta}$, denoted $\mathbf{b}^T\mathbf{y}$. By definition  
+<center>
+$$E[\mathbf{b}^T\mathbf{y}] = \mathbf{a}^T \mathbf{\beta}.$$  
+</center>
+However we can also calculate  
+<center>  
+\begin{align*}
+E[\mathbf{b}^T\mathbf{y}] &= \mathbf{b}^T E[\mathbf{Z}\mathbf{\beta} + \mathbf{\epsilon}] \\
+&= \mathbf{b}^T \mathbf{Z} \mathbf{\beta}.
+\end{align*}
+</center>
+It follows that 
+<center>
+$$\mathbf{b}^T \mathbf{Z} \mathbf{\beta} = \mathbf{a}^T \mathbf{\beta}, \qquad \text{for all } \mathbf{\beta},$$
+</center>  
+so 
+<center>  
+$$\mathbf{a}^T = \mathbf{b}^T\mathbf{Z}.$$
+</center>  
+
+Now  
+<center>
+\begin{align*}
+\text{Var}(\mathbf{b}^T\mathbf{y}) &= \mathbf{b}^T\text{Var}(\mathbf{Z}\mathbf{\beta}+\mathbf{\epsilon})\mathbf{b} \\
+&= \mathbf{b}^T\text{Var}(\mathbf{\epsilon})\mathbf{b} \\
+&= \mathbf{b}^T\sigma^2\mathbf{I}_n\mathbf{b} = \sigma^2 \mathbf{b}^T\mathbf{b},
+\end{align*}
+</center>  
+and  
+<center>  
+\begin{align*}
+\text{Var}(\mathbf{a}^T\mathbf{\hat{\beta}}) &= \text{Var}(\mathbf{C}\mathbf{y}) \\
+&= \mathbf{C}\text{Var}(\mathbf{Z}\mathbf{\beta}+\mathbf{\epsilon})\mathbf{C}^T \\
+&= \mathbf{C}\text{Var}(\mathbf{\epsilon})\mathbf{C}^T \\
+&= \mathbf{C} \sigma^2 \mathbf{I}_n \mathbf{C}^T \\
+&= \sigma^2 \mathbf{C}\mathbf{C}^T \\
+&= \sigma^2 (\mathbf{a}^T(\mathbf{Z}^T\mathbf{Z})^{-1}\mathbf{Z}^T) (\mathbf{a}^T(\mathbf{Z}^T\mathbf{Z})^{-1}\mathbf{Z}^T)^T \\
+&= \sigma^2 \mathbf{a}^T(\mathbf{Z}^T\mathbf{Z})^{-1}\mathbf{Z}^T\mathbf{Z}(\mathbf{Z}^T\mathbf{Z})^{-1}\mathbf{a} \\
+&= \sigma^2 \mathbf{a}^T(\mathbf{Z}^T\mathbf{Z})^{-1}\mathbf{a}.
+\end{align*}
+</center>
+
+Substituting $\mathbf{a}^T=\mathbf{b}^T\mathbf{Z}$, we can rewrite
+
+<center>
+\begin{eqnarray*}
+\text{Var}(\mathbf{a}^T\mathbf{\hat{\beta}})
+&=& \sigma^2 \mathbf{b}^T\mathbf{Z}(\mathbf{Z}^T\mathbf{Z})^{-1}(\mathbf{b}^T\mathbf{Z})^T \\
+&=& \sigma^2 \mathbf{b}^T\mathbf{Z}(\mathbf{Z}^T\mathbf{Z})^{-1}\mathbf{Z}^T\mathbf{b} \\
+&=& \sigma^2\mathbf{b}^T\mathbf{P}\mathbf{b}.
+\end{eqnarray*}
+</center>
+
+Comparing $\text{Var}(\mathbf{b}^T\mathbf{y})$ and $\text{Var}(\mathbf{a}^T\mathbf{\hat{\beta}})$, we get
+<center>
+\begin{eqnarray*}
+\text{Var}(\mathbf{b}^T\mathbf{y}) - \text{Var}(\mathbf{a}^T\mathbf{\hat{\beta}})
+&=& \sigma^2 \mathbf{b}^T\mathbf{b} - \sigma^2 \mathbf{b}^T\mathbf{P}\mathbf{b} \\
+&=& \sigma^2 \mathbf{b}^T (\mathbf{I}_n-\mathbf{P})\mathbf{b} \\
+&=& \sigma^2 \mathbf{b}^T(\mathbf{I}_n-\mathbf{P})^2\mathbf{b} \\
+&=& \sigma^2 \mathbf{b}^T(\mathbf{I}_n-\mathbf{P})^T (\mathbf{I}_n-\mathbf{P})\mathbf{b} \\
+&=& \sigma^2 \mathbf{D}^T\mathbf{D},
+\end{eqnarray*}
+</center>
+where $\mathbf{D} = (\mathbf{I}_n-\mathbf{P})\mathbf{b}$.  Therefore,
+<center>
+$$\text{Var}(\mathbf{b}^T\mathbf{y})-\text{Var}(\mathbf{a}^T\mathbf{\hat{\beta}}) = \sigma^2 \mathbf{D}^T\mathbf{D} \geq 0, $$ 
+</center>
+so $\mathbf{a}^T\mathbf{\hat{\beta}}$ has the smallest variance of any other linear unbiased estimator.
+
+Finally suppose that $\mathbf{b}^T\mathbf{y}$ is another linear unbiased estimator such that $\text{Var}(\mathbf{b}^T\mathbf{y}) = \text{Var}(\mathbf{a}^T\mathbf{\hat{\beta}})$, then 
+<center>
+\begin{align*}
+\text{Var}(\mathbf{b}^T\mathbf{y}) - \text{Var}(\mathbf{a}^T\mathbf{\hat{\beta}}) &= \sigma^2 \mathbf{D}^T\mathbf{D}=0 \\
+\implies \qquad \mathbf{D}&=\mathbf{0}
+\end{align*}
+</center>
+
+Since $\mathbf{D}=(\mathbf{I}_n-\mathbf{P})\mathbf{b}=\mathbf{0}$, it follows that
+<center>
+\begin{align*}
+\mathbf{b} &= \mathbf{P}\mathbf{b} \\ 
+&= \mathbf{Z}(\mathbf{Z}^T\mathbf{Z})^{-1}\mathbf{Z}^T\mathbf{b} \\
+&= \mathbf{Z}(\mathbf{Z}^T\mathbf{Z})^{-1}\mathbf{a} \\
+\implies \qquad \mathbf{b}^T &= \mathbf{a}^T(\mathbf{Z}^T\mathbf{Z})^{-1}\mathbf{Z}^T,
+\end{align*}
+</center>
+So
+<center>
+\begin{align*}
+\mathbf{b}^T\mathbf{y} &= \mathbf{a}^T(\mathbf{Z}^T\mathbf{Z})^{-1}\mathbf{Z}^T\mathbf{y} \\
+&=\mathbf{a}^T\mathbf{\hat{\beta}}.
+\end{align*}
+</center>
+
+Therefore $\mathbf{a}^T\mathbf{\hat{\beta}}$ is the *unique linear unbiased estimator* of $\mathbf{a}^T\mathbf{\beta}$.
+:::
+</details>
+\
+
+:::{.thm #Sec_Linear_LSE:cor:BLUE} 
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Theorem 17.6.2.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Best linear unbiased estimator (BLUE)**</span> 
+\
+If $\mathbf{a}^T=(0,0,\dots,1,0,\dots,0)$ where the $1$ is in the $i$th position, then $\hat{\beta}_i$ is the 
+*best linear unbiased estimator*, shorthand BLUE, of $\beta_i$.
+:::
+
+The following **R shiny** app generates data and fits a regression line, $y = \alpha + \beta x$. It allows for variability in the coefficients and how the covariates $x$ are generated. Predicted values can also be plotted with confidence intervals, see [Section 18, Interval Estimation](#Interval_Estimation) for an introduction to confidence intervals and [Lab 12: Linear Models II](#Sec_Linear_ANOVA:lab) for a discussion of confidence intervals for predicted values.
+
+R Shiny app: [Linear Model](https://shiny-new.maths.nottingham.ac.uk/pmzpn/Linear_Model_Intro/)
+
+
+## <span style="color: rgba(15, 0, 207, 1);">**Task: Session 9**</span>  {- #Sec_Linear_LSE:lab}
+
+Attempt the **R Markdown** file for Session 9:  
+[Session 9: Linear Models I](https://moodle.nottingham.ac.uk/course/view.php?id=134982#section-2)
+
+
+## <span style="color: rgba(15, 0, 207, 1);">**Student Exercises**</span>  {- #Sec_Linear_LSE:exer}
+
+Attempt the exercises below. 
+
+
+:::{.exer #exer17:1}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Exercise 17.1.}
+```
+\
+Suppose that a model states that 
+<center> 
+$$ E[Y_1] = \theta, \qquad E[Y_2] = 2 \theta - \phi, \qquad E[Y_3] = \theta + 2 \phi.$$  
+</center>  
+Find the least squares estimates of $\theta$ and $\phi$.
+:::
+
+```{asis, include=knitr::is_html_output()}
+<details><summary>Solution to Exercise 17.1.</summary>
+:::{.ans #Question_S17_1} 
+Using first principles, minimise  
+<center> 
+$$D= \sum_{i=1}^3 (y_i - E[y_i])^2 = (y_1 - \theta)^2 + (y_2 - 2\theta + \phi)^2 + (y_3 - \theta - 2 \phi)^2$$  
+</center>  
+by finding solutions to the normal equations,  
+<center>  
+\begin{eqnarray*}
+\frac{\partial D}{\partial \theta} &=& 0 = -2(y_1 - \theta) -4(y_2 - 2\theta + \phi) -2(y_3 - \theta - 2 \phi), \\
+\frac{\partial D}{\partial \phi} &=& 0 = 2(y_2 - 2\theta + \phi) -4(y_3 - \theta - 2 \phi).
+\end{eqnarray*}  
+</center>  
+Solving for $\theta, \phi$ gives  
+<center> 
+$$ \hat{\theta} = \frac{1}{6}(y_1 + 2y_2 + y_3), \qquad \hat{\phi} = \frac{1}{5}(2y_3 - y_2).$$  
+</center> 
+
+Note that generally if we have a linear model with $p$ parameters $\theta = (\theta_1,\theta_2, \ldots, \theta_p)$ and $n$ observations $y_1, y_2, \ldots, y_n$ with $E[y_i] = \sum_{j=1}^p a_{ij} \theta_j$, then the least squares estimate of $\theta_j$ $(j=1,2,\ldots, p)$ is  
+<center> 
+$$ \hat{\theta}_j = \frac{1}{\sum_{i=1}^n a_{ij}^2} \sum_{i=1}^n a_{ij} y_i. $$  
+</center>   
+:::
+</details>
+```
+\
+
+:::{.exer #exer17:2}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Exercise 17.2.}
+```
+\
+```{r,echo=FALSE}
+#
+# Question 2 setup
+#
+
+set.seed(415837)
+
+n=sample(seq(6,9),1,replace=T)
+
+muM=rnorm(1,70,10)
+sigM=sample(seq(3,8),1,replace=T)
+
+x=round(rnorm(n,muM,sigM),0)
+
+beta0=runif(1,10,20)
+beta1=runif(1,0.6,0.9)
+
+muY=beta0+beta1*x
+sigY=sample(seq(3,8),1,replace=T)
+y=round(rnorm(n,muY,sigY),0)
+
+midx=round(rnorm(1,muM,sigM),0)
+```
+
+The marks of `r n` students are presented below. For student $i$, $x_i$ denotes their mark in a mid-term test and $y_i$ denotes their mark in the final exam.
+
+Mid-term test marks:
+<center>
+\[ \mathbf{x} = (x_1, x_2, \ldots, x_{`r n`}) = ( `r x` ) \]  
+</center>  
+
+Final exam marks:
+<center>  
+\[ \mathbf{y} = (y_1, y_2, \ldots, y_{`r n`}) = ( `r y` ). \]  
+</center>  
+
+Note that: 
+<center>  
+\begin{eqnarray*}
+\bar{x} &=& \frac{1}{`r n`} \sum_{i=1}^{`r n`} x_i = `r mean(x)` \\
+\bar{y} &=& \frac{1}{`r n`} \sum_{i=1}^{`r n`} y_i = `r mean(y)` \\
+s_{xy} &=&  \frac{1}{`r n` -1} \left\{\sum_{i=1}^{`r n`} x_iy_i - n \bar{x} \bar{y} \right\} = `r round(cov(x,y),3)` \\
+s_x^2 &=&  \frac{1}{`r n` -1} \left\{\sum_{i=1}^{`r n`} x_i^2 - n \bar{x}^2 \right\} = `r round(var(x),3)` \\
+s_y^2 &=&  \frac{1}{`r n` -1} \left\{\sum_{i=1}^{`r n`} y_i^2 - n \bar{y}^2 \right\} = `r round(var(y),3)`
+\end{eqnarray*}  
+</center>  
+
+(a) Calculate the correlation between the mid-term test marks and the final exam marks.  
+(b)  Fit a straight line linear model $y = \alpha + \beta x + \epsilon$, where $\epsilon \sim N(0,\sigma^2)$ with the final exam mark, $y$, as the response and the mid-term test mark, $x$, as the predictor variable. Include estimation of $\sigma^2$ in the model fit.   
+(c) Find the expected final exam mark of a student who scores `r midx` in the mid-term test.   
+:::
+
+```{asis, include=knitr::is_html_output()}
+<details><summary>Solution to Exercise 17.2.</summary>
+:::{.ans #Question_S17_2} 
+(a) The correlation between $x$ and $y$ is given by  
+<center>  
+\[ \frac{s_{xy}}{s_x \times s_y} = \frac{25.679}{\sqrt{29.554} \times \sqrt{35.929} } =  0.788 \]  
+</center> 
+
+(b) The coefficients of the linear regression model are:  
+<center> 
+\begin{eqnarray*}
+\hat{\beta} &=& \frac{s_{x,y}}{s_x^2} = \frac{25.679}{29.554} = 0.869. \\
+\hat{\alpha} &=& \bar{y} - \hat{\beta}  \bar{x} = 54.75 - 0.869 \times 65.875 = -2.488.
+\end{eqnarray*}  
+</center> 
+
+```{r,echo=FALSE}
+beta1_est=round(cov(x,y)/var(x),3)
+beta0_est=round(mean(y)-cov(x,y)*mean(x)/var(x),3)
+
+p=2
+n=length(y)
+ss=round(sum((y-(beta0_est+beta1_est*x))^2)/(n-p),3)
+
+```
+```{asis, include=knitr::is_html_output()}
+Since we have $p=2$ parameters ($\alpha$ and $\beta$), an unbiased estimate of $\sigma^2$ is:  
+<center> 
+$$s^2 = \frac{1}{n-p} \sum_{i=1}^n (y_i - [\hat{\alpha} +\hat{\beta} x ])^2 = 15.886. $$  
+</center> 
+Thus the fitted model is:  
+<center> 
+$$ y = -2.488 + 0.869 x + \epsilon, \qquad \qquad \epsilon \sim N(0,15.886). $$  
+</center> 
+
+(c) The expected final exam mark of a student who scores 79 in the mid-term test is:  
+<center> 
+$$ y^\ast = -2.488 + 0.869 \times 79 = 66.163. $$   
+</center> 
+:::
+```

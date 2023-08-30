@@ -1,0 +1,68 @@
+--- 
+title: "Foundations of Statistics"
+author: "Prof Peter Neal and Dr Daniel Cavey"
+date: "Autumn Semester 2023, University of Nottingham"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+description: "Lecture Notes for Foundations of Statistics"
+---
+
+```{r setup, echo = FALSE, results = FALSE, message=FALSE}
+
+library(magick)
+# knitr::opts_chunk$set(fig.align = 'center') 
+colourise <- function(x, colour) {
+  if (knitr::is_latex_output()) {
+    sprintf("\\textcolor{%s}{%s}", colour, x)
+  } else if (knitr::is_html_output()) {
+    sprintf("<span style='color: %s;'>%s</span>", colour, 
+      x)
+  } else x
+}
+```
+
+
+# Preliminaries {-}
+
+## Overview {-}
+
+In this course the fundamental principles and techniques underlying modern statistical and data analysis will be introduced. The course will cover the core foundations of statistical theory consisting of:  
+
+ - probability distributions and techniques;  
+ - statistical concepts and methods;  
+ - linear models.  
+ 
+The course highlights the importance of computers, and in particular, statistical packages, in performing modern statistical analysis. Students will be introduced to the statistical package **R** as a statistical and programming tool and will gain experience in interpreting and communicating its output.  
+
+**Learning Outcomes**
+
+A student who completes this module successfully will be able to: 
+
+- derive and explain properties of basic statistical inference; linear regression models and probability techniques;  
+- perform exploratory data analysis; summarising their analysis and proposing further investigations;  
+- derive point and interval estimators, and perform hypothesis tests for a variety of situations;  
+- apply the theory and methods for statistical inference, linear regression models and probability techniques to a wide range of practical examples;  
+- use the statistical package **R** to derive results concerning statistical inference;  
+- communicate their statistical analysis in a written report.  
+
+**Syllabus Overview**
+
+- Summary statistics and visualising data  
+- Probability, random variables and expectation  
+- Joint distributions, conditional distribution, covariance and correlation  
+- Central limit theorem  
+- Parameter estimation - Method of Moments and Maximum Likelihood Estimation  
+- Transformations of random variables   
+- Multivariate normal distribution  
+- Linear Models  
+- Least squares estimation  
+- Interval estimation  
+- Hypothesis testing and goodness-of-fit  
+- ANOVA  
+
+## Tasks {-}
+
+At the end of most chapters there are tasks to complete. These tasks will either be computer lab sessions using the statistical package **R** or statistical exercises or both to reinforce the material covered in the chapter (or the last couple of chapters).

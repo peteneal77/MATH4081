@@ -1,0 +1,247 @@
+body {
+  counter-reset: h1counter
+}
+
+.level1 .header-section-number {
+  display: none;
+}
+
+.level2 .header-section-number {
+  display: none;
+}
+
+/* Code to create section styling */
+
+h1 {
+  counter-reset: h2;                            /* Resets subsection numbering back to 0 */
+  background-color: rgba(207, 0, 15, 0.2);      /* rgba(207, 0, 15, 0.2) is a red */
+  border-top: solid;
+  border-right:solid;
+  border-bottom: solid;
+  border-color: rgba(207, 0, 15, 1);
+  border-radius: 0 30px 30px 0;
+  padding-left: 5px;
+  display: table-caption;
+  width: 325%;
+}
+
+/* Code to create subsection styling */
+
+h2 {
+  counter-reset: theorem question exercise;      /* Resets theorem numbering back to 1 */
+  font-size: 1.4em !important
+}
+h2::before {
+    counter-increment: h2;                       /* Increases subsection numbering by 1 every time a new subsection created */
+    content: counter(h2) "   ";                  /* Subsection number to go before supplied name */
+    color: rgba(207, 0, 15, 1);
+    padding-right: 10px;
+}
+
+/* Code to create environment for definitions */
+
+.def {
+  background-color: rgba(207, 0, 15, 0.2);       /* red background */
+  background-size: contain;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;                          /* Gives space around definition box */
+  padding: 5px;                                 /* Gives space within box around text */
+}
+.def:before {
+  display: block;
+  content: "Definition " counter(h2) "." counter(theorem) "  ";      /* Definition labelling */
+  counter-increment: theorem;                                        /* Increases theorem/def/lemma numbering by 1 every time a item created */
+  font-weight: bold;
+}
+
+/* Code to create environment for examples */
+
+.ex {
+  border-left: solid;                           /* Line down left hand side of example */
+  border-color: rgba(207, 0, 15, 1);
+  padding-left: 10px;
+  margin-bottom: 30px;
+}
+.ex:before {
+  display:block;
+  content: "Example " counter(h2) "." counter(theorem) "  ";          /* Example labelling */
+  counter-increment: theorem;                                         /* Increases theorem/def/lemma numbering by 1 every time a item created */
+  font-weight: bold;
+}
+.ex p {
+  padding-left: 5px;                             /* Prevents overlap between text and left hand line */
+}
+
+/* Code to create environment for examples with suppressed numbering */
+
+.exsup {
+  border-left: solid;                         /* Line down left hand side of example */
+  border-color: rgba(207, 0, 15, 1);
+  padding-left: 10px;
+  margin-bottom: 30px;
+}
+.exsup:before {
+  display:block;
+  content: "Example ";
+  font-weight: bold;
+}
+.exsup p {
+  padding-left: 5px;                          /* Prevents overlap between text and left hand line */
+}
+
+/* Code to create environment for lemmas */
+
+.lem:before {
+  content: "Lemma " counter(h2) "." counter(theorem) ":";           /* Lemma labelling */
+  counter-increment: theorem;                                       /* Increases theorem/def/lemma numbering by 1 every time a item created */
+  font-weight: bold;
+  display: inline-block;
+  width: -webkit-fill-available;                    /* Prevents environment overflowing page */
+}
+.lem {
+  display: block;
+  border: solid rgba(207, 0, 15, 1);                /* Red border to box */
+  border-radius: 10px;
+  background-color: rgba(232, 232, 232, 1);         /* Gray background to box */
+  margin-left: 40px;
+  margin-right: 40px;
+  margin-top: 20px;
+  margin-bottom: 30px;                              /* Gives space around definition box */
+  padding: 15px 15px 15px 15px;                     /* Gives space within box around text */
+}
+
+/* Code to create environment for propositions */
+
+.prop:before {
+  content: "Proposition " counter(h2) "." counter(theorem) ":";       /* Proposition labelling */
+  counter-increment: theorem;                                         /* Increases theorem/def/lemma numbering by 1 every time a item created */
+  font-weight: bold;
+  display: inline-block;
+  width: -webkit-fill-available;                    /* Prevents environment overflowing page */
+}
+.prop {
+  display: block;
+  border: solid rgba(207, 0, 15, 1);                /* Red border to box */
+  border-radius: 10px;
+  background-color: rgba(232, 232, 232, 1);         /* Gray background to box */
+  margin-left: 40px;
+  margin-right: 40px;
+  margin-top: 20px;
+  margin-bottom: 30px;                              /* Gives space around definition box */
+  padding: 15px 15px 15px 15px;                     /* Gives space within box around text */
+}
+
+/* Code to create environment for corrollarys */
+
+.cor:before {
+  content: "Corollary " counter(h2) "." counter(theorem) ":";         /* Corollary labelling */
+  counter-increment: theorem;                                         /* Increases theorem/def/lemma numbering by 1 every time a item created */
+  font-weight: bold;
+  display: inline-block;
+  width: -webkit-fill-available;                    /* Prevents environment overflowing page */
+}
+.cor {
+  display: block;
+  border: solid rgba(207, 0, 15, 1);                /* Red border to box */
+  border-radius: 10px;
+  background-color: rgba(232, 232, 232, 1);         /* Gray background to box */
+  margin-left: 40px;
+  margin-right: 40px;
+  margin-top: 20px;
+  margin-bottom: 30px;                              /* Gives space around definition box */
+  padding: 15px 15px 15px 15px;                     /* Gives space within box around text */
+}
+
+/* Code to create environment for theorems */
+
+.thm:before {
+  content: "Theorem " counter(h2) "." counter(theorem);           /* Theorem labelling */
+  counter-increment: theorem;                                     /* Increases theorem/def/lemma numbering by 1 every time a item created */
+  font-weight: bold;
+  display: inline-block;
+  width: -webkit-fill-available;                    /* Prevents environment overflowing page */
+}
+.thm {
+  display: block;
+  border: solid rgba(207, 0, 15, 1);                /* Red border to box */
+  border-radius: 10px;
+  background-color: rgba(232, 232, 232, 1);         /* Gray background to box */
+  margin-left: 40px;
+  margin-right: 40px;
+  margin-top: 20px;
+  margin-bottom: 30px;                              /* Gives space around definition box */
+  padding: 15px 15px 15px 15px;                     /* Gives space within box around text */
+}
+
+/* Code to create environment for proofs */
+
+.prf:before {
+  content: "Proof: ";                           /* Proof labelling (no numbering) */
+  color: rgba(207, 0, 15, 1);
+  font-weight: bold;
+  display: inline-block;
+  width: -webkit-fill-available;
+}
+.prf {
+  margin-top: 20px;
+  margin-bottom: 80px;                        /* Creates spacing from text above and below proof */
+}
+.prf p {
+  padding-left: 5px;
+  display: inline-block;
+  width: -webkit-fill-available;              /* Prevents environment overflowing page */
+}
+.prf:after {
+  content: '\220E';                           /* End of proof box */
+  color: rgba(207, 0, 15, 1);
+  font-size: 2em;
+  float: right;
+}
+
+/* Code to create environment for exercises */
+
+.exer:before {
+  content: "Exercise " counter(exercise) " ";                 /* Exercise labelling */
+  counter-increment: exercise;                                /* Increases exercise/question numbering by 1 every time a item created */
+  color: rgba(207, 0, 15, 1);
+  font-weight: bold;
+  display: inline-block;
+  width: -webkit-fill-available;                              /* Prevents environment overflowing page */
+  padding-left: 80px;                                         /* Left spacing to avoid overlap with exercise icon */
+}
+.exer {
+  background: #f5f5f5 5px center/3em no-repeat;               /* Gray box background */
+  background-image: url("./Images/exercise.png");             /* Exercise icon (Should be saved in a folder called Images relative to .rmd files) */
+  background-size: 50px 50px;
+  background-position: top left;
+  margin-bottom: 30px;
+}
+.exer p {
+  padding-left: 80px;
+  padding-bottom: 10px;                                       /* Spacing of text within box. Avoids icon on left */
+}
+
+/* Code to create environment for questions */
+
+.ques:before {
+  content: "Question " counter(question) " ";                 /* Question labelling */
+  counter-increment: question;                                /* Increases exercise/question numbering by 1 every time a item created */
+  color: rgba(207, 0, 15, 1);
+  font-weight: bold;
+  display: inline-block;
+  width: -webkit-fill-available;                              /* Prevents environment overflowing page */
+  padding-left: 80px;                                         /* Left spacing to avoid overlap with exercise icon */
+}
+.ques {
+  background: #f5f5f5 5px center/3em no-repeat;               /* Gray box background */
+  background-image: url("./Images/question.png");             /* Question icon (Should be saved in a folder called Images relative to .rmd files) */
+  background-size: 50px 50px;
+  background-position: top left;
+  margin-bottom: 30px;
+}
+.ques p {
+  padding-left: 80px;
+  padding-bottom: 10px;                                       /* Spacing of text within box. Avoids icon on left */ 
+}

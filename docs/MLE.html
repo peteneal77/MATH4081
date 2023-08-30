@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 10 Techniques for Deriving Estimators | Foundations of Statistics</title>
+  <meta name="description" content="Lecture Notes for Foundations of Statistics" />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 10 Techniques for Deriving Estimators | Foundations of Statistics" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Lecture Notes for Foundations of Statistics" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 10 Techniques for Deriving Estimators | Foundations of Statistics" />
+  
+  <meta name="twitter:description" content="Lecture Notes for Foundations of Statistics" />
+  
+
+<meta name="author" content="Prof Peter Neal and Dr Daniel Cavey" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="paraestimate.html"/>
+<link rel="next" href="MLEprop.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">MATH4081: Foundations of Statistics</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preliminaries</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#overview"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#tasks"><i class="fa fa-check"></i>Tasks</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#intro_stats"><i class="fa fa-check"></i><b>1.1</b> What is Statistics?</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#intro_population"><i class="fa fa-check"></i><b>1.2</b> Populations and samples</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#intro_data"><i class="fa fa-check"></i><b>1.3</b> Types of Data</a></li>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#intro_example"><i class="fa fa-check"></i><b>1.4</b> Some example datasets</a></li>
+<li class="chapter" data-level="1.5" data-path="intro.html"><a href="intro.html#intro_computing"><i class="fa fa-check"></i><b>1.5</b> Statistical Computing</a></li>
+<li class="chapter" data-level="1.6" data-path="intro.html"><a href="intro.html#intro_paradigm"><i class="fa fa-check"></i><b>1.6</b> The statistical paradigm</a></li>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#intro:R"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 1</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>2</b> Summary Statistics</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="summary.html"><a href="summary.html#summary_location"><i class="fa fa-check"></i><b>2.1</b> Measures of location</a></li>
+<li class="chapter" data-level="2.2" data-path="summary.html"><a href="summary.html#summary_spread"><i class="fa fa-check"></i><b>2.2</b> Measures of spread</a></li>
+<li class="chapter" data-level="2.3" data-path="summary.html"><a href="summary.html#summary_robust"><i class="fa fa-check"></i><b>2.3</b> Robustness of summary statistics</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="visual.html"><a href="visual.html"><i class="fa fa-check"></i><b>3</b> Visualising data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="visual.html"><a href="visual.html#visual_intro"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="visual.html"><a href="visual.html#visual_data-features"><i class="fa fa-check"></i><b>3.2</b> Some data features</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="visual.html"><a href="visual.html#visual_data-features_multi"><i class="fa fa-check"></i><b>3.2.1</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Multimodal distributions</strong></span></a></li>
+<li class="chapter" data-level="3.2.2" data-path="visual.html"><a href="visual.html#visual_data-features_symmetry"><i class="fa fa-check"></i><b>3.2.2</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Symmetry</strong></span></a></li>
+<li class="chapter" data-level="3.2.3" data-path="visual.html"><a href="visual.html#visual_data-features_outliers"><i class="fa fa-check"></i><b>3.2.3</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Outliers</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="visual.html"><a href="visual.html#visual_plot"><i class="fa fa-check"></i><b>3.3</b> Basic plot types</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="visual.html"><a href="visual.html#visual_plot_histo"><i class="fa fa-check"></i><b>3.3.1</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Histogram and bar charts</strong></span></a></li>
+<li class="chapter" data-level="3.3.2" data-path="visual.html"><a href="visual.html#visual_plot_density"><i class="fa fa-check"></i><b>3.3.2</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Density plots</strong></span></a></li>
+<li class="chapter" data-level="3.3.3" data-path="visual.html"><a href="visual.html#visual_plot_boxplot"><i class="fa fa-check"></i><b>3.3.3</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Boxplot</strong></span></a></li>
+<li class="chapter" data-level="3.3.4" data-path="visual.html"><a href="visual.html#visual_plot_cdf"><i class="fa fa-check"></i><b>3.3.4</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Cumulative frequency diagrams, and the empirical CDF</strong></span></a></li>
+<li class="chapter" data-level="3.3.5" data-path="visual.html"><a href="visual.html#visual_plot_stem"><i class="fa fa-check"></i><b>3.3.5</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Stem and leaf</strong></span></a></li>
+<li class="chapter" data-level="3.3.6" data-path="visual.html"><a href="visual.html#visual_plot_pie"><i class="fa fa-check"></i><b>3.3.6</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Pie charts</strong></span></a></li>
+<li class="chapter" data-level="3.3.7" data-path="visual.html"><a href="visual.html#visual_plot_dot"><i class="fa fa-check"></i><b>3.3.7</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Dotplots</strong></span></a></li>
+<li class="chapter" data-level="3.3.8" data-path="visual.html"><a href="visual.html#visual_plot_scatter"><i class="fa fa-check"></i><b>3.3.8</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Scatterplots</strong></span></a></li>
+<li class="chapter" data-level="3.3.9" data-path="visual.html"><a href="visual.html#visual_plot_summary"><i class="fa fa-check"></i><b>3.3.9</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Summary</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="visual.html"><a href="visual.html#visual_data"><i class="fa fa-check"></i><b>3.4</b> Commenting on data</a></li>
+<li class="chapter" data-level="" data-path="visual.html"><a href="visual.html#visual:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 2</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="prob.html"><a href="prob.html"><i class="fa fa-check"></i><b>4</b> Probability</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="prob.html"><a href="prob.html#prob:overview"><i class="fa fa-check"></i><b>4.1</b> Overview</a></li>
+<li class="chapter" data-level="4.2" data-path="prob.html"><a href="prob.html#prob:motivation"><i class="fa fa-check"></i><b>4.2</b> Motivation</a></li>
+<li class="chapter" data-level="4.3" data-path="prob.html"><a href="prob.html#prob:sample_space"><i class="fa fa-check"></i><b>4.3</b> Sample Space</a></li>
+<li class="chapter" data-level="4.4" data-path="prob.html"><a href="prob.html#prob:events"><i class="fa fa-check"></i><b>4.4</b> Events</a></li>
+<li class="chapter" data-level="4.5" data-path="prob.html"><a href="prob.html#prob:defn"><i class="fa fa-check"></i><b>4.5</b> Probability</a></li>
+<li class="chapter" data-level="4.6" data-path="prob.html"><a href="prob.html#prob:Conditional_Probability"><i class="fa fa-check"></i><b>4.6</b> Conditional probability</a></li>
+<li class="chapter" data-level="4.7" data-path="prob.html"><a href="prob.html#prob:mutual"><i class="fa fa-check"></i><b>4.7</b> Mutual Independence</a></li>
+<li class="chapter" data-level="" data-path="prob.html"><a href="prob.html#rv:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 3</strong></span></a></li>
+<li class="chapter" data-level="" data-path="prob.html"><a href="prob.html#prob:stud"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="rv.html"><a href="rv.html"><i class="fa fa-check"></i><b>5</b> Random Variables</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="rv.html"><a href="rv.html#rv:overview"><i class="fa fa-check"></i><b>5.1</b> Overview</a></li>
+<li class="chapter" data-level="5.2" data-path="rv.html"><a href="rv.html#rv:des"><i class="fa fa-check"></i><b>5.2</b> Random variables</a></li>
+<li class="chapter" data-level="5.3" data-path="rv.html"><a href="rv.html#rv:expect"><i class="fa fa-check"></i><b>5.3</b> Expectation</a></li>
+<li class="chapter" data-level="5.4" data-path="rv.html"><a href="rv.html#rv:bernoulli"><i class="fa fa-check"></i><b>5.4</b> Bernoulli distribution and its extension</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="rv.html"><a href="rv.html#rv:Bernoulli:bern"><i class="fa fa-check"></i><b>5.4.1</b> Bernoulli distribution</a></li>
+<li class="chapter" data-level="5.4.2" data-path="rv.html"><a href="rv.html#rv:Bernoulli:bin"><i class="fa fa-check"></i><b>5.4.2</b> Binomial Distribution</a></li>
+<li class="chapter" data-level="5.4.3" data-path="rv.html"><a href="rv.html#rv:Bernoulli:geom"><i class="fa fa-check"></i><b>5.4.3</b> Geometric Distribution</a></li>
+<li class="chapter" data-level="5.4.4" data-path="rv.html"><a href="rv.html#rv:Bernoulli:negbin"><i class="fa fa-check"></i><b>5.4.4</b> Negative binomial Distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="rv.html"><a href="rv.html#rv:Poisson"><i class="fa fa-check"></i><b>5.5</b> Poisson distribution</a></li>
+<li class="chapter" data-level="5.6" data-path="rv.html"><a href="rv.html#rv:exponential"><i class="fa fa-check"></i><b>5.6</b> Exponential distribution and its extensions</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="rv.html"><a href="rv.html#rv:exponential:exp"><i class="fa fa-check"></i><b>5.6.1</b> Exponential distribution</a></li>
+<li class="chapter" data-level="5.6.2" data-path="rv.html"><a href="rv.html#rv:exponential:gamma"><i class="fa fa-check"></i><b>5.6.2</b> Gamma distribution</a></li>
+<li class="chapter" data-level="5.6.3" data-path="rv.html"><a href="rv.html#rv:exponential:chi"><i class="fa fa-check"></i><b>5.6.3</b> Chi squared distribution</a></li>
+<li class="chapter" data-level="5.6.4" data-path="rv.html"><a href="rv.html#rv:exponential:beta"><i class="fa fa-check"></i><b>5.6.4</b> Beta distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="rv.html"><a href="rv.html#rv:normal"><i class="fa fa-check"></i><b>5.7</b> Normal (Gaussian) Distribution</a></li>
+<li class="chapter" data-level="" data-path="rv.html"><a href="rv.html#prob:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="jointdis.html"><a href="jointdis.html"><i class="fa fa-check"></i><b>6</b> Joint Distribution Functions</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="jointdis.html"><a href="jointdis.html#jointdis:intro"><i class="fa fa-check"></i><b>6.1</b> Overview</a></li>
+<li class="chapter" data-level="6.2" data-path="jointdis.html"><a href="jointdis.html#jointdis:cdf"><i class="fa fa-check"></i><b>6.2</b> Joint c.d.f. and p.d.f.</a></li>
+<li class="chapter" data-level="6.3" data-path="jointdis.html"><a href="jointdis.html#jointdis:marginal"><i class="fa fa-check"></i><b>6.3</b> Marginal c.d.f. and p.d.f.</a></li>
+<li class="chapter" data-level="6.4" data-path="jointdis.html"><a href="jointdis.html#jointdis:independent"><i class="fa fa-check"></i><b>6.4</b> Independent random variables</a></li>
+<li class="chapter" data-level="" data-path="jointdis.html"><a href="jointdis.html#jointdis:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercise</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="Sec_CLT.html"><a href="Sec_CLT.html"><i class="fa fa-check"></i><b>7</b> Central Limit Theorem and law of large numbers</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="Sec_CLT.html"><a href="Sec_CLT.html#Sec_CLT:intro"><i class="fa fa-check"></i><b>7.1</b> Introduction</a></li>
+<li class="chapter" data-level="7.2" data-path="Sec_CLT.html"><a href="Sec_CLT.html#Sec_CLT:statement"><i class="fa fa-check"></i><b>7.2</b> Statement of Central Limit Theorem</a></li>
+<li class="chapter" data-level="7.3" data-path="Sec_CLT.html"><a href="Sec_CLT.html#Sec_CLT:discrete"><i class="fa fa-check"></i><b>7.3</b> Central limit theorem for discrete random variables</a></li>
+<li class="chapter" data-level="7.4" data-path="Sec_CLT.html"><a href="Sec_CLT.html#Sec_CLT:LLN"><i class="fa fa-check"></i><b>7.4</b> Law of Large Numbers</a></li>
+<li class="chapter" data-level="" data-path="Sec_CLT.html"><a href="Sec_CLT.html#Sec_clt:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 4</strong></span></a></li>
+<li class="chapter" data-level="" data-path="Sec_CLT.html"><a href="Sec_CLT.html#Sec_clt:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="motivate.html"><a href="motivate.html"><i class="fa fa-check"></i><b>8</b> Motivation for Statistical Inference</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="motivate.html"><a href="motivate.html#motivate:intro"><i class="fa fa-check"></i><b>8.1</b> Introduction</a></li>
+<li class="chapter" data-level="8.2" data-path="motivate.html"><a href="motivate.html#motivate:example"><i class="fa fa-check"></i><b>8.2</b> Motivating example</a></li>
+<li class="chapter" data-level="8.3" data-path="motivate.html"><a href="motivate.html#motivate:assumption"><i class="fa fa-check"></i><b>8.3</b> Modelling assumptions</a></li>
+<li class="chapter" data-level="8.4" data-path="motivate.html"><a href="motivate.html#motivate:parametric"><i class="fa fa-check"></i><b>8.4</b> Parametric models</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="paraestimate.html"><a href="paraestimate.html"><i class="fa fa-check"></i><b>9</b> Parameter Estimation</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="paraestimate.html"><a href="paraestimate.html#paraestimate:intro"><i class="fa fa-check"></i><b>9.1</b> Introduction</a></li>
+<li class="chapter" data-level="9.2" data-path="paraestimate.html"><a href="paraestimate.html#paraestimate:prelim"><i class="fa fa-check"></i><b>9.2</b> Preliminaries</a></li>
+<li class="chapter" data-level="9.3" data-path="paraestimate.html"><a href="paraestimate.html#paraestimate:judge"><i class="fa fa-check"></i><b>9.3</b> Judging estimators</a></li>
+<li class="chapter" data-level="9.4" data-path="paraestimate.html"><a href="paraestimate.html#paraestimate:variance"><i class="fa fa-check"></i><b>9.4</b> Sample Variance</a></li>
+<li class="chapter" data-level="" data-path="paraestimate.html"><a href="paraestimate.html#paraestimate:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 5</strong></span></a></li>
+<li class="chapter" data-level="" data-path="paraestimate.html"><a href="paraestimate.html#paraestimate:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="MLE.html"><a href="MLE.html"><i class="fa fa-check"></i><b>10</b> Techniques for Deriving Estimators</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="MLE.html"><a href="MLE.html#MLE:intro"><i class="fa fa-check"></i><b>10.1</b> Introduction</a></li>
+<li class="chapter" data-level="10.2" data-path="MLE.html"><a href="MLE.html#MLE:moments"><i class="fa fa-check"></i><b>10.2</b> Method of Moments</a></li>
+<li class="chapter" data-level="10.3" data-path="MLE.html"><a href="MLE.html#MLE:MLE"><i class="fa fa-check"></i><b>10.3</b> Maximum likelihood estimation</a></li>
+<li class="chapter" data-level="10.4" data-path="MLE.html"><a href="MLE.html#MLE:comments"><i class="fa fa-check"></i><b>10.4</b> Comments on the Maximum Likelihood Estimator</a></li>
+<li class="chapter" data-level="" data-path="MLE.html"><a href="MLE.html#MLE:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="MLEprop.html"><a href="MLEprop.html"><i class="fa fa-check"></i><b>11</b> Additional Properties of Estimators</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:intro"><i class="fa fa-check"></i><b>11.1</b> Introduction</a></li>
+<li class="chapter" data-level="11.2" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:sufficient"><i class="fa fa-check"></i><b>11.2</b> Sufficiency</a></li>
+<li class="chapter" data-level="11.3" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:MVE"><i class="fa fa-check"></i><b>11.3</b> Minimum variance estimators</a></li>
+<li class="chapter" data-level="11.4" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:asymptotic"><i class="fa fa-check"></i><b>11.4</b> Asymptotic normality of the MLE</a></li>
+<li class="chapter" data-level="11.5" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:invariance"><i class="fa fa-check"></i><b>11.5</b> Invariance property</a></li>
+<li class="chapter" data-level="" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 6</strong></span></a></li>
+<li class="chapter" data-level="" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="CondDis.html"><a href="CondDis.html"><i class="fa fa-check"></i><b>12</b> Conditional Distribution and Conditional Expectation</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="CondDis.html"><a href="CondDis.html#CondDis:CondDis"><i class="fa fa-check"></i><b>12.1</b> Conditional distribution</a></li>
+<li class="chapter" data-level="12.2" data-path="CondDis.html"><a href="CondDis.html#CondDis:CondExpect"><i class="fa fa-check"></i><b>12.2</b> Conditional expectation</a></li>
+<li class="chapter" data-level="12.3" data-path="CondDis.html"><a href="CondDis.html#CondDis:Independence"><i class="fa fa-check"></i><b>12.3</b> Independent random variables</a></li>
+<li class="chapter" data-level="" data-path="CondDis.html"><a href="CondDis.html#CondDis:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercise</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="Correlation.html"><a href="Correlation.html"><i class="fa fa-check"></i><b>13</b> Expectation, Covariance and Correlation</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="Correlation.html"><a href="Correlation.html#Correlation:Expectation"><i class="fa fa-check"></i><b>13.1</b> Expectation of a function of random variables</a></li>
+<li class="chapter" data-level="13.2" data-path="Correlation.html"><a href="Correlation.html#Correlation:Covariance"><i class="fa fa-check"></i><b>13.2</b> Covariance</a></li>
+<li class="chapter" data-level="13.3" data-path="Correlation.html"><a href="Correlation.html#Correlation:Correlation"><i class="fa fa-check"></i><b>13.3</b> Correlation</a></li>
+<li class="chapter" data-level="" data-path="Correlation.html"><a href="Correlation.html#Correlation:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 7</strong></span></a></li>
+<li class="chapter" data-level="" data-path="Correlation.html"><a href="Correlation.html#Correlation:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="Transform.html"><a href="Transform.html"><i class="fa fa-check"></i><b>14</b> Transformations of random variables</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="Transform.html"><a href="Transform.html#Transform:intro"><i class="fa fa-check"></i><b>14.1</b> Introduction</a></li>
+<li class="chapter" data-level="14.2" data-path="Transform.html"><a href="Transform.html#Transform:univariate"><i class="fa fa-check"></i><b>14.2</b> Univariate case</a></li>
+<li class="chapter" data-level="14.3" data-path="Transform.html"><a href="Transform.html#Transform:bivariate"><i class="fa fa-check"></i><b>14.3</b> Bivariate case</a></li>
+<li class="chapter" data-level="" data-path="Transform.html"><a href="Transform.html#Transform:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercise</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="MV_Normal.html"><a href="MV_Normal.html"><i class="fa fa-check"></i><b>15</b> Multivariate Normal Distribution</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="MV_Normal.html"><a href="MV_Normal.html#MV_Normal:intro"><i class="fa fa-check"></i><b>15.1</b> Introduction</a></li>
+<li class="chapter" data-level="15.2" data-path="MV_Normal.html"><a href="MV_Normal.html#MV_Normal:multi"><i class="fa fa-check"></i><b>15.2</b> <span class="math inline">\(n\)</span>-Dimensional Normal Distribution</a></li>
+<li class="chapter" data-level="" data-path="MV_Normal.html"><a href="MV_Normal.html#MV_Normal:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 8</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html"><i class="fa fa-check"></i><b>16</b> Introduction to Linear Models</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:intro"><i class="fa fa-check"></i><b>16.1</b> Introduction</a></li>
+<li class="chapter" data-level="16.2" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:stat"><i class="fa fa-check"></i><b>16.2</b> Statistical models</a></li>
+<li class="chapter" data-level="16.3" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:linear"><i class="fa fa-check"></i><b>16.3</b> The linear model</a></li>
+<li class="chapter" data-level="16.4" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:Gauss"><i class="fa fa-check"></i><b>16.4</b> The Normal (Gaussian) linear model</a></li>
+<li class="chapter" data-level="16.5" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:residuals"><i class="fa fa-check"></i><b>16.5</b> Residuals</a></li>
+<li class="chapter" data-level="16.6" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:line"><i class="fa fa-check"></i><b>16.6</b> Straight Line, Horizontal Line and Quadratic Models</a></li>
+<li class="chapter" data-level="16.7" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:Examples"><i class="fa fa-check"></i><b>16.7</b> Examples</a></li>
+<li class="chapter" data-level="16.8" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:Prediction"><i class="fa fa-check"></i><b>16.8</b> Prediction</a></li>
+<li class="chapter" data-level="16.9" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:Nested"><i class="fa fa-check"></i><b>16.9</b> Nested Models</a></li>
+<li class="chapter" data-level="" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercise</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html"><i class="fa fa-check"></i><b>17</b> Least Squares Estimation for Linear Models</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:intro"><i class="fa fa-check"></i><b>17.1</b> Introduction</a></li>
+<li class="chapter" data-level="17.2" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:algebra"><i class="fa fa-check"></i><b>17.2</b> Linear algebra review</a></li>
+<li class="chapter" data-level="17.3" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:derive"><i class="fa fa-check"></i><b>17.3</b> Deriving the least squares estimator</a></li>
+<li class="chapter" data-level="17.4" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:examples"><i class="fa fa-check"></i><b>17.4</b> Examples</a></li>
+<li class="chapter" data-level="17.5" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:beta"><i class="fa fa-check"></i><b>17.5</b> Properties of the estimator of <span class="math inline">\(\mathbf{\beta}\)</span></a></li>
+<li class="chapter" data-level="17.6" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:GaussMarkov"><i class="fa fa-check"></i><b>17.6</b> Gauss-Markov Theorem</a></li>
+<li class="chapter" data-level="" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 9</strong></span></a></li>
+<li class="chapter" data-level="" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="Interval_Estimation.html"><a href="Interval_Estimation.html"><i class="fa fa-check"></i><b>18</b> Interval Estimation</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="Interval_Estimation.html"><a href="Interval_Estimation.html#Interval_Estimation:intro"><i class="fa fa-check"></i><b>18.1</b> Introduction</a></li>
+<li class="chapter" data-level="18.2" data-path="Interval_Estimation.html"><a href="Interval_Estimation.html#Interval_Estimation:confident"><i class="fa fa-check"></i><b>18.2</b> Confident?</a></li>
+<li class="chapter" data-level="18.3" data-path="Interval_Estimation.html"><a href="Interval_Estimation.html#Interval_Estimation:CI"><i class="fa fa-check"></i><b>18.3</b> Confidence intervals</a></li>
+<li class="chapter" data-level="18.4" data-path="Interval_Estimation.html"><a href="Interval_Estimation.html#Interval_Estimation:MLE"><i class="fa fa-check"></i><b>18.4</b> Asymptotic distribution of the MLE</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html"><i class="fa fa-check"></i><b>19</b> Hypothesis Testing</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:intro"><i class="fa fa-check"></i><b>19.1</b> Introduction to hypothesis testing</a></li>
+<li class="chapter" data-level="19.2" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:errors"><i class="fa fa-check"></i><b>19.2</b> Type I and Type II errors</a></li>
+<li class="chapter" data-level="19.3" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:normal_known"><i class="fa fa-check"></i><b>19.3</b> Tests for normal means, <span class="math inline">\(\sigma\)</span> known</a></li>
+<li class="chapter" data-level="19.4" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:p_values"><i class="fa fa-check"></i><b>19.4</b> <span class="math inline">\(p\)</span> values</a></li>
+<li class="chapter" data-level="19.5" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:normal_unknown"><i class="fa fa-check"></i><b>19.5</b> Tests for normal means, <span class="math inline">\(\sigma\)</span> unknown</a></li>
+<li class="chapter" data-level="19.6" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:twosided"><i class="fa fa-check"></i><b>19.6</b> Confidence intervals and two-sided tests</a></li>
+<li class="chapter" data-level="19.7" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:variance"><i class="fa fa-check"></i><b>19.7</b> Distribution of the variance</a></li>
+<li class="chapter" data-level="19.8" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:other"><i class="fa fa-check"></i><b>19.8</b> Other types of tests</a></li>
+<li class="chapter" data-level="19.9" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:samplesize"><i class="fa fa-check"></i><b>19.9</b> Sample size calculation</a></li>
+<li class="chapter" data-level="" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 10</strong></span></a></li>
+<li class="chapter" data-level="" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html"><i class="fa fa-check"></i><b>20</b> Hypothesis Testing Discrete Data</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html#Hypo_Test_Discrete:intro"><i class="fa fa-check"></i><b>20.1</b> Introduction</a></li>
+<li class="chapter" data-level="20.2" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html#Hypo_Test_Discrete:motivate"><i class="fa fa-check"></i><b>20.2</b> Goodness-of-fit motivating example</a></li>
+<li class="chapter" data-level="20.3" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html#Hypo_Test_Discrete:GoF"><i class="fa fa-check"></i><b>20.3</b> Goodness-of-fit</a></li>
+<li class="chapter" data-level="20.4" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html#Hypo_Test_Discrete:Independence"><i class="fa fa-check"></i><b>20.4</b> Testing Independence</a></li>
+<li class="chapter" data-level="" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html#Hypo_Test_Discrete:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 11</strong></span></a></li>
+<li class="chapter" data-level="" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html#Hypo_Test_Discrete:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="Sec_Linear_hypo_test.html"><a href="Sec_Linear_hypo_test.html"><i class="fa fa-check"></i><b>21</b> Basic Hypothesis Tests for Linear Models</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="Sec_Linear_hypo_test.html"><a href="Sec_Linear_hypo_test.html#Sec_Linear_hypo_test:intro"><i class="fa fa-check"></i><b>21.1</b> Introduction</a></li>
+<li class="chapter" data-level="21.2" data-path="Sec_Linear_hypo_test.html"><a href="Sec_Linear_hypo_test.html#Sec_Linear_hypo_test:single"><i class="fa fa-check"></i><b>21.2</b> Tests on a single parameter</a></li>
+<li class="chapter" data-level="21.3" data-path="Sec_Linear_hypo_test.html"><a href="Sec_Linear_hypo_test.html#Sec_Linear_hypo_test:CI"><i class="fa fa-check"></i><b>21.3</b> Confidence intervals for parameters</a></li>
+<li class="chapter" data-level="21.4" data-path="Sec_Linear_hypo_test.html"><a href="Sec_Linear_hypo_test.html#Sec_Linear_hypo_test:F"><i class="fa fa-check"></i><b>21.4</b> Tests for the existence of regression</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html"><i class="fa fa-check"></i><b>22</b> ANOVA Tables and F Tests</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:Intro"><i class="fa fa-check"></i><b>22.1</b> Introduction</a></li>
+<li class="chapter" data-level="22.2" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:residuals"><i class="fa fa-check"></i><b>22.2</b> The residuals</a></li>
+<li class="chapter" data-level="22.3" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:SS"><i class="fa fa-check"></i><b>22.3</b> Sums of squares</a></li>
+<li class="chapter" data-level="22.4" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:ANOVA"><i class="fa fa-check"></i><b>22.4</b> Analysis of Variance (ANOVA)</a></li>
+<li class="chapter" data-level="22.5" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:Compare"><i class="fa fa-check"></i><b>22.5</b> Comparing models</a></li>
+<li class="chapter" data-level="22.6" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:seq"><i class="fa fa-check"></i><b>22.6</b> Sequential sum of squares</a></li>
+<li class="chapter" data-level="" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 12</strong></span></a></li>
+<li class="chapter" data-level="" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="introR.html"><a href="introR.html"><i class="fa fa-check"></i><b>23</b> Introduction to R</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="introR.html"><a href="introR.html#introR_what"><i class="fa fa-check"></i><b>23.1</b> What are R, RStudio and R Markdown?</a></li>
+<li class="chapter" data-level="23.2" data-path="introR.html"><a href="introR.html#introR_UoN"><i class="fa fa-check"></i><b>23.2</b> Starting RStudio on the UoN Network</a></li>
+<li class="chapter" data-level="23.3" data-path="introR.html"><a href="introR.html#introR_download"><i class="fa fa-check"></i><b>23.3</b> Downloading R and RStudio</a></li>
+<li class="chapter" data-level="23.4" data-path="introR.html"><a href="introR.html#introR_start"><i class="fa fa-check"></i><b>23.4</b> Getting started in R</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="Rmark.html"><a href="Rmark.html"><i class="fa fa-check"></i><b>24</b> What is R Markdown?</a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="Rmark.html"><a href="Rmark.html#Rmark_start"><i class="fa fa-check"></i><b>24.1</b> Getting started</a></li>
+<li class="chapter" data-level="24.2" data-path="Rmark.html"><a href="Rmark.html#Rmark_R"><i class="fa fa-check"></i><b>24.2</b> R in R Markdown</a></li>
+<li class="chapter" data-level="24.3" data-path="Rmark.html"><a href="Rmark.html#Rmark_text"><i class="fa fa-check"></i><b>24.3</b> Text in R markdown</a></li>
+<li class="chapter" data-level="24.4" data-path="Rmark.html"><a href="Rmark.html#Rmark_maths"><i class="fa fa-check"></i><b>24.4</b> Mathematics in R Markdown</a></li>
+<li class="chapter" data-level="24.5" data-path="Rmark.html"><a href="Rmark.html#Rmark_work"><i class="fa fa-check"></i><b>24.5</b> Worked Example</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://moodle.nottingham.ac.uk/course/view.php?id=134982" target="blank">MATH4081 Moodle Page</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Foundations of Statistics</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="MLE" class="section level1 hasAnchor" number="10">
+<h1><span class="header-section-number">Chapter 10</span> Techniques for Deriving Estimators<a href="MLE.html#MLE" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="MLE:intro" class="section level2 hasAnchor" number="10.1">
+<h2><span class="header-section-number">10.1</span> Introduction<a href="MLE.html#MLE:intro" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this Section we introduce two techniques for deriving estimators:</p>
+<ul>
+<li><a href="MLE.html#MLE:moments">Method of Moments</a><br />
+</li>
+<li><a href="MLE.html#MLE:MLE">Maximum Likelihood Estimation</a></li>
+</ul>
+<p>The <a href="MLE.html#MLE:moments">Method of Moments</a> is a simple, intuitive approach, which has its limitations beyond simple random sampling (<em>i.i.d.</em> observations). <a href="MLE.html#MLE:MLE">Maximum Likelihood Estimation</a> is an approach which can be extended to complex modelling scenarios and likelihood based estimation will be central to statistical inference procedures throughout not only this module but the whole course.</p>
+</div>
+<div id="MLE:moments" class="section level2 hasAnchor" number="10.2">
+<h2><span class="header-section-number">10.2</span> Method of Moments<a href="MLE.html#MLE:moments" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Let <span class="math inline">\(X\)</span> be a random variable.</p>
+<div id="MLE:def:moments" class="def">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Moments</strong></span></p>
+<p>If <span class="math inline">\(E[X^k]\)</span> exists in the sense that it is finite, then <span class="math inline">\(E[X^k]\)</span> is said to be the <span class="math inline">\(k^{th}\)</span> <em>moment</em> of the random variable <span class="math inline">\(X\)</span>.</p>
+</div>
+<p>For example,</p>
+<ul>
+<li><p><span class="math inline">\(E[X] = \mu\)</span> is the first moment of <span class="math inline">\(X\)</span>;</p></li>
+<li><p><span class="math inline">\(E[X^2]\)</span> is the second moment of <span class="math inline">\(X\)</span>.</p></li>
+</ul>
+<p>Note that <span class="math inline">\(var(X) = E[X^2] - (E[X])^2\)</span> is a function of the first and second moments.</p>
+<div id="MLE:def:sample_moments" class="def">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Sample moments</strong></span></p>
+<p>Let <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> be a random sample. The <span class="math inline">\(k^{th}\)</span> <em>sample moment</em> is</p>
+<center>
+<span class="math display">\[\hat{\mu}_k = \frac{1}{n} \sum_{i=1}^n X_i^k.\]</span>
+</center>
+</div>
+Since,
+<center>
+<span class="math display">\[\begin{align*}
+E[\hat{\mu}_k] &amp;= E\left[ \frac{1}{n} \sum\limits_{i=1}^n X_i^k \right] \\
+&amp;= \frac{1}{n} \sum_{i=1}^n E\left[ X_i^k \right] \\
+&amp;= E\left[ X_i^k \right],
+\end{align*}\]</span>
+</center>
+<p>it follows that the <span class="math inline">\(k^{th}\)</span> sample moment is an unbiased estimator of the <span class="math inline">\(k^{th}\)</span> moment of a distribution. Therefore, if one wants to estimate the parameters from a particular distribution, one can write the parameters as a function of the moments of the distribution and then estimate them by their corresponding sample moments. This is known as the <strong>method of moments</strong>.</p>
+<div id="MLE:lem:moments" class="lem">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Method of Moments: Mean and Variance</strong></span></p>
+Let <span class="math inline">\(X_1,X_2,\dots,X_n\)</span> be a random sample from any distribution with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>.<br />
+The method of moments estimators for <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span> are:
+<center>
+<span class="math display">\[ \hat{\mu} = \bar{X} \qquad \mbox{ and } \qquad \hat{\sigma}^2 = \frac{1}{n} \sum_{i=1}^n (X_i - \bar{X})^2. \]</span>
+</center>
+</div>
+<div id="MLE:lemprf:moments" class="prf">
+The method of moments estimator for <span class="math inline">\(\mu\)</span> is<br />
+
+<center>
+<span class="math display">\[\begin{align*}
+\hat{\mu} &amp;= \hat{\mu}_1 \\
+&amp;= \frac{1}{n} \sum\limits_{i=1}^n X_i \\
+&amp;= \bar{X}, \end{align*}\]</span>
+</center>
+Given that <span class="math inline">\(\sigma^2 = E[X^2] - E[X]^2\)</span>, the method of moments estimator for <span class="math inline">\(\sigma^2\)</span> is<br />
+
+<center>
+<span class="math display">\[\begin{align*}
+\hat{\sigma}^2 &amp;= \hat{\mu}_2 - (\hat{\mu}_1)^2 \\
+&amp;= \frac{1}{n} \sum\limits_{i=1}^n X_i^2 - \left( \frac{1}{n} \sum\limits_{i=1}^n X_i \right)^2 \\
+&amp;= \frac{1}{n} \sum\limits_{i=1}^n (X_i - \bar{X})^2.
+\end{align*}\]</span>
+</center>
+</div>
+<br />
+Note that <span class="math inline">\(E[\hat{\mu}] = E[\bar{X}] =\mu\)</span> is an unbiased estimator, whilst
+<center>
+<span class="math display">\[E[\hat{\sigma}^2] = E \left[\frac{1}{n} \sum\limits_{i=1}^n (X_i - \bar{X})^2 \right] = \frac{n-1}{n} \sigma^2\]</span>
+</center>
+<p>is a biased estimator, but is asymptotically unbiased. See <a href="paraestimate.html#paraestimate:variance">Section 9.4</a> where the properties of <span class="math inline">\(\hat{\sigma}^2\)</span> are explored further.</p>
+<div id="MLE:ex:bin_moments" class="ex">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Method of Moments: Binomial distribution</strong></span></p>
+<p>Let <span class="math inline">\(X_1,X_2,\ldots,X_n \sim \text{Bin}(m,\theta)\)</span> where <span class="math inline">\(m\)</span> is known. Find the method of moments estimator for <span class="math inline">\(\theta\)</span>.</p>
+<p>The first moment (mean) of the Binomial distribution is <span class="math inline">\(m \theta\)</span>. Therefore,</p>
+<center>
+<span class="math display">\[\hat{\theta} = \frac{\hat{\mu}_1}{m} = \frac{\bar{X}}{m}.\]</span>
+</center>
+</div>
+<p><br />
+</p>
+<div id="MLE:ex:exp_moments" class="ex">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Method of Moments: Exponential distribution</strong></span></p>
+<p>Let <span class="math inline">\(X_1,X_2,\ldots,X_n \sim \text{Exp}(\theta)\)</span>. Find the method of moments estimator for <span class="math inline">\(\theta\)</span>.</p>
+For <span class="math inline">\(x&gt;0\)</span> and <span class="math inline">\(\theta&gt;0\)</span>,
+<center>
+<span class="math display">\[f(x|\theta) = \theta e^{-\theta x}. \]</span>
+</center>
+Therefore <span class="math inline">\(E[X] = 1/\theta\)</span>, so <span class="math inline">\(1/\hat{\theta} = \bar{X}\)</span> and<br />
+
+<center>
+<span class="math display">\[\hat{\theta} = 1/\bar{X}.\]</span>
+</center>
+</div>
+<p>The sampling properties of the <span class="math inline">\(k^{th}\)</span> sample moment are fairly desirable:</p>
+<ul>
+<li><span class="math inline">\(\hat{\mu}_k\)</span> is an unbiased estimator of <span class="math inline">\(E[X^k]\)</span>;<br />
+</li>
+<li>By the Central Limit Theorem, <span class="math inline">\(\hat{\mu}_k\)</span> is asymptotically normal if <span class="math inline">\(E[X^{2k}]\)</span> exists;<br />
+</li>
+<li><span class="math inline">\(\hat{\mu}_k\)</span> is a consistent estimator of <span class="math inline">\(E[X^k]\)</span>.</li>
+</ul>
+<p>If <span class="math inline">\(h\)</span> is a continuous function, then <span class="math inline">\(\hat{\theta} = h(\hat{\mu}_1, \hat{\mu}_2, \dots, \hat{\mu}_k)\)</span> is a consistent estimator of <span class="math inline">\(\theta = h(\mu_1,\mu_2,\dots,\mu_k)\)</span>, but it may not be an unbiased or an asymptotically normal estimator.</p>
+<p>There are often difficulties with the method of moments:</p>
+<ul>
+<li>Finding <span class="math inline">\(\theta\)</span> as a function of theoretical moments is not always simple;<br />
+</li>
+<li>For some models, moments may not exist.</li>
+</ul>
+</div>
+<div id="MLE:MLE" class="section level2 hasAnchor" number="10.3">
+<h2><span class="header-section-number">10.3</span> Maximum likelihood estimation<a href="MLE.html#MLE:MLE" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In the study of probability, for random variables <span class="math inline">\(X_1,X_2,\dots,X_n\)</span> we consider the joint probability mass function or probability density function as just a function of the random variables <span class="math inline">\(X_1,X_2,\dots,X_n\)</span>. Specifically we assume that the parameter value(s) are completely known.</p>
+For example, if <span class="math inline">\(X_1,X_2,\dots,X_n\)</span> is a random sample from a Poisson distribution with mean <span class="math inline">\(\lambda\)</span>, then
+<center>
+<span class="math display">\[P (X_1 =x_1, X_2 = x_2, \ldots, X_n = x_n) = p_{X_1,X_2,\dots,X_n}(x_1,x_2,\dots,x_n) = \frac{ e^{-n\lambda} \lambda^{\left( \sum\limits_{i=1}^n x_i \right)} }{\prod\limits_{i=1}^n x_i!}\]</span>
+</center>
+<p>for <span class="math inline">\(\lambda &gt; 0\)</span>. See <a href="jointdis.html#jointdis:independent">Section 6.4</a> for derivation.</p>
+<p>However, in the study of statistics, we assume the parameter values are <strong>unknown</strong>. Therefore, if we are given a specific random sample <span class="math inline">\(x_1,x_2,\dots,x_n\)</span>, then <span class="math inline">\(p(x_1,x_2,\dots,x_n)\)</span> will take on different values for each possible value of the parameters (<span class="math inline">\(\lambda\)</span> in the Poisson example). Hence, we can consider <span class="math inline">\(p(x_1,x_2,\dots,x_n)\)</span> to also be a function of the unknown parameter and write <span class="math inline">\(p(x_1,x_2,\dots,x_n|\lambda)\)</span> to make the dependence on <span class="math inline">\(\lambda\)</span> explicit. In <strong>maximum likelihood estimation</strong> we choose <span class="math inline">\(\hat{\lambda}\)</span> to be the value of <span class="math inline">\(\lambda\)</span> which most likely produced the random sample <span class="math inline">\(x_1,x_2,\dots,x_n\)</span>, that is, the value of <span class="math inline">\(\lambda\)</span> which maximises <span class="math inline">\(p(x_1, x_2, \ldots, x_n |\lambda)\)</span> for the observed <span class="math inline">\(x_1,x_2,\dots,x_n\)</span>.</p>
+<div id="MLE:def:like" class="def">
+<span style="color: rgba(207, 0, 15, 1);"><strong>Likelihood function</strong></span><br />
+<br />
+The <em>likelihood function</em> of the random variables <span class="math inline">\(X_1,X_2,\dots,X_n\)</span> is the joint p.m.f. (discrete case) or joint p.d.f. (continuous case) of the observed data given the parameter <span class="math inline">\(\theta\)</span>, that is<br />
+
+<center>
+<span class="math display">\[L(\theta) = f(x_1,x_2,\dots,x_n | \theta).\]</span>
+</center>
+</div>
+Note that if <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> are a random sample from a distribution with probability function <span class="math inline">\(f(x|\theta)\)</span> then<br />
+
+<center>
+<span class="math display">\[ L(\theta) = \prod_{i=1}^n f(x_i|\theta).\]</span>
+</center>
+<div id="MLE:def:MLE" class="def">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Maximum likelihood estimator</strong></span></p>
+<p>The <em>maximum likelihood estimator</em>, denoted shorthand by MLE or m.l.e., of <span class="math inline">\(\theta\)</span> is the value <span class="math inline">\(\hat{\theta}\)</span> which maximises <span class="math inline">\(L(\theta)\)</span>.</p>
+</div>
+<div id="MLE:ex:Poisson" class="ex">
+<p>Suppose that we collect a random sample from a Poisson distribution such that <span class="math inline">\(X_1=1\)</span>, <span class="math inline">\(X_2=2\)</span>, <span class="math inline">\(X_3=3\)</span> and <span class="math inline">\(X_4=4\)</span>. Find the maximum likelihood estimator of <span class="math inline">\(\lambda\)</span>.</p>
+</div>
+<p><br />
+</p>
+The likelihood function is<br />
+
+<center>
+<span class="math display">\[\begin{align*}
+L(\lambda) &amp;= p(x_1, x_2, x_3, x_4 |\lambda) \\
+&amp;= p(1,2,3,4| \lambda) \\
+&amp;= \frac{e^{-4\lambda}\lambda^{10}}{1!2!3!4!}.
+\end{align*}\]</span>
+</center>
+Since <span class="math inline">\(\log x\)</span> is a monotonic increasing function, the value <span class="math inline">\(\hat{\lambda}\)</span> that maximises <span class="math inline">\(\log L(\lambda)\)</span> will also maximise <span class="math inline">\(L(\lambda)\)</span>. Hence calculate,<br />
+
+<center>
+<span class="math display">\[\log L(\lambda) = -4 \lambda + 10 \log \lambda - \log (1!2!3!4!).\]</span>
+</center>
+To maximise <span class="math inline">\(\log L(\lambda)\)</span> we solve<br />
+
+<center>
+<span class="math display">\[\frac{d \log L(\lambda)}{d\lambda}=0.\]</span>
+</center>
+<p>Now, <span class="math inline">\(\frac{d \log L(\lambda)}{d\lambda} = -4 + \frac{10}{\lambda} = 0\)</span>. Hence, <span class="math inline">\(\hat{\lambda} = \frac{5}{2} = 2.5\)</span>.</p>
+<div id="MLE:def:log_like" class="def">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Log likelihood function</strong></span></p>
+<p>If <span class="math inline">\(L(\theta)\)</span> is the likelihood function of <span class="math inline">\(\theta\)</span>, then <span class="math inline">\(l(\theta)=\log L(\theta)\)</span> is called the <em>log likelihood function</em> of <span class="math inline">\(\theta\)</span>.</p>
+</div>
+<div id="MLE:exer:bin_mle" class="ex">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Binomial MLE</strong></span></p>
+<p>Let <span class="math inline">\(X \sim \text{Bin}(m,\theta)\)</span>. Find the MLE of <span class="math inline">\(\theta\)</span> given observation <span class="math inline">\(x\)</span>.</p>
+</div>
+<p>Attempt <a href="MLE.html#MLE:exer:bin_mle">Example 10.3.5: Binomial MLE</a> and then watch <a href="MLE.html#video17">Video 17</a> for the solutions.</p>
+<p>We will use the case <span class="math inline">\(m=10\)</span> and <span class="math inline">\(x=3\)</span> to illustrate the calculations.</p>
+<div id="video17" class="des">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Video 17: Binomial MLE</strong></span></p>
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1355621/sp/135562100/embedIframeJs/uiconf_id/13188771/partner_id/1355621?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_5slobzch&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_ht43m4rg" width="640" height="420" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Binomial MLE FINAL VERSION">
+</iframe>
+</div>
+<details>
+<summary>
+Solution to Example 10.3.5: Binomial MLE
+</summary>
+<div class="ans">
+<p>Given <span class="math inline">\(x\)</span> is sampled from the random variable <span class="math inline">\(X\)</span>, we have that</p>
+<center>
+<span class="math display">\[L(\theta) = {m \choose x} \theta^x (1-\theta)^{m-x}, \qquad 0 \leq \theta \leq 1.\]</span>
+</center>
+<p>In the case <span class="math inline">\(m=10\)</span> and <span class="math inline">\(x=3\)</span> the likelihood becomes <span class="math inline">\(L(\theta) = 120 \theta^3 (1-\theta)^7\)</span> and this is illustrated in Figure <a href="MLE.html#fig:binmle1">10.1</a>.</p>
+<center>
+<div class="figure"><span style="display:block;" id="fig:binmle1"></span>
+<img src="_main_files/figure-html/binmle1-1.png" alt="Likelihood function." width="70%" />
+<p class="caption">
+Figure 10.1: Likelihood function.
+</p>
+</div>
+</center>
+<p>Take the derivative of <span class="math inline">\(L(\theta)\)</span> (using the product rule):</p>
+<center>
+<span class="math display">\[\begin{align*}
+\frac{d L(\theta)}{d\theta} &amp;= {m \choose x} x \theta^{x-1} (1-\theta)^{m-x} - {m \choose x} \theta^{x} (m-x) (1-\theta)^{m-x-1} \\[3pt]
+&amp;= {m \choose x} \theta^{x-1} (1-\theta)^{m-x-1} \left[ x(1-\theta) - (m-x)\theta \right].
+\end{align*}\]</span>
+</center>
+<p>Setting <span class="math inline">\(\frac{d L(\theta)}{d\theta} = 0\)</span>, we obtain</p>
+<center>
+<span class="math display">\[\left[ x(1-\theta) - (m-x)\theta \right] = 0.\]</span>
+</center>
+<p>Hence, <span class="math inline">\(\hat{\theta} = \frac{x}{m}\)</span> is a possible value for the MLE of <span class="math inline">\(\theta\)</span>.</p>
+<p>Since <span class="math inline">\(L(\theta)\)</span> is a continuous function over <span class="math inline">\([0,1]\)</span>, the maximum must exist at either the stationary point or at one of the endpoints of the interval. Given, <span class="math inline">\(L(0) = 0\)</span>, <span class="math inline">\(L(1) = 0\)</span>, and <span class="math inline">\(L\left(\frac{x}{m}\right)&gt;0\)</span>, it follows that <span class="math inline">\(\hat{\theta}=\frac{x}{m}\)</span> is the MLE of <span class="math inline">\(\theta.\)</span></p>
+<p>In the illustrative example, <span class="math inline">\(m=10\)</span> and <span class="math inline">\(x=3\)</span> giving <span class="math inline">\(\hat{\theta} = \frac{3}{10} =0.3\)</span>. In Figure <a href="MLE.html#fig:binmle2">10.2</a> the MLE is marked on the plot of the likelihood function.</p>
+<center>
+<div class="figure"><span style="display:block;" id="fig:binmle2"></span>
+<img src="_main_files/figure-html/binmle2-1.png" alt="Likelihood function with MLE at 0.3." width="70%" />
+<p class="caption">
+Figure 10.2: Likelihood function with MLE at 0.3.
+</p>
+</div>
+</center>
+<p>It is easier to use the log-likelihood <span class="math inline">\(l(\theta)\)</span> to derive the MLE.</p>
+<p>We have that</p>
+<center>
+<span class="math display">\[l(\theta) = \log \left[ \binom{m}{x} \theta^x (1-\theta)^{m-x} \right] = \log \left[ \binom{m}{x}\right] + x \log \theta + (m-x) \log (1-\theta).\]</span>
+</center>
+<p>In the case <span class="math inline">\(m=10\)</span> and <span class="math inline">\(x=3\)</span> the likelihood becomes <span class="math inline">\(l(\theta) = \log 120 + 3 \log \theta + 7 \log (1-\theta)\)</span> and this is illustrated in Figure <a href="MLE.html#fig:binmle3">10.3</a>.</p>
+<center>
+<div class="figure"><span style="display:block;" id="fig:binmle3"></span>
+<img src="_main_files/figure-html/binmle3-1.png" alt="Log-likelihood function." width="70%" />
+<p class="caption">
+Figure 10.3: Log-likelihood function.
+</p>
+</div>
+</center>
+<p>Take the derivative of <span class="math inline">\(l(\theta)\)</span>:</p>
+<center>
+<span class="math display">\[\begin{align*}
+\frac{d l(\theta)}{d\theta} &amp;= 0 +\frac{x}{\theta} - \frac{m-x}{1-\theta} \\[3pt]
+&amp;= \frac{x (1-\theta) - (m-x) \theta}{\theta (1-\theta)}.
+\end{align*}\]</span>
+</center>
+Setting <span class="math inline">\(\frac{d l(\theta)}{d\theta} = 0\)</span>, again requires solving
+<center>
+<span class="math display">\[\left[ x(1-\theta) - (m-x)\theta \right] = 0.\]</span>
+</center>
+<p>Giving <span class="math inline">\(\hat{\theta} = \frac{x}{m}\)</span>.</p>
+<p>In the illustrative example, <span class="math inline">\(m=10\)</span> and <span class="math inline">\(x=3\)</span> giving <span class="math inline">\(\hat{\theta} = \frac{3}{10} =0.3\)</span>. In Figure <a href="MLE.html#fig:binmle4">10.4</a> the MLE is marked on the plot of the likelihood function.</p>
+<center>
+<div class="figure"><span style="display:block;" id="fig:binmle4"></span>
+<img src="_main_files/figure-html/binmle4-1.png" alt="Log-likelihood function with MLE at 0.3." width="70%" />
+<p class="caption">
+Figure 10.4: Log-likelihood function with MLE at 0.3.
+</p>
+</div>
+</center>
+</div>
+</details>
+<p><br />
+The following <strong>R</strong> shiny app allows you to investigate the MLE for data from a geometric distribution, <span class="math inline">\(X \sim {\rm Geom} (p)\)</span>. The success probability of the geometric distribution can be varied from 0.01 to 1. The likelihood, log-likelihood and relative likelihood (likelihood divided by its maximum) functions can be plotted. Note that as the number of observations become large the likelihood becomes very small, and equal to, 0 to computer accuracy. You will observe that the likelihood function becomes more focussed about the MLE as the sample size increases. Also the MLE will generally be closer to the <em>true</em> value of <span class="math inline">\(p\)</span> used to generate the data as the sample size increases.</p>
+<p>R Shiny app: <a href="https://shiny-new.maths.nottingham.ac.uk/pmzpn/MLE/">MLE Geometric Distribution</a><br />
+</p>
+<div id="MLE:ex:poisson_mle" class="ex">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Poisson MLE</strong></span></p>
+<p>Let <span class="math inline">\(X_1,X_2, \ldots, X_n\)</span> be a random sample from a Poisson distribution with mean <span class="math inline">\(\lambda\)</span>. Find the MLE of <span class="math inline">\(\lambda\)</span>.</p>
+</div>
+<p><br />
+</p>
+We have<br />
+
+<center>
+<span class="math display">\[\begin{align*}
+L(\lambda) &amp;= p(x_1,x_2, \ldots, x_n | \lambda) \\[3pt]
+&amp;= \frac{ \text{e}^{-n\lambda} \lambda^{\sum_{i=1}^n x_i}}{\prod_{i=1}^n x_i!},
+\end{align*}\]</span>
+</center>
+where <span class="math inline">\(\lambda&gt;0\)</span>. So,
+<center>
+<span class="math display">\[ l ( \lambda ) = -n \lambda + \sum\limits_{i=1}^n x_i \log \lambda - \log \prod\limits_{i=1}^n x_i!.\]</span>
+</center>
+Now
+<center>
+<span class="math display">\[ \frac{dl(\lambda)}{d\lambda} = -n + \frac{\sum_{i=1}^n x_i}{\lambda}. \]</span>
+</center>
+Setting <span class="math inline">\(\frac{dl(\lambda)}{d\lambda} =0\)</span> and solving yields
+<center>
+<span class="math display">\[ \hat{\lambda} = \frac{\sum_{i=1}^n x_i}{n} = \bar{x}.\]</span>
+</center>
+<p>Since <span class="math inline">\(\frac{d^2 l(\lambda)}{d\lambda ^2} = \frac{-\sum_{i=1}^n x_i}{\lambda^2} &lt; 0\)</span>, it follows that <span class="math inline">\(\hat{\lambda}=\bar{X}\)</span> is a maximum, so is the MLE of <span class="math inline">\(\lambda\)</span>.</p>
+<p><br />
+</p>
+In both <a href="MLE.html#MLE:exer:bin_mle">Example 10.3.5</a> and <a href="#MLE:ex:pois_mle">Example 10.3.6</a>, we note that terms in the likelihood which do not involve the parameter of interest play no role in the calculating of the MLE. For example, <span class="math inline">\(\binom{m}{x}\)</span> in the binomial and <span class="math inline">\(\left[\prod\limits_{i=1}^n x_i!\right]^{-1}\)</span> in the Poisson. Therefore it is sufficient to consider a function <span class="math inline">\(H(\theta)\)</span> which is proportional to the likelihood, that is, there exists <span class="math inline">\(K &gt;0\)</span> such that
+<center>
+<span class="math display">\[ L(\theta) = K H(\theta) \qquad \mbox{for all } \theta. \]</span>
+</center>
+We write <span class="math inline">\(L(\theta) \propto H(\theta)\)</span> and note that if <span class="math inline">\(h(\theta) = \log H (\theta)\)</span>, then<br />
+
+<center>
+<span class="math display">\[ l(\theta) = \log K + h (\theta)\]</span>
+</center>
+and<br />
+
+<center>
+<span class="math display">\[ \frac{d \;}{d \theta} l (\theta) = \frac{d \;}{d \theta} h (\theta).\]</span>
+</center>
+<div id="MLE:ex:normal_mean" class="ex">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>MLE of mean of a Normal random variable</strong></span></p>
+<p>Let <span class="math inline">\(X_1,X_2, \ldots, X_n\)</span> be a random sample of <span class="math inline">\(N(\theta,1)\)</span> with mean <span class="math inline">\(\theta\)</span>. Find the MLE of <span class="math inline">\(\theta\)</span> given observations <span class="math inline">\(x_1, x_2, \ldots, x_n\)</span>.</p>
+</div>
+<p><br />
+</p>
+For each of the <span class="math inline">\(x_i\)</span>:<br />
+
+<center>
+<span class="math display">\[ f(x_i|\theta) = \frac{1}{\sqrt{2\pi}} \exp \left\{ -\frac{1}{2} \left(x_i-\theta\right)^2 \right\}.\]</span>
+</center>
+Thus:
+<center>
+<span class="math display">\[ L(\theta) = \left( 2 \pi\right)^{-n/2} \prod \limits_{i=1}^n \exp \left\{ -\frac{1}{2} \left(x_i-\theta\right)^2 \right\} \]</span>
+</center>
+and so,
+<center>
+<span class="math display">\[ L(\theta) \propto \prod \limits_{i=1}^n \exp \left\{ -\frac{1}{2} \left(x_i-\theta\right)^2 \right\} = \exp \left\{ -\frac{1}{2} \sum_{i=1}^n (x_i-\theta)^2\right\} \]</span>
+</center>
+and
+<center>
+<span class="math display">\[ l(\theta) = \log L(\theta) = -\frac{1}{2} \sum _{i=1}^n \left(x_i-\theta\right)^2 +
+\text{constant}.\]</span>
+</center>
+Hence
+<center>
+<span class="math display">\[ \frac{dl(\theta)}{d\theta} = \sum _{i=1}^n (x_i-\theta) = 0\]</span>
+</center>
+gives the stationary point of the likelihood, with
+<center>
+<span class="math display" id="eq:theta">\[\begin{equation}
+\hat{\theta} = \frac{\sum x_i}{n} = \bar{x},
+\tag{10.1}  
+\end{equation}\]</span>
+</center>
+It is easily verified that <span class="math inline">\(\hat{\theta}\)</span> given in <a href="MLE.html#eq:theta">(10.1)</a> is a maximum
+since
+<center>
+<span class="math display">\[ \frac{d^2 l(\theta)}{d\theta^2} = -n &lt; 0 .\]</span>
+</center>
+<p>So <span class="math inline">\(\hat{\theta}= \bar{x}\)</span> is the MLE of <span class="math inline">\(\theta\)</span>.<br />
+</p>
+<p>In <a href="MLE.html#MLE:exer:bin_mle">Example 10.3.5</a>, <a href="#MLE:ex:pois_mle">Example 10.3.6</a> and <a href="MLE.html#MLE:ex:normal_mean">Example 10.3.7</a> the maximum likelihood estimators correspond with the method of moment estimators. In <a href="#MLE:ex:unif_mle">Example 10.3.8</a> we consider a situation where the maximum likelihood estimator is very different from the method of moments estimator.</p>
+<div id="MLE:exer:unif_mle" class="ex">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>MLE for Uniform random variables</strong></span></p>
+<p>Let <span class="math inline">\(U_1,U_2, \ldots, U_n\)</span> be i.i.d. samples of <span class="math inline">\(U[0,\theta]\)</span>. Given observations <span class="math inline">\(u_1, u_2, \ldots, u_n\)</span>:</p>
+<ol style="list-style-type: lower-alpha">
+<li>Find the MLE of <span class="math inline">\(\theta\)</span>.<br />
+</li>
+<li>Find the method of moments estimator of <span class="math inline">\(\theta\)</span>.</li>
+</ol>
+</div>
+<p>Attempt <a href="MLE.html#MLE:exer:bin_mle">Example 10.3.8: MLE for Uniform random variables</a> and then watch <a href="MLE.html#video18">Video 18</a> for the solutions.</p>
+<p>We will data <span class="math inline">\(\mathbf{u}= (u_1, u_2, \ldots, u_5)= (1.30,2.12,2.40,0.98,1.43)\)</span> as an illustrative example. These 5 observations were simulated from <span class="math inline">\(U(0,3)\)</span>.</p>
+<div id="video18" class="des">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Video 18: MLE for Uniform random variables</strong></span></p>
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1355621/sp/135562100/embedIframeJs/uiconf_id/13188771/partner_id/1355621?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_w4cepvo9&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_jcrw2cnc" width="640" height="420" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Uniform MLE FINAL VERSION">
+</iframe>
+</div>
+<details>
+<summary>
+Solution to Example 10.3.8: MLE for Uniform random variables
+</summary>
+<div id="MLE:exerprf:unif_mle" class="ans">
+<ol style="list-style-type: lower-alpha">
+<li>If <span class="math inline">\(U_i \sim U[0,\theta]\)</span>, then its p.d.f. is given by<br />
+
+<center>
+<span class="math display">\[f(u|\theta) = \begin{cases} \frac{1}{\theta}, &amp; \text{if } 0 \leq u \leq \theta, \\[3pt]
+0, &amp; \text{otherwise.} \end{cases}\]</span>
+</center>
+Note that if <span class="math inline">\(\theta&lt; u_i\)</span> for some <span class="math inline">\(i\)</span>, then <span class="math inline">\(L(\theta)=0\)</span>. Since <span class="math inline">\(L(\theta)\)</span> is always positive and we want to maximise L, we can assume <span class="math inline">\(0 \leq u_i \leq \theta\)</span> for all <span class="math inline">\(i=1,\dots,n\)</span>, then
+<center>
+<span class="math display">\[L(\theta) = \prod_{i=1}^n f(u_i|\theta) = \prod_{i=1}^n \frac{1}{\theta} = \frac{1}{\theta^n}.\]</span>
+</center>
+Hence, <span class="math inline">\(L(\theta)\)</span> is a decreasing function of <span class="math inline">\(\theta\)</span> and its maximum must exist at the smallest value that <span class="math inline">\(\theta\)</span> can obtain. Since <span class="math inline">\(\theta &gt; \max \{u_1,u_2,\dots,u_n\}\)</span>, the MLE of <span class="math inline">\(\theta\)</span> is <span class="math inline">\(\hat{\theta} = \max \{u_1,u_2,\dots,u_n\}\)</span>.</li>
+</ol>
+<p>Figure <a href="MLE.html#fig:unifmle1">10.5</a> shows the likelihood function <span class="math inline">\(L(\theta)\)</span> using the data <span class="math inline">\(\mathbf{u}= (1.30,2.12,2.40,0.98,1.43)\)</span>.</p>
+<center>
+<div class="figure"><span style="display:block;" id="fig:unifmle1"></span>
+<img src="_main_files/figure-html/unifmle1-1.png" alt="Likelihood function for u = (1.30,2.12,2.40,0.98,1.43)." width="70%" />
+<p class="caption">
+Figure 10.5: Likelihood function for u = (1.30,2.12,2.40,0.98,1.43).
+</p>
+</div>
+</center>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>By comparison the method of moments estimator, <span class="math inline">\(\check{\theta}\)</span>, of <span class="math inline">\(\theta\)</span> uses <span class="math inline">\(E[U]= \frac{0 +\theta}{2}\)</span> and hence is given by
+<span class="math display">\[ \check{\theta} = 2 \bar{u}. \]</span>
+Note that if <span class="math inline">\(2 \bar{u} &lt; \max \{u_1,u_2,\dots,u_n\}\)</span> then <span class="math inline">\(\check{\theta}\)</span> will not be consistent with the data, <em>i.e.</em> <span class="math inline">\(L(\check{\theta})=0\)</span>.</li>
+</ol>
+<p>To observe the difference between the MLE and the method of moments estimator, using <span class="math inline">\(\mathbf{u}= (1.30,2.12,2.40,0.98,1.43)\)</span>:</p>
+<ul>
+<li>MLE: <span class="math inline">\(\hat{\theta} = \max \{1.30,2.12,2.40,0.98,1.43 \} =2.40\)</span>;<br />
+</li>
+<li>Method of Moments: <span class="math inline">\(\check{\theta} =2 \bar{u} = 2 (1.646) =3.292\)</span>.<br />
+</li>
+</ul>
+</div>
+</details>
+<p><br />
+</p>
+</div>
+<div id="MLE:comments" class="section level2 hasAnchor" number="10.4">
+<h2><span class="header-section-number">10.4</span> Comments on the Maximum Likelihood Estimator<a href="MLE.html#MLE:comments" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The following points on the maximum likelihood estimator are worth noting:</p>
+<ol style="list-style-type: decimal">
+<li>When finding the MLE you want to maximise the likelihood function. However it is often more convenient to maximise the log likelihood function instead. Both functions will be maximised by the same parameter values;<br />
+</li>
+<li>MLEs may not exist, and if they do, they may not be unique;<br />
+</li>
+<li>The likelihood function is <strong>NOT</strong> the probability distribution for <span class="math inline">\(\theta\)</span>. The correct interpretation of the likelihood function is that it is the probability of obtaining the observed data if <span class="math inline">\(\theta\)</span> were the true value of the parameter. We assume <span class="math inline">\(\theta\)</span> is an unknown constant, not a random variable. In Bayesian statistics we will consider the parameter to be random;<br />
+</li>
+<li>The MLE has some nice large sample properties, including consistency, asymptotic normality and other optimality properties;<br />
+</li>
+<li>The MLE can be used for non-independent data or non-identically distributed data as well;<br />
+</li>
+<li>Often the MLE cannot be found using calculus techniques and must be found numerically. It is often useful, if we can, to plot the likelihood function to find good starting points to find the MLE numerically;<br />
+</li>
+<li>The MLE satisfies a useful invariance property. Namely, if <span class="math inline">\(\phi = h(\theta)\)</span>, where <span class="math inline">\(h(\theta)\)</span> is a one-to-one function of <span class="math inline">\(\theta\)</span>, then the MLE of <span class="math inline">\(\phi\)</span> is given by <span class="math inline">\(\hat{\phi} = h (\hat{\theta})\)</span>. For example, if <span class="math inline">\(\phi = \frac{1}{\theta}\)</span> and <span class="math inline">\(\hat{\theta}=\bar{X}\)</span> then <span class="math inline">\(\hat{\phi} = \frac{1}{\hat{\theta}} = \frac{1}{\bar{X}}\)</span>.</li>
+</ol>
+</div>
+<div id="MLE:exer" class="section level2 unnumbered hasAnchor">
+<h2><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span><a href="MLE.html#MLE:exer" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Attempt the exercises below.</p>
+<div id="exer10:1" class="exer">
+<p><br />
+Let <span class="math inline">\(X_1, X_2, \dots, X_n\)</span> be independent random variables, each with pdf
+<span class="math display">\[ f(x | \theta) = \theta^2 x \exp(-\theta x),\]</span>
+for <span class="math inline">\(x &gt; 0\)</span>. Use the method of moments to determine an estimator of <span class="math inline">\(\theta\)</span>.</p>
+<p>Remember that if <span class="math inline">\(X \sim \text{Gamma}(\alpha,\beta)\)</span> then <span class="math inline">\(E[X]=\alpha/\beta\)</span>.</p>
+</div>
+<details>
+<summary>
+Solution to Exercise 10.1.
+</summary>
+<div id="QuestionMLE_1" class="ans">
+The distribution is <span class="math inline">\({\rm Gamma} (\alpha, \beta)\)</span> with <span class="math inline">\(\alpha = 2\)</span> and <span class="math inline">\(\beta = \theta\)</span> since<br />
+
+<center>
+<span class="math display">\[ \frac {{\beta}^{\alpha} x^{\alpha - 1} e^{-\beta x}}{\Gamma (\alpha)} = \frac {{\theta}^{2} x^{2 - 1} e^{-\theta x}}{\Gamma (2)} = {\theta}^2 x e^{-\theta x}. \]</span>
+</center>
+For the <span class="math inline">\({\rm Gamma} (\alpha, \beta)\)</span> distribution<br />
+
+<center>
+<span class="math display">\[E[X] = \frac {\alpha}{\beta} = \frac {2}{\theta}.\]</span>
+</center>
+Alternatively this can be obtained directly using integration by parts.<br />
+By the method of moments,
+<center>
+<span class="math display">\[ E[X]= \frac {\alpha}{\beta} = \frac {2}{\theta} = \bar{x} \qquad \Rightarrow \qquad \theta = \frac {2}{\bar{x}}.\]</span>
+</center>
+</div>
+</details>
+<p><br />
+</p>
+<div id="exer10:2" class="exer">
+<br />
+Let <span class="math inline">\(X_1, X_2, \dots, X_n\)</span> be a random sample from the distribution with p.d.f.
+<center>
+<span class="math display">\[ f(x|\theta) = \theta e^{-(x-1)\theta}, \qquad x&gt;1,\]</span>
+</center>
+<p>where <span class="math inline">\(\theta &gt; 0\)</span> is an unknown parameter. Find the MLE of <span class="math inline">\(\theta\)</span>.</p>
+</div>
+<details>
+<summary>
+Solution to Exercise 10.2.
+</summary>
+<div id="QuestionMLE_2" class="ans">
+The likelihood is
+<center>
+<span class="math display">\[\begin{eqnarray*}
+L(\theta) = \prod_{i=1}^n f(x_i | \theta) = \prod _{i=1}^n \theta e^{-(x_i-1)\theta} &amp;=&amp; \theta^n \exp \left\{ - \sum_{i=1}^n (x_i-1)\theta \right\} \\
+&amp;=&amp; \theta^n \exp \left\{ - \left( \sum_{i=1}^n x_i-n \right) \theta \right\}.
+\end{eqnarray*}\]</span>
+</center>
+Thus
+<center>
+<span class="math display">\[ l(\theta) = \log L(\theta) = n \log \theta - \left( \sum_{i=1}^n x_i-n \right) \theta, \]</span>
+</center>
+so
+<center>
+<span class="math display">\[ l&#39;(\theta)=\frac{n}{\theta}- \sum_{i=1}^n x_i+n.\]</span>
+</center>
+For a stationary point,
+<center>
+<span class="math display">\[\begin{eqnarray*}
+l&#39;(\theta) = 0 \qquad &amp;\Longleftrightarrow&amp; \qquad \frac{n}{\theta}-\sum_{i=1}^n x_i+n=0 \\
+\qquad &amp;\Longleftrightarrow&amp; \qquad \theta = \frac{n}{\sum_{i=1}^n x_i-n} = \frac{1}{\bar{x}-1}.
+\end{eqnarray*}\]</span>
+</center>
+This corresponds to a maximum since
+<center>
+<span class="math display">\[ l&#39;&#39;(\theta)=-\frac{n}{\theta ^2}&lt;0. \]</span>
+</center>
+<p>Thus the MLE of <span class="math inline">\(\theta\)</span> is <span class="math inline">\(\hat{\theta}=\frac{1}{\bar{x}-1}\)</span>.</p>
+</div>
+</details>
+<p><br />
+</p>
+<div id="exer10:3" class="exer">
+<br />
+(a) Let <span class="math inline">\(X_1, X_2, \dots, X_n\)</span> be a random sample from the distribution having pdf
+<span class="math display">\[ f(x|\theta) = \frac{1}{2} (1+ \theta x), \qquad -1&lt;x&lt;1,\]</span>
+where <span class="math inline">\(\theta \in (-1,1)\)</span> is an unknown parameter. Show that the method of moments estimator for <span class="math inline">\(\theta\)</span> is
+<center>
+<span class="math display">\[\tilde{\theta}_1 = 3 \bar{X}\]</span>
+</center>
+where <span class="math inline">\(\bar{X} = \frac{1}{n} \sum_{i=1}^n X_i.\)</span><br />
+(b) Suppose instead that it is observed only whether a given observation is positive or negative. For <span class="math inline">\(i=1,2,\dots,n\)</span>, let<br />
+
+<center>
+<span class="math display">\[ Y_i = \begin{cases} 1 &amp; \text{if } X_i \geq 0 \\ 0 &amp; \text{if } X_i &lt; 0. \end{cases} \]</span>
+</center>
+Show that the method of moments estimator for <span class="math inline">\(\theta\)</span> based on <span class="math inline">\(Y_1, Y_2, \dots, Y_n\)</span> is<br />
+
+<center>
+<span class="math display">\[\tilde{\theta}_2 = 4 \bar{Y} - 2,\]</span>
+</center>
+<p>where <span class="math inline">\(\bar{Y} = \frac{1}{n} \sum_{i=1}^n Y_i.\)</span><br />
+(c) Justifying your answers,</p>
+<ol style="list-style-type: lower-roman">
+<li>which, if either, of the estimators <span class="math inline">\(\tilde{\theta}_1\)</span> and <span class="math inline">\(\tilde{\theta}_2\)</span> are unbiased?<br />
+</li>
+<li>which of the estimators <span class="math inline">\(\tilde{\theta}_1\)</span> and <span class="math inline">\(\tilde{\theta}_2\)</span> is more efficient?<br />
+</li>
+<li>which, if either, of the estimators <span class="math inline">\(\tilde{\theta}_1\)</span> and <span class="math inline">\(\tilde{\theta}_2\)</span> are mean-square
+consistent?<br />
+</li>
+</ol>
+</div>
+<details>
+<summary>
+Solution to Question 3.
+</summary>
+<div id="QuestionMLE_3" class="ans">
+<ol style="list-style-type: lower-alpha">
+<li>Since,<br />
+
+<center>
+<span class="math display">\[ E[X_1] = \int_{-1}^{1} \frac{x}{2}(1+ \theta x) dx = \left[ \frac{x^2}{4} + \theta \frac{x^3}{6} \right]_{-1}^1 = \frac{\theta}{3}, \]</span>
+</center>
+the method of moments estimator is obtained by solving <span class="math inline">\(\bar{X} = \frac{\theta}{3}\)</span> yielding, <span class="math inline">\(\tilde{\theta}_1 = 3\bar{X}\)</span>.<br />
+</li>
+<li>First note that,<br />
+
+<center>
+<span class="math display">\[ P(X_1 &gt; 0) = \int_0^1 \frac{1}{2} (1+\theta x) dx = \left[ \frac{x}{2} + \theta \frac{x^2}{4} \right]_0^1 = \frac{1}{2} \left(1+\frac{\theta}{2}\right).\]</span>
+</center>
+Thus,<br />
+
+<center>
+<span class="math display">\[ E[Y_1] = P(X_1 &gt; 0) = \frac{1}{2} \left(1+\frac{\theta}{2}\right), \]</span>
+</center>
+so, <span class="math inline">\(\bar{Y} = \frac{1}{2} \left(1+\frac{\theta}{2}\right)\)</span>, yielding,<br />
+
+<center>
+<span class="math display">\[ \tilde{\theta}_2 = 4\bar{Y} - 2.\]</span>
+</center></li>
+<li></li>
+</ol>
+<ol style="list-style-type: lower-roman">
+<li>Both estimators are unbiased.
+<center>
+<span class="math display">\[ E[\tilde{\theta}_1] = E \left[ \frac{3}{n} \sum_{i=1}^n X_i \right] = \frac{3}{n} \sum_{i=1}^n E[X_i] = \frac{3}{n} n \frac{\theta}{3} = \theta, \]</span>
+</center>
+so <span class="math inline">\(\tilde{\theta}_1\)</span> is unbiased.<br />
+
+<center>
+<span class="math display">\[ E[\tilde{\theta}_2] = E \left[ \frac{4}{n} \sum_{i=1}^n Y_i - 2 \right] = \frac{4}{n} \sum_{i=1}^n E[Y_i] - 2 = \frac{4}{n} n \frac{1}{2} \left(1+ \frac{\theta}{2}\right) - 2 = \theta, \]</span>
+</center>
+so <span class="math inline">\(\tilde{\theta}_2\)</span> is unbiased.<br />
+</li>
+<li><center>
+<span class="math display">\[ var(\tilde{\theta}_1) = var\left( \frac{3}{n} \sum_{i=1}^n X_i \right) = \frac{9}{n^2} \sum_{i=1}^n var(X_i) = \frac{9}{n} var(X_1). \]</span>
+</center>
+Now,<br />
+
+<center>
+<span class="math display">\[ E[X_1^2] = \int_{-1}^1 \frac{x^2}{2} (1+\theta x) dx = \left[ \frac{x^3}{6} + \theta \frac{x^4}{8} \right]_{-1}^1 = \frac{1}{3}. \]</span>
+</center>
+Thus,<br />
+
+<center>
+<span class="math display">\[ var(X_1) = \frac{1}{3} - \frac{\theta^2}{9} = \frac{1}{9}(3-\theta^2), \]</span>
+</center>
+so,<br />
+
+<center>
+<span class="math display">\[ var(\tilde{\theta}_1) = \frac{1}{n}(3-\theta^2). \]</span>
+</center>
+Similarly,<br />
+
+<center>
+<span class="math display">\[ var(\tilde{\theta}_2) = var(4\bar{Y} -2) = 16 var(\bar{Y}) = \frac{16}{n} var(Y_1). \]</span>
+</center>
+Now <span class="math inline">\(Y_1 \sim \text{Bin}\left(1,\frac{1}{2}\left(1+\frac{\theta}{2}\right) \right)\)</span> so,<br />
+
+<center>
+<span class="math display">\[ var(Y_1) = \frac{1}{2}\left(1+\frac{\theta}{2}\right)\frac{1}{2}\left(1-\frac{\theta}{2}\right) = \frac{1}{4}\left(1-\frac{\theta^2}{4}\right) = \frac{1}{16}(4-\theta^2), \]</span>
+</center>
+thus,<br />
+
+<center>
+<span class="math display">\[ var(\tilde{\theta}_2) = \frac{1}{n}(4-\theta^2). \]</span>
+</center>
+Hence, <span class="math inline">\(var(\tilde{\theta}_1) &lt; var(\tilde{\theta}_2)\)</span>, so <span class="math inline">\(\tilde{\theta}_1\)</span> is more efficient than <span class="math inline">\(\tilde{\theta}_2\)</span>.<br />
+</li>
+<li>Since <span class="math inline">\(\tilde{\theta}_i\)</span> is unbiased, <span class="math inline">\(MSE(\tilde{\theta}_i) = var(\tilde{\theta}_i)\)</span> for <span class="math inline">\(i=1,2\)</span>. Thus<br />
+
+<center>
+<span class="math display">\[MSE(\tilde{\theta}_1) = \frac{1}{n}(3-\tilde{\theta}_1^2) \rightarrow 0 \qquad \mbox{ as } \; n \rightarrow \infty.\]</span>
+</center>
+So <span class="math inline">\(\tilde{\theta}_1\)</span> is consistent.<br />
+Also,
+<center>
+<span class="math display">\[MSE(\tilde{\theta}_2) = \frac{1}{n}(4-\tilde{\theta}_2^2) \rightarrow 0 \qquad \mbox{ as } \; n \rightarrow \infty.\]</span>
+</center>
+So <span class="math inline">\(\tilde{\theta}_2\)</span> is consistent.<br />
+</li>
+</ol>
+</div>
+</details>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="paraestimate.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="MLEprop.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/10-S3_Techniques_for_Deriving_Estimators.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

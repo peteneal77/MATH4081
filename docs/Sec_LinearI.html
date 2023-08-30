@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 16 Introduction to Linear Models | Foundations of Statistics</title>
+  <meta name="description" content="Lecture Notes for Foundations of Statistics" />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 16 Introduction to Linear Models | Foundations of Statistics" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Lecture Notes for Foundations of Statistics" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 16 Introduction to Linear Models | Foundations of Statistics" />
+  
+  <meta name="twitter:description" content="Lecture Notes for Foundations of Statistics" />
+  
+
+<meta name="author" content="Prof Peter Neal and Dr Daniel Cavey" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="MV_Normal.html"/>
+<link rel="next" href="Sec_Linear_LSE.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">MATH4081: Foundations of Statistics</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preliminaries</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#overview"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#tasks"><i class="fa fa-check"></i>Tasks</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#intro_stats"><i class="fa fa-check"></i><b>1.1</b> What is Statistics?</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#intro_population"><i class="fa fa-check"></i><b>1.2</b> Populations and samples</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#intro_data"><i class="fa fa-check"></i><b>1.3</b> Types of Data</a></li>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#intro_example"><i class="fa fa-check"></i><b>1.4</b> Some example datasets</a></li>
+<li class="chapter" data-level="1.5" data-path="intro.html"><a href="intro.html#intro_computing"><i class="fa fa-check"></i><b>1.5</b> Statistical Computing</a></li>
+<li class="chapter" data-level="1.6" data-path="intro.html"><a href="intro.html#intro_paradigm"><i class="fa fa-check"></i><b>1.6</b> The statistical paradigm</a></li>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#intro:R"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 1</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>2</b> Summary Statistics</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="summary.html"><a href="summary.html#summary_location"><i class="fa fa-check"></i><b>2.1</b> Measures of location</a></li>
+<li class="chapter" data-level="2.2" data-path="summary.html"><a href="summary.html#summary_spread"><i class="fa fa-check"></i><b>2.2</b> Measures of spread</a></li>
+<li class="chapter" data-level="2.3" data-path="summary.html"><a href="summary.html#summary_robust"><i class="fa fa-check"></i><b>2.3</b> Robustness of summary statistics</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="visual.html"><a href="visual.html"><i class="fa fa-check"></i><b>3</b> Visualising data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="visual.html"><a href="visual.html#visual_intro"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="visual.html"><a href="visual.html#visual_data-features"><i class="fa fa-check"></i><b>3.2</b> Some data features</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="visual.html"><a href="visual.html#visual_data-features_multi"><i class="fa fa-check"></i><b>3.2.1</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Multimodal distributions</strong></span></a></li>
+<li class="chapter" data-level="3.2.2" data-path="visual.html"><a href="visual.html#visual_data-features_symmetry"><i class="fa fa-check"></i><b>3.2.2</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Symmetry</strong></span></a></li>
+<li class="chapter" data-level="3.2.3" data-path="visual.html"><a href="visual.html#visual_data-features_outliers"><i class="fa fa-check"></i><b>3.2.3</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Outliers</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="visual.html"><a href="visual.html#visual_plot"><i class="fa fa-check"></i><b>3.3</b> Basic plot types</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="visual.html"><a href="visual.html#visual_plot_histo"><i class="fa fa-check"></i><b>3.3.1</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Histogram and bar charts</strong></span></a></li>
+<li class="chapter" data-level="3.3.2" data-path="visual.html"><a href="visual.html#visual_plot_density"><i class="fa fa-check"></i><b>3.3.2</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Density plots</strong></span></a></li>
+<li class="chapter" data-level="3.3.3" data-path="visual.html"><a href="visual.html#visual_plot_boxplot"><i class="fa fa-check"></i><b>3.3.3</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Boxplot</strong></span></a></li>
+<li class="chapter" data-level="3.3.4" data-path="visual.html"><a href="visual.html#visual_plot_cdf"><i class="fa fa-check"></i><b>3.3.4</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Cumulative frequency diagrams, and the empirical CDF</strong></span></a></li>
+<li class="chapter" data-level="3.3.5" data-path="visual.html"><a href="visual.html#visual_plot_stem"><i class="fa fa-check"></i><b>3.3.5</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Stem and leaf</strong></span></a></li>
+<li class="chapter" data-level="3.3.6" data-path="visual.html"><a href="visual.html#visual_plot_pie"><i class="fa fa-check"></i><b>3.3.6</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Pie charts</strong></span></a></li>
+<li class="chapter" data-level="3.3.7" data-path="visual.html"><a href="visual.html#visual_plot_dot"><i class="fa fa-check"></i><b>3.3.7</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Dotplots</strong></span></a></li>
+<li class="chapter" data-level="3.3.8" data-path="visual.html"><a href="visual.html#visual_plot_scatter"><i class="fa fa-check"></i><b>3.3.8</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Scatterplots</strong></span></a></li>
+<li class="chapter" data-level="3.3.9" data-path="visual.html"><a href="visual.html#visual_plot_summary"><i class="fa fa-check"></i><b>3.3.9</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Summary</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="visual.html"><a href="visual.html#visual_data"><i class="fa fa-check"></i><b>3.4</b> Commenting on data</a></li>
+<li class="chapter" data-level="" data-path="visual.html"><a href="visual.html#visual:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 2</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="prob.html"><a href="prob.html"><i class="fa fa-check"></i><b>4</b> Probability</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="prob.html"><a href="prob.html#prob:overview"><i class="fa fa-check"></i><b>4.1</b> Overview</a></li>
+<li class="chapter" data-level="4.2" data-path="prob.html"><a href="prob.html#prob:motivation"><i class="fa fa-check"></i><b>4.2</b> Motivation</a></li>
+<li class="chapter" data-level="4.3" data-path="prob.html"><a href="prob.html#prob:sample_space"><i class="fa fa-check"></i><b>4.3</b> Sample Space</a></li>
+<li class="chapter" data-level="4.4" data-path="prob.html"><a href="prob.html#prob:events"><i class="fa fa-check"></i><b>4.4</b> Events</a></li>
+<li class="chapter" data-level="4.5" data-path="prob.html"><a href="prob.html#prob:defn"><i class="fa fa-check"></i><b>4.5</b> Probability</a></li>
+<li class="chapter" data-level="4.6" data-path="prob.html"><a href="prob.html#prob:Conditional_Probability"><i class="fa fa-check"></i><b>4.6</b> Conditional probability</a></li>
+<li class="chapter" data-level="4.7" data-path="prob.html"><a href="prob.html#prob:mutual"><i class="fa fa-check"></i><b>4.7</b> Mutual Independence</a></li>
+<li class="chapter" data-level="" data-path="prob.html"><a href="prob.html#rv:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 3</strong></span></a></li>
+<li class="chapter" data-level="" data-path="prob.html"><a href="prob.html#prob:stud"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="rv.html"><a href="rv.html"><i class="fa fa-check"></i><b>5</b> Random Variables</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="rv.html"><a href="rv.html#rv:overview"><i class="fa fa-check"></i><b>5.1</b> Overview</a></li>
+<li class="chapter" data-level="5.2" data-path="rv.html"><a href="rv.html#rv:des"><i class="fa fa-check"></i><b>5.2</b> Random variables</a></li>
+<li class="chapter" data-level="5.3" data-path="rv.html"><a href="rv.html#rv:expect"><i class="fa fa-check"></i><b>5.3</b> Expectation</a></li>
+<li class="chapter" data-level="5.4" data-path="rv.html"><a href="rv.html#rv:bernoulli"><i class="fa fa-check"></i><b>5.4</b> Bernoulli distribution and its extension</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="rv.html"><a href="rv.html#rv:Bernoulli:bern"><i class="fa fa-check"></i><b>5.4.1</b> Bernoulli distribution</a></li>
+<li class="chapter" data-level="5.4.2" data-path="rv.html"><a href="rv.html#rv:Bernoulli:bin"><i class="fa fa-check"></i><b>5.4.2</b> Binomial Distribution</a></li>
+<li class="chapter" data-level="5.4.3" data-path="rv.html"><a href="rv.html#rv:Bernoulli:geom"><i class="fa fa-check"></i><b>5.4.3</b> Geometric Distribution</a></li>
+<li class="chapter" data-level="5.4.4" data-path="rv.html"><a href="rv.html#rv:Bernoulli:negbin"><i class="fa fa-check"></i><b>5.4.4</b> Negative binomial Distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="rv.html"><a href="rv.html#rv:Poisson"><i class="fa fa-check"></i><b>5.5</b> Poisson distribution</a></li>
+<li class="chapter" data-level="5.6" data-path="rv.html"><a href="rv.html#rv:exponential"><i class="fa fa-check"></i><b>5.6</b> Exponential distribution and its extensions</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="rv.html"><a href="rv.html#rv:exponential:exp"><i class="fa fa-check"></i><b>5.6.1</b> Exponential distribution</a></li>
+<li class="chapter" data-level="5.6.2" data-path="rv.html"><a href="rv.html#rv:exponential:gamma"><i class="fa fa-check"></i><b>5.6.2</b> Gamma distribution</a></li>
+<li class="chapter" data-level="5.6.3" data-path="rv.html"><a href="rv.html#rv:exponential:chi"><i class="fa fa-check"></i><b>5.6.3</b> Chi squared distribution</a></li>
+<li class="chapter" data-level="5.6.4" data-path="rv.html"><a href="rv.html#rv:exponential:beta"><i class="fa fa-check"></i><b>5.6.4</b> Beta distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="rv.html"><a href="rv.html#rv:normal"><i class="fa fa-check"></i><b>5.7</b> Normal (Gaussian) Distribution</a></li>
+<li class="chapter" data-level="" data-path="rv.html"><a href="rv.html#prob:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="jointdis.html"><a href="jointdis.html"><i class="fa fa-check"></i><b>6</b> Joint Distribution Functions</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="jointdis.html"><a href="jointdis.html#jointdis:intro"><i class="fa fa-check"></i><b>6.1</b> Overview</a></li>
+<li class="chapter" data-level="6.2" data-path="jointdis.html"><a href="jointdis.html#jointdis:cdf"><i class="fa fa-check"></i><b>6.2</b> Joint c.d.f. and p.d.f.</a></li>
+<li class="chapter" data-level="6.3" data-path="jointdis.html"><a href="jointdis.html#jointdis:marginal"><i class="fa fa-check"></i><b>6.3</b> Marginal c.d.f. and p.d.f.</a></li>
+<li class="chapter" data-level="6.4" data-path="jointdis.html"><a href="jointdis.html#jointdis:independent"><i class="fa fa-check"></i><b>6.4</b> Independent random variables</a></li>
+<li class="chapter" data-level="" data-path="jointdis.html"><a href="jointdis.html#jointdis:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercise</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="Sec_CLT.html"><a href="Sec_CLT.html"><i class="fa fa-check"></i><b>7</b> Central Limit Theorem and law of large numbers</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="Sec_CLT.html"><a href="Sec_CLT.html#Sec_CLT:intro"><i class="fa fa-check"></i><b>7.1</b> Introduction</a></li>
+<li class="chapter" data-level="7.2" data-path="Sec_CLT.html"><a href="Sec_CLT.html#Sec_CLT:statement"><i class="fa fa-check"></i><b>7.2</b> Statement of Central Limit Theorem</a></li>
+<li class="chapter" data-level="7.3" data-path="Sec_CLT.html"><a href="Sec_CLT.html#Sec_CLT:discrete"><i class="fa fa-check"></i><b>7.3</b> Central limit theorem for discrete random variables</a></li>
+<li class="chapter" data-level="7.4" data-path="Sec_CLT.html"><a href="Sec_CLT.html#Sec_CLT:LLN"><i class="fa fa-check"></i><b>7.4</b> Law of Large Numbers</a></li>
+<li class="chapter" data-level="" data-path="Sec_CLT.html"><a href="Sec_CLT.html#Sec_clt:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 4</strong></span></a></li>
+<li class="chapter" data-level="" data-path="Sec_CLT.html"><a href="Sec_CLT.html#Sec_clt:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="motivate.html"><a href="motivate.html"><i class="fa fa-check"></i><b>8</b> Motivation for Statistical Inference</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="motivate.html"><a href="motivate.html#motivate:intro"><i class="fa fa-check"></i><b>8.1</b> Introduction</a></li>
+<li class="chapter" data-level="8.2" data-path="motivate.html"><a href="motivate.html#motivate:example"><i class="fa fa-check"></i><b>8.2</b> Motivating example</a></li>
+<li class="chapter" data-level="8.3" data-path="motivate.html"><a href="motivate.html#motivate:assumption"><i class="fa fa-check"></i><b>8.3</b> Modelling assumptions</a></li>
+<li class="chapter" data-level="8.4" data-path="motivate.html"><a href="motivate.html#motivate:parametric"><i class="fa fa-check"></i><b>8.4</b> Parametric models</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="paraestimate.html"><a href="paraestimate.html"><i class="fa fa-check"></i><b>9</b> Parameter Estimation</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="paraestimate.html"><a href="paraestimate.html#paraestimate:intro"><i class="fa fa-check"></i><b>9.1</b> Introduction</a></li>
+<li class="chapter" data-level="9.2" data-path="paraestimate.html"><a href="paraestimate.html#paraestimate:prelim"><i class="fa fa-check"></i><b>9.2</b> Preliminaries</a></li>
+<li class="chapter" data-level="9.3" data-path="paraestimate.html"><a href="paraestimate.html#paraestimate:judge"><i class="fa fa-check"></i><b>9.3</b> Judging estimators</a></li>
+<li class="chapter" data-level="9.4" data-path="paraestimate.html"><a href="paraestimate.html#paraestimate:variance"><i class="fa fa-check"></i><b>9.4</b> Sample Variance</a></li>
+<li class="chapter" data-level="" data-path="paraestimate.html"><a href="paraestimate.html#paraestimate:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 5</strong></span></a></li>
+<li class="chapter" data-level="" data-path="paraestimate.html"><a href="paraestimate.html#paraestimate:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="MLE.html"><a href="MLE.html"><i class="fa fa-check"></i><b>10</b> Techniques for Deriving Estimators</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="MLE.html"><a href="MLE.html#MLE:intro"><i class="fa fa-check"></i><b>10.1</b> Introduction</a></li>
+<li class="chapter" data-level="10.2" data-path="MLE.html"><a href="MLE.html#MLE:moments"><i class="fa fa-check"></i><b>10.2</b> Method of Moments</a></li>
+<li class="chapter" data-level="10.3" data-path="MLE.html"><a href="MLE.html#MLE:MLE"><i class="fa fa-check"></i><b>10.3</b> Maximum likelihood estimation</a></li>
+<li class="chapter" data-level="10.4" data-path="MLE.html"><a href="MLE.html#MLE:comments"><i class="fa fa-check"></i><b>10.4</b> Comments on the Maximum Likelihood Estimator</a></li>
+<li class="chapter" data-level="" data-path="MLE.html"><a href="MLE.html#MLE:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="MLEprop.html"><a href="MLEprop.html"><i class="fa fa-check"></i><b>11</b> Additional Properties of Estimators</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:intro"><i class="fa fa-check"></i><b>11.1</b> Introduction</a></li>
+<li class="chapter" data-level="11.2" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:sufficient"><i class="fa fa-check"></i><b>11.2</b> Sufficiency</a></li>
+<li class="chapter" data-level="11.3" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:MVE"><i class="fa fa-check"></i><b>11.3</b> Minimum variance estimators</a></li>
+<li class="chapter" data-level="11.4" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:asymptotic"><i class="fa fa-check"></i><b>11.4</b> Asymptotic normality of the MLE</a></li>
+<li class="chapter" data-level="11.5" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:invariance"><i class="fa fa-check"></i><b>11.5</b> Invariance property</a></li>
+<li class="chapter" data-level="" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 6</strong></span></a></li>
+<li class="chapter" data-level="" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="CondDis.html"><a href="CondDis.html"><i class="fa fa-check"></i><b>12</b> Conditional Distribution and Conditional Expectation</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="CondDis.html"><a href="CondDis.html#CondDis:CondDis"><i class="fa fa-check"></i><b>12.1</b> Conditional distribution</a></li>
+<li class="chapter" data-level="12.2" data-path="CondDis.html"><a href="CondDis.html#CondDis:CondExpect"><i class="fa fa-check"></i><b>12.2</b> Conditional expectation</a></li>
+<li class="chapter" data-level="12.3" data-path="CondDis.html"><a href="CondDis.html#CondDis:Independence"><i class="fa fa-check"></i><b>12.3</b> Independent random variables</a></li>
+<li class="chapter" data-level="" data-path="CondDis.html"><a href="CondDis.html#CondDis:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercise</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="Correlation.html"><a href="Correlation.html"><i class="fa fa-check"></i><b>13</b> Expectation, Covariance and Correlation</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="Correlation.html"><a href="Correlation.html#Correlation:Expectation"><i class="fa fa-check"></i><b>13.1</b> Expectation of a function of random variables</a></li>
+<li class="chapter" data-level="13.2" data-path="Correlation.html"><a href="Correlation.html#Correlation:Covariance"><i class="fa fa-check"></i><b>13.2</b> Covariance</a></li>
+<li class="chapter" data-level="13.3" data-path="Correlation.html"><a href="Correlation.html#Correlation:Correlation"><i class="fa fa-check"></i><b>13.3</b> Correlation</a></li>
+<li class="chapter" data-level="" data-path="Correlation.html"><a href="Correlation.html#Correlation:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 7</strong></span></a></li>
+<li class="chapter" data-level="" data-path="Correlation.html"><a href="Correlation.html#Correlation:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="Transform.html"><a href="Transform.html"><i class="fa fa-check"></i><b>14</b> Transformations of random variables</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="Transform.html"><a href="Transform.html#Transform:intro"><i class="fa fa-check"></i><b>14.1</b> Introduction</a></li>
+<li class="chapter" data-level="14.2" data-path="Transform.html"><a href="Transform.html#Transform:univariate"><i class="fa fa-check"></i><b>14.2</b> Univariate case</a></li>
+<li class="chapter" data-level="14.3" data-path="Transform.html"><a href="Transform.html#Transform:bivariate"><i class="fa fa-check"></i><b>14.3</b> Bivariate case</a></li>
+<li class="chapter" data-level="" data-path="Transform.html"><a href="Transform.html#Transform:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercise</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="MV_Normal.html"><a href="MV_Normal.html"><i class="fa fa-check"></i><b>15</b> Multivariate Normal Distribution</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="MV_Normal.html"><a href="MV_Normal.html#MV_Normal:intro"><i class="fa fa-check"></i><b>15.1</b> Introduction</a></li>
+<li class="chapter" data-level="15.2" data-path="MV_Normal.html"><a href="MV_Normal.html#MV_Normal:multi"><i class="fa fa-check"></i><b>15.2</b> <span class="math inline">\(n\)</span>-Dimensional Normal Distribution</a></li>
+<li class="chapter" data-level="" data-path="MV_Normal.html"><a href="MV_Normal.html#MV_Normal:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 8</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html"><i class="fa fa-check"></i><b>16</b> Introduction to Linear Models</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:intro"><i class="fa fa-check"></i><b>16.1</b> Introduction</a></li>
+<li class="chapter" data-level="16.2" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:stat"><i class="fa fa-check"></i><b>16.2</b> Statistical models</a></li>
+<li class="chapter" data-level="16.3" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:linear"><i class="fa fa-check"></i><b>16.3</b> The linear model</a></li>
+<li class="chapter" data-level="16.4" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:Gauss"><i class="fa fa-check"></i><b>16.4</b> The Normal (Gaussian) linear model</a></li>
+<li class="chapter" data-level="16.5" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:residuals"><i class="fa fa-check"></i><b>16.5</b> Residuals</a></li>
+<li class="chapter" data-level="16.6" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:line"><i class="fa fa-check"></i><b>16.6</b> Straight Line, Horizontal Line and Quadratic Models</a></li>
+<li class="chapter" data-level="16.7" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:Examples"><i class="fa fa-check"></i><b>16.7</b> Examples</a></li>
+<li class="chapter" data-level="16.8" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:Prediction"><i class="fa fa-check"></i><b>16.8</b> Prediction</a></li>
+<li class="chapter" data-level="16.9" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:Nested"><i class="fa fa-check"></i><b>16.9</b> Nested Models</a></li>
+<li class="chapter" data-level="" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercise</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html"><i class="fa fa-check"></i><b>17</b> Least Squares Estimation for Linear Models</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:intro"><i class="fa fa-check"></i><b>17.1</b> Introduction</a></li>
+<li class="chapter" data-level="17.2" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:algebra"><i class="fa fa-check"></i><b>17.2</b> Linear algebra review</a></li>
+<li class="chapter" data-level="17.3" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:derive"><i class="fa fa-check"></i><b>17.3</b> Deriving the least squares estimator</a></li>
+<li class="chapter" data-level="17.4" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:examples"><i class="fa fa-check"></i><b>17.4</b> Examples</a></li>
+<li class="chapter" data-level="17.5" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:beta"><i class="fa fa-check"></i><b>17.5</b> Properties of the estimator of <span class="math inline">\(\mathbf{\beta}\)</span></a></li>
+<li class="chapter" data-level="17.6" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:GaussMarkov"><i class="fa fa-check"></i><b>17.6</b> Gauss-Markov Theorem</a></li>
+<li class="chapter" data-level="" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 9</strong></span></a></li>
+<li class="chapter" data-level="" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="Interval_Estimation.html"><a href="Interval_Estimation.html"><i class="fa fa-check"></i><b>18</b> Interval Estimation</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="Interval_Estimation.html"><a href="Interval_Estimation.html#Interval_Estimation:intro"><i class="fa fa-check"></i><b>18.1</b> Introduction</a></li>
+<li class="chapter" data-level="18.2" data-path="Interval_Estimation.html"><a href="Interval_Estimation.html#Interval_Estimation:confident"><i class="fa fa-check"></i><b>18.2</b> Confident?</a></li>
+<li class="chapter" data-level="18.3" data-path="Interval_Estimation.html"><a href="Interval_Estimation.html#Interval_Estimation:CI"><i class="fa fa-check"></i><b>18.3</b> Confidence intervals</a></li>
+<li class="chapter" data-level="18.4" data-path="Interval_Estimation.html"><a href="Interval_Estimation.html#Interval_Estimation:MLE"><i class="fa fa-check"></i><b>18.4</b> Asymptotic distribution of the MLE</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html"><i class="fa fa-check"></i><b>19</b> Hypothesis Testing</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:intro"><i class="fa fa-check"></i><b>19.1</b> Introduction to hypothesis testing</a></li>
+<li class="chapter" data-level="19.2" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:errors"><i class="fa fa-check"></i><b>19.2</b> Type I and Type II errors</a></li>
+<li class="chapter" data-level="19.3" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:normal_known"><i class="fa fa-check"></i><b>19.3</b> Tests for normal means, <span class="math inline">\(\sigma\)</span> known</a></li>
+<li class="chapter" data-level="19.4" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:p_values"><i class="fa fa-check"></i><b>19.4</b> <span class="math inline">\(p\)</span> values</a></li>
+<li class="chapter" data-level="19.5" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:normal_unknown"><i class="fa fa-check"></i><b>19.5</b> Tests for normal means, <span class="math inline">\(\sigma\)</span> unknown</a></li>
+<li class="chapter" data-level="19.6" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:twosided"><i class="fa fa-check"></i><b>19.6</b> Confidence intervals and two-sided tests</a></li>
+<li class="chapter" data-level="19.7" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:variance"><i class="fa fa-check"></i><b>19.7</b> Distribution of the variance</a></li>
+<li class="chapter" data-level="19.8" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:other"><i class="fa fa-check"></i><b>19.8</b> Other types of tests</a></li>
+<li class="chapter" data-level="19.9" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:samplesize"><i class="fa fa-check"></i><b>19.9</b> Sample size calculation</a></li>
+<li class="chapter" data-level="" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 10</strong></span></a></li>
+<li class="chapter" data-level="" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html"><i class="fa fa-check"></i><b>20</b> Hypothesis Testing Discrete Data</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html#Hypo_Test_Discrete:intro"><i class="fa fa-check"></i><b>20.1</b> Introduction</a></li>
+<li class="chapter" data-level="20.2" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html#Hypo_Test_Discrete:motivate"><i class="fa fa-check"></i><b>20.2</b> Goodness-of-fit motivating example</a></li>
+<li class="chapter" data-level="20.3" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html#Hypo_Test_Discrete:GoF"><i class="fa fa-check"></i><b>20.3</b> Goodness-of-fit</a></li>
+<li class="chapter" data-level="20.4" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html#Hypo_Test_Discrete:Independence"><i class="fa fa-check"></i><b>20.4</b> Testing Independence</a></li>
+<li class="chapter" data-level="" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html#Hypo_Test_Discrete:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 11</strong></span></a></li>
+<li class="chapter" data-level="" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html#Hypo_Test_Discrete:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="Sec_Linear_hypo_test.html"><a href="Sec_Linear_hypo_test.html"><i class="fa fa-check"></i><b>21</b> Basic Hypothesis Tests for Linear Models</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="Sec_Linear_hypo_test.html"><a href="Sec_Linear_hypo_test.html#Sec_Linear_hypo_test:intro"><i class="fa fa-check"></i><b>21.1</b> Introduction</a></li>
+<li class="chapter" data-level="21.2" data-path="Sec_Linear_hypo_test.html"><a href="Sec_Linear_hypo_test.html#Sec_Linear_hypo_test:single"><i class="fa fa-check"></i><b>21.2</b> Tests on a single parameter</a></li>
+<li class="chapter" data-level="21.3" data-path="Sec_Linear_hypo_test.html"><a href="Sec_Linear_hypo_test.html#Sec_Linear_hypo_test:CI"><i class="fa fa-check"></i><b>21.3</b> Confidence intervals for parameters</a></li>
+<li class="chapter" data-level="21.4" data-path="Sec_Linear_hypo_test.html"><a href="Sec_Linear_hypo_test.html#Sec_Linear_hypo_test:F"><i class="fa fa-check"></i><b>21.4</b> Tests for the existence of regression</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html"><i class="fa fa-check"></i><b>22</b> ANOVA Tables and F Tests</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:Intro"><i class="fa fa-check"></i><b>22.1</b> Introduction</a></li>
+<li class="chapter" data-level="22.2" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:residuals"><i class="fa fa-check"></i><b>22.2</b> The residuals</a></li>
+<li class="chapter" data-level="22.3" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:SS"><i class="fa fa-check"></i><b>22.3</b> Sums of squares</a></li>
+<li class="chapter" data-level="22.4" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:ANOVA"><i class="fa fa-check"></i><b>22.4</b> Analysis of Variance (ANOVA)</a></li>
+<li class="chapter" data-level="22.5" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:Compare"><i class="fa fa-check"></i><b>22.5</b> Comparing models</a></li>
+<li class="chapter" data-level="22.6" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:seq"><i class="fa fa-check"></i><b>22.6</b> Sequential sum of squares</a></li>
+<li class="chapter" data-level="" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 12</strong></span></a></li>
+<li class="chapter" data-level="" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="introR.html"><a href="introR.html"><i class="fa fa-check"></i><b>23</b> Introduction to R</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="introR.html"><a href="introR.html#introR_what"><i class="fa fa-check"></i><b>23.1</b> What are R, RStudio and R Markdown?</a></li>
+<li class="chapter" data-level="23.2" data-path="introR.html"><a href="introR.html#introR_UoN"><i class="fa fa-check"></i><b>23.2</b> Starting RStudio on the UoN Network</a></li>
+<li class="chapter" data-level="23.3" data-path="introR.html"><a href="introR.html#introR_download"><i class="fa fa-check"></i><b>23.3</b> Downloading R and RStudio</a></li>
+<li class="chapter" data-level="23.4" data-path="introR.html"><a href="introR.html#introR_start"><i class="fa fa-check"></i><b>23.4</b> Getting started in R</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="Rmark.html"><a href="Rmark.html"><i class="fa fa-check"></i><b>24</b> What is R Markdown?</a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="Rmark.html"><a href="Rmark.html#Rmark_start"><i class="fa fa-check"></i><b>24.1</b> Getting started</a></li>
+<li class="chapter" data-level="24.2" data-path="Rmark.html"><a href="Rmark.html#Rmark_R"><i class="fa fa-check"></i><b>24.2</b> R in R Markdown</a></li>
+<li class="chapter" data-level="24.3" data-path="Rmark.html"><a href="Rmark.html#Rmark_text"><i class="fa fa-check"></i><b>24.3</b> Text in R markdown</a></li>
+<li class="chapter" data-level="24.4" data-path="Rmark.html"><a href="Rmark.html#Rmark_maths"><i class="fa fa-check"></i><b>24.4</b> Mathematics in R Markdown</a></li>
+<li class="chapter" data-level="24.5" data-path="Rmark.html"><a href="Rmark.html#Rmark_work"><i class="fa fa-check"></i><b>24.5</b> Worked Example</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://moodle.nottingham.ac.uk/course/view.php?id=134982" target="blank">MATH4081 Moodle Page</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Foundations of Statistics</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="Sec_LinearI" class="section level1 hasAnchor" number="16">
+<h1><span class="header-section-number">Chapter 16</span> Introduction to Linear Models<a href="Sec_LinearI.html#Sec_LinearI" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="Sec_LinearI:intro" class="section level2 hasAnchor" number="16.1">
+<h2><span class="header-section-number">16.1</span> Introduction<a href="Sec_LinearI.html#Sec_LinearI:intro" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this section we present an introduction to Linear Models. Linear Models are the most common type of statistical model and is a wider class of model than is perhaps apparent at first. In <a href="Sec_LinearI.html#Sec_LinearI:stat">Section 16.2</a>,
+we introduce the concept of constructing a <em>statistical model</em>. In <a href="Sec_LinearI.html#Sec_LinearI:linear">Section 16.3</a> we identify the key (linear) elements for a Linear Model and in <a href="#Sec_LinearI:gauss">Section 16.4</a> introduce the Normal (Gaussian) linear model. In <a href="Sec_LinearI.html#Sec_LinearI:residuals">Section 16.5</a> we define residuals the differences between the <em>observations</em> and what we <em>expect</em> to observe given the model. In <a href="Sec_LinearI.html#Sec_LinearI:line">Section 16.6</a> we consider <em>least squares estimation</em> for the parameters of linear models and show that for the Normal (Gaussian) linear model that this is equivalent to <em>maximum likelihood estimation</em>. In <a href="Sec_LinearI.html#Sec_LinearI:Examples">Section 16.7</a> we study two examples and consider how the residuals of the model can help us assess the appropriateness of the model. In <a href="Sec_LinearI.html#Sec_LinearI:Prediction">Section 16.8</a> we briefly consider using the linear model for prediction which is one of the main purposes for constructing linear modeals. Finally in <a href="Sec_LinearI.html#Sec_LinearI:Nested">Section 16.9</a> we introduce the concept of nested models where a <em>simpler</em> model is <em>nested</em> within (a special case of) a <em>more complex</em> model. Whether to choose a simple or more complex model is a challenging statistical question and in this section we begin to study some of the considerations needed in making our choice.</p>
+</div>
+<div id="Sec_LinearI:stat" class="section level2 hasAnchor" number="16.2">
+<h2><span class="header-section-number">16.2</span> Statistical models<a href="Sec_LinearI.html#Sec_LinearI:stat" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>One of the tasks of a statistician is the analysis of data. Statistical analysis usually involves one or more of the following:</p>
+<ul>
+<li>Summarising data;<br />
+</li>
+<li>Estimation;<br />
+</li>
+<li>Inference;<br />
+</li>
+<li>Prediction.</li>
+</ul>
+<p>In general, we statistically model the relationship between two or more random variables by considering models of the form:
+<span class="math display">\[Y = f(\mathbf{X},\mathbf{\beta})+\epsilon,\]</span>
+where,</p>
+<ul>
+<li><span class="math inline">\(Y\)</span> is the response variable;<br />
+</li>
+<li><span class="math inline">\(f\)</span> is some mathematical function;<br />
+</li>
+<li><span class="math inline">\(\mathbf{X}\)</span> is some matrix of predictor (input) variables;<br />
+</li>
+<li><span class="math inline">\(\mathbf{\beta}\)</span> are the model parameters;<br />
+</li>
+<li><span class="math inline">\(\epsilon\)</span> is the random error term (residual).</li>
+</ul>
+<p>If we assume that <span class="math inline">\(E[\epsilon]=0\)</span>, then <span class="math inline">\(E[Y] = f(\mathbf{X},\mathbf{\beta})\)</span> if <span class="math inline">\(\mathbf{X}\)</span> is assumed to be non-random. Otherwise <span class="math inline">\(E[Y|\mathbf{X}] = f(\mathbf{X},\mathbf{\beta})\)</span>.</p>
+<p>Consider the following examples where such modelling theory could be applied.</p>
+<div id="LinearI:ex:cars" class="ex">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Cars on an intersection</strong></span><br />
+<br />
+We observe the number of cars passing an intersection over a one minute interval. We want to estimate the average rate at which cars pass this intersection.</p>
+<p>If <span class="math inline">\(Y\)</span> is the number of cars passing the intersection over a one minute interval, then <span class="math inline">\(Y\)</span> is likely to have a Poisson distribution with mean <span class="math inline">\(\lambda\)</span>. We want to estimate <span class="math inline">\(\lambda\)</span>, the model parameter.</p>
+</div>
+<p><br />
+</p>
+<div id="LinearI:ex:econ" class="ex">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Industrial producivity</strong></span><br />
+<br />
+In economics, the production of an industry, <span class="math inline">\(Y\)</span>, is modelled to be a function of the amount of labour available, <span class="math inline">\(L\)</span>, and the capital input, <span class="math inline">\(K\)</span>. In particular, the Cobb-Douglas Production Function is given to be <span class="math inline">\(Y = C_0 L^\alpha K^\beta\)</span>.</p>
+<p>Furthermore if <span class="math inline">\(\alpha + \beta = 1\)</span>, then an industry is said to operate under constant returns to scale, that is, if capital and labour increase by a factor of <span class="math inline">\(t\)</span>, then production also increases by a factor of <span class="math inline">\(t\)</span>.</p>
+<p>As a consultant to an economic researcher, you collect production, labour and capital data for a specific industry and want to estimate the functional relationship and test whether <span class="math inline">\(\alpha + \beta = 1\)</span> in this industry. The problem will have the following components:</p>
+<ul>
+<li>A theoretical model: <span class="math inline">\(Y = C_0 L^\alpha K^\beta\)</span>;<br />
+</li>
+<li>A statistical model: <span class="math inline">\(\log Y = C^\ast + \alpha \log L + \beta \log K + \epsilon\)</span>;<br />
+</li>
+<li>Some estimations: <span class="math inline">\(C^\ast\)</span>, <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>;<br />
+</li>
+<li>A test: does <span class="math inline">\(\alpha + \beta = 1\)</span>?<br />
+</li>
+</ul>
+</div>
+<p><br />
+</p>
+<div id="LinearI:ex:blood" class="ex">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Blood pressure</strong></span><br />
+<br />
+Suppose we are interested in studying what factors affect a person’s blood pressure. We have a proposed statistical model, where blood pressure depends on a large number of factors:</p>
+<center>
+<span class="math display">\[ \text{Blood pressure} = f \left( \begin{array}{c c c}  \text{age}, &amp; \text{weight}, &amp; \text{gender}, \\ \text{activity level}, &amp; \text{personality type}, &amp; \text{time of day}, \\ &amp; \text{genetic predisposition} &amp; \end{array} \right) + \epsilon. \]</span>
+</center>
+<p>We want to estimate the functional relationship <span class="math inline">\(f\)</span> and potentially test which of the factors has a significant influence on a person’s blood pressure.</p>
+</div>
+</div>
+<div id="Sec_LinearI:linear" class="section level2 hasAnchor" number="16.3">
+<h2><span class="header-section-number">16.3</span> The linear model<a href="Sec_LinearI.html#Sec_LinearI:linear" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+Suppose that <span class="math inline">\(Y_1, Y_2, \ldots Y_n\)</span> are a collection of response variables, with <span class="math inline">\(Y_i\)</span> dependent on the predictor variables <span class="math inline">\(\mathbf{X}_i = \begin{pmatrix} 1 &amp; X_{1,i} &amp; \cdots &amp; X_{p,i} \end{pmatrix}\)</span>. Assume that, for <span class="math inline">\(i=1,2,\ldots, n\)</span>,<br />
+
+<center>
+<span class="math display">\[Y_i = f(\mathbf{X}_i,\mathbf{\beta}) + \epsilon_i = \beta_0 + \beta_1X_{1i} + \dots + \beta_p X_{pi} + \epsilon_i.  \]</span>
+</center>
+A matrix representation of the model is <span class="math inline">\(\mathbf{Y} = \mathbf{Z} \mathbf{\beta} + \mathbf{\epsilon}\)</span>, where<br />
+
+<center>
+<span class="math display">\[\begin{eqnarray*}  
+\mathbf{Y} = \left[ \begin{array}{c} Y_1 \\ Y_2 \\ \vdots \\ Y_n \end{array} \right], &amp;\qquad \qquad \qquad&amp;
+\mathbf{Z} = \left[ \begin{array}{cccc} 1 &amp; X_{11} &amp; \cdots &amp; X_{p1} \\ 1 &amp; X_{12} &amp; \cdots &amp; X_{p2} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 1 &amp; X_{1n} &amp; \cdots &amp; X_{pn} \end{array} \right], \\
+\mathbf{\beta} = \left[ \begin{array}{c} \beta_0 \\ \beta_1 \\ \vdots \\ \beta_p \end{array} \right], &amp;\quad \qquad \qquad&amp;
+\mathbf{\epsilon} = \left[ \begin{array}{c} \epsilon_1 \\ \epsilon_2 \\ \vdots \\ \epsilon_n \end{array} \right].
+\end{eqnarray*}\]</span>
+</center>
+<p>Here <span class="math inline">\(\mathbf{Z}\)</span> is called the <em>design matrix</em> and in models with a constant term includes a column of ones as well as the <em>data matrix</em> <span class="math inline">\(\mathbf{X}\)</span> and possibly functions of <span class="math inline">\(\mathbf{X}\)</span>. If no constant or functions are included in the model, <span class="math inline">\(\mathbf{Z}\)</span> and <span class="math inline">\(\mathbf{X}\)</span> are equivalent.</p>
+<p>It is common to represent linear models in matrix form. As we shall observe in <a href="Sec_Linear_LSE.html#Sec_Linear_LSE">Section 17</a> using matrices allows for concise representations of key quantities such as parameter estimates and calculating residuals. Familiarity with core concepts from linear algebra is essential in understanding and manipulating linear models.</p>
+<div id="Sec_LinearI:def:linear" class="def">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Linear Model</strong></span><br />
+<br />
+A model is considered to be <em>linear</em> if it is linear in its <em>parameters</em>.</p>
+</div>
+<p>Consider the following models, and why they are linear/non-linear:</p>
+<ul>
+<li><span class="math inline">\(Y_i = \beta_0 + \beta_1 X_{1i} + \beta_2 X_{2i} + \epsilon_i\)</span> is linear;<br />
+</li>
+<li><span class="math inline">\(Y_i = \beta_0 + \beta_1 X_{1i} + \beta_2 X_{2i}^2 + \epsilon_i\)</span> is linear;<br />
+</li>
+<li><span class="math inline">\(\log Y = \log C_0 L^\alpha K^\beta + \epsilon\)</span> is considered linear since we can transform the model into <span class="math inline">\(\log Y = C_0 + \alpha \log L + \beta \log K + \epsilon\)</span>;<br />
+</li>
+<li><span class="math inline">\(Y = \frac{\beta_1}{\beta_1 - \beta_2} \left[ e^{-\beta_2 X} - e^{\beta_1 X} \right] + \epsilon\)</span> is non-linear.</li>
+</ul>
+<p>A linear model therefore has the following underlying assumptions:</p>
+<ul>
+<li>The model form can be written <span class="math inline">\(Y_i = \beta_0 + \beta_1 X_{1i} + \cdots + \beta_p X_{pi} + \epsilon_i\)</span> for all <span class="math inline">\(i\)</span>;<br />
+</li>
+<li><span class="math inline">\(E[\epsilon_i]=0\)</span> for all <span class="math inline">\(i\)</span>;<br />
+</li>
+<li><span class="math inline">\(\text{Var}(\epsilon_i) = \sigma^2\)</span> for all <span class="math inline">\(i\)</span>;<br />
+</li>
+<li><span class="math inline">\(\text{Cov}(\epsilon_i, \epsilon_j) = 0\)</span> for all <span class="math inline">\(i \ne j\)</span>.</li>
+</ul>
+</div>
+<div id="Sec_LinearI:Gauss" class="section level2 hasAnchor" number="16.4">
+<h2><span class="header-section-number">16.4</span> The Normal (Gaussian) linear model<a href="Sec_LinearI.html#Sec_LinearI:Gauss" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="Sec_LinearI:def:normal" class="def">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Normal Linear Model</strong></span><br />
+<br />
+A <em>normal linear model</em> assumes:</p>
+<ul>
+<li>A model form given by <span class="math inline">\(Y_i = \beta_0 + \beta_1 X_{1i} + \cdots + \beta_p X_{pi} + \epsilon_i\)</span> for all <span class="math inline">\(i\)</span>;<br />
+</li>
+<li><span class="math inline">\(\epsilon_i \sim N(0,\sigma^2)\)</span> are independent and identically distributed (i.i.d.).<br />
+</li>
+</ul>
+</div>
+<p>There are two key implications of these assumptions:</p>
+<ul>
+<li><span class="math inline">\(Y_i \sim N(\beta_0 + \beta_1 X_{1i} + \cdots + \beta_p X_{pi},\sigma^2)\)</span> for all <span class="math inline">\(i=1,\dots,n\)</span>. Equivalently writing this in matrix form, <span class="math inline">\(\mathbf{Y} \sim N_n \left( \mathbf{Z} \mathbf{\beta}, \sigma^2 \mathbf{I}_n \right)\)</span> where <span class="math inline">\(N_n\)</span> is the <span class="math inline">\(n\)</span>-dimensional multivariate normal distribution. Note that if two random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are normally distributed, then <span class="math inline">\(\text{Cov}(X,Y)=0\)</span> if and only if <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent.<br />
+</li>
+<li>Since <span class="math inline">\(\text{Cov}(\epsilon_i,\epsilon_j)=0\)</span> for all <span class="math inline">\(i \ne j\)</span>, then <span class="math inline">\(\text{Cov}(Y_i,Y_j)=0\)</span> for all <span class="math inline">\(i \ne j\)</span>, and <span class="math inline">\(Y_1, Y_2,\dots,Y_n\)</span> are independent. (Remember that for Normal (Gaussian) random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent if and only if they are uncorrelated <span class="math inline">\(Cov (X,Y) =0\)</span>, see <a href="MV_Normal.html#MV_Normal:multi">Section 15.2</a>.)</li>
+</ul>
+</div>
+<div id="Sec_LinearI:residuals" class="section level2 hasAnchor" number="16.5">
+<h2><span class="header-section-number">16.5</span> Residuals<a href="Sec_LinearI.html#Sec_LinearI:residuals" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+We have the statistical model:
+<center>
+<span class="math display">\[ Y = f (\mathbf{X},\beta) + \epsilon, \]</span>
+</center>
+which satisfies <span class="math inline">\(E[\epsilon] =0\)</span>, and hence, <span class="math inline">\(E[Y]=f(\mathbf{X},\beta)\)</span>. The above equation can be rewritten as
+<center>
+<span class="math display">\[ \epsilon = Y  - f (\mathbf{X},\beta). \]</span>
+</center>
+Suppose that we have <strong>observed</strong> responses <span class="math inline">\(y_1, y_2, \ldots, y_n\)</span>, where observation <span class="math inline">\(i\)</span> has predictors <span class="math inline">\(\mathbf{x}_i\)</span>. Then given parameters <span class="math inline">\(\beta\)</span>, the <strong>expected</strong> value for the <span class="math inline">\(i^{th}\)</span> response is <span class="math inline">\(f (\mathbf{x}_i,\beta)\)</span>, and is often denoted <span class="math inline">\(\hat{y}_i\)</span>. The residual <span class="math inline">\(\epsilon_i\)</span> is the difference between the observed response and its expected value:<br />
+
+<center>
+<span class="math display">\[ \epsilon_i = y_i - \hat{y}_i = y_i - f (\mathbf{x}_i,\beta). \]</span>
+</center>
+Note that if <span class="math inline">\(f(\mathbf{x}_i, \beta) = \alpha + \beta x_i\)</span>, then<br />
+
+<center>
+<span class="math display">\[ \epsilon_i = y_i - \{ \alpha + \beta x_i \}. \]</span>
+</center>
+<p>An assumption of the Normal linear model is that <span class="math inline">\(\epsilon_i \sim N(0,\sigma^2)\)</span>, independent of the value of <span class="math inline">\(f(x_i, \beta) = \alpha +\beta x_i\)</span>. Therefore plotting residual values against expected values is one way of testing the appropriateness of the model.</p>
+</div>
+<div id="Sec_LinearI:line" class="section level2 hasAnchor" number="16.6">
+<h2><span class="header-section-number">16.6</span> Straight Line, Horizontal Line and Quadratic Models<a href="Sec_LinearI.html#Sec_LinearI:line" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this section we look at three types of linear model that we might choose to assume to fit some data <span class="math inline">\(X_i\)</span> and <span class="math inline">\(Y_i\)</span>. Making this choice appropriately is a key part of the statistical analysis process.</p>
+<div id="Sec_Linear:def:straight" class="def">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Straight line model</strong></span><br />
+<br />
+The <strong>straight line model</strong> is the simple linear regression model given by</p>
+<center>
+<span class="math display">\[y_{i} = \alpha + \beta x_i + \epsilon_i, \qquad \text{for all  } i =1,\ldots n.\]</span>
+</center>
+</div>
+<p>Given a straight line model, we have <span class="math inline">\(E[Y] = \alpha + \beta X\)</span>. The key part of using a straight line model is to estimate the values of <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>.</p>
+<div id="Sec_Linear:def:estimate" class="def">
+<p><br />
+Let <span class="math inline">\(\hat{\alpha}\)</span> and <span class="math inline">\(\hat{\beta}\)</span> be the estimated values of <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>, respectively. We call <span class="math inline">\(y_i\)</span> the <span class="math inline">\(i^{th}\)</span> <em>observed value</em> and <span class="math inline">\(\hat{y}_i = \hat{\alpha} + \hat{\beta} x_i\)</span> the <span class="math inline">\(i^{th}\)</span> <em>fitted value</em> (expected value).</p>
+</div>
+<div id="Sec_Linear:def:deviance" class="def">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Model deviance</strong></span><br />
+<br />
+<span class="math inline">\(D = \sum_{i=1}^{n} \left(y_{i}-\hat{y}_i\right)^{2}\)</span> is called the <em>model deviance</em>.</p>
+</div>
+<p>Since <span class="math inline">\(\epsilon_i = y_{i}-\hat{y}_i\)</span>, the model deviance is the sum of the squares of the residuals,
+<span class="math display">\[ D = \sum_{i=1}^n \epsilon_i^2.\]</span></p>
+For the estimated line to fit the data well, one wants an estimator of <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> that minimises the model deviance. So, choose <span class="math inline">\(\hat{\alpha}\)</span> and <span class="math inline">\(\hat{\beta}\)</span> to minimise
+<center>
+<span class="math display">\[D = \sum\limits_{i=1}^{n} \left(y_{i}-\hat{y}_i\right)^{2} = \sum\limits_{i=1}^n \left( y_i-\alpha-\beta x_i \right)^2.\]</span>
+</center>
+To minimise <span class="math inline">\(D\)</span> we calculate the stationary points of <span class="math inline">\(D\)</span>, that is, the values of <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> for which the two first order partial derivatives vanish.<br />
+
+<center>
+<span class="math display">\[\begin{align*}
+\frac{\partial D}{\partial \alpha} &amp;= -2 \sum\limits_{i=1}^n \left(y_i- \left( \hat{\alpha} + \hat{\beta}x_i \right) \right) = 0 \\[3pt]
+\frac{\partial D}{\partial \beta} &amp;= -2 \sum\limits_{i=1}^n x_i \left(y_i - \left( \hat{\alpha} + \hat{\beta} x_i \right) \right) = 0
+\end{align*}\]</span>
+</center>
+Solving these equations simultaneously gives<br />
+
+<center>
+<span class="math display">\[\begin{align*}
+\hat{\beta} &amp;= \frac{ \sum\limits_{i=1}^n \left( x_i-\bar{x} \right) \left( y_i-\bar{y} \right) }{ \sum\limits_{i=1}^n  \left( x_i-\bar{x} \right)^2} = \frac{(n-1)s_{xy}}{(n-1)s_x^2} = \frac{s_{xy}}{s_x^2}, \\[3pt]
+\hat{\alpha} &amp;= \bar{y} - \hat{\beta}\bar{x}.
+\end{align*}\]</span>
+</center>
+<p>Note that <span class="math inline">\(\hat{\alpha}\)</span> and <span class="math inline">\(\hat{\beta}\)</span> are called <em>least squares estimators</em> of <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>. We did not use the normality assumption in our derivation, so the least squares estimators are invariant to the choice of distribution for the error terms.</p>
+<p>If we include the assumption of normality, then it can be shown that <span class="math inline">\(\hat{\alpha}\)</span> and <span class="math inline">\(\hat{\beta}\)</span> are also the MLEs of <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> respectively.</p>
+<div id="Sec_LinearI:lem:MLE" class="lem">
+<br />
+Let <span class="math inline">\(y_1, y_2, \ldots, y_n\)</span> be observations from a normal linear model:<br />
+
+<center>
+<span class="math display">\[ y= \alpha + \beta x + \epsilon, \]</span>
+</center>
+where <span class="math inline">\(\epsilon \sim N(0,\sigma^2)\)</span> and <span class="math inline">\(x_1,x_2, \ldots, x_n\)</span> are the predictor variables. Then<br />
+
+<center>
+<span class="math display">\[  \hat{\beta} = \frac{s_{xy}}{s_x^2} \qquad \qquad \mbox{and} \qquad \qquad \hat{\alpha} =  \bar{y} - \hat{\beta}\bar{x}, \]</span>
+</center>
+<p>are the maximum likelihood estimates of <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\alpha\)</span>, respectively.</p>
+</div>
+<div id="Sec_LinearI:prf:MLE" class="prf">
+First, note that<br />
+
+<center>
+<span class="math display">\[ y_i \sim N (\alpha + \beta x_i, \sigma^2). \]</span>
+</center>
+Therefore the likelihood is given by<br />
+
+<center>
+<span class="math display">\[\begin{eqnarray*}  L (\alpha,\beta, \sigma^2) &amp;=&amp; \prod_{i=1}^n f(y_i | \alpha, \beta, x_i, \sigma^2) \\
+&amp;=&amp; \prod_{i=1}^n \frac{1}{\sqrt{2 \pi \sigma^2}} \exp \left( - \frac{1}{2 \sigma^2} \left\{ y_i - (\alpha +\beta x_i) \right\}^2 \right) \\
+&amp;=&amp; (2 \pi \sigma^2)^{-\frac{n}{2}} \exp \left( -\frac{1}{2 \sigma^2} \sum_{i=1}^n \left\{ y_i - (\alpha +\beta x_i) \right\}^2 \right).
+\end{eqnarray*}\]</span>
+</center>
+The log-likelihood is<br />
+
+<center>
+<span class="math display">\[ l (\alpha,\beta, \sigma^2) = - \frac{n}{2} \log \left(2 \pi \sigma^2 \right) -\frac{1}{2 \sigma^2} \sum_{i=1}^n \left\{ y_i - (\alpha +\beta x_i) \right\}^2. \]</span>
+</center>
+<p>In order to maximise the log-likelihood with respect to <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>, we note that:</p>
+<ul>
+<li><span class="math inline">\(- \frac{n}{2} \log \left(2 \pi \sigma^2 \right)\)</span> does not involve <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>, so can be treated as a constant;<br />
+</li>
+<li>Since <span class="math inline">\(\sigma^2 &gt;0\)</span>, <span class="math inline">\(-\frac{1}{2 \sigma^2} \sum_{i=1}^n \left\{ y_i - (\alpha +\beta x_i) \right\}^2\)</span> will reach its maximum when <span class="math inline">\(\sum_{i=1}^n \left\{ y_i - (\alpha +\beta x_i) \right\}^2\)</span> is minimised.</li>
+</ul>
+<p>Therefore the parameter values <span class="math inline">\(\hat{\alpha}\)</span> and <span class="math inline">\(\hat{\beta}\)</span> which maximise <span class="math inline">\(l (\alpha,\beta, \sigma^2)\)</span> are the parameter values which minimise <span class="math inline">\(\sum_{i=1}^n \left\{ y_i - (\alpha +\beta x_i) \right\}^2\)</span>, <em>i.e.</em> the <em>least squares estimates</em>.</p>
+<p>Note that the maximum likelihood estimates of <span class="math inline">\(\hat{\alpha}\)</span> and <span class="math inline">\(\hat{\beta}\)</span> do not depend on the value of <span class="math inline">\(\sigma^2\)</span>.</p>
+</div>
+<div id="Sec_Linear:def:horizontal" class="def">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Horizontal line model</strong></span><br />
+<br />
+The <strong>horizontal line model</strong> is the simple linear regression model given by</p>
+<center>
+<span class="math display">\[y_i = \mu + \epsilon_i, \qquad \text{for } i=1,\dots,n.\]</span>
+</center>
+</div>
+<p>Given a horizontal line model, we have <span class="math inline">\(E[Y]=\mu\)</span>. Specifically in this model, we assume the predictor variable has no ability to explain the variance in the response variable.</p>
+<p>To estimate <span class="math inline">\(\mu\)</span> by least squares we minimise <span class="math inline">\(D = \sum\limits_{i=1}^n (y_i - \mu)^2\)</span>. Setting <span class="math inline">\(\frac{\partial D}{\partial \mu} = 0\)</span> and solving, we get <span class="math inline">\(\hat{\mu} = \bar{y}\)</span>.</p>
+<p>Let <span class="math inline">\(D_1\)</span> be the deviance of the straight line model and <span class="math inline">\(D_2\)</span> be the deviance of the horizontal line model. The straight line model does a better job of explaining the variance in <span class="math inline">\(Y\)</span> if <span class="math inline">\(D_1 \leq D_2\)</span>, in which case we say that the straight line model <em>fits</em> the data better.</p>
+<div id="Sec_Linear:def:quadratic" class="def">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Quadratic line model</strong></span><br />
+<br />
+The <strong>quadratic model</strong> is the simple linear regression model given by</p>
+<center>
+<span class="math display">\[y_i = \alpha + \beta x_i + \gamma x_i^2 + \epsilon_i, \qquad \text{for } i=1,\dots,n.\]</span>
+</center>
+</div>
+To estimate <span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\gamma\)</span> by least squares we minimise<br />
+
+<center>
+<span class="math display">\[D = \sum\limits_{i=1}^n \left( y_i - (\alpha + \beta x_i + \gamma x_i^2) \right)^2.\]</span>
+</center>
+<p>If we let <span class="math inline">\(D_3 = \sum\limits_{i=1}^n \left( y_i - (\hat{\alpha} + \hat{\beta} x_i + \hat{\gamma} x_i^2) \right)^2\)</span> be the model deviance, then the quadratic model <em>fits</em> the data better than the straight line model if <span class="math inline">\(D_3 \leq D_1\)</span>.</p>
+</div>
+<div id="Sec_LinearI:Examples" class="section level2 hasAnchor" number="16.7">
+<h2><span class="header-section-number">16.7</span> Examples<a href="Sec_LinearI.html#Sec_LinearI:Examples" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="Sec_LinearI:ex:example_mileage" class="ex">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Tyre experiment</strong></span><br />
+<br />
+A laboratory tests tyres for tread wear by conducting an experiment where tyres from a particular manufacturer are mounted on a car. The tyres are rotated from wheel to wheel every 1000 miles, and the groove depth is measured in mils (0.001 inches) initially and after every 4000 miles giving the following data (Tamhane and Dunlap, 2000):</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Mileage (1000 miles)</th>
+<th align="center">Groove Depth (mils)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">0</td>
+<td align="center">394.23</td>
+</tr>
+<tr class="even">
+<td align="center">4</td>
+<td align="center">329.50</td>
+</tr>
+<tr class="odd">
+<td align="center">8</td>
+<td align="center">291.00</td>
+</tr>
+<tr class="even">
+<td align="center">12</td>
+<td align="center">255.17</td>
+</tr>
+<tr class="odd">
+<td align="center">16</td>
+<td align="center">229.33</td>
+</tr>
+<tr class="even">
+<td align="center">20</td>
+<td align="center">204.83</td>
+</tr>
+<tr class="odd">
+<td align="center">24</td>
+<td align="center">179.00</td>
+</tr>
+<tr class="even">
+<td align="center">28</td>
+<td align="center">163.83</td>
+</tr>
+<tr class="odd">
+<td align="center">32</td>
+<td align="center">150.33</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Watch <a href="Sec_LinearI.html#video24">Video 24</a> for a work through fitting linear models to the tyre experiment in <strong>R</strong> and a discussion of choosing the most appropriate linear model. A work through of the analysis is presented below.</p>
+<div id="video24" class="des">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Video 24: Tyre Experiment</strong></span></p>
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1355621/sp/135562100/embedIframeJs/uiconf_id/13188771/partner_id/1355621?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_scmp85zy&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_m13drj5r" width="640" height="420" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Tyre Experiment FINAL VERSION">
+</iframe>
+</div>
+<p>Firstly we have to determine which is the response variable and which is the predictor (or controlled) variable. Secondly, we have to hypothesise a functional relationship between the two variables, using either
+theoretical relationships or exploratory data analysis.</p>
+<p>Let the response variable, <span class="math inline">\(Y\)</span>, be groove depth and let the predictor variable, <span class="math inline">\(X\)</span>, be mileage. Consider a plot of mileage vs. depth:</p>
+<center>
+<img src="_main_files/figure-html/unnamed-chunk-268-1.png" width="672" />
+</center>
+<p><br />
+</p>
+<p>Note that as mileage increases, the groove depth decreases.</p>
+<p>The straight line model for the data is</p>
+<center>
+<img src="_main_files/figure-html/unnamed-chunk-269-1.png" width="672" />
+</center>
+<br />
+The straight line model is:<br />
+
+<center>
+<span class="math display">\[ y= 360.599  -7.279 x + \epsilon \]</span>
+</center>
+<p>and the deviance for the model is 2524.8.</p>
+<p>A plot of the residuals for the straight line model shows a relationship with <span class="math inline">\(x\)</span> (mileage), possibly quadratic. This informs us that there is a relationship between mileage and groove depth which is not captured by the linear model.</p>
+<center>
+<img src="_main_files/figure-html/unnamed-chunk-270-1.png" width="672" />
+</center>
+<p>The horizontal line model for the data is</p>
+<center>
+<img src="_main_files/figure-html/unnamed-chunk-271-1.png" width="672" />
+</center>
+<p>The horizontal line model is:
+<span class="math display">\[ y= 244.136 +  \epsilon. \]</span></p>
+<p>The deviance for the model is 53388.7, which is much higher than the deviance for the straight line model suggesting it is a considerably worse fit to the data. In this case the poorness of the fit of the horizontal line model is obvious, but later will explore ways of making rigorous the comparison between models.</p>
+<p>A plot of the residuals for the horizontal line model shows a very clear downward trend with <span class="math inline">\(x\)</span> (mileage) confirming that the horizontal line model does not capture the relationship between mileage and groove depth.</p>
+<center>
+<img src="_main_files/figure-html/unnamed-chunk-272-1.png" width="672" />
+</center>
+<p>The quadratic model for the data is</p>
+<center>
+<img src="_main_files/figure-html/unnamed-chunk-273-1.png" width="672" />
+</center>
+<p><br />
+The quadratic model is
+<span class="math display">\[ y= 386.199  -12.765 x + 0.171 x^2 + \epsilon \]</span>
+and the deviance for the model is 207.65. This is a substantial reduction on the deviance of the straight line model suggesting that it offers a substantial improvement.</p>
+<p>A plot of the residuals for the quadratic model shows no obvious pattern. This suggests that the model could be appropriate in capturing the relationship between mileage and groove depth, with the differences between <em>observed</em> and <em>expected</em> values due to randomness.</p>
+<center>
+<img src="_main_files/figure-html/unnamed-chunk-274-1.png" width="672" />
+</center>
+<div id="Sec_LinearI:ex:drug" class="ex">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Drug effectiveness</strong></span><br />
+<br />
+Suppose we are interested in the effect a certain drug has on the weight of an organ. An experiment is designed in which rats are randomly assigned to different treatment groups in which each group contains <span class="math inline">\(J\)</span> rats and receives the drug at one of 7 distinct levels. Upon completion of the treatment, the organs are harvested from the rats and weighed.<br />
+</p>
+Let <span class="math inline">\(Y_{ij}\)</span> be the weight of the organ (response variable) of the <span class="math inline">\(j^{th}\)</span> rat in the <span class="math inline">\(i^{th}\)</span> treatment,<br />
+
+<center>
+<span class="math display">\[Y_{ij} = \mu_i + \epsilon_{ij}, \qquad \text{for all } i=1,\dots,7 \text{ and } j=1,\dots,J.\]</span>
+</center>
+<p>The model is linear in the parameters <span class="math inline">\(\mu_1, \mu_2,\dots,\mu_7\)</span>. Specifically our aim is to test whether <span class="math inline">\(\mu_1 = \mu_2 = \cdots = \mu_7\)</span>. Estimating using least squares minimises
+<span class="math display">\[D = \sum\limits_{i=1}^7 \sum\limits_{j=1}^J (y_{ij} - \mu_i)^2,\]</span></p>
+and least squares estimators are given by:
+<center>
+<span class="math display">\[\hat{\mu}_i = \bar{y}_{i.} = \frac{1}{J} \sum\limits_{i=1}^J y_{ij}.\]</span>
+</center>
+<p>The estimate of the mean for level <span class="math inline">\(i\)</span> is the sample mean of the <span class="math inline">\(J\)</span> rats receiving treatment level <span class="math inline">\(i\)</span>.</p>
+</div>
+</div>
+<div id="Sec_LinearI:Prediction" class="section level2 hasAnchor" number="16.8">
+<h2><span class="header-section-number">16.8</span> Prediction<a href="Sec_LinearI.html#Sec_LinearI:Prediction" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A linear model identifies a relationship between the response variable <span class="math inline">\(y\)</span> and the predictor variable(s), <span class="math inline">\(\mathbf{x}\)</span>. We can then use the linear model to predict <span class="math inline">\(y^\ast\)</span> given predictor variables <span class="math inline">\(\mathbf{x}^\ast\)</span>.</p>
+Given the model,
+<center>
+<span class="math display">\[ Y = f (\mathbf{x},\beta) + \epsilon\]</span>
+</center>
+where <span class="math inline">\(E[\epsilon]=0\)</span>, we have that our best estimate of <span class="math inline">\(y^\ast\)</span> given <span class="math inline">\(\mathbf{x}^\ast\)</span> and model parameters <span class="math inline">\(\hat{\beta}\)</span> is<br />
+
+<center>
+<span class="math display">\[ y^\ast = E[Y | \mathbf{x}^\ast, \hat{\beta}]= f(\mathbf{x}^\ast, \hat{\beta}) = \hat{\beta}_0 + \sum_{j=1}^p \hat{\beta}_j x_j^\ast. \]</span>
+</center>
+<p>We will discuss later the uncertainty in the prediction of <span class="math inline">\(y^\ast\)</span> which depends upon the variance of <span class="math inline">\(\epsilon\)</span>, uncertainty in the estimation of <span class="math inline">\(\hat{\beta}\)</span> and how far the <span class="math inline">\(x_j^\ast\)</span>s are from the mean of the <span class="math inline">\(x_j\)</span>s.</p>
+<p>For <a href="Sec_LinearI.html#Sec_LinearI:ex:example_mileage">Example 16.7.1 (Tyre experiment)</a>, we can use the three models (straight line, horizontal line, quadratic) to predict the groove depth (mils) of the tyres after 18,000 miles. The predicted values are:</p>
+<ul>
+<li>Straight line model - <span class="math inline">\(y^\ast = 360.599 -7.279 (18) = 229.577\)</span>.<br />
+</li>
+<li>Horizontal line model - <span class="math inline">\(y^\ast = 244.136\)</span>.<br />
+</li>
+<li>Quadratic model - <span class="math inline">\(y^\ast = 386.199 -12.765 (18) + 0.171 (18^2) = 211.833\)</span>.</li>
+</ul>
+</div>
+<div id="Sec_LinearI:Nested" class="section level2 hasAnchor" number="16.9">
+<h2><span class="header-section-number">16.9</span> Nested Models<a href="Sec_LinearI.html#Sec_LinearI:Nested" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In <a href="Sec_LinearI.html#Sec_LinearI:ex:example_mileage">Example 16.7.1 (Tyre experiment)</a>, we considered three models:</p>
+<ul>
+<li>Straight line model: <span class="math inline">\(y = \alpha + \beta x + \epsilon\)</span>.<br />
+</li>
+<li>Horizontal line model: <span class="math inline">\(y = \mu + \epsilon\)</span>.<br />
+</li>
+<li>Quadratic model: <span class="math inline">\(y = \alpha + \beta x + \gamma x^2+ \epsilon\)</span>.</li>
+</ul>
+<p>The quadratic model is the most general of the three models. We note that if <span class="math inline">\(\gamma =0\)</span>, then the quadratic model reduces to the straight line model. Similarly letting <span class="math inline">\(\beta= \gamma =0\)</span> in the quadratic model and with <span class="math inline">\(\mu = \alpha\)</span>, the quadratic model reduces to the horizontal model. That is, the horizontal line and straight line models are special cases of the quadratic model, and we say that the horizontal line and straight line models are <strong>nested models</strong> in the quadratic model. Similarly the horizontal line model is a <strong>nested model</strong> in the straight line model.</p>
+<div id="Sec_LinearI:def:nested" class="def">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Nested model</strong></span><br />
+<br />
+Model <span class="math inline">\(A\)</span> is a nested model of Model <span class="math inline">\(B\)</span> if the parameters of Model <span class="math inline">\(A\)</span> are a subset of the parameters of Model <span class="math inline">\(B\)</span>.</p>
+</div>
+<div id="Sec_LinearI:lem:nested" class="lem">
+<br />
+Let <span class="math inline">\(D_A\)</span> and <span class="math inline">\(D_B\)</span> denote the deviances of Models <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, respectively. Then if Model <span class="math inline">\(A\)</span> is a nested model of Model <span class="math inline">\(B\)</span>,
+<center>
+<span class="math display">\[ D_B \leq D_A.\]</span>
+</center>
+<p>That is, the more complex model with additional parameters will fit the data better.</p>
+</div>
+<div class="prf">
+<p>Let <span class="math inline">\(\alpha = (\alpha_1, \alpha_2, \ldots, \alpha_K)\)</span> denote the <span class="math inline">\(K\)</span> parameters of Model <span class="math inline">\(A\)</span> and let <span class="math inline">\(\beta = (\alpha_1, \alpha_2, \ldots, \alpha_K,\delta_1, \ldots, \delta_M)\)</span> denote the <span class="math inline">\(K+M\)</span> parameters of Model <span class="math inline">\(B\)</span>.</p>
+<p>If <span class="math inline">\(\hat{\alpha} = (\hat{\alpha}_1, \hat{\alpha}_2, \ldots, \hat{\alpha}_K)\)</span> minimise the deviance under Model <span class="math inline">\(A\)</span>, then the parameters <span class="math inline">\((\hat{\alpha}_1, \hat{\alpha}_2, \ldots, \hat{\alpha}_K,0, \ldots, 0)\)</span>, where <span class="math inline">\(\delta_i =0\)</span> will achieve the deviance <span class="math inline">\(D_A\)</span> under Model <span class="math inline">\(B\)</span>. Thus <span class="math inline">\(D_B\)</span> can be at most equal to <span class="math inline">\(D_A\)</span>.</p>
+</div>
+<p><br />
+Since more complex models will better fit data (smaller deviance), why not choose the most complex model possible?</p>
+<p>There are many reasons and these include <em>interpretability</em>, can you interpret the relation between <span class="math inline">\(x_i\)</span> and <span class="math inline">\(y_i\)</span> (for example, the time taken to run 100 metres is unlikely to be a good predictor for performance on a maths test) and <em>predictive power</em>, given a new predictor observation <span class="math inline">\(x^\ast\)</span> can we predict <span class="math inline">\(y^\ast\)</span>.</p>
+</div>
+<div id="Sec_LinearI:exer" class="section level2 unnumbered hasAnchor">
+<h2><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercise</strong></span><a href="Sec_LinearI.html#Sec_LinearI:exer" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Attempt the exercise below.</p>
+<div id="exer16:1" class="exer">
+<p><br />
+Given the following theoretical relationships between <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span>, with <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> unknown, can you find ways of expressing the relationship in a <strong>linear</strong> manner?</p>
+<ol style="list-style-type: lower-alpha">
+<li><span class="math inline">\(Y = \alpha e^{\beta X}\)</span>,<br />
+</li>
+<li><span class="math inline">\(Y = \alpha X^{\beta}\)</span>,<br />
+</li>
+<li><span class="math inline">\(Y = \log(\alpha+e^{\beta X})\)</span>.<br />
+</li>
+</ol>
+</div>
+<details>
+<summary>
+Solution to Exercise 16.1.
+</summary>
+<div id="Question_S16_1" class="ans">
+<ol style="list-style-type: lower-alpha">
+<li>Take logs, so <span class="math inline">\(\log Y = \log \alpha + \beta X\)</span>. Hence, <span class="math inline">\(Y&#39; = \alpha&#39; + \beta X\)</span> where <span class="math inline">\(Y&#39; = \log Y, \alpha&#39; = \log \alpha\)</span>.<br />
+</li>
+<li>Again, take logs, so <span class="math inline">\(\log Y = \log \alpha + \beta \log X\)</span>. Hence, <span class="math inline">\(Y&#39; = \alpha&#39; + \beta X&#39;\)</span> where <span class="math inline">\(Y&#39; = \log Y\)</span>, <span class="math inline">\(\alpha&#39; = \log \alpha\)</span>, <span class="math inline">\(X&#39; = \log X\)</span>.<br />
+</li>
+<li>This cannot be written as a linear model.<br />
+</li>
+</ol>
+</div>
+</details>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="MV_Normal.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="Sec_Linear_LSE.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/16-Basic_ideas.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

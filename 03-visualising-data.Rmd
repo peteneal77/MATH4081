@@ -1,0 +1,727 @@
+# Visualising data {#visual}
+
+## Introduction {#visual_intro}
+
+We have seen different ways of creating numerical summaries:  
+
+- [Measures of location](#summary_location): Mean, median, mode.    
+- [Measures of spread](#summary_spread): Variance, standard deviation, interquartile range.  
+
+A numerical summary is useful but a single number (or a few numbers) can only tell us so much about the data.
+
+ 
+Studying the data values if there are hundreds or thousands of observations is going to be hard to take in.
+
+Therefore, "if a picture paints a thousand words" then **"a plot captures a thousand data points"!**
+
+In this chapter we'll start by talking about some data features to look out for,
+then some particular types of plots. In [Section 3.2](#visual_data-features), we discuss basic features of the data such as [multimodality](#visual_data-features_multi), [symmetry](#visual_data-features_symmetry) and [outliers](#visual_data-features_outliers). In [Section 3.3](#visual_plot), we present a wide range of different graphical ways of presenting data and we summarise the pros and cons of the different methods in a [summary](#visual_plot_summary). Finally, in [Section 3.4](#visual_data), we draw together the considerations in summarising and visualising data.
+
+
+## Some data features {#visual_data-features}
+
+In describing either the way in which observations in a sample are
+dispersed, or the features of a random variable, we talk about the
+**distribution** of the observations or random variable. 
+
+The observations are our **sample** of data, whereas the random variable
+represents the **population** from which the data are drawn.
+
+It is important
+at this stage to distinguish between describing the sample of data and making
+inferences about the population from which the data are drawn.
+Plotting
+the data and obtaining numerical summaries for the data should give some
+idea of the equivalent features in the population, provided the sample
+size is large enough.
+
+Hence when describing features in plots, the description should pick out
+features of the data itself but it should also include inferences about
+the population distribution the data are drawn from. If the sample size
+is very small then we may comment that few or no inferences can be made.
+When displaying data graphically we can see not only where the data are
+located and how they are dispersed but also the general shape of the
+distribution and if there are any interesting features. 
+
+### <span style="color: rgba(207, 0, 15, 1);">**Multimodal distributions**</span>  {#visual_data-features_multi}
+
+We also use the word **mode** to describe where a distribution has a *local* maximum. Then we can call a distribution unimodal (one peak), 
+bimodal (two peaks) or 
+multimodal (multiple peaks), e.g. as shown in Figure \@ref(fig:figUniBiMultiModal).
+
+<center>
+```{r figUniBiMultiModal, echo = FALSE, message=FALSE, fig.keep='all', out.width= "80%", fig.cap = "Distributions with different numbers of modes."}
+library(magick)
+img <- image_read_svg('Images/unimodal_bimodal_multimodal.svg')
+knitr::knit_print(img)
+```
+</center>
+
+Sometimes there are gaps in the data, like in Figure \@ref(fig:figGappy)
+
+<center>
+```{r figGappy, echo = FALSE, message=FALSE, fig.keep='all', out.width= "80%", fig.cap = "A bimodal distribution with a gap."}
+img <- image_read_svg('Images/distn_with_gap.svg')
+knitr::knit_print(img)
+```
+</center>
+
+This can suggest the data are grouped in some way and it may be difficult
+to summarise the data with single summary statistics. (Imagine Figure \@ref(fig:figGappy) represents heights of people on a school trip---what could explain the distribution looking gappy like that?)
+
+In such cases, then it may be appropriate to give, for example, more than one measure of location.
+
+### <span style="color: rgba(207, 0, 15, 1);">**Symmetry**</span>   {#visual_data-features_symmetry}
+
+The summary statistics we looked at previously were all measures of location or 
+spread---they tell us nothing about the symmetry of the distribution. 
+
+There is another summary statistic called **skewness**  which measures the 
+*assymmetry* of a distribution. 
+
+The sample skewness for a sample
+$x_1 , x_2 , \ldots , x_n$, of observations is defined as:
+<center>
+\[ g = \frac{1}{n} \sum\limits_{i=1}^n \left( \frac{x_i - {\bar{x}}}{s} \right) ^3 ,\]
+</center>
+where $\bar{x}$ and $s$ are the sample mean and standard deviation
+respectively. 
+
+A perfectly symmetric distribution has a skewness of zero.
+
+A distribution with skewness greater than zero is said to be positively 
+skewed, or skewed to the right (meaning the right 'tail' is longer).
+
+A distribution with skewness less than zero is said to be negatively skewed,
+or skewed to the left (the left 'tail' is longer).
+
+<center>
+```{r figSkewness, echo = FALSE, message=FALSE, fig.keep='all', out.width= "80%", fig.cap = "Symmetric and asymmetric (skewed) distributions."}
+img <- image_read_svg('Images/symmetric_and_skewed.svg')
+knitr::knit_print(img)
+```
+</center>
+
+### <span style="color: rgba(207, 0, 15, 1);">**Outliers**</span>   {#visual_data-features_outliers}
+
+An outlier is an observation which is in some sense extreme. In the
+context of a single sample of observations on one random variable,
+outliers are observations that are well above or well below the other
+values in the data. For example, the observation of 3.83 in the [Cavendish dataset](#intro_example) considered in [Section 2.3](#summary_robust). All such extreme observations should be checked if
+possible to ensure they are correct values. It is important to identify
+any outliers in a data set as they can considerably distort numeric
+summaries or analytical methods (robustness).
+
+In cases when an observation appears to be an outlier and no reason for
+the extreme measurement is found, the data could be analysed both with
+the outlier included and once it has been removed. Thus the distortion
+due to the outlier can be fully assessed.
+
+## Basic plot types {#visual_plot}
+
+### <span style="color: rgba(207, 0, 15, 1);">**Histogram and bar charts**</span>  {#visual_plot_histo}  
+
+Whenever more than about twenty observations are involved, it is often
+helpful to group the observations in a **frequency table**. Frequency
+tables are also helpful when constructing histograms as we shall see in
+a moment. We write $f_i$ for the frequency of observation $x_i$
+($i = 1,\ldots,k)$. A frequency table shows how many observations fall
+into various classes defined by categorising the observations into
+groups, see the [Coursework marks](#intro_example) example. The choice of which classes to use is somewhat arbitrary, but
+since it affects the visual impression given by the data when forming a
+histogram, the choice should be made with care.
+
+The following are guidelines:
+
+1.  For continuous data, we usually choose consecutive intervals of the
+    same width. For discrete data, the individual values are used if
+    this is reasonable, but if the data are sparse it may be necessary
+    to classify the observations into consecutive groups of values with
+    the same number of values in each group. In either case, care is
+    needed when specifying the intervals so that ambiguities are
+    avoided.
+
+2.  Interval or group sizes should be chosen so that most frequencies
+    (of observations in a class) are of a moderate size compared with
+    the total number of observations. For example, data on the heights
+    of 100 individuals which range from 160cm to 190cm might be grouped
+    easily in intervals of 2cm or possibly 5cm but not 1mm or 50cm.
+
+Once we have constructed a frequency table we can construct a
+**histogram** easily as the data have already been grouped. When drawing
+a histogram the classification intervals are represented by the scale on
+the abscissa ('x-axis') of a graph (N.B. sometimes the midpoints of the
+intervals are used as the scale on the abscissa) and rectangles are
+drawn on this base so that the *area* of the rectangle is *proportional
+to the frequency* of observations in the class. The unit on the ordinate
+('y-axis') is the number of observations per unit class interval. Note
+that the *heights* of the rectangle will be *proportional to
+frequencies* if and only if class intervals of *equal* size are used.
+
+Histograms are usually given in terms of *frequency* (number of occurrences) but can alternatively be given in terms of *density*. Density rescales the histogram so that the area in the rectangles sum to one. The shape of the histogram is thus not affected but the y-axis is rescaled. Frequency has a simple interpretation whereas density allows us to compare two samples of different size (heights of the population of Nottingham, approximately 337,000 individuals with heights of the population of Long Eaton, approximately 39,000 individuals) and to compare with probability distributions.
+
+::: {.ex #example007}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Example 3.3.1.}
+```
+<span style="color: rgba(207, 0, 15, 1);"> **IQ Scores**  </span>  The I.Q. of 100 people chosen at random was
+measured, resulting in the following frequency table:
+
+  ----------------------- ------------------------
+           I.Q.            # of people (frequency)
+       IQ $\leq$ 80                    0
+    80 $<$ IQ $\leq$ 90               12
+   90 $<$ IQ $\leq$ 100               37
+   100 $<$ IQ $\leq$ 110              30
+   110 $<$ IQ $\leq$ 120              19
+   120 $<$ IQ $\leq$ 130               2
+  ----------------------- ------------------------
+:::
+
+A histogram of these data is:
+
+<center>
+```{r figIQHistogram, echo = FALSE, fig.asp =0.7, out.width = "80%", fig.cap = "Histogram of the IQ data"}
+freq <- c(0,12,37,30,19,2)
+mids <- c(75,85,95,105,115,125)
+dat <- rep(mids,freq)
+par(mar = c(4, 4, 1, 1))
+hist(dat, breaks = c(80,90,100,110,120,130), xlab = "IQ", main = "")
+```
+</center>
+
+Remember: frequency should be *proportional to area*, and so for unequal
+class widths one should plot the frequency density. For the IQ data, if we wanted 110-130 to be one class, compare:
+
+<center>
+```{r fig-IQ-histogram-2, echo = FALSE, fig.asp =0.6, fig.show="hold", out.width = "45%", fig.asp = 0.9, warning = FALSE, fig.cap = "Histogram of IQ data with unequal bar widths: wrong and right versions"}
+freq <- c(0,12,37,30,19,2)
+mids <- c(75,85,95,105,115,125)
+dat <- rep(mids,freq)
+par(mar = c(4, 4, 1, 3), lwd=2, cex = 1.5)
+suppressWarnings(hist(dat, breaks = c(80,90,100,110,130), freq=TRUE, xlab = "IQ", main = "Wrong", lwd=2))
+hist(dat, breaks = c(80,90,100,110,130), freq=FALSE, xlab = "IQ", main = "Right", lwd=2)
+```
+</center>
+
+When the data are discrete an alternative and better form of
+graphical representation is a **bar chart** with the heights of the bars
+representing frequencies, see Figure \@ref(fig:barg).
+
+<center>
+```{r barg, echo = FALSE, fig.asp =0.7, out.width = "80%", fig.cap = "Goals scored in each of 32 FA Cup third round matches"}
+goals_dat <- c(1,7,9,6,4,1,2,1,1)
+par(mar = c(5.1, 4.1, 1.5, 2.1))
+barplot(goals_dat, names = 0:8, xlab = "Number of goals", ylab = "Frequency")
+```
+</center>
+
+### <span style="color: rgba(207, 0, 15, 1);">**Density plots**</span>  {#visual_plot_density}  
+
+For continuous data, the histogram gives an approximation of the underlying distribution. The width and choice of endpoints of the intervals for the histogram affect the plot. Also for most continuous distributions we assume that a small change in value leads to a small change, up or down, in the likelihood of the value occurring. For example, the chance of an adult male being 169.9cm tall is unlikely to be very different to the chance of being 170.1cm tall. However, if we break the histogram into 5cm intervals with intervals 165cm-170cm and 170cm-175cm the height of the bars could be significantly different suggesting a big change in the likelihood of the heights. 
+
+In Figure \@ref(fig:histograms-intervals) are 3 histograms for the same data, a sample of heights (*cm*) of 100 UK adult males. Histograms 1 and 3 use intervals of length 5*cm* but different starting points for the intervals. Histogram 2 uses intervals of length 2*cm*.
+
+<center>
+```{r, histograms-intervals, echo = FALSE, fig.show="hold", out.width="33%", fig.asp = 1, fig.cap = "Histograms with different intervals"}
+set.seed(3673821)
+x=rnorm(100,177,8)
+hist(x,breaks=seq(155,200,5),xlab="Height Males (cm)",main="Histogram 1",ylim=c(0,30))
+hist(x,breaks=seq(156,200,2),xlab="Height Males (cm)",main="Histogram 2",ylim=c(0,30))
+hist(x,breaks=seq(152.5,202.5,5),xlab="Height Males (cm)",main="Histogram 3",ylim=c(0,30))
+```
+</center>
+
+The heights (frequencies) differ between histograms 1 and 3 and histogram 2 due to the different interval widths. In Figure \@ref(fig:histograms-intervals-den) we re-plot the histograms using density so the areas sum to 1 and we can perform a direct comparison.
+
+<center>
+```{r, histograms-intervals-den, echo = FALSE, fig.show="hold", out.width="33%", fig.asp = 1, fig.cap = "Histograms with different intervals"}
+set.seed(3673821)
+x=rnorm(100,177,8)
+hist(x,breaks=seq(155,200,5),xlab="Height Males (cm)",main="Histogram 1",freq=F,ylim=c(0,0.06))
+hist(x,breaks=seq(156,200,2),xlab="Height Males (cm)",main="Histogram 2",freq=F,ylim=c(0,0.06))
+hist(x,breaks=seq(152.5,202.5,5),xlab="Height Males (cm)",main="Histogram 3",freq=F,ylim=c(0,0.06))
+```
+</center>
+
+An alternative to the histogram is a density plot. A density plot uses the data to estimate the distribution of the population using an approach known as *kernel smoothing*. Kernel smoothing estimates the probability density function (pdf) of the distribution of the population which is a measure of how likely a particular value is to occur. We will give a formal definition of the pdf in [Section 5.2](#rv_des).
+This approach removes the need to specify intervals for values as for the histogram and produces a continuous approximation of the density, how likely values are. In Figure \@ref(fig:density-height), we illustrate with the UK adult male height data and also superimpose the density plot on histogram 1 to show the similarities. 
+
+<center>
+```{r, density-height, echo = FALSE, fig.show="hold", out.width="40%", fig.asp = 1, fig.cap = "Histograms with different intervals"}
+set.seed(3673821)
+x=rnorm(100,177,8)
+plot(density(x),type="l",xlab="Height Males (cm)",col="red",lwd=2,ylim=c(0,0.06),main="Density plot")
+hist(x,breaks=seq(155,200,5),xlab="Height Males (cm)",main="Histogram 1",freq=F,ylim=c(0,0.06))
+lines(density(x),col="red",lwd=2)
+```
+</center>
+
+**NB.** Histograms and density plots of data may not bear much resemblance to distribution
+of population when the sample size, $n$, is *small*, although as $n$ 
+increases the histogram and density plot should resemble the population distribution
+more closely.
+
+In Figure \@ref(fig:histograms-various-n), we plot histograms of random samples of sizes $n = 15, 100, 1000$ of UK adult males with the true population distribution's pdf superimposed (red).
+
+<center>
+```{r, histograms-various-n, echo = FALSE, fig.show="hold", out.width="33%", fig.asp = 1, fig.cap = "Histograms with different intervals"}
+set.seed(3673821)
+x=rnorm(1000,177,8)
+zz=seq(150,200,0.1)
+hist(x[1:15],xlab="Height Males (cm)",main="n=15",freq=F,xlim=c(150,200),ylim=c(0,0.06))
+lines(zz,dnorm(zz,177,8),col=2,lwd=2)
+hist(x[1:100],xlab="Height Males (cm)",main="n=100",freq=F,xlim=c(150,200),ylim=c(0,0.06))
+lines(zz,dnorm(zz,177,8),col=2,lwd=2)
+hist(x,xlab="Height Males (cm)",main="n=1000",freq=F,xlim=c(150,200),ylim=c(0,0.06))
+lines(zz,dnorm(zz,177,8),col=2,lwd=2)
+```
+</center>
+
+The plots in Figure \@ref(fig:histograms-various-n) are repeated in Figure \@ref(fig:density-various-n) using density plot instead of histogram. We note that for small $n$ the density plot (estimate of the pdf) is rather bumpy with multiple modes and we would probably prefer the stability and unimodality of the histogram, whereas for large $n$, the density plot (estimate of the pdf) offers a better approximation for the underlying continuous distribution (true population pdf).
+
+<center>
+```{r, density-various-n, echo = FALSE, fig.show="hold", out.width="33%", fig.asp = 1, fig.cap = "Density plots - sample (black) and population (red)"}
+set.seed(3673821)
+x=rnorm(1000,177,8)
+zz=seq(150,200,0.1)
+plot(density(x[1:15]),xlab="Height Males (cm)",main="n=15",lwd=2,xlim=c(150,200),ylim=c(0,0.06))
+lines(zz,dnorm(zz,177,8),col=2,lwd=2)
+plot(density(x[1:100]),xlab="Height Males (cm)",main="n=100",lwd=2,xlim=c(150,200),ylim=c(0,0.06))
+lines(zz,dnorm(zz,177,8),col=2,lwd=2)
+plot(density(x),xlab="Height Males (cm)",main="n=1000",lwd=2,xlim=c(150,200),ylim=c(0,0.06))
+lines(zz,dnorm(zz,177,8),col=2,lwd=2)
+```
+</center>
+
+The following **R** Shiny app allows you to investigate data features along with histograms and density plots further for a data set comprising of marks of 3 groups of students on a maths test.
+
+```{asis, include=knitr::is_html_output()}
+<details><summary>A summary of Maths Test data </summary>
+The **R** Shiny app allows you to explore the data for the score (out of 120) on a Maths test for 1500 students. 
+
+The data is comprised of 500 students in each of three categories:  
+
+- A-level mathematics students;  
+- No A-level mathematics students;  
+- Undergraduate students in mathematics.  
+
+Any combination of the three groups of students can be viewed with a histogram and/or density plot of the marks shown. The histogram and/or density plots can be plotted using frequency (counts of observations in each bin of the histogram) or density (the area in the histogram/under the density plot sums to 1). 
+
+The mean, median and interquartile range of the data can also be plotted.
+
+This data exhibits a range of behaviours depending upon what subsets of the data are considered. These include:  
+
+- Symmetry  
+- Skewness (positive and negative)  
+- Unimodality  
+- Bi and multiple-modality  
+
+We observe that if we exclude the A-level mathematics students then the mean and median are *atypical* values falling between the two modes.
+</details>
+```
+
+R Shiny app: [Data Features](https://shiny-new.maths.nottingham.ac.uk/pmzpn/DataFeatures/)
+
+### <span style="color: rgba(207, 0, 15, 1);">**Boxplot**</span>  {#visual_plot_boxplot}  
+
+We have already seen that the lower quartile, median and upper quartile
+split the data into four portions. Together with the lowest value in the
+sample and the highest value in the sample, these statistics form the
+_five-number summary_:
+
+::: {.ex #example008}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Example 3.3.2.}
+```
+<span style="color: rgba(207, 0, 15, 1);"> **Coursework marks**  </span>  
+The _five-number summary_ for the coursework marks data given in [Section 1.4](#intro_example) are:
+
+   min   $Q_1$   median   $Q_3$   max
+  ----- ------- -------- ------- -----
+   34     44       46      48     50
+
+Between each statistic fall 25% of the observations. The simplest form
+of the **boxplot** is simply a visual presentation of the five number
+summary as follows:
+:::
+
+<center>
+```{r, echo = FALSE, fig.height=1.8, fig.cap = "A boxplot depicting the five-number summary"}
+ dat <- c(34, 42, 42, 44, 44, 44, 46, 46, 46, 46, 46, 46, 48, 48, 48, 50, 50, 50)
+ boundaries <- boxplot(dat, horizontal = TRUE, axes = FALSE, range = 0, ylim = c(31,54), pars=list(par(mar=c(0.6,0.4,0.4,0.4)))); axis(1, line =-1.6)
+ text(x=boundaries$stats, y=1.40, c("min", "Q1", "median", "Q3", "max"), cex = 0.8)
+```
+</center> 
+ 
+```{asis, include=knitr::is_latex_output()}
+\newpage
+```
+ 
+Here the box is drawn with its left hand edge at the lower quartile
+and right hand edge at the upper quartile. A line is drawn at the median
+that divides the box in two. From the centre of each end of the box, a
+line is drawn to the minimum and maximum of the values in the sample.
+These lines are sometimes called **whiskers** and the plots are
+sometimes called box-and-whisker plots. There are other variations of
+the boxplot but this is the simplest version. Sometimes 
+extreme observations called **outliers** (see later) are picked out and denoted
+with either a '\*' or 'o' to stop them from influencing the whiskers too 
+much. In fact, the ``boxplot`` function in **R** does this by default:
+
+<center>
+```{r, echo = FALSE, fig.height=1.8, fig.cap = "A boxplot with an outlier picked out"}
+ dat <- c(34, 42, 42, 44, 44, 44, 46, 46, 46, 46, 46, 46, 48, 50, 50, 50)
+ boxplot(dat, horizontal = TRUE, axes = FALSE, ylim = c(31,54), pars=list(par(mar=c(0.6,0.4,0.4,0.4)))); axis(1, line =-1.6)
+```
+</center>
+
+### <span style="color: rgba(207, 0, 15, 1);">**Cumulative frequency diagrams, and the empirical CDF**</span>  {#visual_plot_cdf}  
+
+The **cumulative frequency** at $x$ is defined as the number of
+observations less than or equal to $x$. The *relative* cumulative
+frequency, often written as $\hat{F}(x)$, is the cumulative frequency of $x$ divided by the total number of
+observations $n$.
+
+$\hat{ F}(x)$ is also called the **empirical cumulative distribution
+function** (empirical cdf). The cumulative distribution function (cdf) for the population, denoted $F(x)$, is the probability of observing an observation in the population taking a value less than or equal to $x$. $F(x)$ is an increasing (strictly non-decreasing) function in $x$ with the rate of change in the cdf determined by the pdf introduced in discussions of the [density plot](#visual_plot_density).
+We will introduce the cdf formally in [Section 5.2](#rv:des).
+
+A cumulative frequency diagram involves plotting the cumulative
+frequency at $x$ versus $x$. If the data are grouped continuous data ([IQ scores](#example007))
+then straight lines are drawn between the upper class boundaries, and if
+the data are discrete,goals per FA cup match, Figure \@ref(fig:barg), or ungrouped data then a step function is used. This is illustrated in Figure \@ref(fig:fig-ecdfs).
+
+```{asis, include=knitr::is_latex_output()}
+\newpage
+```
+
+::: {.ex #example007a} 
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Example 3.3.3.}
+```
+<span style="color: rgba(207, 0, 15, 1);"> **IQ Scores (revisited)**  </span>  
+The cumulative frequency and relative cumulative
+frequency for the I.Q. data above are:
+
+ ----- ----------- -------------
+   $x$   Cum. freq.   $\hat F(x)$
+   80        0             0
+   90        12          0.12
+   100       49          0.49
+   110       79          0.79
+   120       98          0.98
+   130      100          1.00
+  ----- ----------- -------------
+:::
+
+<center>
+```{r fig-ecdfs, echo = FALSE, fig.show="hold", out.width = "45%", fig.asp = 1, fig.cap = "Empirical cdf plots for the 'Goals' and 'IQ' data sets" }
+par(mar = c(4, 4, 1, 1), lwd=2, cex = 1.8)
+my_stepfun <- stepfun(0:8, c(0,cumsum(goals_dat))/sum(goals_dat))
+plot(my_stepfun, lwd = 2, ylim=c(0, 1), xlab = "Goals", ylab = "Empirical CDF", main = "", cex=1)
+plot(seq(70, 140, by = 10), c(0,0,12,49,79,98,100,100)/100, type = 'b', lwd = 2, xlab = "IQ", ylab = "Empirical CDF", main = "")
+```
+</center>
+
+The median can be estimated from a cumulative frequency diagram by
+finding the value $x$ corresponding to cumulative frequency of $n/2$ (or
+$\hat F(x) = 0.5$ if using the empirical CDF).
+
+In [Video 5](#video5) we study comparing the empriical distribution (pdf and cdf) with the random variable (population) the observations come from. This comparison is done using an **R Shiny** app which gives the histogram and estimate of the probability density function. A link to the **R Shiny** app is provided after the video to allow you to explore these features for yourself.
+
+```{asis, include=knitr::is_html_output()}
+:::{.des #video5}
+<span style="color: rgba(207, 0, 15, 1);">**Video 5: Empirical pdf and cdf**</span>  
+
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1355621/sp/135562100/embedIframeJs/uiconf_id/13188771/partner_id/1355621?iframeembed=true&playerId=kaltura_player&entry_id=1_ge0o82fd&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_k78bxj6f" width="640" height="420" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Empirical PDF and CDF FINAL VERSION"></iframe>
+:::
+```
+
+```{asis, include=knitr::is_latex_output()}
+Watch [\textcolor{blue}{Video 5: Empirical pdf and cdf}](https://mediaspace.nottingham.ac.uk/media/Empirical+PDF+and+CDF+FINAL+VERSION/1_ge0o82fd)
+```  
+
+R Shiny app: [pdf-cdf-QQ](https://shiny-new.maths.nottingham.ac.uk/pmzpn/pdf_cdf_QQ/)
+
+
+### <span style="color: rgba(207, 0, 15, 1);">**Stem and leaf**</span>  {#visual_plot_stem} 
+
+One way of representing both discrete or continuous data is to use a
+**stem-and-leaf plot**. This plot is similar to a bar chart/histogram
+but contains more information. It is best described by way of an
+example.
+
+::: {.ex #example009}  
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Example 3.3.4.}
+```
+<span style="color: rgba(207, 0, 15, 1);"> **Seeds data** </span>  
+In the routine testing of consignments of seeds,
+the following procedure is used. From a consignment 100 seeds are
+selected and kept under controlled conditions. The number of seeds which
+have germinated after 14 days is counted. This procedure is repeated 40
+times with the following results:
+
+  ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
+   88   87   85   91   93   91   94   87   90   91
+   92   87   91   89   87   90   88   85   90   92
+   89   86   91   92   91   91   93   93   87   90
+   91   91   89   90   90   91   91   93   92   85
+  ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
+
+The range of data is $94 - 85 = 9$ and we divide this range into
+intervals of fixed length as we would for a histogram.
+:::
+
+For a stem-and-leaf plot we usually make the class interval either 0.5,
+1 or 2 times a power of ten and aim for between 4 and 10 intervals. Of
+course, this is sometimes not possible for very small data sets. For
+these data an interval of two seems appropriate as this will give us 5
+or 6 intervals. Next we draw a vertical line. On the left of this
+vertical line we mark the interval boundaries in increasing order but
+note only the first few digits that are in common to the observation in
+the interval. This is called the **stem**. We then go through the
+observations one by one, noting down the next significant digit on the
+right-hand side of the appropriate stem. This forms the **leaves**. Here
+we obtain:
+
+ - - - - - - - - - - - - - - - - - - -
+ 8 | 5 5 5
+ 8 | 7 7 7 7 6 7
+ 8 | 8 9 8 9 9 
+ 9 | 1 1 0 1 1 0 0 1 1 1 0 1 1 0 0 1 1
+ 9 | 3 2 2 2 3 3 3 2
+ 9 | 4 
+ - - - - - - - - - - - - - - - - - - -
+
+The first stem (line) contains any values of 84 and 85, the second stem
+of 86 and 87, and so on. Note that by allowing the first stem to
+represent 84 & 85 we have ensured that there are stems for 88 & 89 and
+90 & 91 and no stem for 89 & 90 --- a stem which would be very difficult
+to enter on a plot! A final version of the plot is found by ordering the
+digits within each stem. For these data the final stem-and-leaf plot is
+ 
+```{asis, include=knitr::is_latex_output()}
+\newpage
+```
+ 
+ - - - - - - - - - - - - - - - - - - -
+ 8 | 5 5 5
+ 8 | 6 7 7 7 7 7
+ 8 | 8 8 9 9 9 
+ 9 | 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1
+ 9 | 2 2 2 2 3 3 3 3 
+ 9 | 4 
+ - - - - - - - - - - - - - - - - - - -
+ 
+### <span style="color: rgba(207, 0, 15, 1);">**Pie charts**</span>  {#visual_plot_pie} 
+
+When we wish to display proportions of observations in a sample that take each of a discrete
+number of values, a **pie chart** is sometimes used:
+
+<center>
+```{r fig-piechart, echo=FALSE, fig.align = 'center', out.width = "90%", fig.cap = "Pie chart of eye colour of people in Britain"}
+par(mar = c(0, 0, 0, 0), cex=0.9) 
+pie(c(48,30,22), labels = c("Brown 48%","Blue 30%","Green 22%"),col=c("brown","blue","green"), main = "")
+```
+</center>
+
+However, there are many drawbacks with pie charts, especially when the
+number of categories is large, or when some categories have small frequencies,
+and the comparison of groups with similar proportions is difficult. 
+If you're thinking about using a pie chart then I suggest: stop, and ask yourself whether
+a bar chart would be clearer! 
+
+Figure \@ref(fig:opec-example-pie) is a pie chart showing the proportion of oil production by different 
+OPEC countries in 2016. 
+
+<center>
+```{r opec-example-pie, echo = FALSE, out.width = '90%', fig.align=  'center', fig.cap = "Pie chart of oil production by OPEC members"}
+#load('datasets/opec_data.Rdata')
+#load('https://shiny.maths.nottingham.ac.uk/pmzpn/opec_data.Rdata')
+opec_prod=c(10460710 , 4451516  ,3990956  ,3106077,  2923825,  2276967,  1999885  ,1769615 , 1522902 , 1348361 ,  833667, 548421  , 384686 ,  260000,   210820)
+opec_country=c("Saudi Arabia","Iraq", "Iran", "UAE", "Kuwait","Venezuela",   
+"Nigeria","Angola","Qatar" ,"Algeria", "Indonesia","Ecuador",     "Libya" ,       "Rep. Congo" ,  "Gabon")  
+par(mar = c(0, 0, 0, 0), cex=0.9) 
+#pie(dat$production, labels = dat$country, main = "")
+pie(opec_prod, labels = opec_country, main = "")
+```
+</center>
+
+And Figure \@ref(fig:opec-example-bar) is a bar chart showing the same data. Which do you find the clearer?
+
+<center>
+```{r opec-example-bar, echo = FALSE, out.width = '80%', fig.align = 'center', fig.cap = "Bar chart of oil production by OPEC members"}
+#load('datasets/opec_data.Rdata')
+#load('https://shiny.maths.nottingham.ac.uk/pmzpn/opec_data.Rdata')
+par(mar = c(6, 4, 1, 1)) 
+#barplot(100*as.vector(dat$production/sum(dat$production)), names.arg = dat$country, las = 2, ylab = 'Percentage of total OPEC output 2016', main = "")
+barplot(100*as.vector(opec_prod/sum(opec_prod)), names.arg = opec_country, las = 2, ylab = 'Percentage of total OPEC output 2016', main = "")
+```
+</center>
+
+### <span style="color: rgba(207, 0, 15, 1);">**Dotplots**</span>  {#visual_plot_dot} 
+
+A **dotplot** displays each data value as a dot, and is used for both continuous and discrete data. It is usually used only 
+when the sample size is small, otherwise the plot quickly gets overcrowded.
+Here is a dotplot for the $n=29$ Cavendish data values. 
+
+<center>
+```{r fig-dotplot1, echo = FALSE, out.width = '95%', fig.align=  'center', fig.asp = 0.2, fig.cap= "Simple dot plot of the Cavendish data"}
+ylim <- c(0,1)
+     # px <- c(5,6,50,60,70,90)/10
+     px <- sort(c(3.83,5.50, 5.57, 5.42, 5.61, 5.53, 5.47, 5.62, 
+                  5.63, 5.07, 5.29, 5.34, 5.26, 5.44, 5.46, 5.55,
+                  5.34, 5.30, 5.36, 5.79, 5.75, 5.29, 5.10, 5.86,
+                  5.58, 5.27, 5.85, 5.65, 5.39))
+     py <- rep(0,length.out = length(px))
+     
+     col.lighter = "azure3"
+     col.light = "azure4"
+     
+     ## create basic plot outline
+     par(xaxs='i',yaxs='i',mar=c(4,1,0,1), cex = 0.9)
+     plot(NA,xlim = c(3.6,6), ylim=ylim,axes=F,ann=F)
+     points(px,py,pch=16,xpd=NA, cex=1.5)
+     axis(1,col=col.lighter,col.axis=col.light)
+```
+</center>
+
+The 'overplotting' makes it 
+difficult to see how many data values there are in the middle of the data set. Sometimes to make things a bit clear some 'jitter' (randomness) is added in the y direction and/or the points are made slightly transparent, both of which help a lot in this case:
+
+<center>
+```{r fig-dotplot1jittered, echo = FALSE, out.width = '95%', fig.align=  'center', fig.asp = 0.2, fig.cap= "Dot plot of the Cavendish data with some jitter and transparency"}
+     set.seed(12345)
+     py <- rep(0.3*runif(length(px)), length.out = length(px))
+     par(xaxs='i',yaxs='i',mar=c(4,1,0,1), cex = 0.9)
+     plot(NA,xlim = c(3.6,6), ylim=ylim,axes=F,ann=F)
+     points(px,py,pch=16,xpd=NA, cex=1.5, col = rgb(0, 0, 0, max = 255, alpha = 122))
+     axis(1,col=col.lighter,col.axis=col.light)
+```
+</center>
+
+For discrete data the dots are stacked above the
+horizontal axis. The result is something
+similar to a bar chart, but showing individual points. 
+Here is a dotplot for the 
+seed data:
+
+<center>
+```{r fig-dotplot2, echo=FALSE, fig.align = 'center', out.width = "65%", fig.cap = "Dot plot of some discrete seed count data"}
+y=seq(85,94)
+z=c(3,1,5,2,3,6,11,4,4,1)
+plot(NA,xlab="Number of seeds",ylab="",axes=F,xlim=c(84,94),ylim=c(0,12))
+axis(1)
+for(i in 1:length(y))
+{
+  points(rep((84+i),z[i]),0.5+seq(0,z[i]-1),cex=4,pch=20)
+}
+```
+</center>
+
+### <span style="color: rgba(207, 0, 15, 1);">**Scatterplots**</span>  {#visual_plot_scatter} 
+
+
+In addition to displaying the data on each random variable as above,
+when we have data that consists of observations on two or more random
+variables, it is useful to try and assess any relationships between
+random variables by using a **scatterplot**. A scatterplot is simply a
+graph with one random variable as abscissa and another random variable
+as ordinate. A point is plot on the graph for each element of data at
+the observed values of the two random variables,see Figure
+\@ref(fig:fig-scatterplot1). 
+
+<center>
+```{r fig-scatterplot1, echo=FALSE, fig.align = 'center', out.width = "70%", fig.cap = "Scatter plot of number of seeds versus average temperature (40 observations)"}
+
+set.seed(13567)
+x=c(rep(85,3),86,rep(87,5),rep(88,2),rep(89,3),rep(90,6),rep(91,11),rep(92,4),rep(93,4),94)
+tempx=rnorm(40,x,0.5)-70
+plot(tempx,x,xlab="Temperature (C)",ylab="Number of seeds")
+```
+</center>
+
+This is very useful for exploring the relationship between two variables. In the above example we observe that the number of seeds which germinate increases linearly with temperature. We can extend the approach to comparing more than two variables by producing
+a **scatterplot matrix**
+which consists of scatterplots for every pair of random variables, see
+Figure \@ref(fig:fig-scatterplot2).
+
+<center>
+```{r fig-scatterplot2, echo=FALSE, fig.align = 'center', out.width = "95%", fig.cap = "A scatterplot matrix for three variables (100 observations)"}
+
+set.seed(13567)
+y1=rnorm(100)
+y2=rnorm(100)
+y3=rnorm(100)
+var1=(y1+3*y2)/3
+var2=(y1-4*y2)/4
+var3=y3
+M=matrix(c(var1,var2,var3),ncol=3,byrow=F)
+colnames(M)=c("var1","var2","var3")
+
+pairs(~var1+var2+var3,data=M)
+```
+</center>
+
+### <span style="color: rgba(207, 0, 15, 1);">**Summary**</span>  {#visual_plot_summary} 
+
+<span style="color: rgba(207, 0, 15, 1);">**Histogram/Dotplot**</span> 
+
+*Pros:* Gives a good impression of the distribution of the data.
+
+*Cons:* The histogram is sensitive to the classes chosen to group
+observations -- giving only a vague impression of the data.
+
+<span style="color: rgba(207, 0, 15, 1);">**Density plot**</span> 
+
+*Pros:* Represents continuous distribution by a continuous function (density) aoviding the discretisation of histograms.
+
+*Cons:* Over-interprets individual observations for small sample sizes often leading to erroneous multi-modality.
+
+
+<span style="color: rgba(207, 0, 15, 1);">**Boxplot**</span> 
+
+*Pros:* Good for comparing different samples or groups of observations on
+the same random variable. Gives a good quick summary of the data.
+
+*Cons:* Gives no feel for the number of observations involved. Hides
+multiple modes.
+
+<span style="color: rgba(207, 0, 15, 1);">**Stem and leaf plot**</span> 
+
+*Pros:* Gives indication of general shape and other distributional
+features while allowing actual data values to be recovered.
+
+*Cons:* Difficult to use for comparative purposes -- suffers from lack of
+clarity.
+
+<span style="color: rgba(207, 0, 15, 1);">**Pie chart**</span> 
+
+*Pros:* Looks nice.
+
+*Cons:* Only useful for comparing the relative proportions of observations
+in a small number of categories. Difficult to compare categories with
+similar frequencies, or very small frequencies.
+
+
+## Commenting on data {#visual_data}
+
+When we describe a data set in words, often to complement a plot, here are some things worth commenting about:
+
+- *Location* - what is a typical value?  
+- *Spread* - how dispersed are the observations?  
+- *Multiple modes* - is there one or more 'peaks' (and why)?  
+- *Symmetry/skewness* - is skewness positive, negative, roughly zero?  
+- *Outliers* - are there any unusual observations?  
+- *Any other interesting patterns or features* - e.g. are two variables related?  
+
+We have given an overview of summarising data, both numerically (location and spread)  and graphically. We are now in position to consider the mathematical underpinnings of statistics through the introduction of probability.
+
+## <span style="color: rgba(15, 0, 207, 1);">**Task: Session 2**</span>  {- #visual:lab}
+
+In [Section 24](#Rmark), an introduction using to **R Markdown** is given. 
+
+Work through [Section 24](#Rmark) and then attempt to complete the **R Markdown** file for Session 2:  
+[Session 2: Plots in R](https://moodle.nottingham.ac.uk/course/view.php?id=134982#section-2)

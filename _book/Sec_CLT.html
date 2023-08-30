@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 7 Central Limit Theorem and law of large numbers | Foundations of Statistics</title>
+  <meta name="description" content="Lecture Notes for Foundations of Statistics" />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 7 Central Limit Theorem and law of large numbers | Foundations of Statistics" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Lecture Notes for Foundations of Statistics" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 7 Central Limit Theorem and law of large numbers | Foundations of Statistics" />
+  
+  <meta name="twitter:description" content="Lecture Notes for Foundations of Statistics" />
+  
+
+<meta name="author" content="Prof Peter Neal and Dr Daniel Cavey" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="jointdis.html"/>
+<link rel="next" href="motivate.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">MATH4081: Foundations of Statistics</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preliminaries</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#overview"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#tasks"><i class="fa fa-check"></i>Tasks</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#intro_stats"><i class="fa fa-check"></i><b>1.1</b> What is Statistics?</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#intro_population"><i class="fa fa-check"></i><b>1.2</b> Populations and samples</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#intro_data"><i class="fa fa-check"></i><b>1.3</b> Types of Data</a></li>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#intro_example"><i class="fa fa-check"></i><b>1.4</b> Some example datasets</a></li>
+<li class="chapter" data-level="1.5" data-path="intro.html"><a href="intro.html#intro_computing"><i class="fa fa-check"></i><b>1.5</b> Statistical Computing</a></li>
+<li class="chapter" data-level="1.6" data-path="intro.html"><a href="intro.html#intro_paradigm"><i class="fa fa-check"></i><b>1.6</b> The statistical paradigm</a></li>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#intro:R"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 1</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>2</b> Summary Statistics</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="summary.html"><a href="summary.html#summary_location"><i class="fa fa-check"></i><b>2.1</b> Measures of location</a></li>
+<li class="chapter" data-level="2.2" data-path="summary.html"><a href="summary.html#summary_spread"><i class="fa fa-check"></i><b>2.2</b> Measures of spread</a></li>
+<li class="chapter" data-level="2.3" data-path="summary.html"><a href="summary.html#summary_robust"><i class="fa fa-check"></i><b>2.3</b> Robustness of summary statistics</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="visual.html"><a href="visual.html"><i class="fa fa-check"></i><b>3</b> Visualising data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="visual.html"><a href="visual.html#visual_intro"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="visual.html"><a href="visual.html#visual_data-features"><i class="fa fa-check"></i><b>3.2</b> Some data features</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="visual.html"><a href="visual.html#visual_data-features_multi"><i class="fa fa-check"></i><b>3.2.1</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Multimodal distributions</strong></span></a></li>
+<li class="chapter" data-level="3.2.2" data-path="visual.html"><a href="visual.html#visual_data-features_symmetry"><i class="fa fa-check"></i><b>3.2.2</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Symmetry</strong></span></a></li>
+<li class="chapter" data-level="3.2.3" data-path="visual.html"><a href="visual.html#visual_data-features_outliers"><i class="fa fa-check"></i><b>3.2.3</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Outliers</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="visual.html"><a href="visual.html#visual_plot"><i class="fa fa-check"></i><b>3.3</b> Basic plot types</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="visual.html"><a href="visual.html#visual_plot_histo"><i class="fa fa-check"></i><b>3.3.1</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Histogram and bar charts</strong></span></a></li>
+<li class="chapter" data-level="3.3.2" data-path="visual.html"><a href="visual.html#visual_plot_density"><i class="fa fa-check"></i><b>3.3.2</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Density plots</strong></span></a></li>
+<li class="chapter" data-level="3.3.3" data-path="visual.html"><a href="visual.html#visual_plot_boxplot"><i class="fa fa-check"></i><b>3.3.3</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Boxplot</strong></span></a></li>
+<li class="chapter" data-level="3.3.4" data-path="visual.html"><a href="visual.html#visual_plot_cdf"><i class="fa fa-check"></i><b>3.3.4</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Cumulative frequency diagrams, and the empirical CDF</strong></span></a></li>
+<li class="chapter" data-level="3.3.5" data-path="visual.html"><a href="visual.html#visual_plot_stem"><i class="fa fa-check"></i><b>3.3.5</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Stem and leaf</strong></span></a></li>
+<li class="chapter" data-level="3.3.6" data-path="visual.html"><a href="visual.html#visual_plot_pie"><i class="fa fa-check"></i><b>3.3.6</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Pie charts</strong></span></a></li>
+<li class="chapter" data-level="3.3.7" data-path="visual.html"><a href="visual.html#visual_plot_dot"><i class="fa fa-check"></i><b>3.3.7</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Dotplots</strong></span></a></li>
+<li class="chapter" data-level="3.3.8" data-path="visual.html"><a href="visual.html#visual_plot_scatter"><i class="fa fa-check"></i><b>3.3.8</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Scatterplots</strong></span></a></li>
+<li class="chapter" data-level="3.3.9" data-path="visual.html"><a href="visual.html#visual_plot_summary"><i class="fa fa-check"></i><b>3.3.9</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Summary</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="visual.html"><a href="visual.html#visual_data"><i class="fa fa-check"></i><b>3.4</b> Commenting on data</a></li>
+<li class="chapter" data-level="" data-path="visual.html"><a href="visual.html#visual:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 2</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="prob.html"><a href="prob.html"><i class="fa fa-check"></i><b>4</b> Probability</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="prob.html"><a href="prob.html#prob:overview"><i class="fa fa-check"></i><b>4.1</b> Overview</a></li>
+<li class="chapter" data-level="4.2" data-path="prob.html"><a href="prob.html#prob:motivation"><i class="fa fa-check"></i><b>4.2</b> Motivation</a></li>
+<li class="chapter" data-level="4.3" data-path="prob.html"><a href="prob.html#prob:sample_space"><i class="fa fa-check"></i><b>4.3</b> Sample Space</a></li>
+<li class="chapter" data-level="4.4" data-path="prob.html"><a href="prob.html#prob:events"><i class="fa fa-check"></i><b>4.4</b> Events</a></li>
+<li class="chapter" data-level="4.5" data-path="prob.html"><a href="prob.html#prob:defn"><i class="fa fa-check"></i><b>4.5</b> Probability</a></li>
+<li class="chapter" data-level="4.6" data-path="prob.html"><a href="prob.html#prob:Conditional_Probability"><i class="fa fa-check"></i><b>4.6</b> Conditional probability</a></li>
+<li class="chapter" data-level="4.7" data-path="prob.html"><a href="prob.html#prob:mutual"><i class="fa fa-check"></i><b>4.7</b> Mutual Independence</a></li>
+<li class="chapter" data-level="" data-path="prob.html"><a href="prob.html#rv:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 3</strong></span></a></li>
+<li class="chapter" data-level="" data-path="prob.html"><a href="prob.html#prob:stud"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="rv.html"><a href="rv.html"><i class="fa fa-check"></i><b>5</b> Random Variables</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="rv.html"><a href="rv.html#rv:overview"><i class="fa fa-check"></i><b>5.1</b> Overview</a></li>
+<li class="chapter" data-level="5.2" data-path="rv.html"><a href="rv.html#rv:des"><i class="fa fa-check"></i><b>5.2</b> Random variables</a></li>
+<li class="chapter" data-level="5.3" data-path="rv.html"><a href="rv.html#rv:expect"><i class="fa fa-check"></i><b>5.3</b> Expectation</a></li>
+<li class="chapter" data-level="5.4" data-path="rv.html"><a href="rv.html#rv:bernoulli"><i class="fa fa-check"></i><b>5.4</b> Bernoulli distribution and its extension</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="rv.html"><a href="rv.html#rv:Bernoulli:bern"><i class="fa fa-check"></i><b>5.4.1</b> Bernoulli distribution</a></li>
+<li class="chapter" data-level="5.4.2" data-path="rv.html"><a href="rv.html#rv:Bernoulli:bin"><i class="fa fa-check"></i><b>5.4.2</b> Binomial Distribution</a></li>
+<li class="chapter" data-level="5.4.3" data-path="rv.html"><a href="rv.html#rv:Bernoulli:geom"><i class="fa fa-check"></i><b>5.4.3</b> Geometric Distribution</a></li>
+<li class="chapter" data-level="5.4.4" data-path="rv.html"><a href="rv.html#rv:Bernoulli:negbin"><i class="fa fa-check"></i><b>5.4.4</b> Negative binomial Distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="rv.html"><a href="rv.html#rv:Poisson"><i class="fa fa-check"></i><b>5.5</b> Poisson distribution</a></li>
+<li class="chapter" data-level="5.6" data-path="rv.html"><a href="rv.html#rv:exponential"><i class="fa fa-check"></i><b>5.6</b> Exponential distribution and its extensions</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="rv.html"><a href="rv.html#rv:exponential:exp"><i class="fa fa-check"></i><b>5.6.1</b> Exponential distribution</a></li>
+<li class="chapter" data-level="5.6.2" data-path="rv.html"><a href="rv.html#rv:exponential:gamma"><i class="fa fa-check"></i><b>5.6.2</b> Gamma distribution</a></li>
+<li class="chapter" data-level="5.6.3" data-path="rv.html"><a href="rv.html#rv:exponential:chi"><i class="fa fa-check"></i><b>5.6.3</b> Chi squared distribution</a></li>
+<li class="chapter" data-level="5.6.4" data-path="rv.html"><a href="rv.html#rv:exponential:beta"><i class="fa fa-check"></i><b>5.6.4</b> Beta distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="rv.html"><a href="rv.html#rv:normal"><i class="fa fa-check"></i><b>5.7</b> Normal (Gaussian) Distribution</a></li>
+<li class="chapter" data-level="" data-path="rv.html"><a href="rv.html#prob:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="jointdis.html"><a href="jointdis.html"><i class="fa fa-check"></i><b>6</b> Joint Distribution Functions</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="jointdis.html"><a href="jointdis.html#jointdis:intro"><i class="fa fa-check"></i><b>6.1</b> Overview</a></li>
+<li class="chapter" data-level="6.2" data-path="jointdis.html"><a href="jointdis.html#jointdis:cdf"><i class="fa fa-check"></i><b>6.2</b> Joint c.d.f. and p.d.f.</a></li>
+<li class="chapter" data-level="6.3" data-path="jointdis.html"><a href="jointdis.html#jointdis:marginal"><i class="fa fa-check"></i><b>6.3</b> Marginal c.d.f. and p.d.f.</a></li>
+<li class="chapter" data-level="6.4" data-path="jointdis.html"><a href="jointdis.html#jointdis:independent"><i class="fa fa-check"></i><b>6.4</b> Independent random variables</a></li>
+<li class="chapter" data-level="" data-path="jointdis.html"><a href="jointdis.html#jointdis:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercise</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="Sec_CLT.html"><a href="Sec_CLT.html"><i class="fa fa-check"></i><b>7</b> Central Limit Theorem and law of large numbers</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="Sec_CLT.html"><a href="Sec_CLT.html#Sec_CLT:intro"><i class="fa fa-check"></i><b>7.1</b> Introduction</a></li>
+<li class="chapter" data-level="7.2" data-path="Sec_CLT.html"><a href="Sec_CLT.html#Sec_CLT:statement"><i class="fa fa-check"></i><b>7.2</b> Statement of Central Limit Theorem</a></li>
+<li class="chapter" data-level="7.3" data-path="Sec_CLT.html"><a href="Sec_CLT.html#Sec_CLT:discrete"><i class="fa fa-check"></i><b>7.3</b> Central limit theorem for discrete random variables</a></li>
+<li class="chapter" data-level="7.4" data-path="Sec_CLT.html"><a href="Sec_CLT.html#Sec_CLT:LLN"><i class="fa fa-check"></i><b>7.4</b> Law of Large Numbers</a></li>
+<li class="chapter" data-level="" data-path="Sec_CLT.html"><a href="Sec_CLT.html#Sec_clt:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 4</strong></span></a></li>
+<li class="chapter" data-level="" data-path="Sec_CLT.html"><a href="Sec_CLT.html#Sec_clt:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="motivate.html"><a href="motivate.html"><i class="fa fa-check"></i><b>8</b> Motivation for Statistical Inference</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="motivate.html"><a href="motivate.html#motivate:intro"><i class="fa fa-check"></i><b>8.1</b> Introduction</a></li>
+<li class="chapter" data-level="8.2" data-path="motivate.html"><a href="motivate.html#motivate:example"><i class="fa fa-check"></i><b>8.2</b> Motivating example</a></li>
+<li class="chapter" data-level="8.3" data-path="motivate.html"><a href="motivate.html#motivate:assumption"><i class="fa fa-check"></i><b>8.3</b> Modelling assumptions</a></li>
+<li class="chapter" data-level="8.4" data-path="motivate.html"><a href="motivate.html#motivate:parametric"><i class="fa fa-check"></i><b>8.4</b> Parametric models</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="paraestimate.html"><a href="paraestimate.html"><i class="fa fa-check"></i><b>9</b> Parameter Estimation</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="paraestimate.html"><a href="paraestimate.html#paraestimate:intro"><i class="fa fa-check"></i><b>9.1</b> Introduction</a></li>
+<li class="chapter" data-level="9.2" data-path="paraestimate.html"><a href="paraestimate.html#paraestimate:prelim"><i class="fa fa-check"></i><b>9.2</b> Preliminaries</a></li>
+<li class="chapter" data-level="9.3" data-path="paraestimate.html"><a href="paraestimate.html#paraestimate:judge"><i class="fa fa-check"></i><b>9.3</b> Judging estimators</a></li>
+<li class="chapter" data-level="9.4" data-path="paraestimate.html"><a href="paraestimate.html#paraestimate:variance"><i class="fa fa-check"></i><b>9.4</b> Sample Variance</a></li>
+<li class="chapter" data-level="" data-path="paraestimate.html"><a href="paraestimate.html#paraestimate:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 5</strong></span></a></li>
+<li class="chapter" data-level="" data-path="paraestimate.html"><a href="paraestimate.html#paraestimate:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="MLE.html"><a href="MLE.html"><i class="fa fa-check"></i><b>10</b> Techniques for Deriving Estimators</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="MLE.html"><a href="MLE.html#MLE:intro"><i class="fa fa-check"></i><b>10.1</b> Introduction</a></li>
+<li class="chapter" data-level="10.2" data-path="MLE.html"><a href="MLE.html#MLE:moments"><i class="fa fa-check"></i><b>10.2</b> Method of Moments</a></li>
+<li class="chapter" data-level="10.3" data-path="MLE.html"><a href="MLE.html#MLE:MLE"><i class="fa fa-check"></i><b>10.3</b> Maximum likelihood estimation</a></li>
+<li class="chapter" data-level="10.4" data-path="MLE.html"><a href="MLE.html#MLE:comments"><i class="fa fa-check"></i><b>10.4</b> Comments on the Maximum Likelihood Estimator</a></li>
+<li class="chapter" data-level="" data-path="MLE.html"><a href="MLE.html#MLE:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="MLEprop.html"><a href="MLEprop.html"><i class="fa fa-check"></i><b>11</b> Additional Properties of Estimators</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:intro"><i class="fa fa-check"></i><b>11.1</b> Introduction</a></li>
+<li class="chapter" data-level="11.2" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:sufficient"><i class="fa fa-check"></i><b>11.2</b> Sufficiency</a></li>
+<li class="chapter" data-level="11.3" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:MVE"><i class="fa fa-check"></i><b>11.3</b> Minimum variance estimators</a></li>
+<li class="chapter" data-level="11.4" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:asymptotic"><i class="fa fa-check"></i><b>11.4</b> Asymptotic normality of the MLE</a></li>
+<li class="chapter" data-level="11.5" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:invariance"><i class="fa fa-check"></i><b>11.5</b> Invariance property</a></li>
+<li class="chapter" data-level="" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 6</strong></span></a></li>
+<li class="chapter" data-level="" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="CondDis.html"><a href="CondDis.html"><i class="fa fa-check"></i><b>12</b> Conditional Distribution and Conditional Expectation</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="CondDis.html"><a href="CondDis.html#CondDis:CondDis"><i class="fa fa-check"></i><b>12.1</b> Conditional distribution</a></li>
+<li class="chapter" data-level="12.2" data-path="CondDis.html"><a href="CondDis.html#CondDis:CondExpect"><i class="fa fa-check"></i><b>12.2</b> Conditional expectation</a></li>
+<li class="chapter" data-level="12.3" data-path="CondDis.html"><a href="CondDis.html#CondDis:Independence"><i class="fa fa-check"></i><b>12.3</b> Independent random variables</a></li>
+<li class="chapter" data-level="" data-path="CondDis.html"><a href="CondDis.html#CondDis:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercise</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="Correlation.html"><a href="Correlation.html"><i class="fa fa-check"></i><b>13</b> Expectation, Covariance and Correlation</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="Correlation.html"><a href="Correlation.html#Correlation:Expectation"><i class="fa fa-check"></i><b>13.1</b> Expectation of a function of random variables</a></li>
+<li class="chapter" data-level="13.2" data-path="Correlation.html"><a href="Correlation.html#Correlation:Covariance"><i class="fa fa-check"></i><b>13.2</b> Covariance</a></li>
+<li class="chapter" data-level="13.3" data-path="Correlation.html"><a href="Correlation.html#Correlation:Correlation"><i class="fa fa-check"></i><b>13.3</b> Correlation</a></li>
+<li class="chapter" data-level="" data-path="Correlation.html"><a href="Correlation.html#Correlation:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 7</strong></span></a></li>
+<li class="chapter" data-level="" data-path="Correlation.html"><a href="Correlation.html#Correlation:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="Transform.html"><a href="Transform.html"><i class="fa fa-check"></i><b>14</b> Transformations of random variables</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="Transform.html"><a href="Transform.html#Transform:intro"><i class="fa fa-check"></i><b>14.1</b> Introduction</a></li>
+<li class="chapter" data-level="14.2" data-path="Transform.html"><a href="Transform.html#Transform:univariate"><i class="fa fa-check"></i><b>14.2</b> Univariate case</a></li>
+<li class="chapter" data-level="14.3" data-path="Transform.html"><a href="Transform.html#Transform:bivariate"><i class="fa fa-check"></i><b>14.3</b> Bivariate case</a></li>
+<li class="chapter" data-level="" data-path="Transform.html"><a href="Transform.html#Transform:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercise</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="MV_Normal.html"><a href="MV_Normal.html"><i class="fa fa-check"></i><b>15</b> Multivariate Normal Distribution</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="MV_Normal.html"><a href="MV_Normal.html#MV_Normal:intro"><i class="fa fa-check"></i><b>15.1</b> Introduction</a></li>
+<li class="chapter" data-level="15.2" data-path="MV_Normal.html"><a href="MV_Normal.html#MV_Normal:multi"><i class="fa fa-check"></i><b>15.2</b> <span class="math inline">\(n\)</span>-Dimensional Normal Distribution</a></li>
+<li class="chapter" data-level="" data-path="MV_Normal.html"><a href="MV_Normal.html#MV_Normal:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 8</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html"><i class="fa fa-check"></i><b>16</b> Introduction to Linear Models</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:intro"><i class="fa fa-check"></i><b>16.1</b> Introduction</a></li>
+<li class="chapter" data-level="16.2" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:stat"><i class="fa fa-check"></i><b>16.2</b> Statistical models</a></li>
+<li class="chapter" data-level="16.3" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:linear"><i class="fa fa-check"></i><b>16.3</b> The linear model</a></li>
+<li class="chapter" data-level="16.4" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:Gauss"><i class="fa fa-check"></i><b>16.4</b> The Normal (Gaussian) linear model</a></li>
+<li class="chapter" data-level="16.5" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:residuals"><i class="fa fa-check"></i><b>16.5</b> Residuals</a></li>
+<li class="chapter" data-level="16.6" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:line"><i class="fa fa-check"></i><b>16.6</b> Straight Line, Horizontal Line and Quadratic Models</a></li>
+<li class="chapter" data-level="16.7" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:Examples"><i class="fa fa-check"></i><b>16.7</b> Examples</a></li>
+<li class="chapter" data-level="16.8" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:Prediction"><i class="fa fa-check"></i><b>16.8</b> Prediction</a></li>
+<li class="chapter" data-level="16.9" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:Nested"><i class="fa fa-check"></i><b>16.9</b> Nested Models</a></li>
+<li class="chapter" data-level="" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercise</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html"><i class="fa fa-check"></i><b>17</b> Least Squares Estimation for Linear Models</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:intro"><i class="fa fa-check"></i><b>17.1</b> Introduction</a></li>
+<li class="chapter" data-level="17.2" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:algebra"><i class="fa fa-check"></i><b>17.2</b> Linear algebra review</a></li>
+<li class="chapter" data-level="17.3" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:derive"><i class="fa fa-check"></i><b>17.3</b> Deriving the least squares estimator</a></li>
+<li class="chapter" data-level="17.4" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:examples"><i class="fa fa-check"></i><b>17.4</b> Examples</a></li>
+<li class="chapter" data-level="17.5" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:beta"><i class="fa fa-check"></i><b>17.5</b> Properties of the estimator of <span class="math inline">\(\mathbf{\beta}\)</span></a></li>
+<li class="chapter" data-level="17.6" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:GaussMarkov"><i class="fa fa-check"></i><b>17.6</b> Gauss-Markov Theorem</a></li>
+<li class="chapter" data-level="" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 9</strong></span></a></li>
+<li class="chapter" data-level="" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="Interval_Estimation.html"><a href="Interval_Estimation.html"><i class="fa fa-check"></i><b>18</b> Interval Estimation</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="Interval_Estimation.html"><a href="Interval_Estimation.html#Interval_Estimation:intro"><i class="fa fa-check"></i><b>18.1</b> Introduction</a></li>
+<li class="chapter" data-level="18.2" data-path="Interval_Estimation.html"><a href="Interval_Estimation.html#Interval_Estimation:confident"><i class="fa fa-check"></i><b>18.2</b> Confident?</a></li>
+<li class="chapter" data-level="18.3" data-path="Interval_Estimation.html"><a href="Interval_Estimation.html#Interval_Estimation:CI"><i class="fa fa-check"></i><b>18.3</b> Confidence intervals</a></li>
+<li class="chapter" data-level="18.4" data-path="Interval_Estimation.html"><a href="Interval_Estimation.html#Interval_Estimation:MLE"><i class="fa fa-check"></i><b>18.4</b> Asymptotic distribution of the MLE</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html"><i class="fa fa-check"></i><b>19</b> Hypothesis Testing</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:intro"><i class="fa fa-check"></i><b>19.1</b> Introduction to hypothesis testing</a></li>
+<li class="chapter" data-level="19.2" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:errors"><i class="fa fa-check"></i><b>19.2</b> Type I and Type II errors</a></li>
+<li class="chapter" data-level="19.3" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:normal_known"><i class="fa fa-check"></i><b>19.3</b> Tests for normal means, <span class="math inline">\(\sigma\)</span> known</a></li>
+<li class="chapter" data-level="19.4" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:p_values"><i class="fa fa-check"></i><b>19.4</b> <span class="math inline">\(p\)</span> values</a></li>
+<li class="chapter" data-level="19.5" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:normal_unknown"><i class="fa fa-check"></i><b>19.5</b> Tests for normal means, <span class="math inline">\(\sigma\)</span> unknown</a></li>
+<li class="chapter" data-level="19.6" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:twosided"><i class="fa fa-check"></i><b>19.6</b> Confidence intervals and two-sided tests</a></li>
+<li class="chapter" data-level="19.7" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:variance"><i class="fa fa-check"></i><b>19.7</b> Distribution of the variance</a></li>
+<li class="chapter" data-level="19.8" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:other"><i class="fa fa-check"></i><b>19.8</b> Other types of tests</a></li>
+<li class="chapter" data-level="19.9" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:samplesize"><i class="fa fa-check"></i><b>19.9</b> Sample size calculation</a></li>
+<li class="chapter" data-level="" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 10</strong></span></a></li>
+<li class="chapter" data-level="" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html"><i class="fa fa-check"></i><b>20</b> Hypothesis Testing Discrete Data</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html#Hypo_Test_Discrete:intro"><i class="fa fa-check"></i><b>20.1</b> Introduction</a></li>
+<li class="chapter" data-level="20.2" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html#Hypo_Test_Discrete:motivate"><i class="fa fa-check"></i><b>20.2</b> Goodness-of-fit motivating example</a></li>
+<li class="chapter" data-level="20.3" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html#Hypo_Test_Discrete:GoF"><i class="fa fa-check"></i><b>20.3</b> Goodness-of-fit</a></li>
+<li class="chapter" data-level="20.4" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html#Hypo_Test_Discrete:Independence"><i class="fa fa-check"></i><b>20.4</b> Testing Independence</a></li>
+<li class="chapter" data-level="" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html#Hypo_Test_Discrete:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 11</strong></span></a></li>
+<li class="chapter" data-level="" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html#Hypo_Test_Discrete:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="Sec_Linear_hypo_test.html"><a href="Sec_Linear_hypo_test.html"><i class="fa fa-check"></i><b>21</b> Basic Hypothesis Tests for Linear Models</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="Sec_Linear_hypo_test.html"><a href="Sec_Linear_hypo_test.html#Sec_Linear_hypo_test:intro"><i class="fa fa-check"></i><b>21.1</b> Introduction</a></li>
+<li class="chapter" data-level="21.2" data-path="Sec_Linear_hypo_test.html"><a href="Sec_Linear_hypo_test.html#Sec_Linear_hypo_test:single"><i class="fa fa-check"></i><b>21.2</b> Tests on a single parameter</a></li>
+<li class="chapter" data-level="21.3" data-path="Sec_Linear_hypo_test.html"><a href="Sec_Linear_hypo_test.html#Sec_Linear_hypo_test:CI"><i class="fa fa-check"></i><b>21.3</b> Confidence intervals for parameters</a></li>
+<li class="chapter" data-level="21.4" data-path="Sec_Linear_hypo_test.html"><a href="Sec_Linear_hypo_test.html#Sec_Linear_hypo_test:F"><i class="fa fa-check"></i><b>21.4</b> Tests for the existence of regression</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html"><i class="fa fa-check"></i><b>22</b> ANOVA Tables and F Tests</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:Intro"><i class="fa fa-check"></i><b>22.1</b> Introduction</a></li>
+<li class="chapter" data-level="22.2" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:residuals"><i class="fa fa-check"></i><b>22.2</b> The residuals</a></li>
+<li class="chapter" data-level="22.3" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:SS"><i class="fa fa-check"></i><b>22.3</b> Sums of squares</a></li>
+<li class="chapter" data-level="22.4" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:ANOVA"><i class="fa fa-check"></i><b>22.4</b> Analysis of Variance (ANOVA)</a></li>
+<li class="chapter" data-level="22.5" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:Compare"><i class="fa fa-check"></i><b>22.5</b> Comparing models</a></li>
+<li class="chapter" data-level="22.6" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:seq"><i class="fa fa-check"></i><b>22.6</b> Sequential sum of squares</a></li>
+<li class="chapter" data-level="" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 12</strong></span></a></li>
+<li class="chapter" data-level="" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="introR.html"><a href="introR.html"><i class="fa fa-check"></i><b>23</b> Introduction to R</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="introR.html"><a href="introR.html#introR_what"><i class="fa fa-check"></i><b>23.1</b> What are R, RStudio and R Markdown?</a></li>
+<li class="chapter" data-level="23.2" data-path="introR.html"><a href="introR.html#introR_UoN"><i class="fa fa-check"></i><b>23.2</b> Starting RStudio on the UoN Network</a></li>
+<li class="chapter" data-level="23.3" data-path="introR.html"><a href="introR.html#introR_download"><i class="fa fa-check"></i><b>23.3</b> Downloading R and RStudio</a></li>
+<li class="chapter" data-level="23.4" data-path="introR.html"><a href="introR.html#introR_start"><i class="fa fa-check"></i><b>23.4</b> Getting started in R</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="Rmark.html"><a href="Rmark.html"><i class="fa fa-check"></i><b>24</b> What is R Markdown?</a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="Rmark.html"><a href="Rmark.html#Rmark_start"><i class="fa fa-check"></i><b>24.1</b> Getting started</a></li>
+<li class="chapter" data-level="24.2" data-path="Rmark.html"><a href="Rmark.html#Rmark_R"><i class="fa fa-check"></i><b>24.2</b> R in R Markdown</a></li>
+<li class="chapter" data-level="24.3" data-path="Rmark.html"><a href="Rmark.html#Rmark_text"><i class="fa fa-check"></i><b>24.3</b> Text in R markdown</a></li>
+<li class="chapter" data-level="24.4" data-path="Rmark.html"><a href="Rmark.html#Rmark_maths"><i class="fa fa-check"></i><b>24.4</b> Mathematics in R Markdown</a></li>
+<li class="chapter" data-level="24.5" data-path="Rmark.html"><a href="Rmark.html#Rmark_work"><i class="fa fa-check"></i><b>24.5</b> Worked Example</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://moodle.nottingham.ac.uk/course/view.php?id=128925" target="blank">MATH4081 Moodle Page</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Foundations of Statistics</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="Sec_CLT" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">Chapter 7</span> Central Limit Theorem and law of large numbers<a href="Sec_CLT.html#Sec_CLT" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="Sec_CLT:intro" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> Introduction<a href="Sec_CLT.html#Sec_CLT:intro" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this Section we will show why the Normal distribution, introduced in <a href="rv.html#rv:normal">Section 5.7</a>, is so important in probability and statistics. The central limit theorem states that under very weak conditions (almost all probability distributions you will see will satisfy them) the sum of <span class="math inline">\(n\)</span> <em>i.i.d.</em> random variables, <span class="math inline">\(S_n\)</span>, will converge, appropriately <em>normalised</em> to a standard Normal distribution as <span class="math inline">\(n \to \infty\)</span>. For finite, but large <span class="math inline">\(n (\geq 50)\)</span>, we can approximate <span class="math inline">\(S_n\)</span> by a normal distribution and the normal distribution approximation can be used to answer questions concerning <span class="math inline">\(S_n\)</span>. In <a href="Sec_CLT.html#Sec_CLT:statement">Section 7.2</a> we present the <a href="Sec_CLT.html#Sec_CLT:thm:CLT"><strong>Central Limit Theorem</strong></a> and apply it to an example using exponential random variables. In <a href="Sec_CLT.html#Sec_CLT:discrete">Section 7.3</a> we explore how a continuous distribution (the Normal distribution) can be used to approximate sums of discrete distributions. Finally, in <a href="Sec_CLT.html#Sec_CLT:LLN">Section 7.4</a>, we present the <a href="Sec_CLT.html#Sec_CLT:thm:LLN"><strong>Law of Large Numbers</strong></a> which states that the uncertainty in the sample mean of <span class="math inline">\(n\)</span> observations, <span class="math inline">\(S_n/n\)</span>, decreases as <span class="math inline">\(n\)</span> increases and converges to the population mean <span class="math inline">\(\mu\)</span>. Both the Central Limit Theorem and the Law of Large Numbers will be important moving forward when considering statistical questions.</p>
+</div>
+<div id="Sec_CLT:statement" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> Statement of Central Limit Theorem<a href="Sec_CLT.html#Sec_CLT:statement" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Before stating the <a href="Sec_CLT.html#Sec_CLT:thm:CLT"><strong>Central Limit Theorem</strong></a>, we introduce some notation.</p>
+<div id="Sec_CLT:thm:convd" class="def">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Convergence in distribution</strong></span></p>
+A sequence of random variables <span class="math inline">\(Y_1, Y_2, \ldots\)</span> are said to <strong>converge in distribution</strong> to a random variable <span class="math inline">\(Y\)</span>, if for all <span class="math inline">\(y \in \mathbb{R}\)</span>,
+<center>
+<span class="math display">\[ P(Y_n \leq y) \rightarrow P(Y \leq y) \qquad \qquad \mbox{ as } \; n \to \infty. \]</span>
+</center>
+<p>We write <span class="math inline">\(Y_n \xrightarrow{\quad D \quad} Y\)</span> as <span class="math inline">\(n \to \infty\)</span>.</p>
+</div>
+<div id="Sec_CLT:thm:CLT" class="thm">
+<span style="color: rgba(207, 0, 15, 1);"><strong>Central Limit Theorem.</strong></span><br />
+Let <span class="math inline">\(X_1,X_2,\dots,X_n\)</span> be independent and identically distributed random variables (i.e. a random sample) with finite mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>. Let <span class="math inline">\(S_n = X_1 + \cdots + X_n\)</span>. Then
+<center>
+<span class="math display">\[ \frac{S_n - n\mu}{\sigma \sqrt{n}} \xrightarrow{\quad D \quad} N(0,1).\]</span>
+</center>
+</div>
+The central limit theorem is equivalent to
+<center>
+<span class="math display">\[\frac{\bar{X} - \mu}{\sigma/\sqrt{n}} \xrightarrow{\quad D \quad} N(0,1).\]</span>
+</center>
+<p>where <span class="math inline">\(\bar{X} = \frac{1}{n} \sum_{i=1}^n X_i\)</span> is the mean of the distributions <span class="math inline">\(X_1, X_2, \ldots , X_n\)</span>.</p>
+Therefore, we have that for large <span class="math inline">\(n\)</span>,
+<center>
+<span class="math display">\[ S_n \approx N(n \mu, n \sigma^2) \]</span>
+</center>
+and
+<center>
+<span class="math display">\[ \bar{X} \approx N\left(\mu, \frac{\sigma^2}{n} \right). \]</span>
+</center>
+<div id="Sec_CLT:ex:clt_exponential" class="ex">
+<p>Suppose <span class="math inline">\(X_1,X_2,\dots,X_{100}\)</span> are i.i.d. exponential random variables with parameter <span class="math inline">\(\lambda=4\)</span>.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Find <span class="math inline">\(P(S_{100} &gt; 30)\)</span>.<br />
+</li>
+<li>Find limits within which <span class="math inline">\(\bar{X}\)</span> will lie with probability <span class="math inline">\(0.95\)</span>.<br />
+</li>
+</ol>
+</div>
+<div class="ans">
+<ol style="list-style-type: lower-alpha">
+<li><p>Since <span class="math inline">\(X_1,X_2,\dots,X_{100}\)</span> are i.i.d. exponential random variables with parameter <span class="math inline">\(\lambda=4\)</span>, <span class="math inline">\(E\left[X_i\right]=\frac{1}{4}\)</span> and <span class="math inline">\(var(X_i) = \frac{1}{16}\)</span>. Hence,<br />
+</p>
+<center>
+<p><span class="math display">\[\begin{align*}
+E \left[ S_{100} \right] &amp;= 100 \cdot \frac{1}{4} = 25; \\
+var(S_{100}) &amp;= 100 \cdot \frac{1}{16} = \frac{25}{4}.
+\end{align*}\]</span></p>
+</center>
+<p>Since <span class="math inline">\(n=100\)</span> is sufficiently big, <span class="math inline">\(S_{100}\)</span> is approximately normally distributed by the central limit theorem (CLT). Therefore,</p>
+<center>
+<p><span class="math display">\[\begin{align*}
+P(S_{100} &gt; 30) &amp;= P \left( \frac{S_{100}-25}{\sqrt{\frac{25}{4}}} &gt; \frac{30-25}{\sqrt{\frac{25}{4}}} \right) \\
+&amp;\approx P( N(0,1) &gt;2) \\
+&amp;= 1 - P( N(0,1) \leq 2) \\
+&amp;= 0.0228.
+\end{align*}\]</span></p>
+</center>
+<p>Given that <span class="math inline">\(S_{100} = \sum_{i=1}^{100} X_i \sim {\rm Gamma} (100,4)\)</span>, see <a href="rv.html#rv:exponential:gamma">Section 5.6.2</a>, we can compute exactly <span class="math inline">\(P(S_{100} &gt;30) = 0.0279\)</span>, which shows that the central limit theorem gives a reasonable approximation.</p></li>
+<li><p>Since <span class="math inline">\(X_1,X_2,\dots,X_{100}\)</span> are i.i.d. exponential random variables with parameter <span class="math inline">\(\lambda=4\)</span>, <span class="math inline">\(E\left[X_i\right]=\frac{1}{4}\)</span> and <span class="math inline">\(var (X_i) = \frac{1}{16}\)</span>. Therefore, <span class="math inline">\(E\left[\bar{X}\right] = \frac{1}{4}\)</span> and <span class="math inline">\(var(\bar{X}) = \frac{1/16}{100}\)</span>.</p></li>
+</ol>
+Since <span class="math inline">\(n=100\)</span>, <span class="math inline">\(\bar{X}\)</span> will be approximately normally distributed by the CLT, hence
+<center>
+<span class="math display">\[\begin{align*}
+0.95 &amp;= P(a &lt; \bar{X} &lt; b) \\
+&amp;= P \left( \frac{a-1/4}{\sqrt{1/1600}} &lt; \frac{\bar{X}-1/4}{\sqrt{1/1600}} &lt; \frac{b-1/4}{\sqrt{1/1600}} \right) \\
+&amp;\approx P \left( \frac{a-1/4}{\sqrt{1/1600}} &lt; N(0,1) &lt; \frac{b-1/4}{\sqrt{1/1600}} \right). \\
+\end{align*}\]</span>
+</center>
+There are infinitely many choices for <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> but a natural choice is <span class="math inline">\(P(\bar{X}&lt;a) = P (\bar{X}&gt;b) = 0.025\)</span>. That is, we choose <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> such that there is equal chance that <span class="math inline">\(\bar{X}\)</span> is less than <span class="math inline">\(a\)</span> or greater than <span class="math inline">\(b\)</span>. Thus if for <span class="math inline">\(0 &lt; q&lt; 1\)</span>, <span class="math inline">\(z_q\)</span> satisfies <span class="math inline">\(P(Z &lt; z_q)=q\)</span>, we have that<br />
+
+<center>
+<span class="math display">\[\begin{align*}
+\frac{a-1/4}{\sqrt{1/1600}} &amp;= z_{0.025} = -1.96, \\
+\frac{b-1/4}{\sqrt{1/1600}} &amp;= z_{0.975} = 1.96.
+\end{align*}\]</span>
+</center>
+Hence,<br />
+
+<center>
+<span class="math display">\[\begin{align*}
+a &amp;= 0.25 - 1.96 \frac{1}{40} = 0.201, \\
+b &amp;= 0.25 + 1.96 \frac{1}{40} = 0.299.
+\end{align*}\]</span>
+</center>
+</div>
+<p><br />
+</p>
+</div>
+<div id="Sec_CLT:discrete" class="section level2 hasAnchor" number="7.3">
+<h2><span class="header-section-number">7.3</span> Central limit theorem for discrete random variables<a href="Sec_CLT.html#Sec_CLT:discrete" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The central limit theorem can be applied to sums of discrete random variables as well as continuous random variables. Let <span class="math inline">\(X_1, X_2, \ldots\)</span> be <em>i.i.d.</em> copies of a discrete random variable <span class="math inline">\(X\)</span> with <span class="math inline">\(E[X] =\mu\)</span> and <span class="math inline">\(var(X) = \sigma^2\)</span>. Further suppose that the support of <span class="math inline">\(X\)</span> is in the non-negative integers <span class="math inline">\(\{0,1, \ldots \}\)</span>. (This covers all the discrete distributions, we have seen, binomial, negative binomial, Poisson and discrete uniform.)</p>
+Let <span class="math inline">\(Y_n \sim N(n \mu, n \sigma^2)\)</span>. Then the central limit theorem states that for large <span class="math inline">\(n\)</span>, <span class="math inline">\(S_n \approx Y_n\)</span>. However, there will exist <span class="math inline">\(x \in \{0,1,\ldots \}\)</span> such that<br />
+
+<center>
+<span class="math display">\[ P(S_n =x) &gt;0 \qquad \qquad \mbox{but} \qquad \qquad P(Y_n =x) =0. \]</span>
+</center>
+The solution is that we approximate<br />
+
+<center>
+<span class="math display">\[ P(S_n =x) \qquad \qquad \mbox{by} \qquad \qquad P(x - 0.5 &lt;Y_n \leq x+0.5) =0. \]</span>
+</center>
+<p>This is known as the <strong>continuity correction</strong>.</p>
+<div id="Sec_CLT:ex:clt_bernoulli" class="ex">
+<p>Suppose that <span class="math inline">\(X\)</span> is a Bernoulli random variable with <span class="math inline">\(P(X=1)=0.6 (=p)\)</span>, so <span class="math inline">\(E[X]=0.6\)</span> and <span class="math inline">\(var(X) =0.6 \times (1-0.6) =0.24\)</span>. Then <span class="math display">\[S_n = \sum_{i=1}^n X_i \sim {\rm Bin} (n, 0.6). \]</span></p>
+<p>For <span class="math inline">\(n=100\)</span>, <span class="math inline">\(S_{100} \sim {\rm Bin} (100, 0.6)\)</span> can be approximated by <span class="math inline">\(Y\sim N(60,24) (=N(np,np(1-p)))\)</span>, see Figure <a href="Sec_CLT.html#fig:cltbern">7.1</a>.</p>
+<center>
+<div class="figure"><span style="display:block;" id="fig:cltbern"></span>
+<img src="_main_files/figure-html/cltbern-1.png" alt="Central limit theorem approximation for the binomial." width="80%" />
+<p class="caption">
+Figure 7.1: Central limit theorem approximation for the binomial.
+</p>
+</div>
+</center>
+<p>We can see the approximation in Figure <a href="Sec_CLT.html#fig:cltbern">7.1</a> in close-up for <span class="math inline">\(x=54\)</span> to <span class="math inline">\(56\)</span> in Figure <a href="Sec_CLT.html#fig:cltbern55">7.2</a>. The areas marked out by the red lines (normal approximation) are approximately equal to the areas of the bars in the histogram (binomial probabilities).</p>
+<center>
+<div class="figure"><span style="display:block;" id="fig:cltbern55"></span>
+<img src="_main_files/figure-html/cltbern55-1.png" alt="Central limit theorem approximation for the binomial for x=54 to 56." width="80%" />
+<p class="caption">
+Figure 7.2: Central limit theorem approximation for the binomial for x=54 to 56.
+</p>
+</div>
+</center>
+</div>
+</div>
+<div id="Sec_CLT:LLN" class="section level2 hasAnchor" number="7.4">
+<h2><span class="header-section-number">7.4</span> Law of Large Numbers<a href="Sec_CLT.html#Sec_CLT:LLN" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We observed that
+<span class="math display">\[ \bar{X} \approx N\left(\mu, \frac{\sigma^2}{n} \right), \]</span>
+and the variance is decreasing as <span class="math inline">\(n\)</span> increases.</p>
+<p>Given that <span class="math display">\[var (S_n) = var \left(\sum_{i=1}^n X_i \right) = \sum_{i=1}^n var \left( X_i \right) = n \sigma^2,\]</span> we have in general that <span class="math display">\[var (\bar{X}) = var \left(\frac{S_n}{n} \right) = \frac{1}{n^2} var (S_n) = \frac{\sigma^2}{n}.\]</span></p>
+<p>A random variable <span class="math inline">\(Y\)</span> which has <span class="math inline">\(E[Y]=\mu\)</span> and <span class="math inline">\(var(Y)=0\)</span> is the <em>constant</em>, <span class="math inline">\(Y \equiv \mu\)</span>, that is, <span class="math inline">\(P(Y=\mu) =1\)</span>. This suggests that as <span class="math inline">\(n \to \infty\)</span>, <span class="math inline">\(\bar{X}\)</span> converges in some sense to <span class="math inline">\(\mu\)</span>. We can make this convergence rigorous.</p>
+<div id="Sec_CLT:def:convp" class="def">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Convergence in probability</strong></span></p>
+<p>A sequence of random variables <span class="math inline">\(Y_1, Y_2, \ldots\)</span> are said to <strong>converge in probability</strong> to a random variable <span class="math inline">\(Y\)</span>, if for any <span class="math inline">\(\epsilon &gt;0\)</span>,
+<span class="math display">\[ P(|Y_n - Y|&gt; \epsilon) \to 0 \qquad \qquad \mbox{ as } \; n \to \infty. \]</span> We write <span class="math inline">\(Y_n \xrightarrow{\quad p \quad} Y\)</span> as <span class="math inline">\(n \to \infty\)</span>.</p>
+</div>
+<p>We will often be interested in convergence in probability where <span class="math inline">\(Y\)</span> is a constant.</p>
+<p>A useful result for proving convergence in probability to a constant <span class="math inline">\(\mu\)</span> is Chebychev’s inequality. Chebychev’s inequality is a special case of the Markov inequality which is helpful in bounding probabilities in terms of expectations.</p>
+<div id="Sec_CLT:thm:Cheby" class="thm">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Chebychev’s inequality.</strong></span><br />
+Let <span class="math inline">\(X\)</span> be a random variable with <span class="math inline">\(E[X] =\mu\)</span> and <span class="math inline">\(var(X)=\sigma^2\)</span>. Then for any <span class="math inline">\(\epsilon &gt;0\)</span>,
+<span class="math display">\[ P(|X - \mu| &gt; \epsilon) \leq \frac{\sigma^2}{\epsilon^2}. \]</span></p>
+</div>
+<div id="Sec_CLT:thm:LLN" class="thm">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Law of Large Numbers.</strong></span><br />
+Let <span class="math inline">\(X_1, X_2, \ldots\)</span> be <em>i.i.d.</em> according to a random variable <span class="math inline">\(X\)</span> with <span class="math inline">\(E[X] = \mu\)</span> and <span class="math inline">\(var(X) =\sigma^2\)</span>. Then
+<span class="math display">\[\bar{X} = \frac{1}{n} \sum_{i=1}^n X_i \xrightarrow{\quad p \quad} \mu \qquad \qquad \mbox{ as } \; n \to \infty. \]</span></p>
+</div>
+<div class="prf">
+First, note that
+<center>
+<span class="math display">\[E[\bar{X}] = E \left[ \frac{1}{n} \sum_{i=1}^n X_i \right]= \frac{1}{n} \sum_{i=1}^n E \left[ X_i \right] = \frac{1}{n} (n \mu) = \mu.\]</span>
+</center>
+For any <span class="math inline">\(\epsilon &gt;0\)</span>, we have by <a href="Sec_CLT.html#Sec_CLT:thm:Cheby">Chebychev’s inequality</a> that<br />
+
+<center>
+<span class="math display">\[ P(|\bar{X}- \mu| &gt; \epsilon) \leq \frac{1}{\epsilon^2} var (\bar{X}) = \frac{\sigma^2}{n \epsilon^2} \to 0 \qquad \qquad \mbox{ as } n \to \infty, \]</span>
+</center>
+<p>and the Theorem follows.</p>
+</div>
+<div id="Sec_clt:exer:clt_dice" class="ex">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Central limit theorem for dice</strong></span></p>
+<center>
+<div class="figure"><span style="display:block;" id="fig:dice1"></span>
+<img src="Images/dice1.jpg" alt="Dice picture." width="80%" />
+<p class="caption">
+Figure 7.3: Dice picture.
+</p>
+</div>
+</center>
+<p>Let <span class="math inline">\(D_1, D_2, \ldots\)</span> denote the outcomes of successive rolls of a fair six-sided dice.</p>
+<p>Let <span class="math inline">\(S_n = \sum_{i=1}^n D_i\)</span> denote the total score from <span class="math inline">\(n\)</span> rolls of the dice and let <span class="math inline">\(M_n = \frac{1}{n} S_n\)</span> denote the mean score from <span class="math inline">\(n\)</span> rolls of the dice.</p>
+<ol style="list-style-type: lower-alpha">
+<li>What is the approximate distribution of <span class="math inline">\(S_{100}\)</span>?<br />
+</li>
+<li>What is the approximate probability that <span class="math inline">\(S_{100}\)</span> lies between <span class="math inline">\(330\)</span> and <span class="math inline">\(380\)</span>, inclusive?<br />
+</li>
+<li>How large does <span class="math inline">\(n\)</span> need to be such that <span class="math inline">\(P(|M_n - E[D]|&gt;0.1) \leq 0.01\)</span>?<br />
+</li>
+</ol>
+</div>
+<p>Attempt <a href="Sec_CLT.html#Sec_clt:exer:clt_dice">Example 7.4.4</a> and then watch <a href="Sec_CLT.html#video15">Video 15</a> for the solutions.</p>
+<div id="video15" class="des">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Video 15: Central limit theorem for dice</strong></span></p>
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1355621/sp/135562100/embedIframeJs/uiconf_id/13188771/partner_id/1355621?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_f2v50ix1&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_hnmibqyv" width="640" height="420" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Dice CLT FINAL VERSION">
+</iframe>
+</div>
+<details>
+<summary>
+Solution to Example 7.4.4.
+</summary>
+<div class="ans">
+Note that <span class="math inline">\(D_1\)</span> is a discrete uniform distribution with probability mass function
+<center>
+<span class="math display">\[ P(D_1 =x) = \left\{ \begin{array}{ll} \frac{1}{6} \qquad \qquad &amp; x=1,2,\ldots, 6, \\ 0 &amp; \mbox{otherwise}. \end{array} \right. \]</span>
+</center>
+<p>Then <span class="math inline">\(E[D_1] = \frac{7}{2} =3.5\)</span> and <span class="math inline">\(Var (D_1) = \frac{35}{12}\)</span>.</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Since the rolls of the dice are independent,<br />
+</p>
+<center>
+<p><span class="math display">\[\begin{eqnarray*}
+E[S_{100}] &amp;=&amp; E \left[ \sum_{i=1}^{100} D_i \right] =  \sum_{i=1}^{100}E \left[ D_i \right] \\ &amp;=&amp; 100 E[D_1] = 350. \end{eqnarray*}\]</span></p>
+</center>
+<p>and</p>
+<center>
+<p><span class="math display">\[\begin{eqnarray*}
+var(S_{100}) &amp;=&amp; var \left( \sum_{i=1}^{100} D_i \right) =  \sum_{i=1}^{100}var \left(  D_i \right) \\ &amp;=&amp; 100 var(D_1)= \frac{875}{3}. \end{eqnarray*}\]</span></p>
+</center>
+<p>Thus by the central limit theorem, <span class="math inline">\(S_{100} \approx Y \sim N \left(350, \frac{875}{3} \right)\)</span>.</p></li>
+<li><p>Using the CLT approximation above, and the continuity correction<br />
+</p>
+<center>
+<p><span class="math display">\[\begin{eqnarray*}P(330 \leq S_{100} \leq 380)  &amp;\approx&amp; P(329.5 \leq Y \leq 380.5) \\
+&amp;=&amp; P(Y \leq 380.5) - P(Y \leq 329.5) \\
+&amp;=&amp; 0.9629 - 0.115 = 0.8479. \end{eqnarray*}\]</span></p>
+</center>
+<p>If using Normal tables, we have that<br />
+</p>
+<center>
+<p><span class="math display">\[ P\left( Y \leq 380.5 \right) = P \left( Z = \frac{Y-350}{\sqrt{875/3}} \leq \frac{380.5-350}{\sqrt{875/3}} \right) = \Phi (1.786)\]</span></p>
+</center>
+<p>and<br />
+</p>
+<center>
+<p><span class="math display">\[ P\left( Y \leq 329.5 \right) = P \left( Z = \frac{Y-350}{\sqrt{875/3}} \leq \frac{329.5-350}{\sqrt{875/3}} \right) = \Phi (-1.200).\]</span></p>
+</center></li>
+<li><p>Using the Central Limit Theorem, <span class="math inline">\(M_n \approx W_n \sim N \left(\frac{7}{2}, \frac{35}{12 n} \right)\)</span>.</p></li>
+</ol>
+<p>We know by the law of large numbers that <span class="math inline">\(M_n \xrightarrow{\quad p \quad} \frac{7}{2}\)</span> as <span class="math inline">\(n \to \infty\)</span>, but how large does <span class="math inline">\(n\)</span> need to be such that there is a <span class="math inline">\(99\%\)</span> (or greater) chance of <span class="math inline">\(M_n\)</span> being within <span class="math inline">\(0.1\)</span> of <span class="math inline">\(3.5\)</span>?</p>
+Using the approximation <span class="math inline">\(W_n\)</span>, we want:<br />
+
+<center>
+<span class="math display">\[ P \left(\left| W_n - \frac{7}{2} \right| &gt; 0.1 \right) \leq  0.01. \]</span>
+</center>
+Now equivalently we want <span class="math inline">\(n\)</span> such that
+<center>
+<span class="math display">\[\begin{eqnarray*}
+0.99 &amp;\geq &amp; P(3.4 \leq W_n \leq 3.6) \\
+&amp;= &amp; P \left( \frac{3.4 -3.5}{\sqrt{35/(12n)}} \leq Z \leq  \frac{3.6 -3.5}{\sqrt{35/(12n)}} \right) \\
+&amp;=&amp; P \left( - 0.058554 \sqrt{n} &lt; Z &lt; 0.58554 \sqrt{n} \right)  \\
+&amp;=&amp; P(|Z| &lt; 0.058554 \sqrt{n}) = 1- P(|Z| &gt; 0.058554 \sqrt{n}). \end{eqnarray*}\]</span>
+</center>
+Consider <span class="math inline">\(P(|Z| &gt; 0.058554 \sqrt{n}) =0.01\)</span>.<br />
+Note that<br />
+
+<center>
+<span class="math display">\[ P(|Z| &gt;c) =\alpha \hspace{1cm} \Leftrightarrow \hspace{1cm} P (Z &gt;c) = \frac{\alpha}{2} \hspace{1cm} \Leftrightarrow \hspace{1cm} P (Z \leq c) = 1-\frac{\alpha}{2}. \]</span>
+</center>
+We have <span class="math inline">\(\alpha =0.01\)</span>, and using <code>qnorm</code> function in <strong>R</strong> <code>qnorm(0.995)</code> gives <span class="math inline">\(c =\)</span> 2.5758293.<br />
+Therefore
+<center>
+<span class="math display">\[ P(|Z| &gt; 0.058554 \sqrt{n}) =0.01 = P(|Z|&gt;2.5758), \]</span>
+</center>
+or equivalently
+<center>
+<span class="math display">\[0.058554 \sqrt{n} = 2.5758 \hspace{1cm} \Rightarrow \hspace{1cm} \sqrt{n} = 43.99 \hspace{1cm} \Rightarrow \hspace{1cm} n = 1935.2. \]</span>
+</center>
+<p>Given that we require <span class="math inline">\(n \geq 1935.2\)</span>, we have that <span class="math inline">\(n=1936\)</span>.</p>
+</div>
+</details>
+<p><br />
+</p>
+</div>
+<div id="Sec_clt:lab" class="section level2 unnumbered hasAnchor">
+<h2><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 4</strong></span><a href="Sec_CLT.html#Sec_clt:lab" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Attempt the <strong>R Markdown</strong> file for Session 4:<br />
+<a href="https://moodle.nottingham.ac.uk/course/view.php?id=134982#section-2">Session 4: Convergence and the Central Limit Theorem</a></p>
+</div>
+<div id="Sec_clt:exer" class="section level2 unnumbered hasAnchor">
+<h2><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span><a href="Sec_CLT.html#Sec_clt:exer" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Attempt the exercises below.</p>
+<div id="exer7:1" class="exer">
+<br />
+Let <span class="math inline">\(X_1, X_2, \dots, X_{25}\)</span> be independent Poisson random variables each having mean 1. Use the central limit theorem to approximate
+<center>
+<span class="math display">\[ P\left( \sum_{i=1}^{25} X_i &gt; 20 \right).\]</span>
+</center>
+</div>
+<details>
+<summary>
+Solution to Exercise 7.1.
+</summary>
+<div id="CLT_Question1" class="ans">
+Let <span class="math inline">\(X=\sum_{i=1}^{25}X_i\)</span>. Then, <span class="math inline">\(E[X]=25\)</span> and <span class="math inline">\(var(X)=25\)</span>. By the central limit theorem, <span class="math inline">\(X\approx Y \sim N(25,5^2)\)</span>
+<center>
+<span class="math display">\[\begin{eqnarray*}
+P(X&gt;20) \approx P(Y&gt;20.5) = 0.8159.
+\end{eqnarray*}\]</span>
+</center>
+Converting to a standard normal distribution, <span class="math inline">\(Z \sim N(0,1)\)</span>.
+<center>
+<span class="math display">\[\begin{eqnarray*} P(Y &gt;20.5) &amp;=&amp; P \left( Z=\frac{Y-25}{5} &gt; \frac{20.5-25}{5} \right) \\ &amp;=&amp; P(Z&gt;-0.9) =P(Z&lt;0.9) = 0.8159.
+\end{eqnarray*}\]</span>
+</center>
+<p>Note that the final step comes from the symmetry of the normal distribution.</p>
+<p>For comparison, since <span class="math inline">\(X \sim {\rm Po} (25)\)</span>, we have that <span class="math inline">\(P(X &gt;20) = 0.8145\)</span>.</p>
+</div>
+</details>
+<p><br />
+</p>
+<div id="exer7:2" class="exer">
+<p><br />
+The lifetime of a Brand X TV (in years) is an exponential random variable with
+mean 10. By using the central limit theorem, find the approximate probability
+that the average lifetime of a random sample of 36 TVs is at least 10.5.</p>
+</div>
+<details>
+<summary>
+Solution to Exercise 7.2.
+</summary>
+<div id="CLT_Question2" class="ans">
+<p>Let <span class="math inline">\(X_i\)</span> denote the lifetime of the <span class="math inline">\(i^{th}\)</span> TV in the sample, <span class="math inline">\(i=1, 2 \ldots, 36\)</span>. Then (from the lecture notes) we know that <span class="math inline">\(E[X_i] = 10\)</span>, <span class="math inline">\(var(X_i) = 100\)</span>.</p>
+<p>The sample mean is <span class="math inline">\(\bar{X} = (X_1 + \ldots X_{36})/36\)</span>.</p>
+Using the central limit theorem, <span class="math inline">\(X_1 + \ldots + X_{36} \approx N(360, 3600)\)</span>, so
+<center>
+<span class="math display">\[ \bar{X} \approx N \left(\frac{360}{36}, \frac{3600}{36^2} \right)
+= N(10, 2.778). \]</span>
+</center>
+Thus
+<center>
+<span class="math display">\[\begin{eqnarray*}
+P(\bar{X} &gt; 10.5) &amp;=&amp; P \left(\frac{\bar{X} - 10}{\sqrt{2.778}} &gt; \frac{10.5-10}{\sqrt{2.778}} \right) \\ &amp;\approx&amp; P(Z &gt; 0.3)
+\end{eqnarray*}\]</span>
+</center>
+<p>where <span class="math inline">\(Z \sim N(0,1)\)</span>.
+Thus the required probability is approximately <span class="math inline">\(P(Z &gt; 0.3) = 1 - \Phi(0.3) = 0.3821\)</span>.</p>
+</div>
+</details>
+<p><br />
+</p>
+<div id="exer7:3" class="exer">
+<p><br />
+Prior to October 2015,
+in the UK National Lottery gamblers bought a ticket on which they mark six different numbers from
+<span class="math inline">\(\{ 1,2,\ldots,49 \}\)</span>. Six balls were drawn uniformly at random without replacement from a set of <span class="math inline">\(49\)</span> similarly numbered balls. A ticket won the jackpot if the six numbers marked are the same as the six numbers drawn.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Show that the probability a given ticket won the jackpot is <span class="math inline">\(1/13983816\)</span>.<br />
+</li>
+<li>In Week 9 of the UK National Lottery <span class="math inline">\(69,846,979\)</span> tickets were sold and there were <span class="math inline">\(133\)</span> jackpot winners. If all gamblers chose their numbers independently and uniformly at random, use the central limit theorem to determine the approximate distribution of the number of jackpot winners that week. Comment on this in the light of the actual number of jackpot winners.<br />
+</li>
+</ol>
+</div>
+<details>
+<summary>
+Solution to Exercise 7.3.
+</summary>
+<div id="CLT_Question3" class="ans">
+<ol style="list-style-type: lower-alpha">
+<li>There are <span class="math inline">\(\binom{49}{6}=13,983,816\)</span> different ways of choosing 6 distinct numbers <span class="math inline">\(1,2,\ldots,49\)</span>, so the probability a ticket wins the jackpot if <span class="math inline">\(1/13983816\)</span>.<br />
+</li>
+<li>Let <span class="math inline">\(X\)</span> be the number of jackpot winners in Week 9 if gamblers chose their numbers independently and uniformly at random. Then<br />
+
+<center>
+<span class="math display">\[
+X \sim{\rm Bin} \left( 69,846,979, \frac{1}{13,989,816} \right) = {\rm Bin}  (n,p), \text{ say}.
+\]</span>
+</center>
+Then to 4 decimal places <span class="math inline">\(E[X] =n p = 4.9927\)</span> and <span class="math inline">\(var(X)=np(1-p)=4.9927\)</span>.<br />
+Hence, by the central limit theorem,
+<center>
+<span class="math display">\[
+X \approx N(4.9927,4.9927).
+\]</span>
+</center></li>
+</ol>
+Given the Central Limit Theorem the probability of at least 133 jackpot winners is, using the continuity correction,
+<center>
+<span class="math display">\[\begin{align*}
+P(X \geq 133) &amp;\approx P \left( \frac{X-4.9927}{\sqrt{4.9927}} \geq \frac{132.5-4.9927}{\sqrt{4.9927}} \right)\\
+&amp;= P (Z \geq 57.065),
+\end{align*}\]</span>
+</center>
+<p>where <span class="math inline">\(Z \sim N(0,1)\)</span>. This probability is small, so there is very strong evidence that the gamblers did not choose their numbers independently and uniformly at random.</p>
+</div>
+</details>
+<p><br />
+</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="jointdis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="motivate.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/07-P4_Central_Limit_Theorem.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

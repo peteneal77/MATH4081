@@ -1,0 +1,138 @@
+# Multivariate Normal Distribution {#MV_Normal}
+
+## Introduction {#MV_Normal:intro}
+
+In previous sections we have introduced joint distributions between random variables $X$ and $Y$ and considered their marginal and conditional distributions. In this section, we study the special case where the joint distribution of $X_1, X_2, \ldots, X_n$ is a multivariate normal distribution. In this case both marginal and conditional distributions are (multivariate) normal distributions. We pay particular attention to the special case, $n=2$, the bivariate normal distribution. Multivariate normal distributions appear in many areas of statistics and being able to manipulate multivariate normal distributions is an important skill.
+
+
+
+## $n$-Dimensional Normal Distribution {#MV_Normal:multi}
+
+:::{.def #MV_Normal:def:multi}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Definition 15.2.1.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Multivariate normal distribution**</span>  
+
+A random vector $\mathbf{X} = (X_1,X_2,\dots,X_n)^T$ is said to have an $\mathit{n}$*-dimensional normal distribution* with parameters $\mathbf{\mu}$ and $\mathbf{\Sigma}$ if the joint p.d.f. of $\mathbf{X}$ is given by
+$$ f_{\mathbf{X}}(\mathbf{x}) = (2\pi)^{-\frac{n}{2}} \left| \mathbf{\Sigma} \right|^{-\frac{1}{2}} \exp \left\{ -\frac{1}{2} (\mathbf{x}-\mathbf{\mu})^T \mathbf{\Sigma}^{-1} (\mathbf{x}-\mathbf{\mu}) \right\},$$
+where $\mathbf{\mu} = (\mu_1,\mu_2,\dots,\mu_n)^T$ and $\mathbf{\Sigma} = (\sigma_{ij})$ is an $n \times n$ real, symmetric, positive definite matrix with all positive eigenvalues.  It is denoted by
+$$\mathbf{X} \sim N_n(\mathbf{\mu},\mathbf{\Sigma}).$$
+:::
+
+The multivariate normal distribution has the following important properties:
+
+- If $\mathbf{D}$ is a $p \times n$ matrix and $\mathbf{X} \sim N_n(\mathbf{\mu},\mathbf{\Sigma})$, then $\mathbf{Z} = \mathbf{D}\mathbf{X} \sim N_p (\mathbf{D} \mathbf{\mu}, \mathbf{D} \mathbf{\Sigma} \mathbf{D}^T)$.  
+- The marginal distribution of each component $X_i$ is normal with $E[X_i]=\mu_i$ and $\text{Var}(X_i)=\sigma_{ii}$.  Note that this is a direct consequence of the first property taking $\mathbf{D}=(0,\dots,0,1,0,\dots,0)$, that is, the $i$th component equal to $1$.  
+- The components $X_1,X_2,\dots,X_n$ of a multivariate normal random vector are independent of each other if and only if $X_1, X_2,\ldots,X_n$ are uncorrelated, i.e. $\sigma_{ij} = \text{Cov}(X_i,X_j) = 0$ for all $i \neq j$.  
+That is, for normal random variables uncorrelated (zero covariance) implies independence.  
+- Conditional distributions derived from joint normal distributions are normal.  
+
+:::{.def #MV_Normal:def:bi}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Definition 15.2.2.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Bivariate normal distribution**</span>  
+
+The *bivariate normal distribution*  is the special case $n=2$ for the $n$-dimensional normal distribution.
+:::
+
+:::{.def #MV_Normal:def:bi_main}  
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Definition 15.2.3.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Bivariate normal distribution**</span>  
+
+The random variables $X_1$ and $X_2$ are said to have a *bivariate normal distribution* with mean $\mathbf{\mu} = (\mu_1,\mu_2)$ and variance-covariance matrix $\mathbf{\Sigma} =  \begin{pmatrix} \sigma_1^2 & \rho \sigma_1 \sigma_2 \\ \rho \sigma_1 \sigma_2 & \sigma_2^2 \end{pmatrix}$ if their joint p.d.f. is given by
+\begin{align*}
+f_{X_1,X_2}(x_1,x_2) = \frac{1}{2\pi\sigma_1\sigma_2\sqrt{1-\rho^2}} &\exp \left\{ -\frac{1}{2(1-\rho^2)} \left[ \left( \frac{x_1-\mu_1}{\sigma_1} \right)^2 \right. \right. \\
+& \left. \left. -2\rho \left( \frac{x_1-\mu_1}{\sigma_1} \right) \left( \frac{x_2-\mu_2}{\sigma_2} \right) + \left( \frac{x_2-\mu_2}{\sigma_2} \right)^2 \right] \right\}.
+\end{align*}
+:::
+
+For $X_1$ and $X_2$ with a bivariate normal distribution, we have:
+
+- $X_1 \sim N(\mu_1, \sigma_1^2)$ and $X_2 \sim N(\mu_2, \sigma_2^2)$ and $\text{Cov}(X_1,X_2) = \rho \sigma_1 \sigma_2$.
+
+- $(X_1 | X_2 = x_2) \sim N \left( \mu_1 + \rho \frac{\sigma_1}{\sigma_2} (x_2-\mu_2), \sigma_1^2 (1-\rho^2) \right)$.
+
+- $(X_2 | X_1 = x_1) \sim N \left( \mu_2 + \rho \frac{\sigma_2}{\sigma_1} (x_1-\mu_1), \sigma_2^2 (1-\rho^2) \right)$.
+
+
+Suppose that $\mathbf{Z} =(Z_1,Z_2)$, where $Z_1$ and $Z_2$ are independent $N(0,1)$ random variables, that is, 
+$$\mathbf{Z} \sim N_2 ( \mathbf{0}, \mathbf{I}_2),$$ 
+where $\mathbf{I}_2$ is the $2 \times 2$ identity matrix.
+
+Then for any $\mu =(\mu_1,\mu_2) \in \mathbb{R}^2$ and variance-covariance matrix 
+$$ \Sigma = \begin{pmatrix} \sigma_1^2 & \rho \sigma_1 \sigma_2 \\
+\rho \sigma_1 \sigma_2 & \sigma_2^2\end{pmatrix}, $$ with $\sigma_1, \sigma_2 >0$ and $-1 < \rho <1$, $$\mathbf{X} \sim N_2 ( \mu, \Sigma)$$ can be expressed as a transformation of $\mathbf{Z}$. Specifically,
+$$ \mathbf{X} = \mu + \mathbf{L} \mathbf{Z}, $$
+where $$ \mathbf{L} =  \begin{pmatrix} \sigma_1 & 0 \\
+\rho \sigma_2 & \sqrt{1-\rho^2} \sigma_2\end{pmatrix}. $$
+Note that 
+$$ \Sigma = \mathbf{L} \mathbf{L}^\top $$
+and this is known as the **Cholesky** decomposition.
+
+The Cholesky decomposition extends to $n \times n$ variance-covariance matrix, $\Sigma$ and is a common approach to convert $n$ independent univariate normal distributions into a multivariate normal distribution.
+
+ 
+:::{.ex #MV_Normal:exer:tri}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Example 15.2.4.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Trivariate normal.**</span>
+
+Suppose $\mathbf{X}=(X_1,X_2,X_3)^T \sim N_3(\mathbf{0},\mathbf{\Sigma})$, where
+
+<center>
+$$\mathbf{\Sigma} = \begin{pmatrix} 2 & 1 & 0 \\ 1 & 4 & 0 \\ 0 & 0 & 5 \end{pmatrix}.$$
+</center>
+
+(a) Find the distribution of $Y=X_1+X_2$. 
+
+(b) Determine the constant $c$ such that $Y_1 = 2X_1 + cX_2$ and $Y_2 = 2X_1 + cX_3$ are independent.
+:::
+
+Attempt [Example 15.2.4: Trivariate Normal]( #MV_Normal:exer:tri) and then watch [Video 23](#video23) for the solutions.
+
+```{asis, include=knitr::is_html_output()}
+:::{.des #video23}
+<span style="color: rgba(207, 0, 15, 1);">**Video 23: Trivariate Normal**</span>  
+
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1355621/sp/135562100/embedIframeJs/uiconf_id/13188771/partner_id/1355621?iframeembed=true&playerId=kaltura_player&entry_id=1_092gq067&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_8rcna2g0" width="640" height="420" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Multivariate Normal FINAL VERSION"></iframe>
+:::
+```
+
+```{asis, include=knitr::is_latex_output()}
+Watch [\textcolor{blue}{Video 23: Trivariate Normal}](https://mediaspace.nottingham.ac.uk/media/Multivariate+Normal+FINAL+VERSION/1_092gq067)
+```  
+
+<details><summary>Solution to Example 15.2.4.</summary>  
+:::{.ans}  
+(a) Writing $Y = X_1+X_2$, in the form $\mathbf{DX}$ requires $\mathbf{D} = (1\ 1\ 0)$. By the properties of a multivariate normal distribution  
+$$Y \sim N(\mathbf{D0}, \mathbf{D \Sigma D}^T),$$  
+where $\mathbf{D0}=\mathbf{0}$ and  
+\begin{align*}
+\mathbf{D} \mathbf{\Sigma} \mathbf{D}^T &= \begin{pmatrix} 1 & 1 & 0 \end{pmatrix} \begin{pmatrix} 2 & 1 & 0 \\ 1 & 4 & 0 \\ 0 & 0 & 5 \end{pmatrix} \begin{pmatrix} 1 \\ 1 \\ 0 \end{pmatrix} \\
+&= \begin{pmatrix} 3 & 5 & 0 \end{pmatrix} \begin{pmatrix} 1 \\ 1 \\ 0 \end{pmatrix} \\
+&= 8.
+\end{align*}  
+Therefore, $Y \sim N(0,8)$.  
+(b) Let $\mathbf{Y} = \begin{pmatrix} Y_1 \\ Y_2 \end{pmatrix} = \mathbf{DX}$. Choose   
+$$\mathbf{D} = \begin{pmatrix} 2 & c & 0 \\ 2 & 0 & c \end{pmatrix}.$$  
+By the properties of a multivariate normal distribution, $\mathbf{Y} \sim N_2(\mathbf{D0}, \mathbf{D \Sigma D}^T)$, where $\mathbf{D0} = \mathbf{0}$ and  
+\begin{align*}
+\mathbf{D \Sigma D}^T &= \begin{pmatrix} 2 & c & 0 \\ 2 & 0 & c \end{pmatrix} \begin{pmatrix} 2 & 1 & 0 \\ 1 & 4 & 0 \\ 0 & 0 & 5 \end{pmatrix} \begin{pmatrix} 2 & 2 \\ c & 0 \\ 0 & c \end{pmatrix} \\[3pt]
+&= \begin{pmatrix} 4+c & 2+4c & 0 \\ 4 & 2 & 5c \end{pmatrix} \begin{pmatrix} 2 & 2 \\ c & 0 \\ 0 & c \end{pmatrix} \\[3pt]
+&= \begin{pmatrix} 8+4c+4c^2 & 8+2c \\ 8+2c & 8+5c^2 \end{pmatrix}.
+\end{align*}  
+
+For $Y_1$ to be independent of $Y_2$, necessarily $\text{Cov}(Y_1,Y_2) = 8+2c = 0$. Therefore $c=-4$.   
+:::
+</details>
+
+## <span style="color: rgba(15, 0, 207, 1);">**Task: Session 8**</span>  {- #MV_Normal:lab}
+
+Attempt the **R Markdown** file for Session 8:  
+[Session 8: Transformations and Multivariate Normal Distribution](https://moodle.nottingham.ac.uk/course/view.php?id=134982#section-2)
+

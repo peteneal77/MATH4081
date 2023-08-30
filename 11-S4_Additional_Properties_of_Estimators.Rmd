@@ -1,0 +1,464 @@
+# Additional Properties of Estimators {#MLEprop}
+
+## Introduction {#MLEprop:intro}
+
+In this section, we introduce four key concepts associated with estimators, especially maximum likelihood estimators (MLE):
+
+- [Sufficiency](#MLEprop:sufficient) 
+- [Minimum variance estimators](#MLEprop:MVE)
+- [Asymptotic normality of the MLE](#MLEprop:asymptotic)   
+- [Invariance principle](#MLEprop:invariance)  
+
+Sufficiency considers the question of what information from the data, $\mathbf{x} = (x_1,x_2,\ldots,x_n)$ is **sufficient** to estimate a population parameter, $\theta$, without loss of information. Often sufficient statistics will take the form of a summary statistic, for example, the mean. 
+
+Minimising the mean square error (MSE) of estimators is a desirable property. For unbiased estimators minimising the variance of the estimator is equivalent to minimising the MSE. We introduce the Cramer-Rao lower bound which is the minimum variance obtainable by an unbiased estimator and the concept of **minimum variance unbiased estimators** (MVUE) as estimators which obtain the Cramer-Rao lower bound.
+
+For large $n$, the MLE, $\hat{\theta}$ is approximately normally distributed about the true population parameter $\theta$ with variance determined by the second derivative of the likelihood. The variance of the asymptotic normal distribution coincides with the Cramer-Rao lower bound providing further support for using maximum likelihood estimation.
+
+
+## Sufficiency {#MLEprop:sufficient}
+
+:::{.def #MLEprop:def:sufficient}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Definition 11.2.1.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Sufficient Statistic**</span>  
+
+Let $\mathbf{X} = (X_1,X_2,\dots,X_n)$ where $X_1, X_2, \ldots, X_n$ are i.i.d. random variables dependent on a parameter $\theta$. A statistic $T(\mathbf{X}) = T$ is **sufficient** for $\theta$ if the conditional distribution of $\mathbf{X}|T$ does not depend on $\theta$, that is
+$$ f(x_1,x_2,\dots,x_n|T=t,\theta) = u(x_1,x_2,\dots,x_n|T=t),$$
+where $u$ is a function of $x_1,x_2,\dots,x_n$ only. Thus, $T$ contains all the information about $\theta$.
+:::
+
+The key point is that a **sufficient** statistic, as the name suggests, is sufficient for the estimation of a parameter $\theta$. This is particularly useful if the sufficient statistic is a low-dimensional summary statistic of the data. As the following examples show in many cases there is a one-dimensional summary statistic of the data $\mathbf{x} = (x_1,x_2,\ldots,x_n)$ which is sufficient to estimate the population parameter of interest, $\theta$. The [Neyman-Fisher factorisation criterion](#MLEprop:thm:Neyman-Fisher) provides easy to check conditions for sufficiency.
+
+
+
+:::{.thm #MLEprop:thm:Neyman-Fisher}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Theorem 11.2.2.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Neyman-Fisher factorisation criterion**</span>  
+
+The statistic $T(\mathbf{X})$ is sufficient for $\theta$ if and only if one can factor the likelihood function such that
+$$L(\theta) = h (\mathbf{x}) g(t,\theta),$$
+where $h(\mathbf{x})$ does not depend on $\theta$ (whenever $L(\theta)>0$) and $g$ is a non-negative function of $t$ and $\theta$.
+:::
+
+The Neyman-Fisher factorisation criterion is equivalent to the log-likelihood function being expressible in the form:
+$$l(\theta) = \log h(\mathbf{x}) + \log g (T(\mathbf{x}),\theta ) = H(\mathbf{x}) + G( T(\mathbf{x}),\theta ). $$ Then if we differentiate $l (\theta)$ with respect to $\theta$, we have that
+$$ l^\prime (\theta) = \frac{d \;}{d \theta} l (\theta) = \frac{d \;}{d \theta}\left\{H(\mathbf{x}) + G( T(\mathbf{x}),\theta ) \right\} = \frac{d \;}{d \theta}G( T(\mathbf{x}),\theta ). $$ 
+Setting $l^\prime (\theta)=0$ and solving to obtain the MLE $\hat{\theta}$ is equivalent to solving
+$$ \frac{d \;}{d \theta}G( T(\mathbf{x}),\theta ) =0.$$ We observe that $H(\mathbf{x})$ plays no role in the computation of the MLE and the function $G (\cdot, \cdot)$ is a function of the sufficient statistic, $T(\mathbf{x})$ and $\theta$ only.
+
+
+:::{.ex #MLEprop:ex:normal}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Example 11.2.3.}
+```
+Let  $X_1,X_2,\dots,X_n$ be a random sample from $N(\theta,1)$.  Show that $\bar{X}$
+is sufficient for $\theta$.
+:::
+
+:::{.ans}
+Consider the likelihood function:
+
+<center>
+\begin{align*}
+L(\theta) &= f(x_1,x_2,\dots,x_n|\theta) \\
+&= \prod\limits_{i=1}^n \frac{1}{(2 \pi)^{1/2}} \exp \left(-\frac{1}{2} (x_i-\theta)^2 \right) \\
+&= \frac{1}{(2 \pi)^{n/2}} \exp \left(-\frac{1}{2} \sum_{i=1}^n (x_i -\theta)^2 \right) \\
+&= (2 \pi)^{-n/2} \exp \left(-\frac{1}{2} \sum\limits_{i=1}^n \left( x_i^2 -2 \theta x_i + \theta^2 \right) \right) \\
+&= (2 \pi)^{-n/2} \exp \left(-\frac{1}{2} \left( \sum\limits_{i=1}^n x_i^2 - 2 \theta \sum\limits_{i=1}^n x_i + n \theta^2 \right) \right) \\
+&= (2 \pi)^{-n/2} \exp \left(-\frac{1}{2} \left( \sum\limits_{i=1}^n x_i^2 \right) \right) \times \exp \left(-\frac{1}{2} \left( -2 \theta n \bar{x} + n \theta^2 \right) \right).
+\end{align*}
+</center>
+
+Therefore, letting $h(\mathbf{x}) = (2 \pi)^{-n/2} \exp \left(-\frac{1}{2} \left( \sum_{i=1}^n x_i^2 \right) \right)$ and $g(\bar{X},\theta) = \exp \left(-\frac{1}{2} \left( -2 \theta n \bar{x} + n \theta^2 \right) \right)$ we can factor the likelihood function.  So, by the [Neyman-Fisher factorisation criterion](#MLEprop:thm:Neyman-Fisher), $\bar{X}$ is a sufficient statistic for $\theta$.
+:::
+\  
+
+Remember in [Section 10.3](#MLE:MLE), Example 10.3.7, we have shown that the sample mean is the MLE of $\theta$ for $N(\theta,1)$.
+
+
+:::{.ex #MLEprop:ex:poisson}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Example 11.2.4.}
+```
+\
+Let $X_1,X_2,\dots,X_n$ be i.i.d. random variables from a Poisson distribution with parameter $\lambda$.  Show that $\bar{X}$ is a sufficient statistic for $\lambda$ using the [Neyman-Fisher factorisation criterion](#MLEprop:thm:Neyman-Fisher).
+:::
+
+:::{.ans}
+Consider  
+<center>  
+\begin{align*}  
+L(\lambda) &= f(x_1,x_2,\dots,x_n|\lambda) \\
+&= \prod\limits_{i=1}^n \frac{ e^{-\lambda}\lambda^{x_i} }{x_i!} \\
+&= \frac{ e^{-n\lambda} \lambda^{\sum\limits_{i=1}^n x_i} }{ \prod\limits_{i=1}^n x_i!} \\
+&= \frac{1}{\prod\limits_{i=1}^n x_i !} e^{-n\lambda} \lambda^{n \bar{x}}.
+\end{align*}  
+</center>
+
+If we let $h(\mathbf{x}) = \left\{\prod\limits_{i=1}^n x_i ! \right\}^{-1}$ and $g(\bar{X},\theta) = e^{-n\lambda} \lambda^{n \bar{x}}$, then we have factorised the likelihood function according to the [Neyman-Fisher factorisation criterion](#MLEprop:thm:Neyman-Fisher).  So, $\bar{X}$ must be a sufficient statistic of $\lambda$.
+:::
+\
+
+Note that
+
+- Generally we prefer to use a sufficient statistic as an estimator for $\theta$ since the sufficient statistic uses all of the sample information to estimate $\theta$.  
+- Sufficient statistics always exist, since $T(\mathbf{X}) = (X_1,X_2,\dots,X_n)$ is itself a sufficient statistic.  However, we would prefer a statistic that has as low a dimension as possible.  A sufficient statistic with the lowest possible dimensionality is called a *minimal sufficient statistic*.  
+- The MLE, if it exists, will always be a function of a sufficient statistic.  
+
+## Minimum variance estimators {#MLEprop:MVE}
+
+Given a population parameter does there exist a best estimator in general?
+
+Recall that in our previous discussions in [Section 9.3](#paraestimate:judge) on qualities of estimators we said we would prefer an estimator with as small an MSE as possible.  Unfortunately, if we consider the class of all estimators for a particular parameter, there does not exist such an optimality criterion.  If we decide to limit ourselves to particular classes of estimators then there do exist certain optimality criterion.
+
+Let's constrain ourselves to the class of unbiased estimators.  Suppose that the random variables and their distributions satisfy the following regularity conditions:
+
+- The range of the random variables does not depend on $\theta$. The random variable $X \sim U(0,\theta)$ is an example that does not satisfy this condition.  
+- The likelihood function is sufficiently smooth to allow us to interchange the operations of differentiation and integration.  
+- The second derivatives of the log-likelihood function exists.  
+
+:::{.thm #MLEprop:thm:Cramer_Rao}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Theorem 11.3.1.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Cramér-Rao inequality**</span> 
+
+Under the above regularity conditions if $T(\mathbf{X})$ is an unbiased estimator of $\theta$, then
+$$var( T(\mathbf{X}) ) \geq \frac{1}{I(\theta)},$$
+where $I(\theta) = E \left[ - \frac{d^2 l(\theta)}{d\theta^2} \right]$.
+:::
+
+:::{.def #MLEprop:def:Fisher}  
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Definition 11.3.2.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Fisher's information**</span>  
+
+$I(\theta)$ is called the *expected information* or *Fisher's information*.
+:::
+
+:::{.def #MLEprop:def:CRLB}  
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Definition 11.3.3.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Cramér-Rao lower bound**</span>  
+
+$\frac{1}{I(\theta)}$ is called the *Cramér-Rao lower bound*.
+:::
+
+The Cramér-Rao inequality implies that the smallest the variance of any unbiased estimator can become is $1/I(\theta)$.  
+
+:::{.def #MLEprop:def:MVUE}  
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Definition 11.3.4.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Minimum variance unbiased estimator (MVUE)**</span>   
+
+If any unbiased estimator $T(\mathbf{X})$ is such that $\text{Var}(T(\mathbf{X}))=1/I(\theta)$, then we say that $T(\mathbf{X})$ is a **minimum variance unbiased estimator** (MVUE) as no other unbiased estimator will be able to obtain a smaller variance.
+:::
+
+:::{.ex #MLEprop:ex:Poisson_CRLB}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Example 11.3.5.}
+```
+Suppose $X_1,X_2,\dots,X_n$ are i.i.d. random variables from a Poisson distribution with parameter $\lambda$. Does the maximum likelihood estimator $\hat{\lambda} = \bar{X}$ achieve the Cramér-Rao lower bound?
+:::
+
+:::{.ans}
+Firstly note that 
+
+<center>
+$$E[\bar{X}] = \frac{1}{n} \sum\limits_{i=1}^n E[X_i] = \frac{1}{n} \sum\limits_{i=1}^n \lambda = \lambda.$$ 
+</center>  
+
+Therefore $\bar{X}$ is an unbiased estimator. Now
+
+<center>
+$$ L(\lambda) = \frac{ e^{-n\lambda} \lambda^{\sum\limits_{i=1}^n x_i} }{ \prod\limits_{i=1}^n x_i!}.$$  
+</center>  
+This implies,  
+<center>
+$$ l(\lambda)  = -n\lambda + \sum\limits_{i=1}^n x_i \log \lambda - \log \left( \prod\limits_{i=1}^n x_i! \right).$$
+</center>  
+Therefore,  
+<center>  
+\begin{align*}
+\frac{dl(\lambda)}{d\lambda} &= -n + \frac{\sum_{i=1}^n x_i}{\lambda}, \\[3pt]
+\frac{d^2 l(\lambda)}{d\lambda^2} &= - \frac{\sum_{i=1}^n x_i}{\lambda^2}.
+\end{align*}
+</center>  
+
+Computing Fisher's information,
+<center>
+\begin{align*}
+I(\lambda) &= E \left[ -\frac{d^2 l(\lambda)}{d\lambda^2} \right] \\%[3pt]
+&= E \left[ - \left( - \frac{\sum_{i=1}^n X_i}{\lambda^2} \right) \right] \\%[3pt]
+&= \frac{ \sum\limits_{i=1}^n E[X_i] }{\lambda^2} \\%[3pt]
+&= \frac{n\lambda}{\lambda^2} \\%[3pt]
+&= \frac{n}{\lambda}.
+\end{align*}
+</center>  
+
+Hence, according to the Cramér-Rao inequality, 
+<center>
+$$\text{Var}(\bar{X}) \geq \frac{1}{I(\lambda)} = \frac{\lambda}{n}.$$
+</center>
+
+Now, since $X_i \sim \text{Poi}(\lambda)$, $\text{Var}(\bar{X}) = \frac{\lambda}{n}$.  Therefore, $\bar{X}$ is a MVUE for $\lambda$.
+:::
+\
+
+## Asymptotic normality of the MLE {#MLEprop:asymptotic}
+
+:::{.thm #MLEprop:thm:normal_MLE}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Theorem 11.4.1.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Asymptotic normality of the MLE**</span> 
+
+If $\hat{\theta}$ is the MLE of $\theta$, then under certain regularity conditions it can be shown that
+$$\sqrt{n}(\hat{\theta}-\theta) \longrightarrow N \left( 0, \frac{n}{I(\theta)} \right), \qquad \text{as } n \rightarrow \infty.$$
+Hence, approximately for sufficiently large sample sizes,
+$$\hat{\theta} \sim N \left( \theta, \frac{1}{I(\theta)} \right).$$
+:::
+
+As a consequence the MLE has the following asymptotic properties:
+
+- $\hat{\theta}$ is asymptotically unbiased;  
+- $\hat{\theta}$ is asymptotically fully efficient, that is the variance of $\hat{\theta}$ approaches the Cramér-Rao lower bound:  
+<center>
+$$\text{Var}(\hat{\theta}) \rightarrow I(\theta)^{-1}, \qquad \text{as } n \rightarrow \infty;$$  
+</center>  
+- $\hat{\theta}$ is asymptotically normally distributed.  
+
+Despite the fact that $var(\hat{\theta}) \approx \frac{1}{I(\theta)}$ for large $n$, when $\theta$ is unknown then $I(\theta)$ is also unknown.  Consequently, if we need to know the variance we may need to estimate it as well.  To do this it may be convenient to replace the expected information $I(\theta)$ with the observed Fisher information
+<center>
+$$I_O(\hat{\theta}) = - \frac{ d^2 l(\theta) }{ d\theta^2 } \bigg|_{\theta = \hat{\theta}}.$$
+</center>  
+
+Although the asymptotic properties of the MLE are quite good, the properties are only true for sufficiently large samples. The properties do not necessarily hold for small samples and for any finite sample they are approximations. The asymptotic normality of the MLE is an example of the [Central Limit Theorem](#Sec_CLT:statement), and consequently the quality of the approximation will depend on the underlying distribution. 
+
+## Invariance property {#MLEprop:invariance}
+
+If $\phi = g(\theta)$, where $g$ is one-to-one monotonic function of $\theta$, then $\hat{\phi} = g(\hat{\theta})$ is the MLE of $\phi$, and for large $n$:
+$$ \hat{\phi} \approx N \left( \phi, \frac{ [g'(\theta)]^2 }{I(\theta)} \right),$$
+where $g'(\theta) = \frac{d \;}{d\theta} g(\theta)$.
+
+Note that for $\hat{\phi} = g(\hat{\theta})$ to be the MLE of $\phi$ it is not necessary for $g$ to be strictly one-to-one.  It is sufficient for the range of $g$ to be an interval.
+
+:::{.ex #MLEprop:exer:Poisson}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Example 11.5.1.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Properties of Poisson MLE**</span>   
+
+Let $X_1,X_2,\dots,X_n$ be a random sample from a Poisson distribution with parameter $\lambda$.  We have shown $\hat{\lambda}=\bar{X}$ is the MLE of $\lambda$.  
+
+(a) What is its asymptotic distribution?  
+(b) Compute $p= P(X_1 = 0)$.  
+(c) Find the MLE for $P(X_1 = 0)$ and its asymptotic distribution.  
+(d) An alternative approach to estimate $p=P(X_1=0)$ is the proportion of observations $X_1, X_2, \ldots, X_n$ which are equal to 0, $$\tilde{p} =  \frac{1}{n} \sum_{i=1}^n I(X_i =0), $$ where $I(A)=1$ if the event $A$ occurs and 0 otherwise. Show that $\tilde{p}$ is unbiased and find its asymptotic distribution.  
+:::
+
+Attempt [Example 11.5.1: Properties of Poisson MLE](#MLEprop:exer:Poisson) and then watch [Video 19](#video19) for the solutions. 
+
+```{asis, include=knitr::is_html_output()}
+:::{.des #video19}
+<span style="color: rgba(207, 0, 15, 1);">**Video 19: Properties of Poisson MLE**</span>  
+
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1355621/sp/135562100/embedIframeJs/uiconf_id/13188771/partner_id/1355621?iframeembed=true&playerId=kaltura_player&entry_id=1_jo1eknzh&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_aph3ep86" width="640" height="420" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Poisson MLE FINAL VERSION"></iframe>
+:::
+```
+
+```{asis, include=knitr::is_latex_output()}
+Watch [\textcolor{blue}{Video 19: Properties of Poisson MLE}](https://mediaspace.nottingham.ac.uk/media/Poisson+MLE+FINAL+VERSION/1_jo1eknzh)
+``` 
+
+
+<details><summary>Solution to Example 11.5.1: MLE for Properties of Poisson MLE.</summary>
+
+:::{.ans}
+(a) According to the [Asymptotic normality of the MLE Theorem](#MLEprop:thm:normal_MLE), since $\hat{\lambda}$ is the MLE of $\lambda$, then $\hat{\lambda} \rightarrow N\left( \lambda, \frac{1}{I(\lambda)} \right)$.  We have shown that $I(\lambda) = \frac{n}{\lambda}$, therefore, $\hat{\lambda} \rightarrow N \left( \lambda, \frac{\lambda}{n} \right)$.  
+(b) We calculate  
+<center>  
+$$p= P(X_1 = 0) = \frac{e^{-\lambda} \lambda^0 }{0!} = e^{-\lambda}.$$
+</center>  
+(c) Set $p = P(X_1 = 0) = e^{-\lambda} = g(\lambda)$. Then since the range of $g$ is an interval, specifically $(0,\infty)$, the MLE of $p$ is given by  
+<center>  
+$$\hat{p} = g(\hat{\lambda}) = e^{-\hat{\lambda}} = e^{-\bar{X}}.$$   
+</center>  
+By the invariance property,  
+<center>  
+$$\hat{p} \rightarrow N \left(p, \frac{ \left[ g'(\lambda) \right]^2 }{I(\lambda)} \right),$$  
+</center>  
+where $g'(\lambda) = -e^{-\lambda}$. Therefore $\hat{p} \rightarrow N \left( p, \frac{e^{-2\lambda}}{n/\lambda} \right)$. Using $p = e^{-\lambda}$, then $\lambda = -\log(p)$ and by substitution  
+<center>  
+$$\hat{p} \rightarrow N \left( p, \frac{ -p^2 \log(p) }{n} \right), \qquad \text{as } n \rightarrow \infty.$$  
+</center>  
+(d) For an event $A$ the function $1_{\{A\}}$ (known as the indicator function of $A$) takes the value 1 if $A$ occurs and 0 otherwise. Thus $E[1_{\{A\}}] = P(A)$, the expectation for how likely the event $A$ is to occur is simply the probability that the event $A$ occurs. Compare with the Bernoulli distribution.  
+Therefore  
+<center>  
+\begin{eqnarray*} 
+E[ \tilde{p}] &=& E \left[ \frac{1}{n} \sum_{i=1}^n 1_{\{ X_i=0\}} \right] \\ &=& \frac{1}{n} \sum_{i=1}^n E[1_{\{ X_i=0\}}] \\ &=& \frac{1}{n} n P(X_1 =0) = p, 
+\end{eqnarray*}  
+</center>  
+and $\tilde{p}$ is an unbiased estimator.  
+Moreover, if $Y = \sum_{i=1}^n 1_{\{ X_i=0\}}$, the number of observations equal to 0, then $Y \sim {\rm Bin} (n,p)$. For large $n$, the Central Limit Theorem ([Section 7.2](#Sec_CLT:statement)) states $Y \approx N (np, np(1-p))$ and hence  
+<center>  
+$$ \tilde{p} = \frac{Y}{n} \approx N \left( p, \frac{p(1-p)}{n} \right).$$  
+</center>  
+Comparing the asymptotic variances of $\hat{p}$ and $\tilde{p}$ as $p = \exp(-\lambda)$ varies in Figure \@ref(fig:invar1) we note that the asymptotic variance of $\hat{p}$ is always smaller. That is, it is better to use information about the whole distribution $(\bar{X})$ rather than simply which observations are equal to 0 and those which are not. Note that as $p \to 1$ corresponding to $\lambda \to 0$ the difference between the variances becomes smaller.
+<center>
+```{r invar1, echo = FALSE, message=FALSE, out.width= "80%", fig.cap = "Asymptotic variance times sample size, n, for varying p."}
+p=seq(0,1,0.001)
+pp=p[-1]
+var_hat=0
+var_hat[2:1001]=-pp^2*log(pp)
+var_tilde=p*(1-p)
+plot(p,var_tilde,type="l",lwd=2,col=2,xlab=expression(paste("p=",exp(-lambda))),ylab="Asymptotic variance (times n)")
+lines(p,var_hat,lwd=2,col=1)
+#legend(1, 95, legend=c("Line 1", "Line 2"),  col=c("red", "blue"), lty=1:2, cex=0.8)
+legend(0,0.25,legend=c(expression(paste("-",p^2,"log(p)")), "p(1-p)"),  col=c(1, 2), lty=c(1,1), cex=0.8)
+
+```
+</center>
+:::
+</details>
+\
+
+## <span style="color: rgba(15, 0, 207, 1);">**Task: Session 6**</span>  {- #MLEprop:lab}
+
+Attempt the **R Markdown** file for Session 6:  
+[Session 6: Properties of MLEs](https://moodle.nottingham.ac.uk/course/view.php?id=134982#section-2)
+
+
+
+## <span style="color: rgba(15, 0, 207, 1);">**Student Exercises**</span>  {- #MLEprop:exer}
+
+Attempt the exercises below. 
+
+:::{.exer #exer11:1}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Exercise 11.1.}
+```
+\
+Consider the situation where Bernoulli trials are available.  The number of trials required before 5 successes are obtained can be modelled by the negative binomial distribution with parameters $r=5$ and $\theta$.  The probability mass function of a negative binomial is:  
+<center>  
+$$ p(x) = {{x-1} \choose {r-1}} \theta^r (1 - \theta)^{x-r}, \qquad x = r, r+1, \dots. $$  
+</center>  
+Find the maximum likelihood estimator $\hat{\theta}$ of $\theta$ based on a random sample of $n$ sets of trials.  What are the maximum likelihood estimators of:  
+(a) the mean of the distribution $5/\theta$, and,   
+(b) the quantity $\theta^5$?   
+:::
+
+```{asis, include=knitr::is_html_output()}
+<details><summary>Solution to Exercise 11.1.</summary>  
+:::{.ans #QuestionMLEProp_1}  
+The probability mass function is  
+<center>  
+$$ p(x) = {{x-1} \choose {r-1} } \theta^r (1 - \theta)^{x-r}, \qquad x = r, r+1, \dots.$$  
+</center>  
+We have $r = 5$ as fixed.  Therefore, the log-likelihood function based on scores $X_1,X_2,\dots,X_n$ is  
+<center>  
+$$ l(\theta) =  r n \log \theta + \left( \sum_{i = 1}^n (x_i-r) \right) \log (1 - \theta) + \sum_{i = 1}^n \log  { {x_i - 1} \choose {r-1} } $$  
+</center>  
+and  
+<center>  
+$$ l'(\theta) = \frac {rn}{\theta} - \frac {(\sum_{i=1}^n x_i)-nr}{1 - \theta} = \frac{ rn - rn \theta - \theta \sum _{i=1}^n x_i + \theta nr }{ \theta(1-\theta) }. $$  
+</center>  
+Hence,
+<center>  
+\begin{eqnarray*}
+l'(\theta)=0 \qquad &\Longleftrightarrow& \qquad rn - rn \theta - \theta \sum _{i=1}^n x_i + \theta nr=0 \\ 
+ &\Longleftrightarrow& \qquad rn - \theta \sum_{i=1}^n x_i =0 \\
+\qquad &\Longleftrightarrow& \qquad \theta = \frac{nr} {\sum_{i=1}^n x_i} = \frac{r}{\bar{x}},
+\end{eqnarray*}  
+</center>  
+and it is easily checked that $l''(r/ \bar{x}) = -\sum_{i=1}^n x_i =<0$.  In the present example, $r=5$, so the MLE of $\theta$ is $\hat{\theta}=5/ \bar{x}$.
+
+By the invariance property, the MLE of  
+
+(a) $g_1(\theta) = 5/\theta$ is  
+<center>  
+$$ g_1 (\hat{\theta}) = \frac{5}{\hat{\theta}} = \bar{x}, $$  
+</center>  
+(b) $g_2(\theta) = {\theta}^5$ is  
+<center>  
+$$ g_2 (\hat{\theta}) = {\hat{\theta}}^5 = \left( \frac{5}{ {\bar {x}}} \right)^5. $$  
+</center>  
+:::
+</details>  
+```
+\
+
+:::{.exer #exer11:2}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Exercise 11.2.}
+```
+\
+To determine the amount that a particular type of bacteria is present in water one finds out whether or not *any* is present in multiple samples.  Let $\theta$ be the average number of bacteria per unit volume in the river, and assume that the bacteria are distributed at random in the water.  Some $n$ test tubes each containing a volume $v$ of river water are incubated and tested.  A negative test shows no bacteria whereas a positive test shows that at least one bacterium is present.  If $y$ tubes out of $n$ tested give negative results, what is
+the m.l.e. of $\theta$?  
+:::
+
+```{asis, include=knitr::is_html_output()}
+<details><summary>Hint.</summary>   If there are $X$ bacteria in a volume $v$ of river water then  
+<center>  
+$$X \sim \text{Po}(\theta v).$$  
+</center>  
+The probability of a negative reaction is $P(X=0) = p = e^{-\theta v}$ so that the probability of observing $y$ negative reactions out of $n$ is  
+<center>  
+$$p(y | \theta) = {n \choose y} (e^{-\theta v})^y (1-e^{-\theta v})^{n-y}, \qquad y = 0,1,\dots,n,$$   
+</center>  
+which is the likelihood function $L(\theta)$.  
+</details>
+```
+
+
+```{asis, include=knitr::is_html_output()}
+<details><summary>Solution to Exercise 11.2.</summary>  
+:::{.ans #QuestionMLEProp_1}  
+If there are $X$ bacteria in a volume $v$ of river water, then  
+<center>   
+$$p(x | \theta) = \frac{(\theta v)^x e^{- \theta v}}{x!}, \qquad (x=0,1,\ldots; \; \theta >0)$$  
+</center>  
+The probability of a negative reaction (no bacteria) is, therefore,  
+<center>  
+$$ p = p(0 | \theta) = e^{- \theta v} $$  
+</center>  
+and the probability of a positive reaction is  $1 - p = 1 - e^{- \theta v}$.  Since disjoint volumes of water are independent, the $n$ test-tubes constitute independent trials, each with probability $p$ of success (a negative reaction).  Thus, the probability of observing $y$ negative reactions out of $n$ is given by the binomial distribution $B(n,p)$.  Hence  
+<center>  
+$$ p(y | \theta) = \binom{n}{y} (e^{- \theta v})^y (1 - e^{- \theta v})^{n - y}, \qquad y = 0,\ldots, n.$$  
+</center>  
+Thus  
+<center>  
+$$ L(\theta) = \binom{n}{y} (e^{- \theta v})^y (1 - e^{- \theta v})^{n - y} $$  
+</center>  
+and  
+<center>  
+$$ l(\theta) = \log L(\theta) = \log \binom{n}{y} - \theta vy + (n - y) \log (1 - e^{- \theta v}).$$  
+</center>  
+Hence,  
+<center>  
+$$ l'(\theta) = -vy + (n-y) \frac{v e^{-\theta v}}{1- e^{-\theta v}} = -vy+\frac{(n-y)v}{e^{\theta v}-1}. $$  
+</center>  
+Thus  
+<center>  
+\begin{eqnarray*}
+l'(\theta)=0 \qquad &\Longleftrightarrow& \qquad y=\frac{n-y}{ e^{\theta v}-1} \\
+\qquad &\Longleftrightarrow& \qquad e^{\theta v} y=n \\
+\qquad &\Longleftrightarrow& \qquad \theta = \frac{1}{v} \log \left( \frac{n}{y} \right) .
+\end{eqnarray*}  
+</center>  
+Moreover, this maximises $l(\theta)$ as  
+<center>  
+$$ l''(\theta)=-\frac{(n-y)v e^{\theta v}}{( e^{\theta v} -1)^2}<0.$$  
+</center>  
+Thus the MLE of $\theta$ is $\hat{\theta}=\frac{1}{v} \log \left( \frac{n}{y} \right)$.
+::: 
+</details>
+```
+

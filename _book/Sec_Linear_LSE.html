@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 17 Least Squares Estimation for Linear Models | Foundations of Statistics</title>
+  <meta name="description" content="Lecture Notes for Foundations of Statistics" />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 17 Least Squares Estimation for Linear Models | Foundations of Statistics" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Lecture Notes for Foundations of Statistics" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 17 Least Squares Estimation for Linear Models | Foundations of Statistics" />
+  
+  <meta name="twitter:description" content="Lecture Notes for Foundations of Statistics" />
+  
+
+<meta name="author" content="Prof Peter Neal and Dr Daniel Cavey" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="Sec_LinearI.html"/>
+<link rel="next" href="Interval_Estimation.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">MATH4081: Foundations of Statistics</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preliminaries</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#overview"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#tasks"><i class="fa fa-check"></i>Tasks</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#intro_stats"><i class="fa fa-check"></i><b>1.1</b> What is Statistics?</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#intro_population"><i class="fa fa-check"></i><b>1.2</b> Populations and samples</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#intro_data"><i class="fa fa-check"></i><b>1.3</b> Types of Data</a></li>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#intro_example"><i class="fa fa-check"></i><b>1.4</b> Some example datasets</a></li>
+<li class="chapter" data-level="1.5" data-path="intro.html"><a href="intro.html#intro_computing"><i class="fa fa-check"></i><b>1.5</b> Statistical Computing</a></li>
+<li class="chapter" data-level="1.6" data-path="intro.html"><a href="intro.html#intro_paradigm"><i class="fa fa-check"></i><b>1.6</b> The statistical paradigm</a></li>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#intro:R"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 1</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>2</b> Summary Statistics</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="summary.html"><a href="summary.html#summary_location"><i class="fa fa-check"></i><b>2.1</b> Measures of location</a></li>
+<li class="chapter" data-level="2.2" data-path="summary.html"><a href="summary.html#summary_spread"><i class="fa fa-check"></i><b>2.2</b> Measures of spread</a></li>
+<li class="chapter" data-level="2.3" data-path="summary.html"><a href="summary.html#summary_robust"><i class="fa fa-check"></i><b>2.3</b> Robustness of summary statistics</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="visual.html"><a href="visual.html"><i class="fa fa-check"></i><b>3</b> Visualising data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="visual.html"><a href="visual.html#visual_intro"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="visual.html"><a href="visual.html#visual_data-features"><i class="fa fa-check"></i><b>3.2</b> Some data features</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="visual.html"><a href="visual.html#visual_data-features_multi"><i class="fa fa-check"></i><b>3.2.1</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Multimodal distributions</strong></span></a></li>
+<li class="chapter" data-level="3.2.2" data-path="visual.html"><a href="visual.html#visual_data-features_symmetry"><i class="fa fa-check"></i><b>3.2.2</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Symmetry</strong></span></a></li>
+<li class="chapter" data-level="3.2.3" data-path="visual.html"><a href="visual.html#visual_data-features_outliers"><i class="fa fa-check"></i><b>3.2.3</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Outliers</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="visual.html"><a href="visual.html#visual_plot"><i class="fa fa-check"></i><b>3.3</b> Basic plot types</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="visual.html"><a href="visual.html#visual_plot_histo"><i class="fa fa-check"></i><b>3.3.1</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Histogram and bar charts</strong></span></a></li>
+<li class="chapter" data-level="3.3.2" data-path="visual.html"><a href="visual.html#visual_plot_density"><i class="fa fa-check"></i><b>3.3.2</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Density plots</strong></span></a></li>
+<li class="chapter" data-level="3.3.3" data-path="visual.html"><a href="visual.html#visual_plot_boxplot"><i class="fa fa-check"></i><b>3.3.3</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Boxplot</strong></span></a></li>
+<li class="chapter" data-level="3.3.4" data-path="visual.html"><a href="visual.html#visual_plot_cdf"><i class="fa fa-check"></i><b>3.3.4</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Cumulative frequency diagrams, and the empirical CDF</strong></span></a></li>
+<li class="chapter" data-level="3.3.5" data-path="visual.html"><a href="visual.html#visual_plot_stem"><i class="fa fa-check"></i><b>3.3.5</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Stem and leaf</strong></span></a></li>
+<li class="chapter" data-level="3.3.6" data-path="visual.html"><a href="visual.html#visual_plot_pie"><i class="fa fa-check"></i><b>3.3.6</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Pie charts</strong></span></a></li>
+<li class="chapter" data-level="3.3.7" data-path="visual.html"><a href="visual.html#visual_plot_dot"><i class="fa fa-check"></i><b>3.3.7</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Dotplots</strong></span></a></li>
+<li class="chapter" data-level="3.3.8" data-path="visual.html"><a href="visual.html#visual_plot_scatter"><i class="fa fa-check"></i><b>3.3.8</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Scatterplots</strong></span></a></li>
+<li class="chapter" data-level="3.3.9" data-path="visual.html"><a href="visual.html#visual_plot_summary"><i class="fa fa-check"></i><b>3.3.9</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Summary</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="visual.html"><a href="visual.html#visual_data"><i class="fa fa-check"></i><b>3.4</b> Commenting on data</a></li>
+<li class="chapter" data-level="" data-path="visual.html"><a href="visual.html#visual:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 2</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="prob.html"><a href="prob.html"><i class="fa fa-check"></i><b>4</b> Probability</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="prob.html"><a href="prob.html#prob:overview"><i class="fa fa-check"></i><b>4.1</b> Overview</a></li>
+<li class="chapter" data-level="4.2" data-path="prob.html"><a href="prob.html#prob:motivation"><i class="fa fa-check"></i><b>4.2</b> Motivation</a></li>
+<li class="chapter" data-level="4.3" data-path="prob.html"><a href="prob.html#prob:sample_space"><i class="fa fa-check"></i><b>4.3</b> Sample Space</a></li>
+<li class="chapter" data-level="4.4" data-path="prob.html"><a href="prob.html#prob:events"><i class="fa fa-check"></i><b>4.4</b> Events</a></li>
+<li class="chapter" data-level="4.5" data-path="prob.html"><a href="prob.html#prob:defn"><i class="fa fa-check"></i><b>4.5</b> Probability</a></li>
+<li class="chapter" data-level="4.6" data-path="prob.html"><a href="prob.html#prob:Conditional_Probability"><i class="fa fa-check"></i><b>4.6</b> Conditional probability</a></li>
+<li class="chapter" data-level="4.7" data-path="prob.html"><a href="prob.html#prob:mutual"><i class="fa fa-check"></i><b>4.7</b> Mutual Independence</a></li>
+<li class="chapter" data-level="" data-path="prob.html"><a href="prob.html#rv:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 3</strong></span></a></li>
+<li class="chapter" data-level="" data-path="prob.html"><a href="prob.html#prob:stud"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="rv.html"><a href="rv.html"><i class="fa fa-check"></i><b>5</b> Random Variables</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="rv.html"><a href="rv.html#rv:overview"><i class="fa fa-check"></i><b>5.1</b> Overview</a></li>
+<li class="chapter" data-level="5.2" data-path="rv.html"><a href="rv.html#rv:des"><i class="fa fa-check"></i><b>5.2</b> Random variables</a></li>
+<li class="chapter" data-level="5.3" data-path="rv.html"><a href="rv.html#rv:expect"><i class="fa fa-check"></i><b>5.3</b> Expectation</a></li>
+<li class="chapter" data-level="5.4" data-path="rv.html"><a href="rv.html#rv:bernoulli"><i class="fa fa-check"></i><b>5.4</b> Bernoulli distribution and its extension</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="rv.html"><a href="rv.html#rv:Bernoulli:bern"><i class="fa fa-check"></i><b>5.4.1</b> Bernoulli distribution</a></li>
+<li class="chapter" data-level="5.4.2" data-path="rv.html"><a href="rv.html#rv:Bernoulli:bin"><i class="fa fa-check"></i><b>5.4.2</b> Binomial Distribution</a></li>
+<li class="chapter" data-level="5.4.3" data-path="rv.html"><a href="rv.html#rv:Bernoulli:geom"><i class="fa fa-check"></i><b>5.4.3</b> Geometric Distribution</a></li>
+<li class="chapter" data-level="5.4.4" data-path="rv.html"><a href="rv.html#rv:Bernoulli:negbin"><i class="fa fa-check"></i><b>5.4.4</b> Negative binomial Distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="rv.html"><a href="rv.html#rv:Poisson"><i class="fa fa-check"></i><b>5.5</b> Poisson distribution</a></li>
+<li class="chapter" data-level="5.6" data-path="rv.html"><a href="rv.html#rv:exponential"><i class="fa fa-check"></i><b>5.6</b> Exponential distribution and its extensions</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="rv.html"><a href="rv.html#rv:exponential:exp"><i class="fa fa-check"></i><b>5.6.1</b> Exponential distribution</a></li>
+<li class="chapter" data-level="5.6.2" data-path="rv.html"><a href="rv.html#rv:exponential:gamma"><i class="fa fa-check"></i><b>5.6.2</b> Gamma distribution</a></li>
+<li class="chapter" data-level="5.6.3" data-path="rv.html"><a href="rv.html#rv:exponential:chi"><i class="fa fa-check"></i><b>5.6.3</b> Chi squared distribution</a></li>
+<li class="chapter" data-level="5.6.4" data-path="rv.html"><a href="rv.html#rv:exponential:beta"><i class="fa fa-check"></i><b>5.6.4</b> Beta distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="rv.html"><a href="rv.html#rv:normal"><i class="fa fa-check"></i><b>5.7</b> Normal (Gaussian) Distribution</a></li>
+<li class="chapter" data-level="" data-path="rv.html"><a href="rv.html#prob:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="jointdis.html"><a href="jointdis.html"><i class="fa fa-check"></i><b>6</b> Joint Distribution Functions</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="jointdis.html"><a href="jointdis.html#jointdis:intro"><i class="fa fa-check"></i><b>6.1</b> Overview</a></li>
+<li class="chapter" data-level="6.2" data-path="jointdis.html"><a href="jointdis.html#jointdis:cdf"><i class="fa fa-check"></i><b>6.2</b> Joint c.d.f. and p.d.f.</a></li>
+<li class="chapter" data-level="6.3" data-path="jointdis.html"><a href="jointdis.html#jointdis:marginal"><i class="fa fa-check"></i><b>6.3</b> Marginal c.d.f. and p.d.f.</a></li>
+<li class="chapter" data-level="6.4" data-path="jointdis.html"><a href="jointdis.html#jointdis:independent"><i class="fa fa-check"></i><b>6.4</b> Independent random variables</a></li>
+<li class="chapter" data-level="" data-path="jointdis.html"><a href="jointdis.html#jointdis:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercise</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="Sec_CLT.html"><a href="Sec_CLT.html"><i class="fa fa-check"></i><b>7</b> Central Limit Theorem and law of large numbers</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="Sec_CLT.html"><a href="Sec_CLT.html#Sec_CLT:intro"><i class="fa fa-check"></i><b>7.1</b> Introduction</a></li>
+<li class="chapter" data-level="7.2" data-path="Sec_CLT.html"><a href="Sec_CLT.html#Sec_CLT:statement"><i class="fa fa-check"></i><b>7.2</b> Statement of Central Limit Theorem</a></li>
+<li class="chapter" data-level="7.3" data-path="Sec_CLT.html"><a href="Sec_CLT.html#Sec_CLT:discrete"><i class="fa fa-check"></i><b>7.3</b> Central limit theorem for discrete random variables</a></li>
+<li class="chapter" data-level="7.4" data-path="Sec_CLT.html"><a href="Sec_CLT.html#Sec_CLT:LLN"><i class="fa fa-check"></i><b>7.4</b> Law of Large Numbers</a></li>
+<li class="chapter" data-level="" data-path="Sec_CLT.html"><a href="Sec_CLT.html#Sec_clt:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 4</strong></span></a></li>
+<li class="chapter" data-level="" data-path="Sec_CLT.html"><a href="Sec_CLT.html#Sec_clt:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="motivate.html"><a href="motivate.html"><i class="fa fa-check"></i><b>8</b> Motivation for Statistical Inference</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="motivate.html"><a href="motivate.html#motivate:intro"><i class="fa fa-check"></i><b>8.1</b> Introduction</a></li>
+<li class="chapter" data-level="8.2" data-path="motivate.html"><a href="motivate.html#motivate:example"><i class="fa fa-check"></i><b>8.2</b> Motivating example</a></li>
+<li class="chapter" data-level="8.3" data-path="motivate.html"><a href="motivate.html#motivate:assumption"><i class="fa fa-check"></i><b>8.3</b> Modelling assumptions</a></li>
+<li class="chapter" data-level="8.4" data-path="motivate.html"><a href="motivate.html#motivate:parametric"><i class="fa fa-check"></i><b>8.4</b> Parametric models</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="paraestimate.html"><a href="paraestimate.html"><i class="fa fa-check"></i><b>9</b> Parameter Estimation</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="paraestimate.html"><a href="paraestimate.html#paraestimate:intro"><i class="fa fa-check"></i><b>9.1</b> Introduction</a></li>
+<li class="chapter" data-level="9.2" data-path="paraestimate.html"><a href="paraestimate.html#paraestimate:prelim"><i class="fa fa-check"></i><b>9.2</b> Preliminaries</a></li>
+<li class="chapter" data-level="9.3" data-path="paraestimate.html"><a href="paraestimate.html#paraestimate:judge"><i class="fa fa-check"></i><b>9.3</b> Judging estimators</a></li>
+<li class="chapter" data-level="9.4" data-path="paraestimate.html"><a href="paraestimate.html#paraestimate:variance"><i class="fa fa-check"></i><b>9.4</b> Sample Variance</a></li>
+<li class="chapter" data-level="" data-path="paraestimate.html"><a href="paraestimate.html#paraestimate:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 5</strong></span></a></li>
+<li class="chapter" data-level="" data-path="paraestimate.html"><a href="paraestimate.html#paraestimate:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="MLE.html"><a href="MLE.html"><i class="fa fa-check"></i><b>10</b> Techniques for Deriving Estimators</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="MLE.html"><a href="MLE.html#MLE:intro"><i class="fa fa-check"></i><b>10.1</b> Introduction</a></li>
+<li class="chapter" data-level="10.2" data-path="MLE.html"><a href="MLE.html#MLE:moments"><i class="fa fa-check"></i><b>10.2</b> Method of Moments</a></li>
+<li class="chapter" data-level="10.3" data-path="MLE.html"><a href="MLE.html#MLE:MLE"><i class="fa fa-check"></i><b>10.3</b> Maximum likelihood estimation</a></li>
+<li class="chapter" data-level="10.4" data-path="MLE.html"><a href="MLE.html#MLE:comments"><i class="fa fa-check"></i><b>10.4</b> Comments on the Maximum Likelihood Estimator</a></li>
+<li class="chapter" data-level="" data-path="MLE.html"><a href="MLE.html#MLE:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="MLEprop.html"><a href="MLEprop.html"><i class="fa fa-check"></i><b>11</b> Additional Properties of Estimators</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:intro"><i class="fa fa-check"></i><b>11.1</b> Introduction</a></li>
+<li class="chapter" data-level="11.2" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:sufficient"><i class="fa fa-check"></i><b>11.2</b> Sufficiency</a></li>
+<li class="chapter" data-level="11.3" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:MVE"><i class="fa fa-check"></i><b>11.3</b> Minimum variance estimators</a></li>
+<li class="chapter" data-level="11.4" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:asymptotic"><i class="fa fa-check"></i><b>11.4</b> Asymptotic normality of the MLE</a></li>
+<li class="chapter" data-level="11.5" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:invariance"><i class="fa fa-check"></i><b>11.5</b> Invariance property</a></li>
+<li class="chapter" data-level="" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 6</strong></span></a></li>
+<li class="chapter" data-level="" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="CondDis.html"><a href="CondDis.html"><i class="fa fa-check"></i><b>12</b> Conditional Distribution and Conditional Expectation</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="CondDis.html"><a href="CondDis.html#CondDis:CondDis"><i class="fa fa-check"></i><b>12.1</b> Conditional distribution</a></li>
+<li class="chapter" data-level="12.2" data-path="CondDis.html"><a href="CondDis.html#CondDis:CondExpect"><i class="fa fa-check"></i><b>12.2</b> Conditional expectation</a></li>
+<li class="chapter" data-level="12.3" data-path="CondDis.html"><a href="CondDis.html#CondDis:Independence"><i class="fa fa-check"></i><b>12.3</b> Independent random variables</a></li>
+<li class="chapter" data-level="" data-path="CondDis.html"><a href="CondDis.html#CondDis:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercise</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="Correlation.html"><a href="Correlation.html"><i class="fa fa-check"></i><b>13</b> Expectation, Covariance and Correlation</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="Correlation.html"><a href="Correlation.html#Correlation:Expectation"><i class="fa fa-check"></i><b>13.1</b> Expectation of a function of random variables</a></li>
+<li class="chapter" data-level="13.2" data-path="Correlation.html"><a href="Correlation.html#Correlation:Covariance"><i class="fa fa-check"></i><b>13.2</b> Covariance</a></li>
+<li class="chapter" data-level="13.3" data-path="Correlation.html"><a href="Correlation.html#Correlation:Correlation"><i class="fa fa-check"></i><b>13.3</b> Correlation</a></li>
+<li class="chapter" data-level="" data-path="Correlation.html"><a href="Correlation.html#Correlation:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 7</strong></span></a></li>
+<li class="chapter" data-level="" data-path="Correlation.html"><a href="Correlation.html#Correlation:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="Transform.html"><a href="Transform.html"><i class="fa fa-check"></i><b>14</b> Transformations of random variables</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="Transform.html"><a href="Transform.html#Transform:intro"><i class="fa fa-check"></i><b>14.1</b> Introduction</a></li>
+<li class="chapter" data-level="14.2" data-path="Transform.html"><a href="Transform.html#Transform:univariate"><i class="fa fa-check"></i><b>14.2</b> Univariate case</a></li>
+<li class="chapter" data-level="14.3" data-path="Transform.html"><a href="Transform.html#Transform:bivariate"><i class="fa fa-check"></i><b>14.3</b> Bivariate case</a></li>
+<li class="chapter" data-level="" data-path="Transform.html"><a href="Transform.html#Transform:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercise</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="MV_Normal.html"><a href="MV_Normal.html"><i class="fa fa-check"></i><b>15</b> Multivariate Normal Distribution</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="MV_Normal.html"><a href="MV_Normal.html#MV_Normal:intro"><i class="fa fa-check"></i><b>15.1</b> Introduction</a></li>
+<li class="chapter" data-level="15.2" data-path="MV_Normal.html"><a href="MV_Normal.html#MV_Normal:multi"><i class="fa fa-check"></i><b>15.2</b> <span class="math inline">\(n\)</span>-Dimensional Normal Distribution</a></li>
+<li class="chapter" data-level="" data-path="MV_Normal.html"><a href="MV_Normal.html#MV_Normal:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 8</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html"><i class="fa fa-check"></i><b>16</b> Introduction to Linear Models</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:intro"><i class="fa fa-check"></i><b>16.1</b> Introduction</a></li>
+<li class="chapter" data-level="16.2" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:stat"><i class="fa fa-check"></i><b>16.2</b> Statistical models</a></li>
+<li class="chapter" data-level="16.3" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:linear"><i class="fa fa-check"></i><b>16.3</b> The linear model</a></li>
+<li class="chapter" data-level="16.4" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:Gauss"><i class="fa fa-check"></i><b>16.4</b> The Normal (Gaussian) linear model</a></li>
+<li class="chapter" data-level="16.5" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:residuals"><i class="fa fa-check"></i><b>16.5</b> Residuals</a></li>
+<li class="chapter" data-level="16.6" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:line"><i class="fa fa-check"></i><b>16.6</b> Straight Line, Horizontal Line and Quadratic Models</a></li>
+<li class="chapter" data-level="16.7" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:Examples"><i class="fa fa-check"></i><b>16.7</b> Examples</a></li>
+<li class="chapter" data-level="16.8" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:Prediction"><i class="fa fa-check"></i><b>16.8</b> Prediction</a></li>
+<li class="chapter" data-level="16.9" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:Nested"><i class="fa fa-check"></i><b>16.9</b> Nested Models</a></li>
+<li class="chapter" data-level="" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercise</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html"><i class="fa fa-check"></i><b>17</b> Least Squares Estimation for Linear Models</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:intro"><i class="fa fa-check"></i><b>17.1</b> Introduction</a></li>
+<li class="chapter" data-level="17.2" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:algebra"><i class="fa fa-check"></i><b>17.2</b> Linear algebra review</a></li>
+<li class="chapter" data-level="17.3" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:derive"><i class="fa fa-check"></i><b>17.3</b> Deriving the least squares estimator</a></li>
+<li class="chapter" data-level="17.4" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:examples"><i class="fa fa-check"></i><b>17.4</b> Examples</a></li>
+<li class="chapter" data-level="17.5" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:beta"><i class="fa fa-check"></i><b>17.5</b> Properties of the estimator of <span class="math inline">\(\mathbf{\beta}\)</span></a></li>
+<li class="chapter" data-level="17.6" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:GaussMarkov"><i class="fa fa-check"></i><b>17.6</b> Gauss-Markov Theorem</a></li>
+<li class="chapter" data-level="" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 9</strong></span></a></li>
+<li class="chapter" data-level="" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="Interval_Estimation.html"><a href="Interval_Estimation.html"><i class="fa fa-check"></i><b>18</b> Interval Estimation</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="Interval_Estimation.html"><a href="Interval_Estimation.html#Interval_Estimation:intro"><i class="fa fa-check"></i><b>18.1</b> Introduction</a></li>
+<li class="chapter" data-level="18.2" data-path="Interval_Estimation.html"><a href="Interval_Estimation.html#Interval_Estimation:confident"><i class="fa fa-check"></i><b>18.2</b> Confident?</a></li>
+<li class="chapter" data-level="18.3" data-path="Interval_Estimation.html"><a href="Interval_Estimation.html#Interval_Estimation:CI"><i class="fa fa-check"></i><b>18.3</b> Confidence intervals</a></li>
+<li class="chapter" data-level="18.4" data-path="Interval_Estimation.html"><a href="Interval_Estimation.html#Interval_Estimation:MLE"><i class="fa fa-check"></i><b>18.4</b> Asymptotic distribution of the MLE</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html"><i class="fa fa-check"></i><b>19</b> Hypothesis Testing</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:intro"><i class="fa fa-check"></i><b>19.1</b> Introduction to hypothesis testing</a></li>
+<li class="chapter" data-level="19.2" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:errors"><i class="fa fa-check"></i><b>19.2</b> Type I and Type II errors</a></li>
+<li class="chapter" data-level="19.3" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:normal_known"><i class="fa fa-check"></i><b>19.3</b> Tests for normal means, <span class="math inline">\(\sigma\)</span> known</a></li>
+<li class="chapter" data-level="19.4" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:p_values"><i class="fa fa-check"></i><b>19.4</b> <span class="math inline">\(p\)</span> values</a></li>
+<li class="chapter" data-level="19.5" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:normal_unknown"><i class="fa fa-check"></i><b>19.5</b> Tests for normal means, <span class="math inline">\(\sigma\)</span> unknown</a></li>
+<li class="chapter" data-level="19.6" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:twosided"><i class="fa fa-check"></i><b>19.6</b> Confidence intervals and two-sided tests</a></li>
+<li class="chapter" data-level="19.7" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:variance"><i class="fa fa-check"></i><b>19.7</b> Distribution of the variance</a></li>
+<li class="chapter" data-level="19.8" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:other"><i class="fa fa-check"></i><b>19.8</b> Other types of tests</a></li>
+<li class="chapter" data-level="19.9" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:samplesize"><i class="fa fa-check"></i><b>19.9</b> Sample size calculation</a></li>
+<li class="chapter" data-level="" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 10</strong></span></a></li>
+<li class="chapter" data-level="" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html"><i class="fa fa-check"></i><b>20</b> Hypothesis Testing Discrete Data</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html#Hypo_Test_Discrete:intro"><i class="fa fa-check"></i><b>20.1</b> Introduction</a></li>
+<li class="chapter" data-level="20.2" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html#Hypo_Test_Discrete:motivate"><i class="fa fa-check"></i><b>20.2</b> Goodness-of-fit motivating example</a></li>
+<li class="chapter" data-level="20.3" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html#Hypo_Test_Discrete:GoF"><i class="fa fa-check"></i><b>20.3</b> Goodness-of-fit</a></li>
+<li class="chapter" data-level="20.4" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html#Hypo_Test_Discrete:Independence"><i class="fa fa-check"></i><b>20.4</b> Testing Independence</a></li>
+<li class="chapter" data-level="" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html#Hypo_Test_Discrete:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 11</strong></span></a></li>
+<li class="chapter" data-level="" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html#Hypo_Test_Discrete:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="Sec_Linear_hypo_test.html"><a href="Sec_Linear_hypo_test.html"><i class="fa fa-check"></i><b>21</b> Basic Hypothesis Tests for Linear Models</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="Sec_Linear_hypo_test.html"><a href="Sec_Linear_hypo_test.html#Sec_Linear_hypo_test:intro"><i class="fa fa-check"></i><b>21.1</b> Introduction</a></li>
+<li class="chapter" data-level="21.2" data-path="Sec_Linear_hypo_test.html"><a href="Sec_Linear_hypo_test.html#Sec_Linear_hypo_test:single"><i class="fa fa-check"></i><b>21.2</b> Tests on a single parameter</a></li>
+<li class="chapter" data-level="21.3" data-path="Sec_Linear_hypo_test.html"><a href="Sec_Linear_hypo_test.html#Sec_Linear_hypo_test:CI"><i class="fa fa-check"></i><b>21.3</b> Confidence intervals for parameters</a></li>
+<li class="chapter" data-level="21.4" data-path="Sec_Linear_hypo_test.html"><a href="Sec_Linear_hypo_test.html#Sec_Linear_hypo_test:F"><i class="fa fa-check"></i><b>21.4</b> Tests for the existence of regression</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html"><i class="fa fa-check"></i><b>22</b> ANOVA Tables and F Tests</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:Intro"><i class="fa fa-check"></i><b>22.1</b> Introduction</a></li>
+<li class="chapter" data-level="22.2" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:residuals"><i class="fa fa-check"></i><b>22.2</b> The residuals</a></li>
+<li class="chapter" data-level="22.3" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:SS"><i class="fa fa-check"></i><b>22.3</b> Sums of squares</a></li>
+<li class="chapter" data-level="22.4" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:ANOVA"><i class="fa fa-check"></i><b>22.4</b> Analysis of Variance (ANOVA)</a></li>
+<li class="chapter" data-level="22.5" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:Compare"><i class="fa fa-check"></i><b>22.5</b> Comparing models</a></li>
+<li class="chapter" data-level="22.6" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:seq"><i class="fa fa-check"></i><b>22.6</b> Sequential sum of squares</a></li>
+<li class="chapter" data-level="" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 12</strong></span></a></li>
+<li class="chapter" data-level="" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="introR.html"><a href="introR.html"><i class="fa fa-check"></i><b>23</b> Introduction to R</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="introR.html"><a href="introR.html#introR_what"><i class="fa fa-check"></i><b>23.1</b> What are R, RStudio and R Markdown?</a></li>
+<li class="chapter" data-level="23.2" data-path="introR.html"><a href="introR.html#introR_UoN"><i class="fa fa-check"></i><b>23.2</b> Starting RStudio on the UoN Network</a></li>
+<li class="chapter" data-level="23.3" data-path="introR.html"><a href="introR.html#introR_download"><i class="fa fa-check"></i><b>23.3</b> Downloading R and RStudio</a></li>
+<li class="chapter" data-level="23.4" data-path="introR.html"><a href="introR.html#introR_start"><i class="fa fa-check"></i><b>23.4</b> Getting started in R</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="Rmark.html"><a href="Rmark.html"><i class="fa fa-check"></i><b>24</b> What is R Markdown?</a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="Rmark.html"><a href="Rmark.html#Rmark_start"><i class="fa fa-check"></i><b>24.1</b> Getting started</a></li>
+<li class="chapter" data-level="24.2" data-path="Rmark.html"><a href="Rmark.html#Rmark_R"><i class="fa fa-check"></i><b>24.2</b> R in R Markdown</a></li>
+<li class="chapter" data-level="24.3" data-path="Rmark.html"><a href="Rmark.html#Rmark_text"><i class="fa fa-check"></i><b>24.3</b> Text in R markdown</a></li>
+<li class="chapter" data-level="24.4" data-path="Rmark.html"><a href="Rmark.html#Rmark_maths"><i class="fa fa-check"></i><b>24.4</b> Mathematics in R Markdown</a></li>
+<li class="chapter" data-level="24.5" data-path="Rmark.html"><a href="Rmark.html#Rmark_work"><i class="fa fa-check"></i><b>24.5</b> Worked Example</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://moodle.nottingham.ac.uk/course/view.php?id=128925" target="blank">MATH4081 Moodle Page</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Foundations of Statistics</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="Sec_Linear_LSE" class="section level1 hasAnchor" number="17">
+<h1><span class="header-section-number">Chapter 17</span> Least Squares Estimation for Linear Models<a href="Sec_Linear_LSE.html#Sec_Linear_LSE" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="Sec_Linear_LSE:intro" class="section level2 hasAnchor" number="17.1">
+<h2><span class="header-section-number">17.1</span> Introduction<a href="Sec_Linear_LSE.html#Sec_Linear_LSE:intro" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+In <a href="Sec_LinearI.html#Sec_LinearI">Section 16</a> we introduced linear models with particular emphasis on Normal linear models. We derived the <em>least square estimates</em> of the model parameters for the straight line model:
+<center>
+<span class="math display">\[ y = \alpha +  \beta x + \epsilon, \]</span>
+</center>
+<p>and showed that if <span class="math inline">\(\epsilon \sim N(0,\sigma^2)\)</span> then the least square estimates coincide with the <em>maximum likelihood estimates</em> of the parameters. In this section we consider the mathematics behind least squares estimation for general linear models. This relies heavily on linear algebra (matrix manipulation) and we give a review of key linear algebra results in <a href="Sec_Linear_LSE.html#Sec_Linear_LSE:algebra">Section 17.2</a>. The main message is that we can concisely express key quantities such as least square parameter estimates, <span class="math inline">\(\hat{\beta}\)</span>, fitted values, <span class="math inline">\(\hat{y}\)</span> and residuals, <span class="math inline">\(\epsilon\)</span> as functions of matrices.</p>
+</div>
+<div id="Sec_Linear_LSE:algebra" class="section level2 hasAnchor" number="17.2">
+<h2><span class="header-section-number">17.2</span> Linear algebra review<a href="Sec_Linear_LSE.html#Sec_Linear_LSE:algebra" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="Sec_Linear_LSE:def:rank" class="def">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Rank of a matrix</strong></span><br />
+Let <span class="math inline">\(\mathbf{M}\)</span> be any <span class="math inline">\(n \times m\)</span> matrix. Then the <em>rank</em> of <span class="math inline">\(\mathbf{M}\)</span> is the maximum number of linearly independent column vectors of <span class="math inline">\(\mathbf{M}\)</span>.</p>
+</div>
+<div id="Sec_Linear_LSE:def:tranpose" class="def">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Transpose of a matrix</strong></span><br />
+If <span class="math inline">\(\mathbf{M}=(m_{ij})\)</span>, then <span class="math inline">\(\mathbf{M}^T=(m_{ji})\)</span> is said to be the <em>transpose</em> of the matrix <span class="math inline">\(\mathbf{M}\)</span>.</p>
+</div>
+<div id="Sec_Linear_LSE:def:property" class="def">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Properties of square matrices</strong></span><br />
+Suppose <span class="math inline">\(\mathbf{A}\)</span> is a square <span class="math inline">\(n \times n\)</span> matrix, then</p>
+<ul>
+<li><span class="math inline">\(\mathbf{A}\)</span> is <em>symmetric</em> if and only if <span class="math inline">\(\mathbf{A}^T=\mathbf{A}\)</span>;<br />
+</li>
+<li><span class="math inline">\(\mathbf{A}^{-1}\)</span> is the <em>inverse</em> of <span class="math inline">\(\mathbf{A}\)</span> if and only if <span class="math inline">\(\mathbf{A}\mathbf{A}^{-1}=\mathbf{A}^{-1}\mathbf{A}=\mathbf{I}_n\)</span>;<br />
+</li>
+<li>The matrix <span class="math inline">\(\mathbf{A}\)</span> is <em>nonsingular</em> if and only if <span class="math inline">\(\text{rank}(\mathbf{A})=n\)</span>;<br />
+</li>
+<li><span class="math inline">\(\mathbf{A}\)</span> is <em>orthogonal</em> if and only if <span class="math inline">\(\mathbf{A}^{-1}=\mathbf{A}^T\)</span>;<br />
+</li>
+<li><span class="math inline">\(\mathbf{A}\)</span> is <em>idempotent</em> if and only if <span class="math inline">\(\mathbf{A}^2=\mathbf{A}\mathbf{A}=\mathbf{A}\)</span>;<br />
+</li>
+<li><span class="math inline">\(\mathbf{A}\)</span> is <em>positive definite</em> if and only if <span class="math inline">\(\mathbf{x}^T \mathbf{A} \mathbf{x} &gt; 0\)</span> for all non-zero vectors <span class="math inline">\(\mathbf{x}\)</span>.<br />
+</li>
+</ul>
+</div>
+<p>Note the following two important results:</p>
+<ul>
+<li><span class="math inline">\(\mathbf{A}\)</span> has an inverse if and only if <span class="math inline">\(\mathbf{A}\)</span> is nonsingular, that is the rows and columns are linearly independent;<br />
+</li>
+<li><span class="math inline">\(\mathbf{A}^T \mathbf{A}\)</span> is positive definite if <span class="math inline">\(\mathbf{A}\)</span> has an inverse.</li>
+</ul>
+<p>The following computational results are also useful:</p>
+<ul>
+<li>Let <span class="math inline">\(\mathbf{N}\)</span> be an <span class="math inline">\(n \times p\)</span> matrix and <span class="math inline">\(\mathbf{P}\)</span> be a <span class="math inline">\(p \times n\)</span> matrix, then
+<center>
+<span class="math display">\[(\mathbf{N}\mathbf{P})^T = \mathbf{P}^T \mathbf{N}^T;\]</span>
+</center></li>
+<li>Suppose <span class="math inline">\(\mathbf{A}\)</span> and <span class="math inline">\(\mathbf{B}\)</span> are two invertible <span class="math inline">\(n \times n\)</span> matrices, then<br />
+
+<center>
+<span class="math display">\[(\mathbf{A}\mathbf{B})^{-1} = \mathbf{B}^{-1} \mathbf{A}^{-1};\]</span>
+</center></li>
+<li>We can write the sum of squares <span class="math inline">\(\sum\limits_{i=1}^n x_i^2 = \mathbf{x}^T \mathbf{x}\)</span>, where <span class="math inline">\(\mathbf{x}^T=[x_1, x_2,\dots,x_n]\)</span> is a <span class="math inline">\(1 \times n\)</span> row vector.</li>
+</ul>
+Given <span class="math inline">\(n\)</span>-dimensional vectors <span class="math inline">\(\mathbf{x}\)</span> and <span class="math inline">\(\mathbf{y} = \mathbf{y}(\mathbf{x})\)</span>, we define<br />
+
+<center>
+<span class="math display">\[
+\frac{d \mathbf{y}}{d \mathbf{x}} = \left(
+\begin{array}{ccc}
+\frac{\partial y_1}{\partial x_1} &amp; \cdots &amp; \frac{\partial y_n}{\partial x_1}\\
+\frac{\partial y_1}{\partial x_2 }&amp; \cdots &amp; \frac{\partial y_n}{\partial x_2}\\
+\vdots &amp; \vdots &amp; \vdots\\
+\frac{\partial y_1}{\partial x_n }&amp; \cdots &amp; \frac{\partial y_n}{\partial x_n}\\
+\end{array}
+\right) .
+\]</span>
+</center>
+<p>Then the following results hold in the calculus of matrices:</p>
+<ul>
+<li><span class="math inline">\(\frac{d}{d\mathbf{x}}(\mathbf{A}\mathbf{x}) = \mathbf{A}^T\)</span>, where <span class="math inline">\(\mathbf{A}\)</span> is a matrix of constants;<br />
+</li>
+<li><span class="math inline">\(\frac{d}{d\mathbf{x}}(\mathbf{x}^T \mathbf{A} \mathbf{x}) = (\mathbf{A}+\mathbf{A}^T)\mathbf{x} = 2\mathbf{A}\mathbf{x}\)</span> whenever <span class="math inline">\(\mathbf{A}\)</span> is symmetric;<br />
+</li>
+<li>If <span class="math inline">\(f(\mathbf{x})\)</span> is a function of several variables the necessary condition to maximise or minimise <span class="math inline">\(f(\mathbf{x})\)</span> is
+<center>
+<span class="math display">\[\frac{\partial f(\mathbf{x}) }{ \partial \mathbf{x} } = 0.\]</span>
+</center></li>
+<li>Let <span class="math inline">\(\mathbf{H}=\frac{\partial^2 f(\mathbf{x}) }{ \partial \mathbf{x} \partial \mathbf{x}^T}\)</span> be the Hessian of <span class="math inline">\(f\)</span>, that is the matrix of second derivatives. Then a maximum will occur if <span class="math inline">\(\mathbf{H}\)</span> is negative definite, and a minimum will occur if <span class="math inline">\(\mathbf{H}\)</span> is positive definite.</li>
+</ul>
+<p>Let <span class="math inline">\(\mathbf{A}\)</span> be a matrix of constants and <span class="math inline">\(\mathbf{Y}\)</span> be a random vector, then we have the following expectation and variance results:</p>
+<ul>
+<li><span class="math inline">\(E[\mathbf{A}\mathbf{Y}] = \mathbf{A}E[\mathbf{Y}]\)</span>;<br />
+</li>
+<li><span class="math inline">\(\text{Var}(\mathbf{A}\mathbf{Y}) = \mathbf{A} \text{Var}(\mathbf{Y}) \mathbf{A}^T\)</span>.</li>
+</ul>
+</div>
+<div id="Sec_Linear_LSE:derive" class="section level2 hasAnchor" number="17.3">
+<h2><span class="header-section-number">17.3</span> Deriving the least squares estimator<a href="Sec_Linear_LSE.html#Sec_Linear_LSE:derive" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+Recall that a linear model is given in matrix form by <span class="math inline">\(\mathbf{Y}=\mathbf{Z}\mathbf{\beta}+\mathbf{\epsilon}\)</span>, where<br />
+
+<center>
+<span class="math display">\[\begin{eqnarray*}
+\mathbf{Y} = \begin{pmatrix} Y_1 \\ Y_2 \\ \vdots \\ Y_n \end{pmatrix}, &amp;\qquad&amp;
+\mathbf{Z} = \begin{pmatrix}
+1 &amp; X_{11} &amp; \cdots &amp; X_{(p-1)1} \\
+1 &amp; X_{12} &amp; \cdots &amp; X_{(p-1)2} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+1 &amp; X_{1n} &amp; \cdots &amp; X_{(p-1)n} \end{pmatrix}, \\
+\mathbf{\beta} =\begin{pmatrix} \beta_0 \\ \beta_1 \\ \vdots \\ \beta_{p-1} \end{pmatrix}, &amp;\qquad&amp;
+\mathbf{\epsilon} = \begin{pmatrix} \epsilon_1 \\ \epsilon_2 \\ \vdots \\ \epsilon_n \end{pmatrix},
+\end{eqnarray*}\]</span>
+</center>
+<p>where</p>
+<ul>
+<li><span class="math inline">\(\mathbf{Y}\)</span> is an <span class="math inline">\(n \times 1\)</span> column vector of observations of the response variable;<br />
+</li>
+<li><span class="math inline">\(\mathbf{Z}\)</span> is the <span class="math inline">\(n \times p\)</span> design matrix whose first column is a column of <span class="math inline">\(1\)</span>’s, if there is a constant in the model. The other columns are the observations on the explanatory variables <span class="math inline">\((X_1,X_2,\dots,X_{p-1})\)</span>;<br />
+</li>
+<li><span class="math inline">\(\mathbf{\beta}\)</span> is a <span class="math inline">\(p \times 1\)</span> column vector of the unknown parameters;<br />
+</li>
+<li><span class="math inline">\(\mathbf{\epsilon}\)</span> is an <span class="math inline">\(n \times 1\)</span> column vector of the random error terms.</li>
+</ul>
+<p>The general linear regression model assumes that <span class="math inline">\(E[\mathbf{\epsilon}]=\mathbf{0}\)</span> and <span class="math inline">\(\text{Var}(\mathbf{\epsilon}) = \sigma^2 \mathbf{I}_n\)</span>.</p>
+<p>Our aim is to estimate the unknown vector of parameters, <span class="math inline">\(\mathbf{\beta}\)</span>.</p>
+<div id="Sec_Linear_LSE:thm:lse" class="thm">
+<span style="color: rgba(207, 0, 15, 1);"><strong>Least squares estimate</strong></span><br />
+The least squares estimate of <span class="math inline">\(\mathbf{\beta}\)</span> is<br />
+
+<center>
+<span class="math display">\[\mathbf{\hat{\beta}} =(\mathbf{Z}^T\mathbf{Z})^{-1} \mathbf{Z}^T\mathbf{y}.\]</span>
+</center>
+</div>
+<div id="Sec_Linear_LSE:prf:lse" class="prf">
+<p>The least squares estimator is the value of <span class="math inline">\(\mathbf{\beta}\)</span> that minimises the model deviance <span class="math inline">\(D\)</span>. Consider</p>
+<center>
+<span class="math display">\[\begin{align*}
+D &amp;= \sum\limits_{i=1}^n (\mathbf{y}_i - (\mathbf{Z}\mathbf{\beta})_i)^2 \\[3pt]
+&amp;= (\mathbf{y} - \mathbf{Z} \mathbf{\beta})^T (\mathbf{y} - \mathbf{Z} \mathbf{\beta}) \\[3pt]
+&amp;= \mathbf{y}^T\mathbf{y} - \mathbf{y}^T\mathbf{Z}\mathbf{\beta} - \mathbf{\beta}^T\mathbf{Z}^T\mathbf{y} + \mathbf{\beta}^T\mathbf{Z}^T\mathbf{Z}\mathbf{\beta} \\[3pt]
+&amp;= \mathbf{y}^T\mathbf{y} - 2\mathbf{y}^T\mathbf{Z}\mathbf{\beta} + \mathbf{\beta}^T\mathbf{Z}^T\mathbf{Z}\mathbf{\beta}.
+\end{align*}\]</span>
+</center>
+<p>Taking the derivative of <span class="math inline">\(D\)</span> with respect to <span class="math inline">\(\mathbf{\beta}\)</span> and noticing that <span class="math inline">\(\mathbf{Z}^T\mathbf{Z}\)</span> is a symmetric matrix, we have that</p>
+<center>
+<span class="math display">\[\begin{align*}
+\frac{\partial D}{\partial \mathbf{\beta}} &amp;= (-2\mathbf{y}^T\mathbf{Z})^T + 2\mathbf{Z}^T\mathbf{Z}\mathbf{\beta} \\
+&amp;= -2\mathbf{Z}^T\mathbf{y} + 2\mathbf{Z}^T\mathbf{Z}\mathbf{\beta}.
+\end{align*}\]</span>
+</center>
+<p>Therefore the least squares estimator <span class="math inline">\(\mathbf{\hat{\beta}}\)</span> of <span class="math inline">\(\mathbf{\beta}\)</span> will satisfy <span class="math inline">\(\mathbf{Z}^T\mathbf{Z}\mathbf{\hat{\beta}} =\mathbf{Z}^T\mathbf{y}\)</span>. This system of equations are the <em>normal equations</em> for the general linear regression model. To be able to isolate <span class="math inline">\(\mathbf{\hat{\beta}}\)</span> it is necessary for <span class="math inline">\(\mathbf{Z}^T\mathbf{Z}\)</span> to be invertible. Therefore we need <span class="math inline">\(\mathbf{Z}\)</span> to be of full rank, that is, <span class="math inline">\(\text{rank}(\mathbf{Z})=p\)</span>. If <span class="math inline">\(\text{rank}(\mathbf{Z})=p\)</span>, then</p>
+<center>
+<span class="math display">\[ \mathbf{\hat{\beta}} = (\mathbf{Z}^T\mathbf{Z})^{-1} \mathbf{Z}^T\mathbf{y}.\]</span>
+</center>
+<p>We know that <span class="math inline">\(\mathbf{\hat{\beta}}\)</span> minimising <span class="math inline">\(D\)</span> is equivalent to the Hessian of <span class="math inline">\(D\)</span> will be positive definite. If <span class="math inline">\(\mathbf{Z}\)</span> has full rank, then since <span class="math inline">\(\mathbf{Z}^T\mathbf{Z}\)</span> is a symmetric matrix, we have that</p>
+<center>
+<span class="math display">\[\begin{align*}
+\mathbf{H} &amp;= \frac{\partial^2 D}{\partial \mathbf{\beta}^2} \\[3pt]
+&amp;= (2\mathbf{Z}^T\mathbf{Z})^T \\[3pt]
+&amp;= 2\mathbf{Z}^T\mathbf{Z}.
+\end{align*}\]</span>
+</center>
+<p>We know <span class="math inline">\(\mathbf{Z}^T\mathbf{Z}\)</span> is positive definite and hence, <span class="math inline">\(\mathbf{\hat{\beta}}\)</span> is the least squares estimator of <span class="math inline">\(\mathbf{\beta}\)</span>.</p>
+</div>
+<br />
+Let <span class="math inline">\(\mathbf{\hat{y}} = \mathbf{Z}\mathbf{\hat{\beta}}\)</span> be the <span class="math inline">\(n \times 1\)</span> vector of <em>fitted values</em> of <span class="math inline">\(\mathbf{y}\)</span>. Note that<br />
+
+<center>
+<span class="math display">\[\mathbf{\hat{y}} = \mathbf{Z} \mathbf{\hat{\beta}} = \mathbf{Z} (\mathbf{Z}^T\mathbf{Z})^{-1} \mathbf{Z}^T \mathbf{y}.\]</span>
+</center>
+<p>If we set <span class="math inline">\(\mathbf{P}=\mathbf{Z}(\mathbf{Z}^T\mathbf{Z})^{-1}\mathbf{Z}^T\)</span>, then we can write <span class="math display">\[\mathbf{\hat{y}} = \mathbf{P} \mathbf{y}.\]</span> The matrix <span class="math inline">\(\mathbf{P}\)</span> is therefore often referred to as the <em>hat matrix</em>. Note that <span class="math inline">\(P\)</span> is symmetric and idempotent because <span class="math inline">\(\mathbf{P}^T=\mathbf{P}\)</span> and <span class="math inline">\(\mathbf{P}^2=\mathbf{P}\)</span>.</p>
+The residuals, <span class="math inline">\(\epsilon\)</span>, satisfy<br />
+
+<center>
+<span class="math display">\[ \epsilon = \mathbf{y} - \hat{\mathbf{y}} = \mathbf{I}_n \mathbf{y} -  \mathbf{P}\mathbf{y} = (\mathbf{I}_n -  \mathbf{P})\mathbf{y}, \]</span>
+</center>
+<p>where <span class="math inline">\(\mathbf{I}_n\)</span> is the <span class="math inline">\(n \times n\)</span> identify matrix.</p>
+Therefore the sum of the square of the residuals is given by<br />
+
+<center>
+<span class="math display">\[\begin{eqnarray*} \sum_{i=1}^n \epsilon^2_i &amp;=&amp; (\mathbf{y} - \mathbf{Z} \mathbf{\hat{\beta}})^T(\mathbf{y} - \mathbf{Z} \mathbf{\hat{\beta}}) \\ &amp;=&amp; ((\mathbf{I}_n -  \mathbf{P})\mathbf{y})^T (\mathbf{I}_n -  \mathbf{P})\mathbf{y} \\ &amp;=&amp; \mathbf{y}^T (\mathbf{I}_n -  \mathbf{P})^T (\mathbf{I}_n -  \mathbf{P}) \mathbf{y}.
+\end{eqnarray*}\]</span>
+</center>
+<div id="Sec_Linear_LSE:thm:var" class="thm">
+<br />
+The quantity
+<center>
+<span class="math display">\[s^2 = \frac{1}{n-p} \sum_{i=1}^n \epsilon_i^2= \frac{1}{n-p}(\mathbf{y} - \mathbf{Z} \mathbf{\hat{\beta}})^T(\mathbf{y} - \mathbf{Z} \mathbf{\hat{\beta}})\]</span>
+</center>
+<p>is an unbiased estimator of <span class="math inline">\(\sigma^2\)</span>.</p>
+</div>
+<p>Note that to obtain an unbiased estimator of <span class="math inline">\(\sigma^2\)</span>, we divide the sum of the square of the residuals by <span class="math inline">\(n-p\)</span>. That is, the <strong>number of observations</strong> <span class="math inline">\((n)\)</span> minus the <strong>number of parameters</strong> <span class="math inline">\((p)\)</span> estimated in <span class="math inline">\(\beta\)</span>. This is in line with the divisor <span class="math inline">\(n-1\)</span> in estimating the variance of a random variable <span class="math inline">\(X\)</span> from data <span class="math inline">\(x_1, x_2, \ldots, x_n\)</span> with <span class="math inline">\(\mu = E[X]\)</span> (one parameter) estimated by <span class="math inline">\(\bar{x} = \frac{1}{n} \sum_{i=1}^n x_i\)</span>.</p>
+</div>
+<div id="Sec_Linear_LSE:examples" class="section level2 hasAnchor" number="17.4">
+<h2><span class="header-section-number">17.4</span> Examples<a href="Sec_Linear_LSE.html#Sec_Linear_LSE:examples" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="Sec_Linear_LSE:ex:simple" class="ex">
+<p><br />
+Suppose we have two observations such that</p>
+<center>
+<span class="math display">\[\begin{align*}
+y_1 &amp;= \theta + \epsilon, \\
+y_2 &amp;= 2\theta + \epsilon.
+\end{align*}\]</span>
+</center>
+<p>Calculate the least squares estimator of <span class="math inline">\(\theta\)</span>.</p>
+</div>
+<div class="sol">
+<p>Writing the given linear model in a matrix format, one obtains</p>
+<center>
+<span class="math display">\[ \mathbf{Z} = \begin{pmatrix} 1 \\ 2 \end{pmatrix}, \qquad \text{and} \qquad \mathbf{y} = \begin{pmatrix} y_1 \\ y_2 \end{pmatrix} \]</span>
+</center>
+<p>Then <span class="math inline">\((\mathbf{Z}^T\mathbf{Z})^{-1} = \frac{1}{5}\)</span> and by applying <a href="Sec_Linear_LSE.html#Sec_Linear_LSE:thm:lse">Theorem 17.3.1 (Least squares estimate)</a>:</p>
+<center>
+<span class="math display">\[\hat{\theta} = (\mathbf{Z}^T\mathbf{Z})^{-1}\mathbf{Z}^T \mathbf{Y} = \frac{1}{5}(y_1 + 2y_2).\]</span>
+</center>
+</div>
+<p><br />
+</p>
+<div id="Sec_Linear_LSE:ex:reg" class="ex">
+<span style="color: rgba(207, 0, 15, 1);"><strong>Simple Linear Regression</strong></span><br />
+Consider the simple regression model, <span class="math inline">\(y_i =a +b x_i + \epsilon\)</span>, for <span class="math inline">\(i \in \{ 1,\ldots ,n \}\)</span>. Then in matrix terms <span class="math inline">\(\mathbf{Y} = \mathbf{Z} \mathbf{\beta} + \mathbf{\epsilon}\)</span> where,<br />
+
+<center>
+<span class="math display">\[\begin{align*}
+\mathbf{Y} = \begin{pmatrix} y_1 \\ y_2 \\ \vdots \\ y_n \end{pmatrix}, &amp;\quad&amp; \mathbf{Z} = \begin{pmatrix} 1 &amp; x_1 \\ 1 &amp; x_2 \\ \vdots &amp; \vdots \\ 1 &amp; x_n \end{pmatrix}, \\[5pt]
+\mathbf{\beta} = \begin{pmatrix} a \\ b \end{pmatrix}, &amp;\quad&amp; \mathbf{\epsilon} = \begin{pmatrix} \epsilon_1 \\ \epsilon_2 \\ \vdots \\ \epsilon_n \end{pmatrix}.
+\end{align*}\]</span>
+</center>
+<p>Calculate the least squares estimator of <span class="math inline">\(\mathbf{\beta}\)</span>.</p>
+</div>
+<div class="sol">
+<p>The least squares estimators of <span class="math inline">\(\mathbf{\beta}\)</span> will be given by,</p>
+<center>
+<span class="math display">\[ \mathbf{\hat{\beta}} = (\mathbf{Z}^T\mathbf{Z})^{-1}\mathbf{Z}^T\mathbf{y},\]</span>
+</center>
+<p>where,</p>
+<center>
+<span class="math display">\[\begin{align*}
+\mathbf{Z}^T\mathbf{Z} &amp;= \begin{pmatrix} 1 &amp; 1 &amp; \cdots 1 \\ x_1 &amp; x_2 &amp; \cdots x_n \end{pmatrix} \begin{pmatrix} 1 &amp; x_1 \\ 1 &amp; x_2 \\ \vdots &amp; \vdots \\ 1 &amp; x_n \end{pmatrix} \\[5pt]
+&amp;=\begin{pmatrix} n &amp; \sum\limits_{i=1}^n x_i \\ \sum\limits_{i=1}^n x_i &amp; \sum\limits_{i=1}^n x_i^2 \end{pmatrix}, \\[5pt]
+\mathbf{Z}^T \mathbf{y} &amp;= \begin{pmatrix} \sum\limits_{i=1}^n y_i \\ \sum\limits_{i=1}^n x_iy_i \end{pmatrix}.
+\end{align*}\]</span>
+</center>
+Therefore, the inverse of <span class="math inline">\(\mathbf{Z}^T\mathbf{Z}\)</span> is
+<center>
+<span class="math display">\[ \left( \mathbf{Z}^T\mathbf{Z} \right) ^{-1} = \frac{1}{\sum\limits_{i=1}^n (x_i-\bar{x})^2} \begin{pmatrix} \frac{1}{n} \sum\limits_{i=1}^{n} x_i^2 &amp; -\bar{x} \\ -\bar{x} &amp; 1 \end{pmatrix},\]</span>
+</center>
+and so
+<center>
+<span class="math display">\[\begin{align*}
+\mathbf{\hat{\beta}} &amp;= \left( \mathbf{Z}^T\mathbf{Z} \right) ^{-1}\mathbf{Z}^T\mathbf{y} \\[5pt]
+&amp;= \frac{1}{\sum\limits_{i=1}^n (x_i-\bar{x})^2} \begin{pmatrix} \frac{1}{n} \sum\limits_{i=1}^{n} x_i^2 &amp; -\bar{x} \\ -\bar{x} &amp; 1 \end{pmatrix} \begin{pmatrix} \sum\limits_{i=1}^n y_i \\ \sum\limits_{i=1}^n x_iy_i \end{pmatrix} \\[5pt]
+&amp;= \frac{1}{\sum\limits_{i=1}^{n} (x_i - \bar{x})^2} \begin{pmatrix} \frac{1}{n} \sum\limits_{i=1}^{n} x_i^2 \sum\limits_{i=1}^{n} y_i - \bar{x} \sum\limits_{i=1}^{n} x_i y_i \\ -\bar{x} \sum\limits_{i=1}^{n} y_i + \sum\limits_{i=1}^{n} x_i y_i \end{pmatrix} \\[5pt]
+&amp;= \frac{1}{\sum\limits_{i=1}^{n} (x_i - \bar{x})^2} \begin{pmatrix} \bar{y} \sum\limits_{i=1}^{n} x_i^2 - \bar{x} \sum\limits_{i=1}^{n} x_i y_i \\ \sum\limits_{i=1}^{n} y_i (x_i - \bar{x}) \end{pmatrix} \\[5pt]
+&amp;= \frac{1}{\sum\limits_{i=1}^{n} (x_i - \bar{x})^2} \begin{pmatrix} \bar{y} \sum\limits_{i=1}^{n} (x_i - \bar{x})^2 - \bar{x} \sum\limits_{i=1}^{n} (x_i - \bar{x})(y_i - \bar{y}) \\ \sum\limits_{i=1}^{n} (x_i - \bar{x})(y_i - \bar{y}) \end{pmatrix} \\[5pt]
+&amp;= \begin{pmatrix} \bar{y} - \bar{x} \frac{ \sum\limits_{i=1}^n (x_i - \bar{x})(y_i - \bar{y}) }{ \sum\limits_{i=1}^n (x_i - \bar{x})^2 } \\ \frac{ \sum\limits_{i=1}^n (x_i - \bar{x})(y_i - \bar{y}) }{ \sum\limits_{i=1}^n (x_i - \bar{x})^2 } \end{pmatrix}.
+\end{align*}\]</span>
+</center>
+<p>So,</p>
+<center>
+<span class="math display">\[\begin{pmatrix} \hat{a} \\ \hat{b} \end{pmatrix} = \begin{pmatrix} \bar{y} - \hat{b} \bar{x} \\ \frac{s_{xy}}{s_x^2} \end{pmatrix}.\]</span>
+</center>
+</div>
+<p>The least square estimates agree with the estimates we obtained in <a href="Sec_LinearI.html#Sec_LinearI:line">Section 16.6</a>.</p>
+</div>
+<div id="Sec_Linear_LSE:beta" class="section level2 hasAnchor" number="17.5">
+<h2><span class="header-section-number">17.5</span> Properties of the estimator of <span class="math inline">\(\mathbf{\beta}\)</span><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:beta" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this section we give a collection of results about the properties of the estimator of <span class="math inline">\(\mathbf{\beta}\)</span>. The properties are given with proofs. It is not important to know the proofs but to know what the key properties are and have an understanding of why they are important.</p>
+<div id="Sec_Linear_LSE:lem:unbiased" class="lem">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Unbiasedness of LSE</strong></span><br />
+<span class="math inline">\(\mathbf{\hat{\beta}}\)</span> is an unbiased estimator of <span class="math inline">\(\beta\)</span>.</p>
+</div>
+<div class="prf">
+Since <span class="math inline">\((\mathbf{Z}^T\mathbf{Z})^{-1}\mathbf{Z}^T\)</span> is a constant,
+<center>
+<span class="math display">\[\begin{align*}
+E \left[ \mathbf{\hat{\beta}} \right] &amp;= E \left[ (\mathbf{Z}^T\mathbf{Z})^{-1}\mathbf{Z}^T\mathbf{y} \right] \\
+&amp;= (\mathbf{Z}^T \mathbf{Z})^{-1} \mathbf{Z}^T E[\mathbf{y}].
+\end{align*}\]</span>
+</center>
+Substituting in <span class="math inline">\(\mathbf{Z}\mathbf{\beta} + \mathbf{\epsilon}\)</span> for <span class="math inline">\(\mathbf{y}\)</span>
+<center>
+<span class="math display">\[\begin{align*}
+E \left[ \mathbf{\hat{\beta}} \right]
+&amp;= (\mathbf{Z}^T \mathbf{Z})^{-1} \mathbf{Z}^T E[\mathbf{Z}\mathbf{\beta} + \mathbf{\epsilon}] \\
+&amp;= (\mathbf{Z}^T \mathbf{Z})^{-1} \mathbf{Z}^T (\mathbf{Z}\mathbf{\beta} + E[\mathbf{\epsilon}]) \\
+&amp;= (\mathbf{Z}^T \mathbf{Z})^{-1} \mathbf{Z}^T (\mathbf{Z}\mathbf{\beta} + \mathbf{0}) \\
+&amp;= \mathbf{I}_p \mathbf{\beta} \\
+&amp;= \mathbf{\beta}.
+\end{align*}\]</span>
+</center>
+</div>
+<p><br />
+</p>
+<div id="Sec_Linear_LSE:lem:var" class="lem">
+<span style="color: rgba(207, 0, 15, 1);"><strong>Variance of LSE</strong></span><br />
+The variance of <span class="math inline">\(\mathbf{\hat{\beta}}\)</span> is given by
+<center>
+<span class="math display">\[ \text{Var}(\mathbf{\hat{\beta}}) = \sigma^2 \left( \mathbf{Z}^T \mathbf{Z} \right)^{-1}. \]</span>
+</center>
+</div>
+<div class="prf">
+Since for a constant matrix <span class="math inline">\(\mathbf{A}\)</span>, we have that <span class="math inline">\(\text{Var} (\mathbf{A} \mathbf{Y}) = \mathbf{A} \text{Var} ( \mathbf{Y}) \mathbf{A}^T\)</span>, it follows that
+<center>
+<span class="math display">\[\begin{align*}
+\text{Var}(\mathbf{\hat{\beta}}) &amp;= \text{Var} \left( (\mathbf{Z}^T\mathbf{Z})^{-1} \mathbf{Z}^T \mathbf{y} \right) \\
+&amp;= (\mathbf{Z}^T \mathbf{Z})^{-1} \mathbf{Z}^T \text{Var}(\mathbf{y}) \left( (\mathbf{Z}^T \mathbf{Z})^{-1} \mathbf{Z}^T \right)^T
+\end{align*}\]</span>
+</center>
+Substituting in <span class="math inline">\(\mathbf{Z}\mathbf{\beta} + \mathbf{\epsilon}\)</span> for <span class="math inline">\(\mathbf{y}\)</span>, and noting that <span class="math inline">\(\mathbf{Z}\mathbf{\beta}\)</span> is a constant, we have that
+<center>
+<span class="math display">\[\begin{align*}
+\text{Var}(\mathbf{\hat{\beta}})  &amp;= (\mathbf{Z}^T \mathbf{Z})^{-1} \mathbf{Z}^T \text{Var}(\mathbf{Z}\mathbf{\beta}+\mathbf{\epsilon})  \mathbf{Z}(\mathbf{Z}^T\mathbf{Z})^{-1} \\
+&amp;= (\mathbf{Z}^T \mathbf{Z})^{-1} \mathbf{Z}^T \text{Var}(\mathbf{\epsilon}) \mathbf{Z} (\mathbf{Z}^T\mathbf{Z})^{-1} \\
+&amp;= (\mathbf{Z}^T \mathbf{Z})^{-1} \mathbf{Z}^T \sigma^2 \mathbf{I}_n \mathbf{Z} (\mathbf{Z}^T\mathbf{Z})^{-1} \\
+&amp;= \sigma^2 (\mathbf{Z}^T \mathbf{Z})^{-1} \mathbf{Z}^T \mathbf{Z} (\mathbf{Z}^T\mathbf{Z})^{-1} \\
+&amp;= \sigma^2 (\mathbf{Z}^T \mathbf{Z})^{-1}.
+\end{align*}\]</span>
+</center>
+</div>
+<p><br />
+</p>
+<p>Note that <span class="math inline">\(\text{Var}(\mathbf{\hat{\beta}})\)</span> is the <span class="math inline">\(p \times p\)</span> variance-covariance matrix of the vector <span class="math inline">\(\mathbf{\hat{\beta}}\)</span>. Specifically the <span class="math inline">\(i^{th}\)</span> diagonal entry is <span class="math inline">\(\text{Var}(\hat{\beta}_i)\)</span> and the <span class="math inline">\((i,j)^{th}\)</span> entry is <span class="math inline">\(\text{Cov}(\hat{\beta}_i,\hat{\beta}_j)\)</span>.</p>
+<div id="Sec_Linear_LSE:ex:uncertain" class="ex">
+<span style="color: rgba(207, 0, 15, 1);"><strong>Uncertainty in simple linear regression</strong></span><br />
+Consider the straight line model:
+<center>
+<span class="math display">\[ y_i= \alpha + \beta x_i + \epsilon, \qquad \qquad i=1,2,\ldots, n, \]</span>
+</center>
+<p>where <span class="math inline">\(\epsilon \sim N(0,\sigma^2)\)</span>.</p>
+</div>
+<p>Watch <a href="Sec_Linear_LSE.html#video25">Video 25</a> for a run through uncertainty in the estimates of the parameters of a simple linear regression model. A summary of the results are presented after the video.</p>
+<div id="video25" class="des">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Video 25: Uncertainty in simple linear regression</strong></span></p>
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1355621/sp/135562100/embedIframeJs/uiconf_id/13188771/partner_id/1355621?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_7hbhop79&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_88saud42" width="640" height="420" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Uncertainty in Simple Linear Regression FINAL VERSION">
+</iframe>
+</div>
+Then<br />
+
+<center>
+<span class="math display">\[ \mathbf{Z} = \begin{pmatrix} 1 &amp; x_1 \\ 1 &amp; x_2 \\ \vdots &amp; \vdots \\ 1 &amp; x_n \end{pmatrix}, \qquad \qquad \mathbf{\beta} = \begin{pmatrix} \alpha \\ \beta \end{pmatrix}.\]</span>
+</center>
+We have shown in <a href="Sec_Linear_LSE.html#Sec_Linear_LSE:ex:reg">Example 17.4.2 (Simple Linear Regression)</a> that<br />
+
+<center>
+<span class="math display">\[ \left( \mathbf{Z}^T\mathbf{Z} \right)^{-1} = \frac{1}{ \sum\limits_{i=1}^n (x_i - \bar{x})^2 } \begin{pmatrix}
+\frac{1}{n} \sum\limits_{i=1}^n x_i^2 &amp; -\bar{x} \\
+-\bar{x} &amp; 1 \end{pmatrix}. \]</span>
+</center>
+Therefore,<br />
+
+<center>
+<span class="math display">\[\begin{align*}
+\text{Var} \left( \mathbf{\hat{\beta}} \right) &amp;= \sigma^2 \left( \mathbf{Z}^T \mathbf{Z} \right)^{-1} \\
+&amp;= \frac{\sigma^2}{ \sum\limits_{i=1}^n (x_i - \bar{x})^2 } \begin{pmatrix} \frac{1}{n} \sum\limits_{i=1}^n x_i^2 &amp; -\bar{x} \\ -\bar{x} &amp; 1 \end{pmatrix},
+\end{align*}\]</span>
+</center>
+and so,<br />
+
+<center>
+<span class="math display">\[\begin{align*}
+\text{Var}(\hat{\alpha}) &amp;= \frac{ \sigma^2 \sum\limits_{i=1}^n x_i^2 }{ n \sum\limits_{i=1}^n (x_i-\bar{x})^2 }, \\[5pt]
+\text{Var}(\hat{\beta}) &amp;= \frac{\sigma^2}{ \sum\limits_{i=1}^n (x_i-\bar{x})^2 }, \\[5pt]
+\text{Cov}(\hat{\alpha},\hat{\beta}) &amp;= \frac{ - \sigma^2 \bar{x} }{ \sum\limits_{i=1}^n (x_i-\bar{x})^2 }.
+\end{align*}\]</span>
+</center>
+<p>The variance of the <span class="math inline">\(\hat{\beta}\)</span> does not depend on the values of <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> but on <span class="math inline">\(\sigma^2\)</span> (the variance of <span class="math inline">\(\epsilon\)</span>) and the design matrix <span class="math inline">\(\mathbf{Z}\)</span>. This tells us that if we have input in choosing <span class="math inline">\(x_i\)</span> (constructing the design matrix) then we can construct the design matrix to reduce the variance of the estimator. In particular, the larger <span class="math inline">\(\sum_{i=1}^n (x_i - \bar{x})^2\)</span> (variability in the <span class="math inline">\(x_i\)</span>s), the smaller the variance of the estimates. Note that there will often be scientific and practical reasons for choosing <span class="math inline">\(x_i\)</span> within a given range.</p>
+Observe that the covariance between <span class="math inline">\(\hat{\alpha}\)</span> and <span class="math inline">\(\hat{\beta}\)</span> has the opposite sign to <span class="math inline">\(\bar{x}\)</span> and becomes larger as <span class="math inline">\(|\bar{x}|\)</span> increases. The correlation between <span class="math inline">\(\hat{\alpha}\)</span> and <span class="math inline">\(\hat{\beta}\)</span> is<br />
+
+<center>
+<span class="math display">\[ \text{Cor} (\hat{\alpha},\hat{\beta}) = \frac{\text{Cov}(\hat{\alpha},\hat{\beta})}{\sqrt{\text{Var}(\hat{\alpha}) \text{Var}(\hat{\beta})}}
+=  \frac{- \sqrt{n} \bar{x}}{\sqrt{\sum_{i=1}^n x_i^2}}. \]</span>
+</center>
+<p>The correlation in the estimates is larger, in absolute value, the larger <span class="math inline">\(\bar{x}^2\)</span> is relative to <span class="math inline">\(\sum_{i=1}^n x_i^2\)</span>.</p>
+To illustrate the variability in <span class="math inline">\(\hat{\beta}\)</span> we use an example. Suppose that we have ten observations from the model:<br />
+
+<center>
+<span class="math display">\[ y = 2 + 0.6 x + \epsilon \]</span>
+</center>
+<p>where <span class="math inline">\(\epsilon \sim N(0,1)\)</span> and for <span class="math inline">\(i=1,2,\ldots, 10\)</span>, <span class="math inline">\(x_i =i\)</span>.</p>
+Then<br />
+
+<center>
+<span class="math display">\[\begin{eqnarray*} \text{Var} (\hat{\beta}) &amp;=&amp; \frac{1}{\sum_{i=1}^n (x_i -\bar{x})^2} \begin{pmatrix} \frac{1}{n} \sum_{i=1}^n x_i^2 &amp; - \bar{x} \\ -\bar{x} &amp; 1
+\end{pmatrix} \\ &amp;=&amp; \frac{1}{82.5}  \begin{pmatrix} 38.5 &amp; - 5.5 \\ -5.5 &amp; 1
+\end{pmatrix}\\  &amp;=&amp;  \begin{pmatrix} 0.46667 &amp; -0.06667 \\ -0.06667 &amp; 0.01212
+\end{pmatrix}
+\end{eqnarray*}\]</span>
+</center>
+<p>We simulated 100 sets of data from the model and for each set of data calculate <span class="math inline">\(\hat{\alpha}\)</span> and <span class="math inline">\(\hat{\beta}\)</span>. In Figure <a href="Sec_Linear_LSE.html#fig:linearvar1">17.1</a>, the estimates of <span class="math inline">\(\hat{\beta}\)</span> against <span class="math inline">\(\hat{\alpha}\)</span> are plotted along with the true parameter values <span class="math inline">\(\beta =0.6\)</span> and <span class="math inline">\(\alpha =2\)</span>. The estimates show negative correlation.</p>
+<center>
+<div class="figure"><span style="display:block;" id="fig:linearvar1"></span>
+<img src="_main_files/figure-html/linearvar1-1.png" alt="Plot of estimates of straight line model parameters with true parameter values denoted by a red dot" width="672" />
+<p class="caption">
+Figure 17.1: Plot of estimates of straight line model parameters with true parameter values denoted by a red dot
+</p>
+</div>
+</center>
+<p>In Figure <a href="Sec_Linear_LSE.html#fig:linearvar2">17.2</a>, the fitted line <span class="math inline">\(\hat{\alpha}+\hat{\beta} x\)</span> is plotted for each simulated data set along with the true line <span class="math inline">\(2 + 0.6 x\)</span>. Observe that the lines with the highest intercepts tend to have the smallest slope and visa-versa. Also note that there is more variability in the estimated lines at the end points (<span class="math inline">\(x=1\)</span> and <span class="math inline">\(x=10\)</span>) rather than in the middle of the range (close to <span class="math inline">\(x=5.5\)</span>).</p>
+<center>
+<div class="figure"><span style="display:block;" id="fig:linearvar2"></span>
+<img src="_main_files/figure-html/linearvar2-1.png" alt="Estimated lines from 100 simulations with true line in red" width="672" />
+<p class="caption">
+Figure 17.2: Estimated lines from 100 simulations with true line in red
+</p>
+</div>
+</center>
+<div id="Sec_Linear_LSE:lem:dist" class="lem">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Distribution of LSE</strong></span><br />
+If additionally <span class="math inline">\(\mathbf{\epsilon} \sim N_n(\mathbf{0},\sigma^2 \mathbf{I}_n)\)</span>, then
+<span class="math display">\[\mathbf{\hat{\beta}} \sim N_p \left( \mathbf{\beta},\sigma^2(\mathbf{Z}^T\mathbf{Z})^{-1} \right).\]</span></p>
+</div>
+<div id="Sec_Linear_LSE:prf:dist" class="prf">
+<p>Note,</p>
+<center>
+<span class="math display">\[\begin{align*}
+\mathbf{\hat{\beta}} &amp;= (\mathbf{Z}^T\mathbf{Z})^{-1} \mathbf{Z}^T\mathbf{y} \\
+&amp;= (\mathbf{Z}^T\mathbf{Z})^{-1} \mathbf{Z}^T (\mathbf{Z}\mathbf{\beta}+\mathbf{\epsilon}) \\
+&amp;= (\mathbf{Z}^T\mathbf{Z})^{-1} \mathbf{Z}^T\mathbf{Z}\mathbf{\beta} + (\mathbf{Z}^T\mathbf{Z})^{-1} \mathbf{Z}^T \mathbf{\epsilon} \\
+&amp;= \mathbf{\beta} + (\mathbf{Z}^T\mathbf{Z})^{-1} \mathbf{Z}^T \mathbf{\epsilon}.
+\end{align*}\]</span>
+</center>
+<p>Hence <span class="math inline">\(\mathbf{\hat{\beta}}\)</span> is a linear function of a normally distributed random variable. Using the identities <span class="math inline">\(E[A \mathbf{x} + b] = A E[\mathbf{x}] + b\)</span> and <span class="math inline">\(\text{Var}(A \mathbf{x} + b) = A \text{Var}(\mathbf{x}) A^{T}\)</span>, consequently <span class="math inline">\(\mathbf{\hat{\beta}}\)</span> has a normal distribution with mean and variance as required.</p>
+</div>
+<p><br />
+</p>
+Note that since <span class="math inline">\(\mathbf{\hat{\beta}} \sim N_p(\mathbf{\beta},\sigma^2(\mathbf{Z}^T\mathbf{Z})^{-1})\)</span>, then each of the individual parameters has a distribution
+<center>
+<span class="math display">\[\hat{\beta}_i \sim N \left( \beta_i, \sigma^2 ((\mathbf{Z}^T\mathbf{Z})^{-1})_{ii} \right),\]</span>
+</center>
+<p>However the individual <span class="math inline">\(\hat{\beta}_i\)</span> are not independent as we saw in <a href="Sec_Linear_LSE.html#Sec_Linear_LSE:ex:uncertain">Example 17.5.3 (Uncertainty in simple linear regression)</a>.</p>
+</div>
+<div id="Sec_Linear_LSE:GaussMarkov" class="section level2 hasAnchor" number="17.6">
+<h2><span class="header-section-number">17.6</span> Gauss-Markov Theorem<a href="Sec_Linear_LSE.html#Sec_Linear_LSE:GaussMarkov" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The <a href="Sec_Linear_LSE.html#Sec_Linear_LSE:thm:GaussMarkov">Gauss-Markov Theorem</a> shows that a good choice of estimator for <span class="math inline">\(\mathbf{a}^T \beta\)</span>, a linear combination of the parameters, is <span class="math inline">\(\mathbf{a}^T\mathbf{\hat{\beta}}\)</span>.</p>
+<div id="Sec_Linear_LSE:thm:GaussMarkov" class="thm">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Gauss-Markov Theorem</strong></span><br />
+If <span class="math inline">\(\mathbf{\hat{\beta}}\)</span> is the least squares estimator of <span class="math inline">\(\mathbf{\beta}\)</span>, then <span class="math inline">\(\mathbf{a}^T \mathbf{\hat{\beta}}\)</span> is the <em>unique linear unbiased estimator</em> of <span class="math inline">\(\mathbf{a}^T\mathbf{\beta}\)</span> with minimum variance.</p>
+</div>
+<p>The details of the proof of <a href="Sec_Linear_LSE.html#Sec_Linear_LSE:thm:GaussMarkov">Theorem 17.6.1 (Gauss-Markov Theorem)</a> are provided but can be omitted.</p>
+<details>
+<summary>
+Proof of Gauss-Markov Theorem.
+</summary>
+<div class="prf">
+<p>Consider <span class="math inline">\(\mathbf{\hat{\beta}} = (\mathbf{Z}^T\mathbf{Z})^{-1} \mathbf{Z}^T\mathbf{y}\)</span>, the LSE of <span class="math inline">\(\mathbf{\beta}\)</span>. Hence,</p>
+<center>
+<span class="math display">\[\mathbf{a}^T\mathbf{\hat{\beta}} = \mathbf{a}^T (\mathbf{Z}^T\mathbf{Z})^{-1} \mathbf{Z}^T \mathbf{y} = \mathbf{C}\mathbf{y},\]</span>
+</center>
+<p>where <span class="math inline">\(\mathbf{C} = \mathbf{a}^T(\mathbf{Z}^T\mathbf{Z})^{-1} \mathbf{Z}^T\)</span>. It follows that <span class="math inline">\(\mathbf{a}^T \mathbf{\hat{\beta}}\)</span> is a linear function of <span class="math inline">\(\mathbf{y}\)</span>.</p>
+Note that <span class="math inline">\(\mathbf{a}^T \mathbf{\hat{\beta}}\)</span> is an unbiased estimator of <span class="math inline">\(\mathbf{a}^T\mathbf{\beta}\)</span> because,<br />
+
+<center>
+<span class="math display">\[\begin{align*}
+E[\mathbf{a}^T \mathbf{\hat{\beta}}] &amp;= E[\mathbf{C}\mathbf{y}] \\
+&amp;= \mathbf{C} E[\mathbf{Z} \mathbf{\beta} + \mathbf{\epsilon}] \\
+&amp;= \mathbf{C} \mathbf{Z} \mathbf{\beta} + \mathbf{C} E[\mathbf{\epsilon}] \\
+&amp;= \mathbf{a}^T(\mathbf{Z}^T\mathbf{Z})^{-1} \mathbf{Z}^T\mathbf{Z} \mathbf{\beta} + \mathbf{0} \\
+&amp;= \mathbf{a}^T\mathbf{\beta}.
+\end{align*}\]</span>
+</center>
+Suppose there exists another linear unbiased estimator of <span class="math inline">\(\mathbf{a}^T\mathbf{\beta}\)</span>, denoted <span class="math inline">\(\mathbf{b}^T\mathbf{y}\)</span>. By definition<br />
+
+<center>
+<span class="math display">\[E[\mathbf{b}^T\mathbf{y}] = \mathbf{a}^T \mathbf{\beta}.\]</span>
+</center>
+However we can also calculate<br />
+
+<center>
+<span class="math display">\[\begin{align*}
+E[\mathbf{b}^T\mathbf{y}] &amp;= \mathbf{b}^T E[\mathbf{Z}\mathbf{\beta} + \mathbf{\epsilon}] \\
+&amp;= \mathbf{b}^T \mathbf{Z} \mathbf{\beta}.
+\end{align*}\]</span>
+</center>
+It follows that
+<center>
+<span class="math display">\[\mathbf{b}^T \mathbf{Z} \mathbf{\beta} = \mathbf{a}^T \mathbf{\beta}, \qquad \text{for all } \mathbf{\beta},\]</span>
+</center>
+so
+<center>
+<span class="math display">\[\mathbf{a}^T = \mathbf{b}^T\mathbf{Z}.\]</span>
+</center>
+Now<br />
+
+<center>
+<span class="math display">\[\begin{align*}
+\text{Var}(\mathbf{b}^T\mathbf{y}) &amp;= \mathbf{b}^T\text{Var}(\mathbf{Z}\mathbf{\beta}+\mathbf{\epsilon})\mathbf{b} \\
+&amp;= \mathbf{b}^T\text{Var}(\mathbf{\epsilon})\mathbf{b} \\
+&amp;= \mathbf{b}^T\sigma^2\mathbf{I}_n\mathbf{b} = \sigma^2 \mathbf{b}^T\mathbf{b},
+\end{align*}\]</span>
+</center>
+and<br />
+
+<center>
+<span class="math display">\[\begin{align*}
+\text{Var}(\mathbf{a}^T\mathbf{\hat{\beta}}) &amp;= \text{Var}(\mathbf{C}\mathbf{y}) \\
+&amp;= \mathbf{C}\text{Var}(\mathbf{Z}\mathbf{\beta}+\mathbf{\epsilon})\mathbf{C}^T \\
+&amp;= \mathbf{C}\text{Var}(\mathbf{\epsilon})\mathbf{C}^T \\
+&amp;= \mathbf{C} \sigma^2 \mathbf{I}_n \mathbf{C}^T \\
+&amp;= \sigma^2 \mathbf{C}\mathbf{C}^T \\
+&amp;= \sigma^2 (\mathbf{a}^T(\mathbf{Z}^T\mathbf{Z})^{-1}\mathbf{Z}^T) (\mathbf{a}^T(\mathbf{Z}^T\mathbf{Z})^{-1}\mathbf{Z}^T)^T \\
+&amp;= \sigma^2 \mathbf{a}^T(\mathbf{Z}^T\mathbf{Z})^{-1}\mathbf{Z}^T\mathbf{Z}(\mathbf{Z}^T\mathbf{Z})^{-1}\mathbf{a} \\
+&amp;= \sigma^2 \mathbf{a}^T(\mathbf{Z}^T\mathbf{Z})^{-1}\mathbf{a}.
+\end{align*}\]</span>
+</center>
+<p>Substituting <span class="math inline">\(\mathbf{a}^T=\mathbf{b}^T\mathbf{Z}\)</span>, we can rewrite</p>
+<center>
+<span class="math display">\[\begin{eqnarray*}
+\text{Var}(\mathbf{a}^T\mathbf{\hat{\beta}})
+&amp;=&amp; \sigma^2 \mathbf{b}^T\mathbf{Z}(\mathbf{Z}^T\mathbf{Z})^{-1}(\mathbf{b}^T\mathbf{Z})^T \\
+&amp;=&amp; \sigma^2 \mathbf{b}^T\mathbf{Z}(\mathbf{Z}^T\mathbf{Z})^{-1}\mathbf{Z}^T\mathbf{b} \\
+&amp;=&amp; \sigma^2\mathbf{b}^T\mathbf{P}\mathbf{b}.
+\end{eqnarray*}\]</span>
+</center>
+Comparing <span class="math inline">\(\text{Var}(\mathbf{b}^T\mathbf{y})\)</span> and <span class="math inline">\(\text{Var}(\mathbf{a}^T\mathbf{\hat{\beta}})\)</span>, we get
+<center>
+<span class="math display">\[\begin{eqnarray*}
+\text{Var}(\mathbf{b}^T\mathbf{y}) - \text{Var}(\mathbf{a}^T\mathbf{\hat{\beta}})
+&amp;=&amp; \sigma^2 \mathbf{b}^T\mathbf{b} - \sigma^2 \mathbf{b}^T\mathbf{P}\mathbf{b} \\
+&amp;=&amp; \sigma^2 \mathbf{b}^T (\mathbf{I}_n-\mathbf{P})\mathbf{b} \\
+&amp;=&amp; \sigma^2 \mathbf{b}^T(\mathbf{I}_n-\mathbf{P})^2\mathbf{b} \\
+&amp;=&amp; \sigma^2 \mathbf{b}^T(\mathbf{I}_n-\mathbf{P})^T (\mathbf{I}_n-\mathbf{P})\mathbf{b} \\
+&amp;=&amp; \sigma^2 \mathbf{D}^T\mathbf{D},
+\end{eqnarray*}\]</span>
+</center>
+where <span class="math inline">\(\mathbf{D} = (\mathbf{I}_n-\mathbf{P})\mathbf{b}\)</span>. Therefore,
+<center>
+<span class="math display">\[\text{Var}(\mathbf{b}^T\mathbf{y})-\text{Var}(\mathbf{a}^T\mathbf{\hat{\beta}}) = \sigma^2 \mathbf{D}^T\mathbf{D} \geq 0, \]</span>
+</center>
+<p>so <span class="math inline">\(\mathbf{a}^T\mathbf{\hat{\beta}}\)</span> has the smallest variance of any other linear unbiased estimator.</p>
+Finally suppose that <span class="math inline">\(\mathbf{b}^T\mathbf{y}\)</span> is another linear unbiased estimator such that <span class="math inline">\(\text{Var}(\mathbf{b}^T\mathbf{y}) = \text{Var}(\mathbf{a}^T\mathbf{\hat{\beta}})\)</span>, then
+<center>
+<span class="math display">\[\begin{align*}
+\text{Var}(\mathbf{b}^T\mathbf{y}) - \text{Var}(\mathbf{a}^T\mathbf{\hat{\beta}}) &amp;= \sigma^2 \mathbf{D}^T\mathbf{D}=0 \\
+\implies \qquad \mathbf{D}&amp;=\mathbf{0}
+\end{align*}\]</span>
+</center>
+Since <span class="math inline">\(\mathbf{D}=(\mathbf{I}_n-\mathbf{P})\mathbf{b}=\mathbf{0}\)</span>, it follows that
+<center>
+<span class="math display">\[\begin{align*}
+\mathbf{b} &amp;= \mathbf{P}\mathbf{b} \\
+&amp;= \mathbf{Z}(\mathbf{Z}^T\mathbf{Z})^{-1}\mathbf{Z}^T\mathbf{b} \\
+&amp;= \mathbf{Z}(\mathbf{Z}^T\mathbf{Z})^{-1}\mathbf{a} \\
+\implies \qquad \mathbf{b}^T &amp;= \mathbf{a}^T(\mathbf{Z}^T\mathbf{Z})^{-1}\mathbf{Z}^T,
+\end{align*}\]</span>
+</center>
+So
+<center>
+<span class="math display">\[\begin{align*}
+\mathbf{b}^T\mathbf{y} &amp;= \mathbf{a}^T(\mathbf{Z}^T\mathbf{Z})^{-1}\mathbf{Z}^T\mathbf{y} \\
+&amp;=\mathbf{a}^T\mathbf{\hat{\beta}}.
+\end{align*}\]</span>
+</center>
+<p>Therefore <span class="math inline">\(\mathbf{a}^T\mathbf{\hat{\beta}}\)</span> is the <em>unique linear unbiased estimator</em> of <span class="math inline">\(\mathbf{a}^T\mathbf{\beta}\)</span>.</p>
+</div>
+</details>
+<p><br />
+</p>
+<div id="Sec_Linear_LSE:cor:BLUE" class="thm">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Best linear unbiased estimator (BLUE)</strong></span><br />
+If <span class="math inline">\(\mathbf{a}^T=(0,0,\dots,1,0,\dots,0)\)</span> where the <span class="math inline">\(1\)</span> is in the <span class="math inline">\(i\)</span>th position, then <span class="math inline">\(\hat{\beta}_i\)</span> is the
+<em>best linear unbiased estimator</em>, shorthand BLUE, of <span class="math inline">\(\beta_i\)</span>.</p>
+</div>
+<p>The following <strong>R shiny</strong> app generates data and fits a regression line, <span class="math inline">\(y = \alpha + \beta x\)</span>. It allows for variability in the coefficients and how the covariates <span class="math inline">\(x\)</span> are generated. Predicted values can also be plotted with confidence intervals, see <a href="Interval_Estimation.html#Interval_Estimation">Section 18, Interval Estimation</a> for an introduction to confidence intervals and <a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:lab">Lab 12: Linear Models II</a> for a discussion of confidence intervals for predicted values.</p>
+<p>R Shiny app: <a href="https://shiny-new.maths.nottingham.ac.uk/pmzpn/Linear_Model_Intro/">Linear Model</a></p>
+</div>
+<div id="Sec_Linear_LSE:lab" class="section level2 unnumbered hasAnchor">
+<h2><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 9</strong></span><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:lab" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Attempt the <strong>R Markdown</strong> file for Session 9:<br />
+<a href="https://moodle.nottingham.ac.uk/course/view.php?id=134982#section-2">Session 9: Linear Models I</a></p>
+</div>
+<div id="Sec_Linear_LSE:exer" class="section level2 unnumbered hasAnchor">
+<h2><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:exer" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Attempt the exercises below.</p>
+<div id="exer17:1" class="exer">
+<br />
+Suppose that a model states that
+<center>
+<span class="math display">\[ E[Y_1] = \theta, \qquad E[Y_2] = 2 \theta - \phi, \qquad E[Y_3] = \theta + 2 \phi.\]</span>
+</center>
+<p>Find the least squares estimates of <span class="math inline">\(\theta\)</span> and <span class="math inline">\(\phi\)</span>.</p>
+</div>
+<details>
+<summary>
+Solution to Exercise 17.1.
+</summary>
+<div id="Question_S17_1" class="ans">
+Using first principles, minimise<br />
+
+<center>
+<span class="math display">\[D= \sum_{i=1}^3 (y_i - E[y_i])^2 = (y_1 - \theta)^2 + (y_2 - 2\theta + \phi)^2 + (y_3 - \theta - 2 \phi)^2\]</span>
+</center>
+by finding solutions to the normal equations,<br />
+
+<center>
+<span class="math display">\[\begin{eqnarray*}
+\frac{\partial D}{\partial \theta} &amp;=&amp; 0 = -2(y_1 - \theta) -4(y_2 - 2\theta + \phi) -2(y_3 - \theta - 2 \phi), \\
+\frac{\partial D}{\partial \phi} &amp;=&amp; 0 = 2(y_2 - 2\theta + \phi) -4(y_3 - \theta - 2 \phi).
+\end{eqnarray*}\]</span>
+</center>
+Solving for <span class="math inline">\(\theta, \phi\)</span> gives<br />
+
+<center>
+<span class="math display">\[ \hat{\theta} = \frac{1}{6}(y_1 + 2y_2 + y_3), \qquad \hat{\phi} = \frac{1}{5}(2y_3 - y_2).\]</span>
+</center>
+Note that generally if we have a linear model with <span class="math inline">\(p\)</span> parameters <span class="math inline">\(\theta = (\theta_1,\theta_2, \ldots, \theta_p)\)</span> and <span class="math inline">\(n\)</span> observations <span class="math inline">\(y_1, y_2, \ldots, y_n\)</span> with <span class="math inline">\(E[y_i] = \sum_{j=1}^p a_{ij} \theta_j\)</span>, then the least squares estimate of <span class="math inline">\(\theta_j\)</span> <span class="math inline">\((j=1,2,\ldots, p)\)</span> is<br />
+
+<center>
+<span class="math display">\[ \hat{\theta}_j = \frac{1}{\sum_{i=1}^n a_{ij}^2} \sum_{i=1}^n a_{ij} y_i. \]</span>
+</center>
+</div>
+</details>
+<p><br />
+</p>
+<div id="exer17:2" class="exer">
+<p><br />
+</p>
+<p>The marks of 8 students are presented below. For student <span class="math inline">\(i\)</span>, <span class="math inline">\(x_i\)</span> denotes their mark in a mid-term test and <span class="math inline">\(y_i\)</span> denotes their mark in the final exam.</p>
+Mid-term test marks:
+<center>
+<span class="math display">\[ \mathbf{x} = (x_1, x_2, \ldots, x_{8}) = ( 75, 68, 60, 58, 70, 67, 64, 65 ) \]</span>
+</center>
+Final exam marks:
+<center>
+<span class="math display">\[ \mathbf{y} = (y_1, y_2, \ldots, y_{8}) = ( 62, 54, 55, 43, 59, 59, 56, 50 ). \]</span>
+</center>
+Note that:
+<center>
+<span class="math display">\[\begin{eqnarray*}
+\bar{x} &amp;=&amp; \frac{1}{8} \sum_{i=1}^{8} x_i = 65.875 \\
+\bar{y} &amp;=&amp; \frac{1}{8} \sum_{i=1}^{8} y_i = 54.75 \\
+s_{xy} &amp;=&amp;  \frac{1}{8 -1} \left\{\sum_{i=1}^{8} x_iy_i - n \bar{x} \bar{y} \right\} = 25.679 \\
+s_x^2 &amp;=&amp;  \frac{1}{8 -1} \left\{\sum_{i=1}^{8} x_i^2 - n \bar{x}^2 \right\} = 29.554 \\
+s_y^2 &amp;=&amp;  \frac{1}{8 -1} \left\{\sum_{i=1}^{8} y_i^2 - n \bar{y}^2 \right\} = 35.929
+\end{eqnarray*}\]</span>
+</center>
+<ol style="list-style-type: lower-alpha">
+<li>Calculate the correlation between the mid-term test marks and the final exam marks.<br />
+</li>
+<li>Fit a straight line linear model <span class="math inline">\(y = \alpha + \beta x + \epsilon\)</span>, where <span class="math inline">\(\epsilon \sim N(0,\sigma^2)\)</span> with the final exam mark, <span class="math inline">\(y\)</span>, as the response and the mid-term test mark, <span class="math inline">\(x\)</span>, as the predictor variable. Include estimation of <span class="math inline">\(\sigma^2\)</span> in the model fit.<br />
+</li>
+<li>Find the expected final exam mark of a student who scores 79 in the mid-term test.<br />
+</li>
+</ol>
+</div>
+<details>
+<summary>
+Solution to Exercise 17.2.
+</summary>
+<div id="Question_S17_2" class="ans">
+<ol style="list-style-type: lower-alpha">
+<li>The correlation between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> is given by<br />
+
+<center>
+<span class="math display">\[ \frac{s_{xy}}{s_x \times s_y} = \frac{25.679}{\sqrt{29.554} \times \sqrt{35.929} } =  0.788 \]</span>
+</center></li>
+<li>The coefficients of the linear regression model are:<br />
+
+<center>
+<span class="math display">\[\begin{eqnarray*}
+\hat{\beta} &amp;=&amp; \frac{s_{x,y}}{s_x^2} = \frac{25.679}{29.554} = 0.869. \\
+\hat{\alpha} &amp;=&amp; \bar{y} - \hat{\beta}  \bar{x} = 54.75 - 0.869 \times 65.875 = -2.488.
+\end{eqnarray*}\]</span>
+</center></li>
+</ol>
+Since we have <span class="math inline">\(p=2\)</span> parameters (<span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>), an unbiased estimate of <span class="math inline">\(\sigma^2\)</span> is:<br />
+
+<center>
+<span class="math display">\[s^2 = \frac{1}{n-p} \sum_{i=1}^n (y_i - [\hat{\alpha} +\hat{\beta} x ])^2 = 15.886. \]</span>
+</center>
+Thus the fitted model is:<br />
+
+<center>
+<span class="math display">\[ y = -2.488 + 0.869 x + \epsilon, \qquad \qquad \epsilon \sim N(0,15.886). \]</span>
+</center>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>The expected final exam mark of a student who scores 79 in the mid-term test is:<br />
+
+<center>
+<span class="math display">\[ y^\ast = -2.488 + 0.869 \times 79 = 66.163. \]</span>
+</center></li>
+</ol>
+</div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="Sec_LinearI.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="Interval_Estimation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/17-Least_squares_estimation.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

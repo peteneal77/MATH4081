@@ -1,0 +1,56 @@
+# Introduction to R {#introR}
+
+## What are R, RStudio and R Markdown? {#introR_what}
+
+
+**R** is a free and widely used statistical language/package. There is a huge range of statistical commands in **R**, from basic summary statistics to cutting edge research applications. It is also a programming environment, so you can soon build up your own routines. 
+
+**RStudio** is a free graphical user interface that makes using **R** more user-friendly.  
+
+Almost all practical statistical analysis is carried out on a computer, and so becoming familiar with computer packages and languages is an essential task for any user of statistics. 
+
+To help you create beautiful output (HTML pages with mathematics included) we shall use a package called **knitr** which is embedded within some more general **R Markdown** packages, it turns your comments and code into a pretty HTML file. For each computing session I will give you an “R Markdown” file in RStudio (it ends in .Rmd) and then you can use knitr in RStudio to create the HTML.  Note that you will need to edit the R Markdown file to answer the questions it contains.
+
+## Starting RStudio on the UoN Network {#introR_UoN}
+
+First of all log into the computer system. You can then start **RStudio** by going to the
+start menu and selecting
+
+**Start $\rightarrow$ UoN Applications $\rightarrow$ (UoN) RStudio (x.x.x)**
+
+where (x.x.x) is the latest version of **RStudio** available.
+
+**R** is a command line based language, so you will need to type in the commands with any options and arguments.  When **RStudio** starts a console window is opened. It is here that you type in the commands.
+
+## Downloading R and RStudio {#introR_download}
+
+It is recommended that you download **RStudio** onto your own computer to have **R** available when both working online and offline. 
+
+To run **RStudio** on your own computer then you first need to download **R** from CRAN (Comprehensive R Archive Network):  
+[Download R](https://cran.rstudio.com)  
+and then you can download **RStudio** from  
+[Download R Studio](https://www.rstudio.com/products/RStudio/) 
+
+Note that both **R** and **RStudio** are free. 
+
+You can also find additional documentation on **R**, including introductory material, at the CRAN site.
+
+## Getting started in R {#introR_start}
+
+Once you have either accessed **R** through the UoN Network or downloaded and opened **RStudio**, watch the following [Video: Introduction to R](#videoR1) which gives an introduction to **R** and the basics of **RStudio**. It might be helpful, if possible, to simultaneously have **RStudio** open and watch the video so that you can get a feel for using **RStudio**. 
+
+```{asis, include=knitr::is_html_output()}
+:::{.des #videoR1}
+<span style="color: rgba(207, 0, 15, 1);">**Video R1: Introduction to R**</span>  
+
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1355621/sp/135562100/embedIframeJs/uiconf_id/13188771/partner_id/1355621?iframeembed=true&playerId=kaltura_player&entry_id=1_rz83a6k4&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_qhdc0yo8" width="640" height="420" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Introduction to RStudio FINAL VERSION"></iframe>
+:::
+```
+
+```{asis, include=knitr::is_latex_output()}
+Watch [\textcolor{blue}{Video R1: Introduction to R}](https://mediaspace.nottingham.ac.uk/media/Introduction+to+RStudio+FINAL+VERSION/1_rz83a6k4)
+``` 
+
+The **R** script file featured in [Video: Introduction to R](#videoR1) can be downloaded at:   
+[Session 0: Introduction to R script](https://moodle.nottingham.ac.uk/course/view.php?id=134982#section-2)  
+This file is highly recommended if you don't have any previous **R** experience.  

@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 22 ANOVA Tables and F Tests | Foundations of Statistics</title>
+  <meta name="description" content="Lecture Notes for Foundations of Statistics" />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 22 ANOVA Tables and F Tests | Foundations of Statistics" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Lecture Notes for Foundations of Statistics" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 22 ANOVA Tables and F Tests | Foundations of Statistics" />
+  
+  <meta name="twitter:description" content="Lecture Notes for Foundations of Statistics" />
+  
+
+<meta name="author" content="Prof Peter Neal and Dr Daniel Cavey" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="Sec_Linear_hypo_test.html"/>
+<link rel="next" href="introR.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">MATH4081: Foundations of Statistics</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preliminaries</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#overview"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#tasks"><i class="fa fa-check"></i>Tasks</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#intro_stats"><i class="fa fa-check"></i><b>1.1</b> What is Statistics?</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#intro_population"><i class="fa fa-check"></i><b>1.2</b> Populations and samples</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#intro_data"><i class="fa fa-check"></i><b>1.3</b> Types of Data</a></li>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#intro_example"><i class="fa fa-check"></i><b>1.4</b> Some example datasets</a></li>
+<li class="chapter" data-level="1.5" data-path="intro.html"><a href="intro.html#intro_computing"><i class="fa fa-check"></i><b>1.5</b> Statistical Computing</a></li>
+<li class="chapter" data-level="1.6" data-path="intro.html"><a href="intro.html#intro_paradigm"><i class="fa fa-check"></i><b>1.6</b> The statistical paradigm</a></li>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#intro:R"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 1</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>2</b> Summary Statistics</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="summary.html"><a href="summary.html#summary_location"><i class="fa fa-check"></i><b>2.1</b> Measures of location</a></li>
+<li class="chapter" data-level="2.2" data-path="summary.html"><a href="summary.html#summary_spread"><i class="fa fa-check"></i><b>2.2</b> Measures of spread</a></li>
+<li class="chapter" data-level="2.3" data-path="summary.html"><a href="summary.html#summary_robust"><i class="fa fa-check"></i><b>2.3</b> Robustness of summary statistics</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="visual.html"><a href="visual.html"><i class="fa fa-check"></i><b>3</b> Visualising data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="visual.html"><a href="visual.html#visual_intro"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="visual.html"><a href="visual.html#visual_data-features"><i class="fa fa-check"></i><b>3.2</b> Some data features</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="visual.html"><a href="visual.html#visual_data-features_multi"><i class="fa fa-check"></i><b>3.2.1</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Multimodal distributions</strong></span></a></li>
+<li class="chapter" data-level="3.2.2" data-path="visual.html"><a href="visual.html#visual_data-features_symmetry"><i class="fa fa-check"></i><b>3.2.2</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Symmetry</strong></span></a></li>
+<li class="chapter" data-level="3.2.3" data-path="visual.html"><a href="visual.html#visual_data-features_outliers"><i class="fa fa-check"></i><b>3.2.3</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Outliers</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="visual.html"><a href="visual.html#visual_plot"><i class="fa fa-check"></i><b>3.3</b> Basic plot types</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="visual.html"><a href="visual.html#visual_plot_histo"><i class="fa fa-check"></i><b>3.3.1</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Histogram and bar charts</strong></span></a></li>
+<li class="chapter" data-level="3.3.2" data-path="visual.html"><a href="visual.html#visual_plot_density"><i class="fa fa-check"></i><b>3.3.2</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Density plots</strong></span></a></li>
+<li class="chapter" data-level="3.3.3" data-path="visual.html"><a href="visual.html#visual_plot_boxplot"><i class="fa fa-check"></i><b>3.3.3</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Boxplot</strong></span></a></li>
+<li class="chapter" data-level="3.3.4" data-path="visual.html"><a href="visual.html#visual_plot_cdf"><i class="fa fa-check"></i><b>3.3.4</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Cumulative frequency diagrams, and the empirical CDF</strong></span></a></li>
+<li class="chapter" data-level="3.3.5" data-path="visual.html"><a href="visual.html#visual_plot_stem"><i class="fa fa-check"></i><b>3.3.5</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Stem and leaf</strong></span></a></li>
+<li class="chapter" data-level="3.3.6" data-path="visual.html"><a href="visual.html#visual_plot_pie"><i class="fa fa-check"></i><b>3.3.6</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Pie charts</strong></span></a></li>
+<li class="chapter" data-level="3.3.7" data-path="visual.html"><a href="visual.html#visual_plot_dot"><i class="fa fa-check"></i><b>3.3.7</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Dotplots</strong></span></a></li>
+<li class="chapter" data-level="3.3.8" data-path="visual.html"><a href="visual.html#visual_plot_scatter"><i class="fa fa-check"></i><b>3.3.8</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Scatterplots</strong></span></a></li>
+<li class="chapter" data-level="3.3.9" data-path="visual.html"><a href="visual.html#visual_plot_summary"><i class="fa fa-check"></i><b>3.3.9</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Summary</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="visual.html"><a href="visual.html#visual_data"><i class="fa fa-check"></i><b>3.4</b> Commenting on data</a></li>
+<li class="chapter" data-level="" data-path="visual.html"><a href="visual.html#visual:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 2</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="prob.html"><a href="prob.html"><i class="fa fa-check"></i><b>4</b> Probability</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="prob.html"><a href="prob.html#prob:overview"><i class="fa fa-check"></i><b>4.1</b> Overview</a></li>
+<li class="chapter" data-level="4.2" data-path="prob.html"><a href="prob.html#prob:motivation"><i class="fa fa-check"></i><b>4.2</b> Motivation</a></li>
+<li class="chapter" data-level="4.3" data-path="prob.html"><a href="prob.html#prob:sample_space"><i class="fa fa-check"></i><b>4.3</b> Sample Space</a></li>
+<li class="chapter" data-level="4.4" data-path="prob.html"><a href="prob.html#prob:events"><i class="fa fa-check"></i><b>4.4</b> Events</a></li>
+<li class="chapter" data-level="4.5" data-path="prob.html"><a href="prob.html#prob:defn"><i class="fa fa-check"></i><b>4.5</b> Probability</a></li>
+<li class="chapter" data-level="4.6" data-path="prob.html"><a href="prob.html#prob:Conditional_Probability"><i class="fa fa-check"></i><b>4.6</b> Conditional probability</a></li>
+<li class="chapter" data-level="4.7" data-path="prob.html"><a href="prob.html#prob:mutual"><i class="fa fa-check"></i><b>4.7</b> Mutual Independence</a></li>
+<li class="chapter" data-level="" data-path="prob.html"><a href="prob.html#rv:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 3</strong></span></a></li>
+<li class="chapter" data-level="" data-path="prob.html"><a href="prob.html#prob:stud"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="rv.html"><a href="rv.html"><i class="fa fa-check"></i><b>5</b> Random Variables</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="rv.html"><a href="rv.html#rv:overview"><i class="fa fa-check"></i><b>5.1</b> Overview</a></li>
+<li class="chapter" data-level="5.2" data-path="rv.html"><a href="rv.html#rv:des"><i class="fa fa-check"></i><b>5.2</b> Random variables</a></li>
+<li class="chapter" data-level="5.3" data-path="rv.html"><a href="rv.html#rv:expect"><i class="fa fa-check"></i><b>5.3</b> Expectation</a></li>
+<li class="chapter" data-level="5.4" data-path="rv.html"><a href="rv.html#rv:bernoulli"><i class="fa fa-check"></i><b>5.4</b> Bernoulli distribution and its extension</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="rv.html"><a href="rv.html#rv:Bernoulli:bern"><i class="fa fa-check"></i><b>5.4.1</b> Bernoulli distribution</a></li>
+<li class="chapter" data-level="5.4.2" data-path="rv.html"><a href="rv.html#rv:Bernoulli:bin"><i class="fa fa-check"></i><b>5.4.2</b> Binomial Distribution</a></li>
+<li class="chapter" data-level="5.4.3" data-path="rv.html"><a href="rv.html#rv:Bernoulli:geom"><i class="fa fa-check"></i><b>5.4.3</b> Geometric Distribution</a></li>
+<li class="chapter" data-level="5.4.4" data-path="rv.html"><a href="rv.html#rv:Bernoulli:negbin"><i class="fa fa-check"></i><b>5.4.4</b> Negative binomial Distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="rv.html"><a href="rv.html#rv:Poisson"><i class="fa fa-check"></i><b>5.5</b> Poisson distribution</a></li>
+<li class="chapter" data-level="5.6" data-path="rv.html"><a href="rv.html#rv:exponential"><i class="fa fa-check"></i><b>5.6</b> Exponential distribution and its extensions</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="rv.html"><a href="rv.html#rv:exponential:exp"><i class="fa fa-check"></i><b>5.6.1</b> Exponential distribution</a></li>
+<li class="chapter" data-level="5.6.2" data-path="rv.html"><a href="rv.html#rv:exponential:gamma"><i class="fa fa-check"></i><b>5.6.2</b> Gamma distribution</a></li>
+<li class="chapter" data-level="5.6.3" data-path="rv.html"><a href="rv.html#rv:exponential:chi"><i class="fa fa-check"></i><b>5.6.3</b> Chi squared distribution</a></li>
+<li class="chapter" data-level="5.6.4" data-path="rv.html"><a href="rv.html#rv:exponential:beta"><i class="fa fa-check"></i><b>5.6.4</b> Beta distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="rv.html"><a href="rv.html#rv:normal"><i class="fa fa-check"></i><b>5.7</b> Normal (Gaussian) Distribution</a></li>
+<li class="chapter" data-level="" data-path="rv.html"><a href="rv.html#prob:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="jointdis.html"><a href="jointdis.html"><i class="fa fa-check"></i><b>6</b> Joint Distribution Functions</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="jointdis.html"><a href="jointdis.html#jointdis:intro"><i class="fa fa-check"></i><b>6.1</b> Overview</a></li>
+<li class="chapter" data-level="6.2" data-path="jointdis.html"><a href="jointdis.html#jointdis:cdf"><i class="fa fa-check"></i><b>6.2</b> Joint c.d.f. and p.d.f.</a></li>
+<li class="chapter" data-level="6.3" data-path="jointdis.html"><a href="jointdis.html#jointdis:marginal"><i class="fa fa-check"></i><b>6.3</b> Marginal c.d.f. and p.d.f.</a></li>
+<li class="chapter" data-level="6.4" data-path="jointdis.html"><a href="jointdis.html#jointdis:independent"><i class="fa fa-check"></i><b>6.4</b> Independent random variables</a></li>
+<li class="chapter" data-level="" data-path="jointdis.html"><a href="jointdis.html#jointdis:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercise</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="Sec_CLT.html"><a href="Sec_CLT.html"><i class="fa fa-check"></i><b>7</b> Central Limit Theorem and law of large numbers</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="Sec_CLT.html"><a href="Sec_CLT.html#Sec_CLT:intro"><i class="fa fa-check"></i><b>7.1</b> Introduction</a></li>
+<li class="chapter" data-level="7.2" data-path="Sec_CLT.html"><a href="Sec_CLT.html#Sec_CLT:statement"><i class="fa fa-check"></i><b>7.2</b> Statement of Central Limit Theorem</a></li>
+<li class="chapter" data-level="7.3" data-path="Sec_CLT.html"><a href="Sec_CLT.html#Sec_CLT:discrete"><i class="fa fa-check"></i><b>7.3</b> Central limit theorem for discrete random variables</a></li>
+<li class="chapter" data-level="7.4" data-path="Sec_CLT.html"><a href="Sec_CLT.html#Sec_CLT:LLN"><i class="fa fa-check"></i><b>7.4</b> Law of Large Numbers</a></li>
+<li class="chapter" data-level="" data-path="Sec_CLT.html"><a href="Sec_CLT.html#Sec_clt:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 4</strong></span></a></li>
+<li class="chapter" data-level="" data-path="Sec_CLT.html"><a href="Sec_CLT.html#Sec_clt:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="motivate.html"><a href="motivate.html"><i class="fa fa-check"></i><b>8</b> Motivation for Statistical Inference</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="motivate.html"><a href="motivate.html#motivate:intro"><i class="fa fa-check"></i><b>8.1</b> Introduction</a></li>
+<li class="chapter" data-level="8.2" data-path="motivate.html"><a href="motivate.html#motivate:example"><i class="fa fa-check"></i><b>8.2</b> Motivating example</a></li>
+<li class="chapter" data-level="8.3" data-path="motivate.html"><a href="motivate.html#motivate:assumption"><i class="fa fa-check"></i><b>8.3</b> Modelling assumptions</a></li>
+<li class="chapter" data-level="8.4" data-path="motivate.html"><a href="motivate.html#motivate:parametric"><i class="fa fa-check"></i><b>8.4</b> Parametric models</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="paraestimate.html"><a href="paraestimate.html"><i class="fa fa-check"></i><b>9</b> Parameter Estimation</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="paraestimate.html"><a href="paraestimate.html#paraestimate:intro"><i class="fa fa-check"></i><b>9.1</b> Introduction</a></li>
+<li class="chapter" data-level="9.2" data-path="paraestimate.html"><a href="paraestimate.html#paraestimate:prelim"><i class="fa fa-check"></i><b>9.2</b> Preliminaries</a></li>
+<li class="chapter" data-level="9.3" data-path="paraestimate.html"><a href="paraestimate.html#paraestimate:judge"><i class="fa fa-check"></i><b>9.3</b> Judging estimators</a></li>
+<li class="chapter" data-level="9.4" data-path="paraestimate.html"><a href="paraestimate.html#paraestimate:variance"><i class="fa fa-check"></i><b>9.4</b> Sample Variance</a></li>
+<li class="chapter" data-level="" data-path="paraestimate.html"><a href="paraestimate.html#paraestimate:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 5</strong></span></a></li>
+<li class="chapter" data-level="" data-path="paraestimate.html"><a href="paraestimate.html#paraestimate:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="MLE.html"><a href="MLE.html"><i class="fa fa-check"></i><b>10</b> Techniques for Deriving Estimators</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="MLE.html"><a href="MLE.html#MLE:intro"><i class="fa fa-check"></i><b>10.1</b> Introduction</a></li>
+<li class="chapter" data-level="10.2" data-path="MLE.html"><a href="MLE.html#MLE:moments"><i class="fa fa-check"></i><b>10.2</b> Method of Moments</a></li>
+<li class="chapter" data-level="10.3" data-path="MLE.html"><a href="MLE.html#MLE:MLE"><i class="fa fa-check"></i><b>10.3</b> Maximum likelihood estimation</a></li>
+<li class="chapter" data-level="10.4" data-path="MLE.html"><a href="MLE.html#MLE:comments"><i class="fa fa-check"></i><b>10.4</b> Comments on the Maximum Likelihood Estimator</a></li>
+<li class="chapter" data-level="" data-path="MLE.html"><a href="MLE.html#MLE:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="MLEprop.html"><a href="MLEprop.html"><i class="fa fa-check"></i><b>11</b> Additional Properties of Estimators</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:intro"><i class="fa fa-check"></i><b>11.1</b> Introduction</a></li>
+<li class="chapter" data-level="11.2" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:sufficient"><i class="fa fa-check"></i><b>11.2</b> Sufficiency</a></li>
+<li class="chapter" data-level="11.3" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:MVE"><i class="fa fa-check"></i><b>11.3</b> Minimum variance estimators</a></li>
+<li class="chapter" data-level="11.4" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:asymptotic"><i class="fa fa-check"></i><b>11.4</b> Asymptotic normality of the MLE</a></li>
+<li class="chapter" data-level="11.5" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:invariance"><i class="fa fa-check"></i><b>11.5</b> Invariance property</a></li>
+<li class="chapter" data-level="" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 6</strong></span></a></li>
+<li class="chapter" data-level="" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="CondDis.html"><a href="CondDis.html"><i class="fa fa-check"></i><b>12</b> Conditional Distribution and Conditional Expectation</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="CondDis.html"><a href="CondDis.html#CondDis:CondDis"><i class="fa fa-check"></i><b>12.1</b> Conditional distribution</a></li>
+<li class="chapter" data-level="12.2" data-path="CondDis.html"><a href="CondDis.html#CondDis:CondExpect"><i class="fa fa-check"></i><b>12.2</b> Conditional expectation</a></li>
+<li class="chapter" data-level="12.3" data-path="CondDis.html"><a href="CondDis.html#CondDis:Independence"><i class="fa fa-check"></i><b>12.3</b> Independent random variables</a></li>
+<li class="chapter" data-level="" data-path="CondDis.html"><a href="CondDis.html#CondDis:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercise</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="Correlation.html"><a href="Correlation.html"><i class="fa fa-check"></i><b>13</b> Expectation, Covariance and Correlation</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="Correlation.html"><a href="Correlation.html#Correlation:Expectation"><i class="fa fa-check"></i><b>13.1</b> Expectation of a function of random variables</a></li>
+<li class="chapter" data-level="13.2" data-path="Correlation.html"><a href="Correlation.html#Correlation:Covariance"><i class="fa fa-check"></i><b>13.2</b> Covariance</a></li>
+<li class="chapter" data-level="13.3" data-path="Correlation.html"><a href="Correlation.html#Correlation:Correlation"><i class="fa fa-check"></i><b>13.3</b> Correlation</a></li>
+<li class="chapter" data-level="" data-path="Correlation.html"><a href="Correlation.html#Correlation:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 7</strong></span></a></li>
+<li class="chapter" data-level="" data-path="Correlation.html"><a href="Correlation.html#Correlation:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="Transform.html"><a href="Transform.html"><i class="fa fa-check"></i><b>14</b> Transformations of random variables</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="Transform.html"><a href="Transform.html#Transform:intro"><i class="fa fa-check"></i><b>14.1</b> Introduction</a></li>
+<li class="chapter" data-level="14.2" data-path="Transform.html"><a href="Transform.html#Transform:univariate"><i class="fa fa-check"></i><b>14.2</b> Univariate case</a></li>
+<li class="chapter" data-level="14.3" data-path="Transform.html"><a href="Transform.html#Transform:bivariate"><i class="fa fa-check"></i><b>14.3</b> Bivariate case</a></li>
+<li class="chapter" data-level="" data-path="Transform.html"><a href="Transform.html#Transform:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercise</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="MV_Normal.html"><a href="MV_Normal.html"><i class="fa fa-check"></i><b>15</b> Multivariate Normal Distribution</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="MV_Normal.html"><a href="MV_Normal.html#MV_Normal:intro"><i class="fa fa-check"></i><b>15.1</b> Introduction</a></li>
+<li class="chapter" data-level="15.2" data-path="MV_Normal.html"><a href="MV_Normal.html#MV_Normal:multi"><i class="fa fa-check"></i><b>15.2</b> <span class="math inline">\(n\)</span>-Dimensional Normal Distribution</a></li>
+<li class="chapter" data-level="" data-path="MV_Normal.html"><a href="MV_Normal.html#MV_Normal:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 8</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html"><i class="fa fa-check"></i><b>16</b> Introduction to Linear Models</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:intro"><i class="fa fa-check"></i><b>16.1</b> Introduction</a></li>
+<li class="chapter" data-level="16.2" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:stat"><i class="fa fa-check"></i><b>16.2</b> Statistical models</a></li>
+<li class="chapter" data-level="16.3" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:linear"><i class="fa fa-check"></i><b>16.3</b> The linear model</a></li>
+<li class="chapter" data-level="16.4" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:Gauss"><i class="fa fa-check"></i><b>16.4</b> The Normal (Gaussian) linear model</a></li>
+<li class="chapter" data-level="16.5" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:residuals"><i class="fa fa-check"></i><b>16.5</b> Residuals</a></li>
+<li class="chapter" data-level="16.6" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:line"><i class="fa fa-check"></i><b>16.6</b> Straight Line, Horizontal Line and Quadratic Models</a></li>
+<li class="chapter" data-level="16.7" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:Examples"><i class="fa fa-check"></i><b>16.7</b> Examples</a></li>
+<li class="chapter" data-level="16.8" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:Prediction"><i class="fa fa-check"></i><b>16.8</b> Prediction</a></li>
+<li class="chapter" data-level="16.9" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:Nested"><i class="fa fa-check"></i><b>16.9</b> Nested Models</a></li>
+<li class="chapter" data-level="" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercise</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html"><i class="fa fa-check"></i><b>17</b> Least Squares Estimation for Linear Models</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:intro"><i class="fa fa-check"></i><b>17.1</b> Introduction</a></li>
+<li class="chapter" data-level="17.2" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:algebra"><i class="fa fa-check"></i><b>17.2</b> Linear algebra review</a></li>
+<li class="chapter" data-level="17.3" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:derive"><i class="fa fa-check"></i><b>17.3</b> Deriving the least squares estimator</a></li>
+<li class="chapter" data-level="17.4" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:examples"><i class="fa fa-check"></i><b>17.4</b> Examples</a></li>
+<li class="chapter" data-level="17.5" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:beta"><i class="fa fa-check"></i><b>17.5</b> Properties of the estimator of <span class="math inline">\(\mathbf{\beta}\)</span></a></li>
+<li class="chapter" data-level="17.6" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:GaussMarkov"><i class="fa fa-check"></i><b>17.6</b> Gauss-Markov Theorem</a></li>
+<li class="chapter" data-level="" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 9</strong></span></a></li>
+<li class="chapter" data-level="" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="Interval_Estimation.html"><a href="Interval_Estimation.html"><i class="fa fa-check"></i><b>18</b> Interval Estimation</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="Interval_Estimation.html"><a href="Interval_Estimation.html#Interval_Estimation:intro"><i class="fa fa-check"></i><b>18.1</b> Introduction</a></li>
+<li class="chapter" data-level="18.2" data-path="Interval_Estimation.html"><a href="Interval_Estimation.html#Interval_Estimation:confident"><i class="fa fa-check"></i><b>18.2</b> Confident?</a></li>
+<li class="chapter" data-level="18.3" data-path="Interval_Estimation.html"><a href="Interval_Estimation.html#Interval_Estimation:CI"><i class="fa fa-check"></i><b>18.3</b> Confidence intervals</a></li>
+<li class="chapter" data-level="18.4" data-path="Interval_Estimation.html"><a href="Interval_Estimation.html#Interval_Estimation:MLE"><i class="fa fa-check"></i><b>18.4</b> Asymptotic distribution of the MLE</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html"><i class="fa fa-check"></i><b>19</b> Hypothesis Testing</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:intro"><i class="fa fa-check"></i><b>19.1</b> Introduction to hypothesis testing</a></li>
+<li class="chapter" data-level="19.2" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:errors"><i class="fa fa-check"></i><b>19.2</b> Type I and Type II errors</a></li>
+<li class="chapter" data-level="19.3" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:normal_known"><i class="fa fa-check"></i><b>19.3</b> Tests for normal means, <span class="math inline">\(\sigma\)</span> known</a></li>
+<li class="chapter" data-level="19.4" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:p_values"><i class="fa fa-check"></i><b>19.4</b> <span class="math inline">\(p\)</span> values</a></li>
+<li class="chapter" data-level="19.5" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:normal_unknown"><i class="fa fa-check"></i><b>19.5</b> Tests for normal means, <span class="math inline">\(\sigma\)</span> unknown</a></li>
+<li class="chapter" data-level="19.6" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:twosided"><i class="fa fa-check"></i><b>19.6</b> Confidence intervals and two-sided tests</a></li>
+<li class="chapter" data-level="19.7" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:variance"><i class="fa fa-check"></i><b>19.7</b> Distribution of the variance</a></li>
+<li class="chapter" data-level="19.8" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:other"><i class="fa fa-check"></i><b>19.8</b> Other types of tests</a></li>
+<li class="chapter" data-level="19.9" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:samplesize"><i class="fa fa-check"></i><b>19.9</b> Sample size calculation</a></li>
+<li class="chapter" data-level="" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 10</strong></span></a></li>
+<li class="chapter" data-level="" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html"><i class="fa fa-check"></i><b>20</b> Hypothesis Testing Discrete Data</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html#Hypo_Test_Discrete:intro"><i class="fa fa-check"></i><b>20.1</b> Introduction</a></li>
+<li class="chapter" data-level="20.2" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html#Hypo_Test_Discrete:motivate"><i class="fa fa-check"></i><b>20.2</b> Goodness-of-fit motivating example</a></li>
+<li class="chapter" data-level="20.3" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html#Hypo_Test_Discrete:GoF"><i class="fa fa-check"></i><b>20.3</b> Goodness-of-fit</a></li>
+<li class="chapter" data-level="20.4" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html#Hypo_Test_Discrete:Independence"><i class="fa fa-check"></i><b>20.4</b> Testing Independence</a></li>
+<li class="chapter" data-level="" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html#Hypo_Test_Discrete:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 11</strong></span></a></li>
+<li class="chapter" data-level="" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html#Hypo_Test_Discrete:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="Sec_Linear_hypo_test.html"><a href="Sec_Linear_hypo_test.html"><i class="fa fa-check"></i><b>21</b> Basic Hypothesis Tests for Linear Models</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="Sec_Linear_hypo_test.html"><a href="Sec_Linear_hypo_test.html#Sec_Linear_hypo_test:intro"><i class="fa fa-check"></i><b>21.1</b> Introduction</a></li>
+<li class="chapter" data-level="21.2" data-path="Sec_Linear_hypo_test.html"><a href="Sec_Linear_hypo_test.html#Sec_Linear_hypo_test:single"><i class="fa fa-check"></i><b>21.2</b> Tests on a single parameter</a></li>
+<li class="chapter" data-level="21.3" data-path="Sec_Linear_hypo_test.html"><a href="Sec_Linear_hypo_test.html#Sec_Linear_hypo_test:CI"><i class="fa fa-check"></i><b>21.3</b> Confidence intervals for parameters</a></li>
+<li class="chapter" data-level="21.4" data-path="Sec_Linear_hypo_test.html"><a href="Sec_Linear_hypo_test.html#Sec_Linear_hypo_test:F"><i class="fa fa-check"></i><b>21.4</b> Tests for the existence of regression</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html"><i class="fa fa-check"></i><b>22</b> ANOVA Tables and F Tests</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:Intro"><i class="fa fa-check"></i><b>22.1</b> Introduction</a></li>
+<li class="chapter" data-level="22.2" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:residuals"><i class="fa fa-check"></i><b>22.2</b> The residuals</a></li>
+<li class="chapter" data-level="22.3" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:SS"><i class="fa fa-check"></i><b>22.3</b> Sums of squares</a></li>
+<li class="chapter" data-level="22.4" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:ANOVA"><i class="fa fa-check"></i><b>22.4</b> Analysis of Variance (ANOVA)</a></li>
+<li class="chapter" data-level="22.5" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:Compare"><i class="fa fa-check"></i><b>22.5</b> Comparing models</a></li>
+<li class="chapter" data-level="22.6" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:seq"><i class="fa fa-check"></i><b>22.6</b> Sequential sum of squares</a></li>
+<li class="chapter" data-level="" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 12</strong></span></a></li>
+<li class="chapter" data-level="" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="introR.html"><a href="introR.html"><i class="fa fa-check"></i><b>23</b> Introduction to R</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="introR.html"><a href="introR.html#introR_what"><i class="fa fa-check"></i><b>23.1</b> What are R, RStudio and R Markdown?</a></li>
+<li class="chapter" data-level="23.2" data-path="introR.html"><a href="introR.html#introR_UoN"><i class="fa fa-check"></i><b>23.2</b> Starting RStudio on the UoN Network</a></li>
+<li class="chapter" data-level="23.3" data-path="introR.html"><a href="introR.html#introR_download"><i class="fa fa-check"></i><b>23.3</b> Downloading R and RStudio</a></li>
+<li class="chapter" data-level="23.4" data-path="introR.html"><a href="introR.html#introR_start"><i class="fa fa-check"></i><b>23.4</b> Getting started in R</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="Rmark.html"><a href="Rmark.html"><i class="fa fa-check"></i><b>24</b> What is R Markdown?</a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="Rmark.html"><a href="Rmark.html#Rmark_start"><i class="fa fa-check"></i><b>24.1</b> Getting started</a></li>
+<li class="chapter" data-level="24.2" data-path="Rmark.html"><a href="Rmark.html#Rmark_R"><i class="fa fa-check"></i><b>24.2</b> R in R Markdown</a></li>
+<li class="chapter" data-level="24.3" data-path="Rmark.html"><a href="Rmark.html#Rmark_text"><i class="fa fa-check"></i><b>24.3</b> Text in R markdown</a></li>
+<li class="chapter" data-level="24.4" data-path="Rmark.html"><a href="Rmark.html#Rmark_maths"><i class="fa fa-check"></i><b>24.4</b> Mathematics in R Markdown</a></li>
+<li class="chapter" data-level="24.5" data-path="Rmark.html"><a href="Rmark.html#Rmark_work"><i class="fa fa-check"></i><b>24.5</b> Worked Example</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://moodle.nottingham.ac.uk/course/view.php?id=128925" target="blank">MATH4081 Moodle Page</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Foundations of Statistics</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="Sec_Linear_ANOVA" class="section level1 hasAnchor" number="22">
+<h1><span class="header-section-number">Chapter 22</span> ANOVA Tables and F Tests<a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="Sec_Linear_ANOVA:Intro" class="section level2 hasAnchor" number="22.1">
+<h2><span class="header-section-number">22.1</span> Introduction<a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:Intro" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this section we will focus on the sources of variation in a linear model and how these can be used to determine the most appropriate linear model. We start in <a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:residuals">Section 22.2</a> by considering the residuals of the linear model and properties of the residuals. In <a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:SS">Section 22.3</a>, we introduce the total sum-of-squares <span style="color: rgba(15, 0, 207, 1);"><strong>SStot</strong></span> which is a measure of the total amount of variation in the model. This is comprised of two components: the regression sum-of-squares, <span style="color: rgba(15, 0, 207, 1);"><strong>SSreg</strong></span>, which measures the variability in the observations that is captured by the model and the residual sum-of-squares, <span style="color: rgba(15, 0, 207, 1);"><strong>SSres</strong></span>, which measures the unexplained variability in the observations. In <a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:ANOVA">Section 22.4</a>, we introduce ANOVA tables for summarising variability in the model and testing null hypotheses. In particular, we consider the Fuel Consumption example, introduced in <a href="Sec_Linear_hypo_test.html#Sec_Linear_hypo_test:single">Section 21.2</a>, and show how the conclusions obtained in <a href="Sec_Linear_hypo_test.html#Sec_Linear_hypo_test:F">Section 21.4</a> can be presented in the form of an ANOVA table.
+In <a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:Compare">Section 22.5</a>, we consider two linear models for a given data set, where one model is <em>nested</em> within the other model. This allows us to compare two models which lie between the full model (includes all variables) and the null model (excludes all variables). Finally, in <a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:seq">Section 22.6</a> we extend the comparison of nested models to sequential sum-of-squares to find the most appropriate model out of a range of nested linear models.</p>
+</div>
+<div id="Sec_Linear_ANOVA:residuals" class="section level2 hasAnchor" number="22.2">
+<h2><span class="header-section-number">22.2</span> The residuals<a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:residuals" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+Consider the linear model
+<center>
+<span class="math display">\[\mathbf{y} = \mathbf{Z}\mathbf{\beta} + \mathbf{\epsilon}. \]</span>
+</center>
+<p>Recall the following model notation:</p>
+<ul>
+<li><span class="math inline">\(E[\mathbf{\epsilon}] = \mathbf{0}\)</span>;<br />
+</li>
+<li><span class="math inline">\(\text{Var}(\mathbf{\epsilon}) = \sigma^2\mathbf{I}_n\)</span>;<br />
+</li>
+<li><span class="math inline">\(\hat{\mathbf{\beta}} = (\mathbf{Z}^T\mathbf{Z})^{-1} \mathbf{Z}^T\mathbf{y}\)</span> is the <em>LSE</em> of <span class="math inline">\(\mathbf{\beta}\)</span>;<br />
+</li>
+<li><span class="math inline">\(\hat{\mathbf{y}} = \mathbf{Z}\hat{\mathbf{\beta}}\)</span> is the <span class="math inline">\(n \times 1\)</span> vector of <em>fitted values</em>;<br />
+</li>
+<li><span class="math inline">\(\hat{\mathbf{y}} = \mathbf{P}\mathbf{y}\)</span>, where <span class="math inline">\(\mathbf{P} = \mathbf{Z}(\mathbf{Z}^T\mathbf{Z})^{-1} \mathbf{Z}^T\)</span>.</li>
+</ul>
+Let <span class="math inline">\(\mathbf{r} = \hat{\mathbf{\epsilon}} = \mathbf{y} - \hat{\mathbf{y}}\)</span> be the <span class="math inline">\(n \times 1\)</span> vector of <em>residuals</em>. Note that<br />
+
+<center>
+<span class="math display">\[\begin{align*}
+\mathbf{r} &amp;= \mathbf{\hat{\epsilon}} \\
+&amp;= \mathbf{y}-\mathbf{\hat{y}} \\
+&amp;= \mathbf{y}-\mathbf{Z}\mathbf{\hat{\beta}} \\
+&amp;= \mathbf{y} - \mathbf{P} \mathbf{y} \\
+&amp;= (\mathbf{I}_n - \mathbf{P}) \mathbf{y},
+\end{align*}\]</span>
+</center>
+<p>where <span class="math inline">\(\mathbf{I}_n - \mathbf{P}\)</span> is symmetric, idempotent and has trace <span class="math inline">\((\mathbf{I}_n - \mathbf{P}) = \text{rank}(\mathbf{I}_n-\mathbf{P})\mathbf{y} = n-p\)</span>. Note that <span class="math inline">\(\text{rank}(\mathbf{I}_n-\mathbf{P})\mathbf{y} = n-p\)</span> denotes the degrees of freedom of the residuals and is equal to the number of observations, <span class="math inline">\(n\)</span>, minus the number of coefficients (parameters), <span class="math inline">\(p\)</span>.</p>
+<div id="Sec_Linear_ANOVA:thm:orthogonal" class="thm">
+<p><br />
+The vector of fitted values is orthogonal to the vector of residuals, that is
+<span class="math display">\[\hat{\mathbf{y}}^T \hat{\mathbf{\epsilon}} = \hat{\mathbf{\epsilon}}^T \hat{\mathbf{y}} = 0.\]</span></p>
+</div>
+<p>Details of the proof can be omitted.</p>
+<details>
+<summary>
+Proof of Theorem 22.2.1.
+</summary>
+<div class="prf">
+<center>
+<span class="math display">\[\begin{align*}
+\hat{\mathbf{y}}^T \hat{\mathbf{\epsilon}} &amp;= (\mathbf{P}\mathbf{y})^T (\mathbf{I}_n - \mathbf{P}) \mathbf{y} \\
+&amp;= \mathbf{y}^T \mathbf{P}^T (\mathbf{I}_n - \mathbf{P}) \mathbf{y} \\
+&amp;= \mathbf{y}^T \mathbf{P}^T \mathbf{y} - \mathbf{y}^T \mathbf{P}^T \mathbf{P} \mathbf{y} \\
+&amp;= \mathbf{y}^T \mathbf{P} \mathbf{y} - \mathbf{y}^T \mathbf{P} \mathbf{P} \mathbf{y} \\
+&amp;= \mathbf{y}^T \mathbf{P} \mathbf{y} - \mathbf{y}^T \mathbf{P} \mathbf{y} \\
+&amp;= 0,
+\end{align*}\]</span>
+</center>
+<p>using that <span class="math inline">\(\mathbf{P}\)</span> is orthogonal (<span class="math inline">\(\mathbf{P}^T = \mathbf{P}\)</span>) and idempotent (<span class="math inline">\(\mathbf{P}^2 =\mathbf{P}\)</span>).</p>
+</div>
+</details>
+Therefore, <span class="math inline">\(\mathbf{y}\)</span> can be written as a linear combination of orthogonal vectors:<br />
+
+<center>
+<span class="math display">\[\mathbf{y} = \hat{\mathbf{y}} + \hat{\mathbf{\epsilon}}.\]</span>
+</center>
+<p>The normal linear model assumes <span class="math inline">\(\mathbf{\epsilon} \sim N(\mathbf{0}, \sigma^2 \mathbf{I}_n)\)</span>. We would expect the sample residuals, <span class="math inline">\(\hat{\mathbf{\epsilon}}\)</span> to exhibit many of the properties of the error terms. The properties of <span class="math inline">\(\hat{\mathbf{\epsilon}}\)</span> can be explored via graphical methods as in <a href="Sec_LinearI.html#Sec_LinearI:line">Section 16.6</a> and <a href="Sec_Linear_LSE.html#Sec_Linear_LSE:lab">Lab 9: Linear Models</a>.</p>
+</div>
+<div id="Sec_Linear_ANOVA:SS" class="section level2 hasAnchor" number="22.3">
+<h2><span class="header-section-number">22.3</span> Sums of squares<a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:SS" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Let <span class="math inline">\(y_i\)</span> be the <span class="math inline">\(i^{th}\)</span> observation, <span class="math inline">\(\hat{y}_i\)</span> be the <span class="math inline">\(i^{th}\)</span> fitted value and <span class="math inline">\(\bar{y}\)</span> be the mean of the observed values.</p>
+<p><img src="_main_files/figure-html/unnamed-chunk-360-1.png" width="672" /></p>
+<div id="Sec_Linear_ANOVA:lem:deviance" class="lem">
+<span style="color: rgba(207, 0, 15, 1);"><strong>Model Deviance</strong></span><br />
+<br />
+The model deviance is given by
+<center>
+<span class="math display">\[D =  \sum_{i=1}^n (y_i - \hat{y}_i)^2 + \sum_{i=1}^n (\hat{y}_i - \bar{y})^2.\]</span>
+</center>
+</div>
+<div class="prf">
+We have
+<center>
+<span class="math display">\[\begin{align*}
+(y_i - \bar{y}) &amp;= (y_i - \hat{y}_i) + (\hat{y}_i - \bar{y}), \\[3pt]
+\implies \qquad (y_i - \bar{y})^2 &amp;= \left[ (y_i - \hat{y}_i) + (\hat{y}_i - \bar{y}) \right]^2 \\[3pt]
+&amp;= (y_i - \hat{y}_i)^2 + (\hat{y}_i - \bar{y})^2 + 2(y_i - \hat{y}_i)(\hat{y}_i - \bar{y}), \\[3pt]
+\implies \qquad \sum\limits_{i=1}^n (y_i - \bar{y})^2 &amp;= \sum\limits_{i=1}^n (y_i - \hat{y}_i)^2 + \sum\limits_{i=1}^n (\hat{y}_i - \bar{y})^2 + 2 \sum\limits_{i=1}^n (y_i - \hat{y}_i)(\hat{y}_i - \bar{y}).
+\end{align*}\]</span>
+</center>
+Now,
+<center>
+<span class="math display">\[\begin{align*}
+\sum\limits_{i=1}^n (y_i - \hat{y}_i)(\hat{y}_i - \bar{y}) &amp;= \sum\limits_{i=1}^n (y_i - \hat{y}_i )\hat{y}_i - \sum\limits_{i=1}^n (y_i - \hat{y}_i)\bar{y} \\[3pt]
+&amp;= \sum\limits_{i=1}^n \hat{\epsilon}_i\hat{y}_i - \bar{y} \sum\limits_{i=1}^n \hat{\epsilon}_i \\[3pt]
+&amp;= \hat{\mathbf{\epsilon}}^T \hat{\mathbf{y}} - \bar{y} \sum\limits_{i=1}^n \hat{\epsilon}_i \\[3pt]
+&amp;= 0-0 \\[3pt]
+&amp;= 0,
+\end{align*}\]</span>
+</center>
+using that <span class="math inline">\(\hat{\mathbf{\epsilon}}\)</span> and <span class="math inline">\(\hat{\mathbf{y}}\)</span> are orthogonal, and that <span class="math inline">\(\sum\limits_{i=1}^n \hat{\epsilon}_i = 0\)</span> is one of the normal equations. Therefore,
+<center>
+<span class="math display">\[\sum\limits_{i=1}^n \left(y_i - \bar{y} \right)^2 = \sum\limits_{i=1}^n \left( y_i - \hat{y}_i \right) ^2 + \sum\limits_{i=1}^n \left( \hat{y}_i - \bar{y} \right)^2.\]</span>
+</center>
+</div>
+<p><br />
+</p>
+<div id="Sec_Linear_ANOVA:def:SStot" class="def">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Total sum of squares</strong></span><br />
+<br />
+Define <span class="math inline">\(\text{SStot} = \sum\limits_{i=1}^n (y_i - \bar{y})^2\)</span> as the <span style="color: rgba(15, 0, 207, 1);"><strong>total sum of squares</strong></span>. This is proportional to the total variability in <span class="math inline">\(y\)</span> since <span class="math inline">\(\text{SStot} = (n-1) \text{Var}(y)\)</span>. It does not depend on the choice of predictor variables in <span class="math inline">\(\mathbf{Z}\)</span>.</p>
+</div>
+<p><br />
+</p>
+<div id="Sec_Linear_ANOVA:def:SSres" class="def">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Residual sum of squares</strong></span><br />
+<br />
+Define <span class="math inline">\(\text{SSres} = \sum\limits_{i=1}^n (y_i - \hat{y}_i)^2\)</span> as the <span style="color: rgba(15, 0, 207, 1);"><strong>residual sum of squares</strong></span>. This is a measure of the amount of variability in <span class="math inline">\(y\)</span> the model was unable to explain. This is equivalent to the deviance of the model, that is <span class="math inline">\(\text{SSres} = D\)</span>.</p>
+</div>
+<p><br />
+</p>
+<div id="Sec_Linear_ANOVA:def:SSreg" class="def">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Regression sum of squares</strong></span><br />
+ 
+Define <span class="math inline">\(\text{SSreg} = \sum\limits_{i=1}^n (\hat{y}_i - \bar{y})^2\)</span> as the <span style="color: rgba(15, 0, 207, 1);"><strong>regression sum of squares</strong></span>. This is the difference between <span class="math inline">\(\text{SStot}\)</span> and <span class="math inline">\(\text{SSres}\)</span> and is a measure of the amount of variability in <span class="math inline">\(y\)</span> the model was able to explain.</p>
+</div>
+From our above derivations, note
+<center>
+<span class="math display">\[\begin{align*}
+\sum\limits_{i=1}^n (y_i - \bar{y})^2 &amp;= \sum\limits_{i=1}^n (y_i - \hat{y}_i)^2 + \sum\limits_{i=1}^n (\hat{y}_i - \bar{y})^2 \\
+\text{SStot} &amp;= \text{SSres} + \text{SSreg}
+\end{align*}\]</span>
+</center>
+<div id="Sec_Linear_ANOVA:def:CoD" class="def">
+<span style="color: rgba(207, 0, 15, 1);"><strong>Coefficient of determination</strong></span><br />
+<br />
+The <em>coefficient of determination</em> is
+<center>
+<span class="math display">\[R^2 = \frac{\text{SSreg}}{\text{SStot}}.\]</span>
+</center>
+</div>
+<p>The coefficient of determination measures the proportion of variability explained by the regression. Additionally note that:</p>
+<ul>
+<li><span class="math inline">\(0 \leq R^2 \leq 1\)</span>;<br />
+</li>
+<li><span class="math inline">\(R^2 = 1 - \frac{\text{SSres}}{\text{SStot}}\)</span>;<br />
+</li>
+<li><span class="math inline">\(R^2\)</span> is often used as a measure of how well the regression model fits the data: the larger <span class="math inline">\(R^2\)</span> is, the better the fit. One needs to be careful in interpreting what “large” is on a case-by-case basis.</li>
+</ul>
+<div id="Sec_Linear_ANOVA:def:CoD_adjusted" class="def">
+<span style="color: rgba(207, 0, 15, 1);"><strong>Adjusted <span class="math inline">\(R^2\)</span></strong></span><br />
+<br />
+The <em>adjusted</em> <span class="math inline">\(R^2\)</span> is<br />
+
+<center>
+<span class="math display">\[R_{\text{adj}}^2 = 1 - \frac{\text{SSres}/(n-p)}{\text{SStot}/(n-1)}.\]</span>
+</center>
+</div>
+<p>The adjusted <span class="math inline">\(R^2\)</span> is often used to compare the fit of models with different numbers of parameters.</p>
+Under the null hypothesis model, <span class="math inline">\(Y_i = \beta_0 + \epsilon_i\)</span> and <span class="math inline">\(\bar{y} = \hat{y}_i\)</span>. In this special case,<br />
+
+<center>
+<span class="math display">\[\begin{align*}
+\text{SStot} = \text{SSres} &amp;= D, \\
+\text{SSreg} &amp;= 0, \\
+R^2 = R_{\text{adj}}^2 &amp;= 0.
+\end{align*}\]</span>
+</center>
+</div>
+<div id="Sec_Linear_ANOVA:ANOVA" class="section level2 hasAnchor" number="22.4">
+<h2><span class="header-section-number">22.4</span> Analysis of Variance (ANOVA)<a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:ANOVA" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Recall from <a href="Sec_Linear_hypo_test.html#Sec_Linear_hypo_test:F">Section 21.4</a> that the <span class="math inline">\(F\)</span> statistic used in the test for the existence of regression is
+<span class="math display">\[F = \frac{(D_0 - D_1)/(p-1)}{D_1/(n-p)},\]</span>
+where <span class="math inline">\(D_1\)</span> and <span class="math inline">\(D_0\)</span> are the model deviances or SSres under the alternative and null hypotheses respectively. We noted above that <span class="math inline">\(D_0\)</span>, the deviance under the null hypothesis is equivalent to SStot under any model.</p>
+<div id="Sec_Linear_ANOVA:def:MSreg" class="def">
+<span style="color: rgba(207, 0, 15, 1);"><strong>Mean square regression</strong></span><br />
+<br />
+The <span style="color: rgba(15, 0, 207, 1);"><strong>mean square regression</strong></span> is the numerator in the <span class="math inline">\(F\)</span> statistic,
+<center>
+<span class="math display">\[\text{MSreg} = \frac{D_0 - D_1}{p-1} = \frac{\text{SStot} - \text{SSres}}{p-1} = \frac{\text{SSreg}}{p-1}.\]</span>
+</center>
+</div>
+<div id="Sec_Linear_ANOVA:def:MSreg" class="def">
+<span style="color: rgba(207, 0, 15, 1);"><strong>Mean square residual</strong></span><br />
+<br />
+The <span style="color: rgba(15, 0, 207, 1);"><strong>mean square residual</strong></span> is the denominator in the <span class="math inline">\(F\)</span> statistic,
+<center>
+<span class="math display">\[\text{MSres} = \frac{D_1}{n-p} = \frac{\text{SSres}}{n-p}.\]</span>
+</center>
+</div>
+<p>Note the mean square residual is an unbiased estimator of <span class="math inline">\(\sigma^2\)</span>. Similarly, the <span style="color: rgba(15, 0, 207, 1);"><strong>residual standard error</strong></span>, <span class="math inline">\(\text{RSE} = \sqrt{\text{MSres}}\)</span> is an unbiased estimate of <span class="math inline">\(\sigma\)</span>.</p>
+<p>The quantities involved in the calculation of the <span class="math inline">\(F\)</span> statistic are usually displayed in an ANOVA table:</p>
+<table>
+<colgroup>
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Source</th>
+<th align="center">Degrees of Freedom</th>
+<th align="center">Sum of Squares</th>
+<th align="center">Mean Square</th>
+<th align="center">F Statistic</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Regression</td>
+<td align="center"><span class="math inline">\(p-1\)</span></td>
+<td align="center"><span class="math inline">\(\text{SSreg}\)</span></td>
+<td align="center"><span class="math inline">\(\text{MSreg} = \dfrac{\text{SSreg}}{p-1}\)</span></td>
+<td align="center"><span class="math inline">\(F = \dfrac{\text{MSreg}}{\text{MSres}}\)</span></td>
+</tr>
+<tr class="even">
+<td align="center">Residual</td>
+<td align="center"><span class="math inline">\(n-p\)</span></td>
+<td align="center"><span class="math inline">\(\text{SSres}\)</span></td>
+<td align="center"><span class="math inline">\(\text{MSres} = \dfrac{\text{SSres}}{n-p}\)</span></td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td align="center">Total</td>
+<td align="center"><span class="math inline">\(n-1\)</span></td>
+<td align="center"><span class="math inline">\(\text{SStot}\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<div id="Sec_Linear_ANOVA:ex:fuel_ex" class="ex">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Fuel consumption (continued)</strong></span>
+ 
+For the data in <a href="Sec_Linear_hypo_test.html#Sec_Linear_hypo_test:single">Section 21.2, Example 21.2.1 (Fuel Consumption)</a> the model
+<span class="math display">\[\text{fuel} = \beta_0 + \beta_1 \text{dlic} + \beta_2 \text{tax} + \beta_3 \text{inc} + \beta_4 \text{road}\]</span>
+was fitted to the <span class="math inline">\(n=51\)</span> observations with residual standard error, <span class="math inline">\(\text{RSE} = 64.8912\)</span>. Summary statistics show <span class="math inline">\(\text{Var}(\text{fuel}) = 7913.88\)</span>. Complete an ANOVA table and compute <span class="math inline">\(R^2\)</span> for the fitted model.</p>
+</div>
+<p>We have</p>
+<ul>
+<li>Note <span class="math inline">\(p-1=4\)</span>, <span class="math inline">\(n-p=46\)</span> and <span class="math inline">\(n-1=50\)</span>;<br />
+</li>
+<li><span class="math inline">\(\text{SStot} = (n-1)\text{Var}(\text{fuel}) = 50 \times 7913.88 = 395694\)</span>;<br />
+</li>
+<li><span class="math inline">\(\text{MSres} = \text{RSE}^2 = 64.8912^2 = 4210.87\)</span>;<br />
+</li>
+<li><span class="math inline">\(\text{SSres} = (n-p)\text{MSres} = 46 \times 4210.87 = 193700\)</span>;<br />
+</li>
+<li><span class="math inline">\(\text{SSreg} = \text{SStot} - \text{SSres} = 395694-193700 = 201994\)</span>;<br />
+</li>
+<li><span class="math inline">\(\text{MSreg} = \text{SSreg}/(p-1) = 201994/4 = 50498.50\)</span>;<br />
+</li>
+<li><span class="math inline">\(F = \text{MSreg}/\text{MSres} = 50498.5/4210.87 = 11.99\)</span>.</li>
+</ul>
+<p>Hence the completed ANOVA table is</p>
+<table>
+<colgroup>
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Source</th>
+<th align="center">Degrees of Freedom</th>
+<th align="center">Sum of Squares</th>
+<th align="center">Mean Square</th>
+<th align="center">F statistic</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Regression</td>
+<td align="center"><span class="math inline">\(4\)</span></td>
+<td align="center"><span class="math inline">\(201994\)</span></td>
+<td align="center"><span class="math inline">\(50498.50\)</span></td>
+<td align="center"><span class="math inline">\(11.99\)</span></td>
+</tr>
+<tr class="even">
+<td align="center">Residual</td>
+<td align="center"><span class="math inline">\(46\)</span></td>
+<td align="center"><span class="math inline">\(193700\)</span></td>
+<td align="center"><span class="math inline">\(4210.87\)</span></td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td align="center">Total</td>
+<td align="center"><span class="math inline">\(50\)</span></td>
+<td align="center"><span class="math inline">\(395694\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p>We compare the computed <span class="math inline">\(F\)</span>-statistic, 11.99, with a <span class="math inline">\(F_{p-1,n-p} =F_{4,46}\)</span> distribution to obtain a <span class="math inline">\(p\)</span>-value of <span class="math inline">\(9.331 \times 10^{-7} = P(F_{4,46} &gt;11.99)\)</span>. That is, if the null hypothesis (no regression parameters <span class="math inline">\(\beta_1 = \ldots = \beta_4 =0\)</span>) were true, there is probability <span class="math inline">\(9.331 \times 10^{-7}\)</span> (just under one in a million) of observing an <span class="math inline">\(F\)</span>-statistic larger than 11.99.</p>
+<p>Finally, <span class="math inline">\(R^2 = \frac{\text{SSreg}}{\text{SStot}} = \frac{201994}{395694} = 0.5105\)</span>.</p>
+</div>
+<div id="Sec_Linear_ANOVA:Compare" class="section level2 hasAnchor" number="22.5">
+<h2><span class="header-section-number">22.5</span> Comparing models<a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:Compare" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+Consider two models, <span class="math inline">\(M_1\)</span> and <span class="math inline">\(M_2\)</span>, where <span class="math inline">\(M_2\)</span> is a simplification of <span class="math inline">\(M_1\)</span>. For example,
+<center>
+<span class="math display">\[\begin{align*}
+M_1: &amp; \quad Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_3 + \beta_4 X_4 + \epsilon, \\
+M_2: &amp; \quad Y = \beta_0 + \beta_2 X_2 + \beta_4 X_4 + \epsilon.
+\end{align*}\]</span>
+</center>
+<p>The residual sum of squares from model <span class="math inline">\(M_1\)</span> will always be less then <span class="math inline">\(M_2\)</span>, but we can test the hypotheses:
+<span class="math display">\[ H_0: \beta_1 = \beta_3 = 0 \quad \text{ vs. } \quad H_1: \beta_1 \neq 0 \text{ or } \beta_3 \neq 0 \]</span>
+at significance level <span class="math inline">\(\alpha\)</span> to test if removing these terms significantly increases the residual sum of squares.</p>
+<p>Let <span class="math inline">\(D_1 = \sum\limits_{i=1}^n (y_i - \hat{y}_i)^2\)</span> be the model deviance, or SSres, for model <span class="math inline">\(M_1\)</span>.</p>
+<p>Let <span class="math inline">\(D_2 = \sum\limits_{i=1}^n (y_i - \hat{y}_i)^2\)</span> be the model deviance, or SSres, for model <span class="math inline">\(M_2\)</span>.</p>
+<p>The <em>decision rule</em> is to reject <span class="math inline">\(H_0\)</span> if
+<span class="math display">\[ F = \frac{(D_2 - D_1) / q}{D_1 / (n-p)} &gt; F_{q,n-p,\alpha},\]</span>
+where <span class="math inline">\(n\)</span> is the number of observations, <span class="math inline">\(p\)</span> is the number of parameters in <span class="math inline">\(M_1\)</span> and <span class="math inline">\(q\)</span> is the number of parameters that are fixed to reduce <span class="math inline">\(M_1\)</span> to <span class="math inline">\(M_2\)</span>.</p>
+<p>For the example above, <span class="math inline">\(p = 5\)</span> and <span class="math inline">\(q = 2\)</span>.</p>
+<p>Watch <a href="Sec_Linear_ANOVA.html#video32">Video 32</a> for a work through of comparing models using the <span class="math inline">\(F\)</span>-distribution. The video uses <a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:ex:fuel_exII">Example 22.5.1 (Fuel consumption - continued)</a> given below.</p>
+<div id="video32" class="des">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Video 32: Model comparison.</strong></span></p>
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1355621/sp/135562100/embedIframeJs/uiconf_id/13188771/partner_id/1355621?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_dhza0pb9&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_gp0264uy" width="640" height="420" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Model Comparison FINAL VERSION">
+</iframe>
+</div>
+<div id="Sec_Linear_ANOVA:ex:fuel_exII" class="ex">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Fuel consumption (continued)</strong></span><br />
+Let Model 1 be
+<span class="math display">\[ \text{fuel} = \beta_0 + \beta_1 \text{dlic} + \beta_2 \text{tax} + \beta_3 \text{inc} + \beta_4 \text{road},\]</span>
+and let Model 2 be
+<span class="math display">\[ \text{fuel} = \beta_0 + \beta_1 \text{dlic} + \beta_3 \text{inc}.\]</span>
+The residual sum of squares is <span class="math inline">\(193700\)</span> for Model 1 and <span class="math inline">\(249264\)</span> for Model 2. Test which model fits the data better.</p>
+</div>
+<div class="ans">
+The question is equivalent to testing the hypotheses:
+<center>
+<span class="math display">\[ H_0: \beta_2 = \beta_4 = 0 \quad \text{ vs. } \quad H_1: \beta_2 \neq 0 \text{ or } \beta_4 \neq 0,\]</span>
+</center>
+<p>at <span class="math inline">\(\alpha = 0.05\)</span>. The decision rule is to reject <span class="math inline">\(H_0\)</span> if</p>
+<center>
+<span class="math display">\[ F = \frac{(D_2 - D_1) / q}{D_1 / (n-p)} &gt; F_{q,n-p,\alpha} = F_{2,46,0.05} = 3.20.\]</span>
+</center>
+<p>Substituting in the data gives,</p>
+<center>
+<span class="math display">\[ F = \frac{(249264 - 193700)/2}{193700/(51-5)} = 6.598.\]</span>
+</center>
+<p>Consequently, we will reject <span class="math inline">\(H_0\)</span>. Model 1 fits the data better at <span class="math inline">\(\alpha = 0.05\)</span>.</p>
+<p>We note that the <span class="math inline">\(p\)</span>-value is <span class="math inline">\(0.0048 = P(F_{2,46} &gt;6.598)\)</span>, which gives very strong support in favour of Model 1.</p>
+</div>
+<p><br />
+</p>
+Let’s consider the more general case where the basic model <span class="math inline">\(M_1\)</span> is
+<center>
+<span class="math display">\[Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_{p-1} X_{p-1} + \epsilon.\]</span>
+</center>
+Denote
+<center>
+<span class="math display">\[ \text{SSreg}(M_1) = \sum_{i=1}^n (\hat{y}_i - \bar{y})^2 = R(\beta_1,\beta_2,\dots,\beta_{p-1} | \beta_0),\]</span>
+</center>
+<p>assuming there is a constant in the model.</p>
+<p>Our goal is to build a regression model which <em>best</em> describes the response variable. Hence we would like to explain as much of the variance in <span class="math inline">\(Y\)</span> as possible, yet keep the model as simple as possible. This is known as the <span style="color: rgba(15, 0, 207, 1);"><strong>Principle of Parsimony</strong></span>. Consequently we want to determine which explanatory variables are worthwhile to include in the final model.</p>
+<p>The idea is that explanatory variables should be included in the model if the extra portion of the regression sum of squares, called the extra sum of squares, which arises from their inclusion in the model is relatively large compared to the unexplained variance in the model, residual sum of squares.</p>
+Consider a second model <span class="math inline">\(M_2\)</span> which is a simplification of <span class="math inline">\(M_1\)</span>, specifically<br />
+
+<center>
+<span class="math display">\[Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_{k-1} X_{k-1} + \epsilon,\]</span>
+</center>
+where <span class="math inline">\(k &lt; p\)</span>. Then<br />
+
+<center>
+<span class="math display">\[\text{SSreg}(M_2) = R(\beta_1,\beta_2,\dots,\beta_{k-1} | \beta_0).\]</span>
+</center>
+<div id="Sec_Linear_ANOVA:def:ess" class="def">
+<span style="color: rgba(207, 0, 15, 1);"><strong>Extra sum of squares</strong></span><br />
+The <em>extra sum of squares</em> due to the inclusion of the terms <span class="math inline">\(\beta_k X_k + \cdots + \beta_{p-1} X_{p-1}\)</span> in the model is<br />
+
+<center>
+<span class="math display">\[\text{SSreg}(M_1) - \text{SSreg}(M_2).\]</span>
+</center>
+It is denoted<br />
+
+<center>
+<span class="math display">\[R(\beta_k,\dots,\beta_{p-1} | \beta_0,\beta_1,\dots,\beta_{k-1}) = R(\beta_1,\beta_2,\dots,\beta_{p-1} | \beta_0) - R(\beta_1,\beta_2,\dots,\beta_{k-1} | \beta_0). \]</span>
+</center>
+</div>
+<p>The extra sum of squares has <span class="math inline">\(q=p-k\)</span> degrees of freedom, where <span class="math inline">\(q\)</span> is the number of explanatory variables added to the reduced model to make the full model.</p>
+<p>We can test the hypotheses:</p>
+<ul>
+<li><span class="math inline">\(H_0:\)</span> The reduced model, <span class="math inline">\(M_2\)</span>, best describes the data;<br />
+</li>
+<li><span class="math inline">\(H_1:\)</span> The full model, <span class="math inline">\(M_1\)</span>, best describes the data.</li>
+</ul>
+The <span style="color: rgba(15, 0, 207, 1);"><strong>decision rule</strong></span> is to reject <span class="math inline">\(H_0\)</span> if
+<center>
+<span class="math display">\[ F = \frac{R(\beta_k,\dots,\beta_{p-1} |\beta_0,\dots,\beta_{k-1})/q}{\text{SSres}(M_1)/(n-p)} &gt; F_{q,n-p,\alpha}.\]</span>
+</center>
+<p>Rejecting <span class="math inline">\(H_0\)</span> implies the full model describes the data better, so we should include the variables <span class="math inline">\(X_k,\dots,X_{p-1}\)</span> in our model.</p>
+The test for the existence of regression is a special case of this type of test, where<br />
+
+<center>
+<span class="math display">\[H_0: \beta_1=\beta_2=\cdots=\beta_p=0,\]</span>
+</center>
+<p>that is, the reduced model is <span class="math inline">\(Y = \beta_0 + \epsilon\)</span>. Note that <span class="math inline">\(\text{SSreg}(M_1) = R(\beta_1,\beta_2,\dots,\beta_{p-1} | \beta_0 )\)</span> is the extra sum of squares in this case.</p>
+</div>
+<div id="Sec_Linear_ANOVA:seq" class="section level2 hasAnchor" number="22.6">
+<h2><span class="header-section-number">22.6</span> Sequential sum of squares<a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:seq" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="Sec_Linear_ANOVA:def:sss" class="def">
+<span style="color: rgba(207, 0, 15, 1);"><strong>Sequential sum of squares</strong></span><br />
+The <em>sequential sum of squares</em> for each <span class="math inline">\(j\)</span>, denoted <span class="math inline">\(\text{SSseq}_{i}\)</span>, is<br />
+
+<center>
+<span class="math display">\[R(\beta_j | \beta_0,\beta_1,\dots,\beta_{j-1}) = R(\beta_1,\beta_2,\dots,\beta_j | \beta_0) - R(\beta_1,\beta_2,\dots,\beta_{j-1} | \beta_0) \]</span>
+</center>
+<p>and is the extra sum of squares that one incurs by adding the explanatory variable <span class="math inline">\(X_j\)</span> to the model given that <span class="math inline">\(X_1,\dots,X_{j-1}\)</span> are already present.</p>
+</div>
+<p>The sequential sum of squares is often given in addition to the basic ANOVA table.</p>
+<table>
+<colgroup>
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Source</th>
+<th align="center">Degrees of Freedom</th>
+<th align="center">Sequential Sum of Squares</th>
+<th align="center">Mean Square</th>
+<th align="center">F statistic</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><span class="math inline">\(X_1\)</span></td>
+<td align="center"><span class="math inline">\(\text{df}_1\)</span></td>
+<td align="center"><span class="math inline">\(\text{SSseq}_1\)</span></td>
+<td align="center"><span class="math inline">\(\text{MSseq}_1 = \frac{\text{SSseq}_1}{\text{df}_1}\)</span></td>
+<td align="center"><span class="math inline">\(F = \frac{\text{MSseq}_1}{\text{MSres}}\)</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(X_2\)</span></td>
+<td align="center"><span class="math inline">\(\text{df}_2\)</span></td>
+<td align="center"><span class="math inline">\(\text{SSseq}_2\)</span></td>
+<td align="center"><span class="math inline">\(\text{MSseq}_2 = \frac{\text{SSseq}_2}{\text{df}_2}\)</span></td>
+<td align="center"><span class="math inline">\(F = \frac{\text{MSseq}_2}{\text{MSres}}\)</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span class="math inline">\(\vdots\)</span></td>
+<td align="center"><span class="math inline">\(\vdots\)</span></td>
+<td align="center"><span class="math inline">\(\vdots\)</span></td>
+<td align="center"><span class="math inline">\(\vdots\)</span></td>
+<td align="center"><span class="math inline">\(\vdots\)</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(X_{p-1}\)</span></td>
+<td align="center"><span class="math inline">\(\text{df}_{p-1}\)</span></td>
+<td align="center"><span class="math inline">\(\text{SSseq}_{p-1}\)</span></td>
+<td align="center"><span class="math inline">\(\text{MSseq}_{p-1} = \frac{\text{SSseq}_{p-1}}{\text{df}_{p-1}}\)</span></td>
+<td align="center"><span class="math inline">\(F = \frac{\text{MSseq}_{p-1}}{\text{MSres}}\)</span></td>
+</tr>
+<tr class="odd">
+<td align="center">Residuals</td>
+<td align="center"><span class="math inline">\(n-p\)</span></td>
+<td align="center"><span class="math inline">\(\text{SSres}\)</span></td>
+<td align="center"><span class="math inline">\(\text{MSres} = \frac{\text{SSres}}{n-p}\)</span></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+Note that given the sequential sum of squares, one can calculate<br />
+
+<center>
+<span class="math display">\[R(\beta_j,\beta_{j+1},\dots,\beta_k | \beta_0,\beta_1,\dots,\beta_{j-1}) = \sum\limits_{i=j}^k \text{SSseq}_i.\]</span>
+</center>
+However, one cannot calculate the nonsequential sums of squares in this manner, such as<br />
+
+<center>
+<span class="math display">\[R(\beta_1,\beta_3,\beta_5 | \beta_0,\beta_2,\beta_4).\]</span>
+</center>
+Note that in the fuel example
+<center>
+<span class="math display">\[ \text{SSreg} = R(\beta_1 | \beta_0) + R(\beta_2 | \beta_0,\beta_1) + R(\beta_3 | \beta_0,\beta_1,\beta_2) + R(\beta_4 | \beta_0,\beta_1,\beta_2,\beta_3).\]</span>
+</center>
+<div id="Sec_Linear_ANOVA:def:sss" class="def">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Partial sum of squares</strong></span><br />
+The <em>partial sum of squares</em> for each <span class="math inline">\(j\)</span> is
+<span class="math display">\[\begin{align*}
+R(\beta_j | \beta_0,\beta_1,&amp;\dots,\beta_{j-1},\beta_{j+1},\dots,\beta_{p-1}) \\
+&amp;=  R(\beta_1,\beta_2,\dots,\beta_{p-1} | \beta_0) - R(\beta_1,\dots,\beta_{j-1},\beta_{j+1},\dots,\beta_{p-1} | \beta_0)
+\end{align*}\]</span>
+and is the extra sum of squares that one incurs by adding the explanatory variable <span class="math inline">\(X_j\)</span> to the model given that <span class="math inline">\(X_1,\dots,X_{j-1},X_{j+1},\dots,X_{p-1}\)</span> are already present.</p>
+</div>
+Note that the <span class="math inline">\(F\)</span> test for testing the hypotheses:<br />
+
+<center>
+<span class="math display">\[ H_0: \beta_j = 0 \quad \text{ vs. } \quad H_1: \beta_j \neq 0 \]</span>
+</center>
+<p>at level <span class="math inline">\(\alpha\)</span>, is equivalent to the <span class="math inline">\(t\)</span> test for the individual parameter since <span class="math inline">\(t_{n-p}^2 = F_{1,n-p}\)</span>.</p>
+<div id="Sec_Linear_ANOVA:ex:fuel_exIII" class="ex">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Fuel consumption (continued)</strong></span>
+ 
+For the data in <a href="Sec_Linear_hypo_test.html#Sec_Linear_hypo_test:single">Section 21.2, Example 21.2.1 (Fuel Consumption)</a>, we have the following ANOVA output table:</p>
+<table>
+<colgroup>
+<col width="21%" />
+<col width="26%" />
+<col width="26%" />
+<col width="26%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Source</th>
+<th align="center">Degrees of Freedom</th>
+<th align="center">Sequential Sum of Square</th>
+<th align="center">Mean Square</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">dlic</td>
+<td align="center">1</td>
+<td align="center">86854</td>
+<td align="center">86854</td>
+</tr>
+<tr class="even">
+<td align="center">tax</td>
+<td align="center">1</td>
+<td align="center">19159</td>
+<td align="center">19159</td>
+</tr>
+<tr class="odd">
+<td align="center">inc</td>
+<td align="center">1</td>
+<td align="center">61408</td>
+<td align="center">61408</td>
+</tr>
+<tr class="even">
+<td align="center">road</td>
+<td align="center">1</td>
+<td align="center">34573</td>
+<td align="center">34573</td>
+</tr>
+<tr class="odd">
+<td align="center">Residuals</td>
+<td align="center">46</td>
+<td align="center">193700</td>
+<td align="center">4211</td>
+</tr>
+</tbody>
+</table>
+<p>We want to test the following hypotheses:</p>
+<ul>
+<li><span class="math inline">\(H_0: \quad Y = \beta_0 + \beta_1 \text{dlic} + \beta_2 \text{tax} + \epsilon\)</span>;<br />
+</li>
+<li><span class="math inline">\(H_1: \quad Y = \beta_0 + \beta_1 \text{dlic} + \beta_2 \text{tax} + \beta_3 \text{inc} + \beta_4 \text{road} + \epsilon\)</span>.<br />
+</li>
+</ul>
+</div>
+<p><br />
+</p>
+The decision rule is to reject <span class="math inline">\(H_0\)</span> if<br />
+
+<center>
+<span class="math display">\[ F = \frac{R(\beta_3,\beta_4 | \beta_0,\beta_1,\beta_2)/2}{\text{SSres}/(n-p)} &gt; F_{2,n-p,0.05}\]</span>
+</center>
+where<br />
+
+<center>
+<span class="math display">\[\begin{align*}
+R(\beta_3,\beta_4 | \beta_0,\beta_1,\beta_2) &amp;= R(\beta_3 | \beta_0,\beta_1,\beta_2) + R (\beta_4 | \beta_0,\beta_1,\beta_2,\beta_3) \\
+&amp;= 61408 + 34573 \\
+&amp;= 95981.
+\end{align*}\]</span>
+</center>
+<p>Hence,
+<span class="math display">\[F = \frac{95981/2}{4211} = 11.40 &gt; F_{2,46,0.05} = 3.20.\]</span>
+Therefore we will reject <span class="math inline">\(H_0\)</span> at <span class="math inline">\(\alpha = 0.05\)</span>. Including the variables <em>inc</em> and <em>road</em> significantly improves the model. The <span class="math inline">\(p\)</span>-value is <span class="math inline">\(P(F_{2,46} &gt; 11.40) = 9.53 \times 10^{-5}\)</span>.</p>
+<p>To compare the linear models:</p>
+<ul>
+<li><span class="math inline">\(H_0: \quad Y = \beta_0 + \beta_1 \text{dlic} + \beta_3 \text{inc} + \beta_4 \text{road} + \epsilon\)</span>;<br />
+</li>
+<li><span class="math inline">\(H_1: \quad Y = \beta_0 + \beta_1 \text{dlic} + \beta_2 \text{tax} + \beta_3 \text{inc} + \beta_4 \text{road} + \epsilon\)</span></li>
+</ul>
+<p>is equivalent to the hypotheses: <span class="math inline">\(H_0 : \beta_2 = 0\)</span> vs. <span class="math inline">\(H_1: \beta_2 \neq 0\)</span>.</p>
+The residual sum-of-squares under <span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_1\)</span> are 211964 and 193700, respectively. Since the residual degrees of freedom under the full model is 46 the <span class="math inline">\(F\)</span>-statistic is:<br />
+
+<center>
+<span class="math display">\[ F = \frac{211964 - 193700}{193700/46} = 4.34.\]</span>
+</center>
+<p>The <span class="math inline">\(p\)</span>-value is <span class="math inline">\({\rm P} (F_{1,46} &gt; 4.34) = 0.0429\)</span> which coincides with the <span class="math inline">\(p\)</span>-value for testing <span class="math inline">\(\beta_2 =0\)</span> in <a href="Sec_Linear_hypo_test.html#Sec_Linear_hypo_test:single">Section 21.2, Example 21.2.1 (Fuel Consumption)</a>.</p>
+</div>
+<div id="Sec_Linear_ANOVA:lab" class="section level2 unnumbered hasAnchor">
+<h2><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 12</strong></span><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:lab" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Attempt the <strong>R Markdown</strong> file for Session 12:<br />
+<a href="https://moodle.nottingham.ac.uk/course/view.php?id=134982#section-2">Session 12: Linear Models II</a></p>
+</div>
+<div id="Sec_Linear_ANOVA:exer" class="section level2 unnumbered hasAnchor">
+<h2><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:exer" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Attempt the exercises below.</p>
+<div id="exer22.1" class="exer">
+<p><br />
+The following R output is from the analysis of 43 years of weather records in California. 10 values denoted {i?} for <span class="math inline">\(i=1,\dots,10\)</span> have been removed. What are the 10 missing values?</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb1-1"><a href="Sec_Linear_ANOVA.html#cb1-1" tabindex="-1"></a>Call:</span>
+<span id="cb1-2"><a href="Sec_Linear_ANOVA.html#cb1-2" tabindex="-1"></a>lm(formula = BSAAM ~ APMAM + OPRC)</span>
+<span id="cb1-3"><a href="Sec_Linear_ANOVA.html#cb1-3" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="Sec_Linear_ANOVA.html#cb1-4" tabindex="-1"></a>Residuals:</span>
+<span id="cb1-5"><a href="Sec_Linear_ANOVA.html#cb1-5" tabindex="-1"></a>     Min       1Q   Median       3Q      Max</span>
+<span id="cb1-6"><a href="Sec_Linear_ANOVA.html#cb1-6" tabindex="-1"></a>-21893.1  -6742.5   -654.1   6725.7  27061.8</span>
+<span id="cb1-7"><a href="Sec_Linear_ANOVA.html#cb1-7" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="Sec_Linear_ANOVA.html#cb1-8" tabindex="-1"></a>Coefficients:</span>
+<span id="cb1-9"><a href="Sec_Linear_ANOVA.html#cb1-9" tabindex="-1"></a>            Estimate Std. Error t value Pr(&gt;|t|)</span>
+<span id="cb1-10"><a href="Sec_Linear_ANOVA.html#cb1-10" tabindex="-1"></a>(Intercept)  16703.9     5033.7   3.318  0.00194 **</span>
+<span id="cb1-11"><a href="Sec_Linear_ANOVA.html#cb1-11" tabindex="-1"></a>APMAM          815.0      501.6   1.625  0.11206</span>
+<span id="cb1-12"><a href="Sec_Linear_ANOVA.html#cb1-12" tabindex="-1"></a>OPRC          4589.7      309.0    {1?}     {3?} {4?}</span>
+<span id="cb1-13"><a href="Sec_Linear_ANOVA.html#cb1-13" tabindex="-1"></a>---</span>
+<span id="cb1-14"><a href="Sec_Linear_ANOVA.html#cb1-14" tabindex="-1"></a>Signif. codes:   0 *** 0.001 ** 0.01 * 0.05 . 0.1   1</span>
+<span id="cb1-15"><a href="Sec_Linear_ANOVA.html#cb1-15" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="Sec_Linear_ANOVA.html#cb1-16" tabindex="-1"></a>Residual standard error: 9948 on {2?} degrees of freedom</span>
+<span id="cb1-17"><a href="Sec_Linear_ANOVA.html#cb1-17" tabindex="-1"></a>Multiple R-squared: {7?},     Adjusted R-squared: 0.848</span>
+<span id="cb1-18"><a href="Sec_Linear_ANOVA.html#cb1-18" tabindex="-1"></a>F-statistic: {8?} on {9?} and {10?} DF,  p-value: &lt; 2.2e-16</span>
+<span id="cb1-19"><a href="Sec_Linear_ANOVA.html#cb1-19" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="Sec_Linear_ANOVA.html#cb1-20" tabindex="-1"></a>Analysis of Variance Table</span>
+<span id="cb1-21"><a href="Sec_Linear_ANOVA.html#cb1-21" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="Sec_Linear_ANOVA.html#cb1-22" tabindex="-1"></a>Response: BSAAM</span>
+<span id="cb1-23"><a href="Sec_Linear_ANOVA.html#cb1-23" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="Sec_Linear_ANOVA.html#cb1-24" tabindex="-1"></a>          Df     Sum Sq    Mean Sq F value    Pr(&gt;F)</span>
+<span id="cb1-25"><a href="Sec_Linear_ANOVA.html#cb1-25" tabindex="-1"></a>APMAM      1 1.5567e+09 1.5567e+09  15.730 0.0002945 ***</span>
+<span id="cb1-26"><a href="Sec_Linear_ANOVA.html#cb1-26" tabindex="-1"></a>OPRC       1 2.1836e+10 2.1836e+10    {6?} &lt; 2.2e-16 ***</span>
+<span id="cb1-27"><a href="Sec_Linear_ANOVA.html#cb1-27" tabindex="-1"></a>Residuals 40 3.9586e+09       {5?}</span>
+<span id="cb1-28"><a href="Sec_Linear_ANOVA.html#cb1-28" tabindex="-1"></a>---</span>
+<span id="cb1-29"><a href="Sec_Linear_ANOVA.html#cb1-29" tabindex="-1"></a>Signif. codes: 0   *** 0.001 ** 0.01 * 0.05 . 0.1 1</span></code></pre></div>
+</div>
+<details>
+<summary>
+Solution to Exercise 22.1.
+</summary>
+<div id="Question_S22_1" class="ans">
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(t = \dfrac{\hat{\beta}_j}{\text{SE}(\hat{\beta}_j)} = \dfrac{4589.7}{309.0} = 14.852\)</span>.<br />
+</li>
+<li><span class="math inline">\(\text{df} = n-p = 43-3 =40\)</span>.<br />
+</li>
+<li><span class="math inline">\(p = P(|t_{40}|&gt;14.583) = 2P(t_{40}&gt;14.853) &lt; 0.001\)</span>.<br />
+</li>
+<li><span class="math inline">\(p\)</span>-values less than 0.001 have significance code ***.<br />
+</li>
+<li><span class="math inline">\(\text{MSres} = \dfrac{\text{SSres}}{n-p} = \dfrac{3.9586\times10^9}{40} = 9.8965 \times 10^7\)</span>.<br />
+</li>
+<li><span class="math inline">\(F = \dfrac{ R(\beta_2|\beta_0,\beta_1)/q }{ \text{SSres}/(n-p) } = \dfrac{2.1836 \times 10^{10}}{9.8965 \times 10^7} = 220.644\)</span>.<br />
+</li>
+<li><span class="math inline">\(\text{SSreg} = 1.5567 \times 10^9 + 2.1836 \times 10^{10} = 2.3393\times 10^{10}\)</span> and<br />
+<span class="math inline">\(\text{SStot} = \text{SSreg}+\text{SSres} = 2.3393\times 10^{10} + 3.9586 \times 10^9 = 2.7351 \times 10^{10}\)</span> so <span class="math inline">\(R^2 = \dfrac{\text{SSreg}}{\text{SStot}} = \dfrac{2.3393\times 10^{10}}{2.7351 \times 10^{10}} = 0.855\)</span>.<br />
+</li>
+<li><span class="math inline">\(F = \dfrac{(D_0-D_1)/(p-1)}{D_1/(n-p)} = \dfrac{(2.7351\times 10^{10} - 3.9586 \times 10^9)/2}{3.9586 \times 10^9/40} = 118.19\)</span><br />
+</li>
+<li><span class="math inline">\(p-1 = 2\)</span>.<br />
+</li>
+<li><span class="math inline">\(n-p = 40\)</span>.<br />
+</li>
+</ol>
+</div>
+</details>
+<p><br />
+</p>
+<div id="exer22.2" class="exer">
+<br />
+An experiment was conducted to find out how long is a piece of string. Six pieces of string were measured along with their colour.
+<center>
+<span class="math display">\[\begin{array}{c|l}
+\mbox{Length} &amp; \mbox{Colour} \\ \hline
+9 &amp; \mbox{Orange} \\
+28 &amp; \mbox{Grey} \\
+8 &amp; \mbox{Pink} \\
+31 &amp; \mbox{Grey} \\
+6 &amp; \mbox{Pink} \\
+11 &amp; \mbox{Orange}
+\end{array} \]</span>
+</center>
+<ol style="list-style-type: lower-alpha">
+<li>Write down an appropriate model to test for an association between colour and the length of string. Hence write down the design matrix.<br />
+</li>
+<li>Find the least squares estimates for the parameters in your model. You may find the following inverse helpful:
+<center>
+<span class="math display">\[\begin{pmatrix} 6 &amp; 2 &amp; 2 \\ 2 &amp; 2 &amp; 0 \\ 2 &amp; 0 &amp; 2 \end{pmatrix}^{-1} = \frac{1}{2} \begin{pmatrix} 1 &amp; -1 &amp; -1 \\ -1 &amp; 2 &amp; 1 \\ -1 &amp; 1 &amp; 2 \end{pmatrix}.\]</span>
+</center></li>
+<li>Find the fitted values and residuals for your model.<br />
+</li>
+<li>Calculate the ANOVA table and then use it to test the hypothesis that colour affects the length of string.<br />
+</li>
+</ol>
+</div>
+<details>
+<summary>
+Solution to Question 2.
+</summary>
+<div id="Question_S22_2" class="ans">
+<ol style="list-style-type: lower-alpha">
+<li>An appropriate model is
+<center>
+<span class="math display">\[ y_i = \begin{cases} \alpha + \epsilon_i &amp; \text{if the string is orange,} \\ \alpha + \beta + \epsilon_i &amp; \text{if the string is grey,} \\ \alpha+\gamma + \epsilon_i &amp; \text{if the string is pink.} \end{cases}\]</span>
+</center>
+Hence the design matrix for <span class="math inline">\(\mathbf{y} = (9, 28, 8, 31, 6, 11)^T\)</span> and <span class="math inline">\(\mathbf{\beta} = (\alpha, \beta, \gamma)^T\)</span> is<br />
+
+<center>
+<span class="math display">\[ \mathbf{Z} = \begin{bmatrix}
+1 &amp; 0 &amp; 0 \\
+1 &amp; 1 &amp; 0 \\
+1 &amp; 0 &amp; 1 \\
+1 &amp; 1 &amp; 0 \\
+1 &amp; 0 &amp; 1 \\
+1 &amp; 0 &amp; 0 \end{bmatrix}.\]</span>
+</center></li>
+<li>The least squares estimate is <span class="math inline">\(\hat{\mathbf{\beta}} = (\mathbf{Z}^T\mathbf{Z})^{-1} \mathbf{Z}^T\mathbf{y}\)</span> where<br />
+
+<center>
+<span class="math display">\[\mathbf{Z}^T\mathbf{Z} = \begin{pmatrix} 6 &amp; 2 &amp; 2 \\ 2 &amp; 2 &amp; 0 \\ 2 &amp; 0 &amp; 2 \end{pmatrix} \qquad \text{and} \qquad \mathbf{Z}^T\mathbf{y} = \begin{pmatrix} 93 \\ 59 \\ 14 \end{pmatrix}.\]</span>
+</center>
+Hence<br />
+
+<center>
+<span class="math display">\[ \hat{\mathbf{\beta}} = (\mathbf{Z}^T\mathbf{Z})^{-1} \mathbf{Z}^T\mathbf{y} = \begin{pmatrix} 1 &amp; -1 &amp; -1 \\ -1 &amp; 2 &amp; 1 \\ -1 &amp; 1 &amp; 2 \end{pmatrix} \begin{pmatrix} 93 \\ 59 \\ 14 \end{pmatrix} = \begin{pmatrix} 10 \\ 19.5 \\ -3 \end{pmatrix}.\]</span>
+</center></li>
+<li>The fitted values and residuals are<br />
+
+<center>
+<span class="math display">\[ \hat{\mathbf{y}} = \mathbf{Z}\mathbf{\hat{\beta}} = \begin{bmatrix}
+1 &amp; 0 &amp; 0 \\
+1 &amp; 1 &amp; 0 \\
+1 &amp; 0 &amp; 1 \\
+1 &amp; 1 &amp; 0 \\
+1 &amp; 0 &amp; 1 \\
+1 &amp; 0 &amp; 0 \end{bmatrix} \begin{pmatrix} 10 \\ 19.5 \\ -3 \end{pmatrix} = \begin{bmatrix}
+10 \\ 29.5 \\ 7 \\ 29.5 \\ 7 \\ 10 \end{bmatrix} \quad \text{and} \quad \hat{\mathbf{\epsilon}} = \mathbf{y} - \hat{\mathbf{y}} = \begin{bmatrix}
+-1 \\ -1.5 \\ 1 \\ 1.5 \\ -1 \\ 1 \end{bmatrix}\]</span>
+</center>
+respectively.<br />
+</li>
+<li>There are <span class="math inline">\(n=6\)</span> observations and <span class="math inline">\(p=3\)</span> parameters. The sums of squares are<br />
+
+<center>
+<span class="math display">\[\begin{eqnarray*}
+\text{SStot} &amp;=&amp; (n-1)\text{Var}(y) = \sum_{i=1}^n y_i^2 - \frac{1}{n} \left(\sum_{i=1}^n y_i\right)^2 = 2047 - \frac{93^2}{6} = 605.5 \\
+\text{SSres} &amp;=&amp; \hat{\epsilon}^T \hat{\epsilon} = (-1)^2 + (-1.5)^2 + 1^2 + 1.5^2 +(-1)^2 + 1^2 = 8.5 \\
+\text{SSreg} &amp;=&amp; \text{SStot}-\text{SSres} = 605.5-8.5 = 597
+\end{eqnarray*}\]</span>
+</center>
+Hence the ANOVA table is
+<center>
+<span class="math display">\[ \begin{array}{l|r|r|r|r}
+\mbox{Source} &amp; \mbox{Df} &amp; \mbox{Sum Sq} &amp; \mbox{Mean Sq} &amp; \mbox{F} \\ \hline
+\mbox{Regression} &amp; 2&amp; 597.0 &amp; 298.500 &amp; 105.35\\
+\mbox{Residual}   &amp; 3 &amp; 8.5 &amp; 2.833 &amp; \\ \hline
+\mbox{Total}      &amp; 5 &amp; 605.5 &amp; &amp;
+\end{array} \]</span>
+</center>
+The test for the existence of regression has statistic <span class="math inline">\(F=105.35\)</span> and critical value <span class="math inline">\(F_{2,3,0.05} = 9.55\)</span>. Hence, we reject the null hypothesis and conclude that colour does affect the length of a piece of string.</li>
+</ol>
+</div>
+</details>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="Sec_Linear_hypo_test.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="introR.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/22-L4_ANOVA_tables_and_F_tests.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

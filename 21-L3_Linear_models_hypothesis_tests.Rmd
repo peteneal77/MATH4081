@@ -1,0 +1,162 @@
+# Basic Hypothesis Tests for Linear Models {#Sec_Linear_hypo_test}
+
+## Introduction {#Sec_Linear_hypo_test:intro}
+
+In this section we consider the application of [hypothesis testing](#Sec_Hypo_Test) to [linear models](#Sec_LinearI). Suppose that we are given the linear model,  
+<center>
+$$ Y_i = \beta_0 + \beta_1 X_{1i} + \beta_2 X_{2i} + \cdots + \beta_{p-1} X_{(p-1)i} + \epsilon_i,$$  
+</center>
+where $\epsilon_i \sim N(0,\sigma^2)$ are independent and identically distributed. We are interested in testing the hypothesis that a coefficient $\beta_j$ is equal to some value $b$. In particular, we are most interested in $b=0$ as setting $\beta_j =0$ means that $x_{ji}$ is not important in predicting $Y_i$, see [Section 21.2](#Sec_Linear_hypo_test:single). We can also construct [confidence intervals](#Sec_Linear_hypo_test:CI) for $\beta_j$ and in [Section 21.4](#Sec_Linear_hypo_test:F) extend hypothesis testing to multiple (all) parameters to test whether or not a linear model is useful in a given modelling scenario.
+
+
+## Tests on a single parameter {#Sec_Linear_hypo_test:single}
+
+Given the linear model,  
+<center>
+$$ Y_i = \beta_0 + \beta_1 X_{1i} + \beta_2 X_{2i} + \cdots + \beta_{p-1} X_{(p-1)i} + \epsilon_i,$$
+</center>
+where $\epsilon_i \sim  N(0,\sigma^2)$, we want to test $H_0: \beta_j = b$ vs. $H_1: \beta_j \neq b$ at significance level $\alpha$ where $b$ is some constant. Typically, we might choose $\alpha =0.05$ (common alternatives $\alpha =0.01$ or $\alpha =0.1$).
+
+The <span style="color: rgba(15, 0, 207, 1);">**decision rule**</span> is to reject $H_0$ if
+$$|T| = \left| \frac{ \hat{\beta}_j - b}{\text{SE}(\hat{\beta}_j)} \right| > t_{n-p,\alpha/2},$$
+where $\text{SE}(\hat{\beta}_j) = \sqrt{ \text{Var}(\hat{\beta}_j) }$ is the standard error of the parameter.  Recall from [Section 17](#Sec_Linear_LSE:beta) that $\text{Var}(\hat{\beta}_j) = s^2 \left( (\mathbf{Z}^T\mathbf{Z})^{-1} \right)_{jj}$.
+
+A special case of the above test occurs when we choose $b=0$.  The test $H_0: \beta_j = 0$ vs. $H_1: \beta_j \neq 0$ at level $\alpha$ has the <span style="color: rgba(15, 0, 207, 1);">**decision rule**</span> to reject $H_0$ if 
+<center>
+$$|T| = \left| \frac{ \hat{\beta}_j}{\text{SE}(\hat{\beta}_j)} \right| > t_{n-p,\alpha/2}.$$  
+</center>  
+
+Note that if we reject $H_0: \beta_j =0$ we are claiming that the explanatory variable $X_j$ is useful in predicting the response variable $Y$ when all the other variables are included in the model.
+
+The test statistic $|T| = \left| \frac{ \hat{\beta}_j}{\text{SE}(\hat{\beta}_j)} \right|$ is often reported in the output from statistical software such as **R**.
+
+:::{.ex #Sec_Linear_hypo_test:ex:fuel_ex}  
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Example 21.2.1.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Fuel consumption**</span>
+\
+A dataset considers fuel consumption for 50 US states plus Washington DC, that is $n=51$ observations.  The response *fuel* is fuel consumption measured in gallons per person.  The predictors considered are *dlic*, the percentage of licensed drivers, *tax*, motor fuel tax in US cents per gallon, *inc*, income per person in \$1,000s and *road*, the log of the number of miles of federal highway. Fitting a linear model of the form
+$$\text{fuel} = \beta_0 + \beta_1 \cdot \text{dlic} + \beta_2 \cdot \text{tax} + \beta_3 \cdot \text{inc} + \beta_4 \cdot \text{road}$$
+using **R**, the output is
+
+|           |  Estimate | Standard Error |
+| :---:     |   :---:   |   :---:        |
+| $\beta_0$ |  154.19   |   194.906      |
+| $\beta_1$ |  4.719    |   1.285        |
+| $\beta_2$ |  -4.228   |   2.030        |
+| $\beta_3$ |  -6.135   |   2.194        |
+| $\beta_4$ |  26.755   |   9.337        |
+
+Test $H_0: \beta_2 = 0$ vs. $H_1: \beta_2 \neq 0$ at significance level $\alpha = 0.05$.
+:::
+\
+Watch [Video 31](#video31) for a work through in **R** of testing the null hypothesis.
+
+```{asis, include=knitr::is_html_output()}
+:::{.des #video31}
+<span style="color: rgba(207, 0, 15, 1);">**Video 31: Fuel consumption example.**</span>  
+
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1355621/sp/135562100/embedIframeJs/uiconf_id/13188771/partner_id/1355621?iframeembed=true&playerId=kaltura_player&entry_id=1_x6zqduvu&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_mfrq06s3" width="640" height="420" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Fuel Consumption FINAL VERSION"></iframe>
+:::
+```
+
+```{asis, include=knitr::is_latex_output()}
+Watch [\textcolor{blue}{Video 31: Fuel consumption example}](https://mediaspace.nottingham.ac.uk/media/Fuel+Consumption+FINAL+VERSION/1_x6zqduvu)
+``` 
+
+
+<details><summary>Hypothesis test for $\beta_2$.</summary>
+The decision rule is to reject $H_0$ if
+
+<center>
+$$|T| = \left| \frac{\hat{\beta}_2}{\text{SE}(\hat{\beta}_2)} \right| = \left| \frac{-4.228}{2.030} \right| = \left| -2.083 \right| > t_{46,0.025} = 2.013.$$
+</center>
+
+So we reject $H_0$ and conclude that the *tax* variable is useful for prediction of *fuel* after having included the other variables.
+
+We note that the $p$-values is $P(|t_{46}|>2.083) = `r round(2*(1-pt(2.083,46)),4)`$ and therefore would not reject the null hypothesis $\beta_2 =0$ at significance level $\alpha = 0.01$.
+</details>
+
+
+## Confidence intervals for parameters {#Sec_Linear_hypo_test:CI}
+
+Recall that
+<center>
+$$|T| = \left| \frac{ \hat{\beta}_j}{\text{SE}(\hat{\beta}_j)} \right| \sim t_{n-p}.$$
+</center>
+
+It follows that a $100(1-\alpha)\%$ confidence interval for $\beta_j$ is  
+<center>
+$$\left( \hat{\beta}_j - t_{n-p,\alpha/2}\text{SE}(\hat{\beta}_j), \hat{\beta}_j + t_{n-p,\alpha/2}\text{SE}(\hat{\beta}_j) \right)$$
+where $\text{SE}(\hat{\beta}_j) = s \sqrt{((\mathbf{Z}^T\mathbf{Z})^{-1})_{jj}}$.  
+</center>
+
+:::{.ex #Sec_Linear_hypo_test:ex:fuel_exII}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Example 21.3.1.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Fuel consumption (continued)**</span>
+\
+Consider [Example 21.2.1 (Fuel consumption)](#Sec_Linear_hypo_test:ex:fuel_ex), construct a 95\% confidence interval for $\beta_2$.
+:::
+\
+
+A 95\% confidence interval for $\beta_2$ is  
+<center>
+\begin{align*}
+&\left( \hat{\beta}_2 - t_{46,0.025}\text{SE}(\hat{\beta}_j), \hat{\beta}_2 + t_{46,0.025}\text{SE}(\hat{\beta}_j) \right) \\[3pt]
+= &\left( -4.228 - 2.013 \times 2.030, -4.228 + 2.013 \times 2.030 \right) \\[3pt]
+= &\left(-8.31,-0.14 \right)
+\end{align*}
+</center>
+This confidence interval does not contain 0 (just) as we would expect from the calculation of the $p$-value in [Example 20.2.1 (Fuel consumption)](#Sec_Linear_hypo_test:ex:fuel_ex) above.
+
+## Tests for the existence of regression {#Sec_Linear_hypo_test:F}
+
+We want to test 
+
+$H_0: \beta_1 = \beta_2 = \cdots = \beta_{p-1} = 0$ 
+
+versus 
+
+$H_1: \beta_j \neq 0$ 
+
+for some $j$ at significance level $\alpha$. 
+
+Note that if we reject $H_0$ we are saying that the model 
+<center>  
+$$Y_i = \beta_0 + \beta_1 X_{1i}+ \beta_2 X_{2i} + \cdots + \beta_{p-1} X_{(p-1)i}$$ 
+</center>  
+has some ability to explain the variance that we are observing in $Y$. That is, there exists a linear relationship between the explanatory variables and the response variable.
+
+If $D_0$ is the model deviance under the null hypothesis and $D_1$ is the model deviance under the alternative hypothesis, then the <span style="color: rgba(15, 0, 207, 1);">**decision rule**</span> is to reject $H_0$ if 
+<center>  
+$$ F = \frac{(D_0 - D_1)/(p-1)}{D_1/(n-p)} > F_{p-1,n-p,\alpha}.$$  
+</center>
+
+:::{.ex #Sec_Linear_hypo_test:ex:fuel_exIII}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Example 21.4.1.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Fuel consumption (continued)**</span>
+\
+For the data in [Example 21.2.1 (Fuel consumption)](Sec_Linear_hypo_test:ex:fuel_ex), the two competing models are  
+<center>
+\begin{align*}
+M_1&: \text{fuel} = \beta_0 + \beta_1 \text{dlic} + \beta_2 \text{tax} + \beta_3 \text{inc} + \beta_4 \text{road} \\
+M_0&: \text{fuel} = \beta_0
+\end{align*}  
+</center>  
+The models have residual sum of squares $D_1 = 193700$ and $D_0 = 395694.1$, respectively. We test $H_0: \beta_1 = \cdots = \beta_4 = 0$ vs. $H_1: \beta_j \neq 0$ for some $j=1,\dots,4$ at level $\alpha=0.05$.
+:::
+\
+
+The decision rule is to reject $H_0$ if  
+<center>  
+$$F = \frac{(395694.1-193700)/(5-1)}{193700/(51-5)} = \frac{50498.525}{4210.870}= 11.99 > F_{4,46,0.05} = 2.574.$$  
+</center>  
+Therefore, we reject $H_0$ and can say that the linear model has some power in explaining the variability in fuel.
+
+Note that the $p$-value for the $F$ test is $9.331 \times 10^{-7} = P(F_{4,46} >11.99)$. This is given in **R** by `1-pf(11.99,4,46)` and is reported in the last line of `summary()` for a linear model in **R**.
+

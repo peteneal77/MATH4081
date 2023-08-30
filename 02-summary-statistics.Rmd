@@ -1,0 +1,282 @@
+
+
+
+# Summary Statistics {#summary} 
+
+
+
+
+A **statistic** is the generic name given to any quantity calculated from the data.  A statistic is therefore a *function* of the data. 
+
+
+We use a **summary statistic** to measure and summarise some aspect of the data. Many simple summary statistics can be divided as one of two types: measures of
+**location** ([Section 2.1](#summary_location)), and measures of **spread** ([Section 2.2](#summary_spread)). In [Section 2.3](#summary_robust) we consider the robustness of summary statistics.
+
+A measure of **location** is *a value "typical" of the data*. Examples include the **mean**, **mode** and **median**.
+
+A measure of **spread** quantifies *how variable the data are*. Examples include the **variance**, **standard deviation**, **range** and **interquartile range**.
+
+
+## Measures of location {#summary_location}
+
+A statistic that is a measure of location summarises the data by giving
+a single number that is, in some sense, typical of that set of data.
+There are three commonly used measures of location, of which the
+**mean** is the most important.
+
+1.  <span style="color: rgba(207, 0, 15, 1);">**Mean**</span>   Suppose that $n$ measurements have been taken on the
+    random variable under investigation, and these are denoted by
+    $x_1 , x_2 , \ldots , x_n$. The (arithmetic) mean of the
+    observations is usually denoted by $\bar{x}$ and is given by
+    <center>
+    \begin{equation}
+    \bar{x} = \frac{x_1 + x_2 + \cdots + x_n}{n} = \frac{1}{n} \sum\limits_{i=1}^n x_i.
+    (\#eq:samplemean)
+    \end{equation}
+    </center>
+    In everyday language we say that $\bar {x}$ is the **average** of
+    the observations.
+
+   If data are discrete they are often tabulated as in the [Coursework dataset](#intro_example). This makes calculating the mean a little easier. Suppose that $f_j$ denotes the number of times that the number $j$ appears in our data set, then we can write
+   <center>
+    \begin{equation}
+    \bar{x} = \sum\limits_{j=1}^\infty j \frac{f_j}{n}.
+    (\#eq:samplemean2)
+    \end{equation}
+    </center>
+    
+  For an explanation of \@ref(eq:samplemean2) and derivation of the mean of the optometry students data, see [Video 2](#video2).
+
+```{asis, include=knitr::is_html_output()}    
+:::{.des #video2}
+<span style="color: rgba(207, 0, 15, 1);">**Video 2: Derivation of the mean**</span>     
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1355621/sp/135562100/embedIframeJs/uiconf_id/13188771/partner_id/1355621?iframeembed=true&playerId=kaltura_player&entry_id=1_4cyoy4po&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_kmwu7kne" width="640" height="420" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Sample Mean FINAL VERSION"></iframe>
+:::    
+```
+
+```{asis, include=knitr::is_latex_output()}
+Watch [\textcolor{blue}{Video 2: Derivation of the mean}](https://mediaspace.nottingham.ac.uk/media/Sample+Mean+FINAL+VERSION/1_4cyoy4po)
+```  
+
+   Sometimes continuous data are grouped into a frequency table --- this loses the values of the individual and essentially converts the continuous data to discrete data.
+The sample mean in this case be estimated by
+    assuming that all the observations in a class interval fall at the
+    mid-point of the interval. Therefore, if we have $k$ intervals with
+    mid-points $m_1$, $m_2$, $\dots$, $m_k$ and frequencies
+    $f_1 , f_2 , \ldots , f_k$ then we treat the mid-points as though they are the 
+    discrete data values and we can use the formula in \@ref(eq:samplemean2).
+    When determining the midpoint of an interval, due notice should be
+    taken of any rounding of the individual observations.
+
+    
+
+2.  <span style="color: rgba(207, 0, 15, 1);">**Median.**</span>   The sample median is defined as the observation with
+    cumulative frequency of $n/2$. This is sometimes used instead of the
+    mean, particularly when the histogram of the observations looks
+    *asymmetric*. The median is obtained by
+    sorting the observations in ascending order and then
+    picking out the middle observation or, equivalently, the
+    $\frac{(n+1)}{2}$th observation. If there are an even number of
+    observations in the sample then the median is taken as the average
+    of the $\frac{n}{2}$th and $\left(\frac{n}{2}+1\right)$th
+    observations. The ranking can be done using a [stem-and-leaf plot](#visual_plot_stem).
+
+   Hence the median is the 'middle value' in the sample with half the
+    observations numerically greater than the median and the other half
+    smaller than the median. The mathematical properties of the median
+    are less easy to determine than those of the mean and so the mean is
+    preferred for use in most formal statistical analyses. However, the
+    median is quick to calculate in small samples and is useful in
+    descriptive work.
+
+    
+
+3.  <span style="color: rgba(207, 0, 15, 1);">**Mode.**</span>   This is the value of the random variable which occurs
+    with greatest frequency. The sample mode for discrete data can be
+    found easily by inspection of the data or by a quick look at a
+    frequency table. It is not realistic to define the sample mode for
+    continuous data (we will see why when introducing continuous probability distributions in [Section 5](#rv)). However when such data have been classified into
+    intervals or categories we can find the **modal class** --- the
+    class or interval containing the most number of observations.
+
+
+## Measures of spread {#summary_spread}
+
+Given the location of the data, we next need to know whether the
+observations are concentrated around this value, or dispersed over a
+much wider range of values. Measures of spread express this idea
+numerically.
+
+
+1.  <span style="color: rgba(207, 0, 15, 1);">**Variance.**</span>   The sample variance of $n$ observations,
+    $x_1 , x_2 , \ldots, x_n$, is usually denoted $s^2$ and defined as 
+    <center>
+    \begin{equation}
+    \begin{aligned}
+    s^2 &= \frac{(x_1 - {\bar{x}})^2 + (x_2 - {\bar{x}})^2 + \cdots + (x_n - {\bar{x}})^2}{n-1}\\
+    &= \frac{1}{n-1} \sum\limits_{i=1}^{n} (x_i - {\bar{x}})^2.\end{aligned}
+  (\#eq:samplevariance)
+  \end{equation}
+  </center>
+    It is an average squared distance of the observations from their
+    sample mean value. The adjustment is that the divisor is $(n-1)$
+    rather than $n$ to correct for a bias (we'll come back to this later in
+    [Section 9.3](#paraestimate_judge)) which occurs
+    because we are measuring from the mean of the data rather than the
+    true mean of the population. It is worth pointing out that the
+    difference between using $n$ and $(n-1)$ is especially important for
+    small samples.
+  This formula can be 
+  rearranged to the alternative form  
+  <center>
+    \begin{equation}
+  \begin{aligned}
+  s^2 &= \frac{1}{n-1} \left( \sum\limits_{i=1}^{n} x_i^2 - n {\bar{x}} ^2 \right) = \frac{1}{n-1}  \left\{  \sum_{i=1}^n x_i^2 - \frac{1}{n}\left(\sum_{i=1}^n x_i\right)^2 \right\}\end{aligned},
+  \end{equation}
+  </center>  
+  which initially looks more complicated but is actually simpler calculate: 
+  compute first the sums $\sum_i x_i$ and $\sum_i x_i^2$ then the rest is easy.
+
+  The alternative form is easy to derive as shown in [Video 3](#video3). However, before you watch the video, try to derive the result yourself.
+
+```{asis, include=knitr::is_html_output()}
+:::{.des #video3}
+<span style="color: rgba(207, 0, 15, 1);">**Video 3: Derivation of the variance**</span>  
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1355621/sp/135562100/embedIframeJs/uiconf_id/13188771/partner_id/1355621?iframeembed=true&playerId=kaltura_player&entry_id=1_scrvhrs2&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_h4i86ye6" width="640" height="420" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Sample Variance FINAL VERSION"></iframe>
+:::
+```
+
+```{asis, include=knitr::is_latex_output()}
+Watch [\textcolor{blue}{Video 3: Derivation of the variance}](https://mediaspace.nottingham.ac.uk/media/Sample+Variance+FINAL+VERSION/1_scrvhrs2)
+```  
+
+2.  <span style="color: rgba(207, 0, 15, 1);">**Standard deviation.**</span>   The standard deviation, typically denoted
+    $s$, is just the positive square root of the variance
+    $s^2$. It is therefore the root-mean-square deviation of the
+    observations about their sample mean. The standard deviation is in
+    the same units as the original measurements and for this reason it
+    is preferred to the variance as a descriptive measure. However, it is
+    often easier from a theoretical and computational point of view to
+    work with variances. Thus the two measures are complementary.
+
+    
+3.  <span style="color: rgba(207, 0, 15, 1);">**Range.**</span>   This is simply the difference between the largest and
+    smallest observation. It can be very useful for comparing the
+    variability in samples of equal size but it is unfortunately
+    affected by the number of observations; the range usually increases
+    as the number of observations in the data set increases.
+
+    
+
+4.  <span style="color: rgba(207, 0, 15, 1);">**Inter-quartile range (IQR).**</span>   The
+    quartiles are chosen so that 25% of the data lies below the lower
+    quartile ($Q_1$) and 25% above the upper quartile ($Q_3$). Thus the
+    lower quartile, median and upper quartile split the data into four
+    equal portions.
+
+      ----- ----- ------- ----- ------- ----- ------- ----- -----
+       Min   25%   $Q_1$   25%   $Q_2$   25%   $Q_3$   25%   Max
+                                                            
+                                                            
+      ----- ----- ------- ----- ------- ----- ------- ----- -----
+
+    After the data are arranged in ascending order, the lower quartile
+    is calculated as the $\frac{(n+1)}{4}$th observation and the upper
+    quartile is calculated as the $\frac{3(n+1)}{4}$th observation. When
+    $n + 1$ is not divisible by 4 then the quartiles are calculated by
+    performing some simple interpolation rule (see [Example 1](#example005)). The
+    difference between the lower and upper quartiles is called the
+    **interquartile range** and it measures the range of the central 50%
+    of the sample.
+    
+::: {.ex #example005} 
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Example 2.1.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Quartiles and IQR for Cavendish's data.**</span>  
+  
+Here $n = 29$, so $Q_1$ is the '$7.5$th' observation. The $7$th
+observation is $5.29$ and the $8$th observation is $5.30$,
+so $Q_1 = 5.295$.
+
+Similarly, $Q_3$ is the '$22.5$th' observation. The $22$nd
+observation is $5.61$ and the $23$rd observation $5.62$,
+so $Q_3 = 5.615$.
+
+The IQR is $5.615 - 5.295 = 0.320$.
+
+Link to [Cavendish dataset](#intro_example).
+:::
+
+
+## Robustness of summary statistics {#summary_robust}
+
+In many circumstances (for example, when the distribution of
+observations is unimodal and roughly symmetric/unskewed and no outliers
+exist--see definitions in
+[Section 3](#visual)--visualisation of data) then the mean, median and mode will be
+very close together. However, if for example the distribution is very
+skewed there may be a considerable differences between the three
+measures. The median is often considered as a better description of
+location for asymmetric distributions than the mean and is much more
+**robust** to outliers. In other words, the value of the mean is
+sensitive to the values of very large or very small observations,
+whereas the median is not. An amended version of the mean, define to be
+more robust, is the **trimmed mean**.
+
+The **($\alpha$%)-trimmed mean** is computed by deleting the $\alpha$%
+smallest observations and the $\alpha$% largest observations before
+calculating the mean of what is remaining. Trimmed means are used in many judge based scoring systems such as diving and figure skating.
+
+This is more robust than the mean, but the choice of $\alpha$ is
+somewhat arbitrary and for this reason the median is usually preferred.
+
+::: {.ex #example006} 
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Example 2.3.1.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Robustness.**</span> 
+  
+Let's calculate the *mean*, *median* and *10%-trimmed mean*
+for the following data: 
+
+$$14, 19, 13, 10, 18, 20, 15, 16, 11, 100$$ 
+
+The mean = $23.6$, and median = $(15+16)/2 = 15.5$. Notice how the value 
+100 seems to be an outlier and that this has affected the mean, which is no longer very
+representative of the "location" of the data.
+
+For the trimmed mean, we delete the bottom and top 10\% of observations and compute the mean of what's left, i.e., we
+delete 10 and 100, then we get that: 
+<center>
+$$\mbox{The trimmed mean}=(14+ 19+ 13+ 18+ 20+ 15+ 16+ 11)/8= 15.75$$
+</center>
+
+So by "trimming" we've gotten rid of the influence of the outlier 100, and the trimmed mean
+seems a better measure of location compared with the mean.
+:::
+
+The *median is robust to outliers*, whereas the mean is not. In [Video 4](#video4) we demonstrate this using the [Cavendish dataset](#intro_example). There is also a link provided to the **R Shiny** app used in the video so that you can explore the data and trimming for yourself.
+
+```{asis, include=knitr::is_html_output()}
+:::{.des #video4}
+<span style="color: rgba(207, 0, 15, 1);">**Video 4: Robust measures**</span>  
+
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1355621/sp/135562100/embedIframeJs/uiconf_id/13188771/partner_id/1355621?iframeembed=true&playerId=kaltura_player&entry_id=1_qfg4edmo&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_4zts4xt9" width="640" height="420" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Robust Measures FINAL VERSION"></iframe>
+:::
+```  
+
+```{asis, include=knitr::is_latex_output()}
+Watch [\textcolor{blue}{Video 4: Robust Measures}](https://mediaspace.nottingham.ac.uk/media/Robust+Measures+FINAL+VERSION/1_qfg4edmo)
+```  
+
+R Shiny app: [Cavendish dataset](https://shiny-new.maths.nottingham.ac.uk/pmzpn/Cavendish/)
+
+
+
+We talk about robustness not only for measures of location but also, for
+example, for measures of spread. 
+
+The interquartile range is very robust to outliers, whereas the
+standard deviation is very sensitive to outliers.
+

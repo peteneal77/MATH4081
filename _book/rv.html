@@ -1,0 +1,1920 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 5 Random Variables | Foundations of Statistics</title>
+  <meta name="description" content="Lecture Notes for Foundations of Statistics" />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 5 Random Variables | Foundations of Statistics" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Lecture Notes for Foundations of Statistics" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 Random Variables | Foundations of Statistics" />
+  
+  <meta name="twitter:description" content="Lecture Notes for Foundations of Statistics" />
+  
+
+<meta name="author" content="Prof Peter Neal and Dr Daniel Cavey" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="prob.html"/>
+<link rel="next" href="jointdis.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">MATH4081: Foundations of Statistics</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preliminaries</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#overview"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#tasks"><i class="fa fa-check"></i>Tasks</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#intro_stats"><i class="fa fa-check"></i><b>1.1</b> What is Statistics?</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#intro_population"><i class="fa fa-check"></i><b>1.2</b> Populations and samples</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#intro_data"><i class="fa fa-check"></i><b>1.3</b> Types of Data</a></li>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#intro_example"><i class="fa fa-check"></i><b>1.4</b> Some example datasets</a></li>
+<li class="chapter" data-level="1.5" data-path="intro.html"><a href="intro.html#intro_computing"><i class="fa fa-check"></i><b>1.5</b> Statistical Computing</a></li>
+<li class="chapter" data-level="1.6" data-path="intro.html"><a href="intro.html#intro_paradigm"><i class="fa fa-check"></i><b>1.6</b> The statistical paradigm</a></li>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#intro:R"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 1</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>2</b> Summary Statistics</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="summary.html"><a href="summary.html#summary_location"><i class="fa fa-check"></i><b>2.1</b> Measures of location</a></li>
+<li class="chapter" data-level="2.2" data-path="summary.html"><a href="summary.html#summary_spread"><i class="fa fa-check"></i><b>2.2</b> Measures of spread</a></li>
+<li class="chapter" data-level="2.3" data-path="summary.html"><a href="summary.html#summary_robust"><i class="fa fa-check"></i><b>2.3</b> Robustness of summary statistics</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="visual.html"><a href="visual.html"><i class="fa fa-check"></i><b>3</b> Visualising data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="visual.html"><a href="visual.html#visual_intro"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="visual.html"><a href="visual.html#visual_data-features"><i class="fa fa-check"></i><b>3.2</b> Some data features</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="visual.html"><a href="visual.html#visual_data-features_multi"><i class="fa fa-check"></i><b>3.2.1</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Multimodal distributions</strong></span></a></li>
+<li class="chapter" data-level="3.2.2" data-path="visual.html"><a href="visual.html#visual_data-features_symmetry"><i class="fa fa-check"></i><b>3.2.2</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Symmetry</strong></span></a></li>
+<li class="chapter" data-level="3.2.3" data-path="visual.html"><a href="visual.html#visual_data-features_outliers"><i class="fa fa-check"></i><b>3.2.3</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Outliers</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="visual.html"><a href="visual.html#visual_plot"><i class="fa fa-check"></i><b>3.3</b> Basic plot types</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="visual.html"><a href="visual.html#visual_plot_histo"><i class="fa fa-check"></i><b>3.3.1</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Histogram and bar charts</strong></span></a></li>
+<li class="chapter" data-level="3.3.2" data-path="visual.html"><a href="visual.html#visual_plot_density"><i class="fa fa-check"></i><b>3.3.2</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Density plots</strong></span></a></li>
+<li class="chapter" data-level="3.3.3" data-path="visual.html"><a href="visual.html#visual_plot_boxplot"><i class="fa fa-check"></i><b>3.3.3</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Boxplot</strong></span></a></li>
+<li class="chapter" data-level="3.3.4" data-path="visual.html"><a href="visual.html#visual_plot_cdf"><i class="fa fa-check"></i><b>3.3.4</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Cumulative frequency diagrams, and the empirical CDF</strong></span></a></li>
+<li class="chapter" data-level="3.3.5" data-path="visual.html"><a href="visual.html#visual_plot_stem"><i class="fa fa-check"></i><b>3.3.5</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Stem and leaf</strong></span></a></li>
+<li class="chapter" data-level="3.3.6" data-path="visual.html"><a href="visual.html#visual_plot_pie"><i class="fa fa-check"></i><b>3.3.6</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Pie charts</strong></span></a></li>
+<li class="chapter" data-level="3.3.7" data-path="visual.html"><a href="visual.html#visual_plot_dot"><i class="fa fa-check"></i><b>3.3.7</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Dotplots</strong></span></a></li>
+<li class="chapter" data-level="3.3.8" data-path="visual.html"><a href="visual.html#visual_plot_scatter"><i class="fa fa-check"></i><b>3.3.8</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Scatterplots</strong></span></a></li>
+<li class="chapter" data-level="3.3.9" data-path="visual.html"><a href="visual.html#visual_plot_summary"><i class="fa fa-check"></i><b>3.3.9</b> <span style="color: rgba(207, 0, 15, 1);"><strong>Summary</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="visual.html"><a href="visual.html#visual_data"><i class="fa fa-check"></i><b>3.4</b> Commenting on data</a></li>
+<li class="chapter" data-level="" data-path="visual.html"><a href="visual.html#visual:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 2</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="prob.html"><a href="prob.html"><i class="fa fa-check"></i><b>4</b> Probability</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="prob.html"><a href="prob.html#prob:overview"><i class="fa fa-check"></i><b>4.1</b> Overview</a></li>
+<li class="chapter" data-level="4.2" data-path="prob.html"><a href="prob.html#prob:motivation"><i class="fa fa-check"></i><b>4.2</b> Motivation</a></li>
+<li class="chapter" data-level="4.3" data-path="prob.html"><a href="prob.html#prob:sample_space"><i class="fa fa-check"></i><b>4.3</b> Sample Space</a></li>
+<li class="chapter" data-level="4.4" data-path="prob.html"><a href="prob.html#prob:events"><i class="fa fa-check"></i><b>4.4</b> Events</a></li>
+<li class="chapter" data-level="4.5" data-path="prob.html"><a href="prob.html#prob:defn"><i class="fa fa-check"></i><b>4.5</b> Probability</a></li>
+<li class="chapter" data-level="4.6" data-path="prob.html"><a href="prob.html#prob:Conditional_Probability"><i class="fa fa-check"></i><b>4.6</b> Conditional probability</a></li>
+<li class="chapter" data-level="4.7" data-path="prob.html"><a href="prob.html#prob:mutual"><i class="fa fa-check"></i><b>4.7</b> Mutual Independence</a></li>
+<li class="chapter" data-level="" data-path="prob.html"><a href="prob.html#rv:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 3</strong></span></a></li>
+<li class="chapter" data-level="" data-path="prob.html"><a href="prob.html#prob:stud"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="rv.html"><a href="rv.html"><i class="fa fa-check"></i><b>5</b> Random Variables</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="rv.html"><a href="rv.html#rv:overview"><i class="fa fa-check"></i><b>5.1</b> Overview</a></li>
+<li class="chapter" data-level="5.2" data-path="rv.html"><a href="rv.html#rv:des"><i class="fa fa-check"></i><b>5.2</b> Random variables</a></li>
+<li class="chapter" data-level="5.3" data-path="rv.html"><a href="rv.html#rv:expect"><i class="fa fa-check"></i><b>5.3</b> Expectation</a></li>
+<li class="chapter" data-level="5.4" data-path="rv.html"><a href="rv.html#rv:bernoulli"><i class="fa fa-check"></i><b>5.4</b> Bernoulli distribution and its extension</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="rv.html"><a href="rv.html#rv:Bernoulli:bern"><i class="fa fa-check"></i><b>5.4.1</b> Bernoulli distribution</a></li>
+<li class="chapter" data-level="5.4.2" data-path="rv.html"><a href="rv.html#rv:Bernoulli:bin"><i class="fa fa-check"></i><b>5.4.2</b> Binomial Distribution</a></li>
+<li class="chapter" data-level="5.4.3" data-path="rv.html"><a href="rv.html#rv:Bernoulli:geom"><i class="fa fa-check"></i><b>5.4.3</b> Geometric Distribution</a></li>
+<li class="chapter" data-level="5.4.4" data-path="rv.html"><a href="rv.html#rv:Bernoulli:negbin"><i class="fa fa-check"></i><b>5.4.4</b> Negative binomial Distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="rv.html"><a href="rv.html#rv:Poisson"><i class="fa fa-check"></i><b>5.5</b> Poisson distribution</a></li>
+<li class="chapter" data-level="5.6" data-path="rv.html"><a href="rv.html#rv:exponential"><i class="fa fa-check"></i><b>5.6</b> Exponential distribution and its extensions</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="rv.html"><a href="rv.html#rv:exponential:exp"><i class="fa fa-check"></i><b>5.6.1</b> Exponential distribution</a></li>
+<li class="chapter" data-level="5.6.2" data-path="rv.html"><a href="rv.html#rv:exponential:gamma"><i class="fa fa-check"></i><b>5.6.2</b> Gamma distribution</a></li>
+<li class="chapter" data-level="5.6.3" data-path="rv.html"><a href="rv.html#rv:exponential:chi"><i class="fa fa-check"></i><b>5.6.3</b> Chi squared distribution</a></li>
+<li class="chapter" data-level="5.6.4" data-path="rv.html"><a href="rv.html#rv:exponential:beta"><i class="fa fa-check"></i><b>5.6.4</b> Beta distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="rv.html"><a href="rv.html#rv:normal"><i class="fa fa-check"></i><b>5.7</b> Normal (Gaussian) Distribution</a></li>
+<li class="chapter" data-level="" data-path="rv.html"><a href="rv.html#prob:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="jointdis.html"><a href="jointdis.html"><i class="fa fa-check"></i><b>6</b> Joint Distribution Functions</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="jointdis.html"><a href="jointdis.html#jointdis:intro"><i class="fa fa-check"></i><b>6.1</b> Overview</a></li>
+<li class="chapter" data-level="6.2" data-path="jointdis.html"><a href="jointdis.html#jointdis:cdf"><i class="fa fa-check"></i><b>6.2</b> Joint c.d.f. and p.d.f.</a></li>
+<li class="chapter" data-level="6.3" data-path="jointdis.html"><a href="jointdis.html#jointdis:marginal"><i class="fa fa-check"></i><b>6.3</b> Marginal c.d.f. and p.d.f.</a></li>
+<li class="chapter" data-level="6.4" data-path="jointdis.html"><a href="jointdis.html#jointdis:independent"><i class="fa fa-check"></i><b>6.4</b> Independent random variables</a></li>
+<li class="chapter" data-level="" data-path="jointdis.html"><a href="jointdis.html#jointdis:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercise</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="Sec_CLT.html"><a href="Sec_CLT.html"><i class="fa fa-check"></i><b>7</b> Central Limit Theorem and law of large numbers</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="Sec_CLT.html"><a href="Sec_CLT.html#Sec_CLT:intro"><i class="fa fa-check"></i><b>7.1</b> Introduction</a></li>
+<li class="chapter" data-level="7.2" data-path="Sec_CLT.html"><a href="Sec_CLT.html#Sec_CLT:statement"><i class="fa fa-check"></i><b>7.2</b> Statement of Central Limit Theorem</a></li>
+<li class="chapter" data-level="7.3" data-path="Sec_CLT.html"><a href="Sec_CLT.html#Sec_CLT:discrete"><i class="fa fa-check"></i><b>7.3</b> Central limit theorem for discrete random variables</a></li>
+<li class="chapter" data-level="7.4" data-path="Sec_CLT.html"><a href="Sec_CLT.html#Sec_CLT:LLN"><i class="fa fa-check"></i><b>7.4</b> Law of Large Numbers</a></li>
+<li class="chapter" data-level="" data-path="Sec_CLT.html"><a href="Sec_CLT.html#Sec_clt:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 4</strong></span></a></li>
+<li class="chapter" data-level="" data-path="Sec_CLT.html"><a href="Sec_CLT.html#Sec_clt:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="motivate.html"><a href="motivate.html"><i class="fa fa-check"></i><b>8</b> Motivation for Statistical Inference</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="motivate.html"><a href="motivate.html#motivate:intro"><i class="fa fa-check"></i><b>8.1</b> Introduction</a></li>
+<li class="chapter" data-level="8.2" data-path="motivate.html"><a href="motivate.html#motivate:example"><i class="fa fa-check"></i><b>8.2</b> Motivating example</a></li>
+<li class="chapter" data-level="8.3" data-path="motivate.html"><a href="motivate.html#motivate:assumption"><i class="fa fa-check"></i><b>8.3</b> Modelling assumptions</a></li>
+<li class="chapter" data-level="8.4" data-path="motivate.html"><a href="motivate.html#motivate:parametric"><i class="fa fa-check"></i><b>8.4</b> Parametric models</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="paraestimate.html"><a href="paraestimate.html"><i class="fa fa-check"></i><b>9</b> Parameter Estimation</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="paraestimate.html"><a href="paraestimate.html#paraestimate:intro"><i class="fa fa-check"></i><b>9.1</b> Introduction</a></li>
+<li class="chapter" data-level="9.2" data-path="paraestimate.html"><a href="paraestimate.html#paraestimate:prelim"><i class="fa fa-check"></i><b>9.2</b> Preliminaries</a></li>
+<li class="chapter" data-level="9.3" data-path="paraestimate.html"><a href="paraestimate.html#paraestimate:judge"><i class="fa fa-check"></i><b>9.3</b> Judging estimators</a></li>
+<li class="chapter" data-level="9.4" data-path="paraestimate.html"><a href="paraestimate.html#paraestimate:variance"><i class="fa fa-check"></i><b>9.4</b> Sample Variance</a></li>
+<li class="chapter" data-level="" data-path="paraestimate.html"><a href="paraestimate.html#paraestimate:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 5</strong></span></a></li>
+<li class="chapter" data-level="" data-path="paraestimate.html"><a href="paraestimate.html#paraestimate:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="MLE.html"><a href="MLE.html"><i class="fa fa-check"></i><b>10</b> Techniques for Deriving Estimators</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="MLE.html"><a href="MLE.html#MLE:intro"><i class="fa fa-check"></i><b>10.1</b> Introduction</a></li>
+<li class="chapter" data-level="10.2" data-path="MLE.html"><a href="MLE.html#MLE:moments"><i class="fa fa-check"></i><b>10.2</b> Method of Moments</a></li>
+<li class="chapter" data-level="10.3" data-path="MLE.html"><a href="MLE.html#MLE:MLE"><i class="fa fa-check"></i><b>10.3</b> Maximum likelihood estimation</a></li>
+<li class="chapter" data-level="10.4" data-path="MLE.html"><a href="MLE.html#MLE:comments"><i class="fa fa-check"></i><b>10.4</b> Comments on the Maximum Likelihood Estimator</a></li>
+<li class="chapter" data-level="" data-path="MLE.html"><a href="MLE.html#MLE:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="MLEprop.html"><a href="MLEprop.html"><i class="fa fa-check"></i><b>11</b> Additional Properties of Estimators</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:intro"><i class="fa fa-check"></i><b>11.1</b> Introduction</a></li>
+<li class="chapter" data-level="11.2" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:sufficient"><i class="fa fa-check"></i><b>11.2</b> Sufficiency</a></li>
+<li class="chapter" data-level="11.3" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:MVE"><i class="fa fa-check"></i><b>11.3</b> Minimum variance estimators</a></li>
+<li class="chapter" data-level="11.4" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:asymptotic"><i class="fa fa-check"></i><b>11.4</b> Asymptotic normality of the MLE</a></li>
+<li class="chapter" data-level="11.5" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:invariance"><i class="fa fa-check"></i><b>11.5</b> Invariance property</a></li>
+<li class="chapter" data-level="" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 6</strong></span></a></li>
+<li class="chapter" data-level="" data-path="MLEprop.html"><a href="MLEprop.html#MLEprop:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="CondDis.html"><a href="CondDis.html"><i class="fa fa-check"></i><b>12</b> Conditional Distribution and Conditional Expectation</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="CondDis.html"><a href="CondDis.html#CondDis:CondDis"><i class="fa fa-check"></i><b>12.1</b> Conditional distribution</a></li>
+<li class="chapter" data-level="12.2" data-path="CondDis.html"><a href="CondDis.html#CondDis:CondExpect"><i class="fa fa-check"></i><b>12.2</b> Conditional expectation</a></li>
+<li class="chapter" data-level="12.3" data-path="CondDis.html"><a href="CondDis.html#CondDis:Independence"><i class="fa fa-check"></i><b>12.3</b> Independent random variables</a></li>
+<li class="chapter" data-level="" data-path="CondDis.html"><a href="CondDis.html#CondDis:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercise</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="Correlation.html"><a href="Correlation.html"><i class="fa fa-check"></i><b>13</b> Expectation, Covariance and Correlation</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="Correlation.html"><a href="Correlation.html#Correlation:Expectation"><i class="fa fa-check"></i><b>13.1</b> Expectation of a function of random variables</a></li>
+<li class="chapter" data-level="13.2" data-path="Correlation.html"><a href="Correlation.html#Correlation:Covariance"><i class="fa fa-check"></i><b>13.2</b> Covariance</a></li>
+<li class="chapter" data-level="13.3" data-path="Correlation.html"><a href="Correlation.html#Correlation:Correlation"><i class="fa fa-check"></i><b>13.3</b> Correlation</a></li>
+<li class="chapter" data-level="" data-path="Correlation.html"><a href="Correlation.html#Correlation:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 7</strong></span></a></li>
+<li class="chapter" data-level="" data-path="Correlation.html"><a href="Correlation.html#Correlation:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="Transform.html"><a href="Transform.html"><i class="fa fa-check"></i><b>14</b> Transformations of random variables</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="Transform.html"><a href="Transform.html#Transform:intro"><i class="fa fa-check"></i><b>14.1</b> Introduction</a></li>
+<li class="chapter" data-level="14.2" data-path="Transform.html"><a href="Transform.html#Transform:univariate"><i class="fa fa-check"></i><b>14.2</b> Univariate case</a></li>
+<li class="chapter" data-level="14.3" data-path="Transform.html"><a href="Transform.html#Transform:bivariate"><i class="fa fa-check"></i><b>14.3</b> Bivariate case</a></li>
+<li class="chapter" data-level="" data-path="Transform.html"><a href="Transform.html#Transform:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercise</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="MV_Normal.html"><a href="MV_Normal.html"><i class="fa fa-check"></i><b>15</b> Multivariate Normal Distribution</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="MV_Normal.html"><a href="MV_Normal.html#MV_Normal:intro"><i class="fa fa-check"></i><b>15.1</b> Introduction</a></li>
+<li class="chapter" data-level="15.2" data-path="MV_Normal.html"><a href="MV_Normal.html#MV_Normal:multi"><i class="fa fa-check"></i><b>15.2</b> <span class="math inline">\(n\)</span>-Dimensional Normal Distribution</a></li>
+<li class="chapter" data-level="" data-path="MV_Normal.html"><a href="MV_Normal.html#MV_Normal:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 8</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html"><i class="fa fa-check"></i><b>16</b> Introduction to Linear Models</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:intro"><i class="fa fa-check"></i><b>16.1</b> Introduction</a></li>
+<li class="chapter" data-level="16.2" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:stat"><i class="fa fa-check"></i><b>16.2</b> Statistical models</a></li>
+<li class="chapter" data-level="16.3" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:linear"><i class="fa fa-check"></i><b>16.3</b> The linear model</a></li>
+<li class="chapter" data-level="16.4" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:Gauss"><i class="fa fa-check"></i><b>16.4</b> The Normal (Gaussian) linear model</a></li>
+<li class="chapter" data-level="16.5" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:residuals"><i class="fa fa-check"></i><b>16.5</b> Residuals</a></li>
+<li class="chapter" data-level="16.6" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:line"><i class="fa fa-check"></i><b>16.6</b> Straight Line, Horizontal Line and Quadratic Models</a></li>
+<li class="chapter" data-level="16.7" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:Examples"><i class="fa fa-check"></i><b>16.7</b> Examples</a></li>
+<li class="chapter" data-level="16.8" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:Prediction"><i class="fa fa-check"></i><b>16.8</b> Prediction</a></li>
+<li class="chapter" data-level="16.9" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:Nested"><i class="fa fa-check"></i><b>16.9</b> Nested Models</a></li>
+<li class="chapter" data-level="" data-path="Sec_LinearI.html"><a href="Sec_LinearI.html#Sec_LinearI:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercise</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html"><i class="fa fa-check"></i><b>17</b> Least Squares Estimation for Linear Models</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:intro"><i class="fa fa-check"></i><b>17.1</b> Introduction</a></li>
+<li class="chapter" data-level="17.2" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:algebra"><i class="fa fa-check"></i><b>17.2</b> Linear algebra review</a></li>
+<li class="chapter" data-level="17.3" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:derive"><i class="fa fa-check"></i><b>17.3</b> Deriving the least squares estimator</a></li>
+<li class="chapter" data-level="17.4" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:examples"><i class="fa fa-check"></i><b>17.4</b> Examples</a></li>
+<li class="chapter" data-level="17.5" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:beta"><i class="fa fa-check"></i><b>17.5</b> Properties of the estimator of <span class="math inline">\(\mathbf{\beta}\)</span></a></li>
+<li class="chapter" data-level="17.6" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:GaussMarkov"><i class="fa fa-check"></i><b>17.6</b> Gauss-Markov Theorem</a></li>
+<li class="chapter" data-level="" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 9</strong></span></a></li>
+<li class="chapter" data-level="" data-path="Sec_Linear_LSE.html"><a href="Sec_Linear_LSE.html#Sec_Linear_LSE:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="Interval_Estimation.html"><a href="Interval_Estimation.html"><i class="fa fa-check"></i><b>18</b> Interval Estimation</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="Interval_Estimation.html"><a href="Interval_Estimation.html#Interval_Estimation:intro"><i class="fa fa-check"></i><b>18.1</b> Introduction</a></li>
+<li class="chapter" data-level="18.2" data-path="Interval_Estimation.html"><a href="Interval_Estimation.html#Interval_Estimation:confident"><i class="fa fa-check"></i><b>18.2</b> Confident?</a></li>
+<li class="chapter" data-level="18.3" data-path="Interval_Estimation.html"><a href="Interval_Estimation.html#Interval_Estimation:CI"><i class="fa fa-check"></i><b>18.3</b> Confidence intervals</a></li>
+<li class="chapter" data-level="18.4" data-path="Interval_Estimation.html"><a href="Interval_Estimation.html#Interval_Estimation:MLE"><i class="fa fa-check"></i><b>18.4</b> Asymptotic distribution of the MLE</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html"><i class="fa fa-check"></i><b>19</b> Hypothesis Testing</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:intro"><i class="fa fa-check"></i><b>19.1</b> Introduction to hypothesis testing</a></li>
+<li class="chapter" data-level="19.2" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:errors"><i class="fa fa-check"></i><b>19.2</b> Type I and Type II errors</a></li>
+<li class="chapter" data-level="19.3" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:normal_known"><i class="fa fa-check"></i><b>19.3</b> Tests for normal means, <span class="math inline">\(\sigma\)</span> known</a></li>
+<li class="chapter" data-level="19.4" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:p_values"><i class="fa fa-check"></i><b>19.4</b> <span class="math inline">\(p\)</span> values</a></li>
+<li class="chapter" data-level="19.5" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:normal_unknown"><i class="fa fa-check"></i><b>19.5</b> Tests for normal means, <span class="math inline">\(\sigma\)</span> unknown</a></li>
+<li class="chapter" data-level="19.6" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:twosided"><i class="fa fa-check"></i><b>19.6</b> Confidence intervals and two-sided tests</a></li>
+<li class="chapter" data-level="19.7" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:variance"><i class="fa fa-check"></i><b>19.7</b> Distribution of the variance</a></li>
+<li class="chapter" data-level="19.8" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:other"><i class="fa fa-check"></i><b>19.8</b> Other types of tests</a></li>
+<li class="chapter" data-level="19.9" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:samplesize"><i class="fa fa-check"></i><b>19.9</b> Sample size calculation</a></li>
+<li class="chapter" data-level="" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 10</strong></span></a></li>
+<li class="chapter" data-level="" data-path="Sec_Hypo_Test.html"><a href="Sec_Hypo_Test.html#Sec_Hypo_Test:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html"><i class="fa fa-check"></i><b>20</b> Hypothesis Testing Discrete Data</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html#Hypo_Test_Discrete:intro"><i class="fa fa-check"></i><b>20.1</b> Introduction</a></li>
+<li class="chapter" data-level="20.2" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html#Hypo_Test_Discrete:motivate"><i class="fa fa-check"></i><b>20.2</b> Goodness-of-fit motivating example</a></li>
+<li class="chapter" data-level="20.3" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html#Hypo_Test_Discrete:GoF"><i class="fa fa-check"></i><b>20.3</b> Goodness-of-fit</a></li>
+<li class="chapter" data-level="20.4" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html#Hypo_Test_Discrete:Independence"><i class="fa fa-check"></i><b>20.4</b> Testing Independence</a></li>
+<li class="chapter" data-level="" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html#Hypo_Test_Discrete:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 11</strong></span></a></li>
+<li class="chapter" data-level="" data-path="Hypo_Test_Discrete.html"><a href="Hypo_Test_Discrete.html#Hypo_Test_Discrete:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="Sec_Linear_hypo_test.html"><a href="Sec_Linear_hypo_test.html"><i class="fa fa-check"></i><b>21</b> Basic Hypothesis Tests for Linear Models</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="Sec_Linear_hypo_test.html"><a href="Sec_Linear_hypo_test.html#Sec_Linear_hypo_test:intro"><i class="fa fa-check"></i><b>21.1</b> Introduction</a></li>
+<li class="chapter" data-level="21.2" data-path="Sec_Linear_hypo_test.html"><a href="Sec_Linear_hypo_test.html#Sec_Linear_hypo_test:single"><i class="fa fa-check"></i><b>21.2</b> Tests on a single parameter</a></li>
+<li class="chapter" data-level="21.3" data-path="Sec_Linear_hypo_test.html"><a href="Sec_Linear_hypo_test.html#Sec_Linear_hypo_test:CI"><i class="fa fa-check"></i><b>21.3</b> Confidence intervals for parameters</a></li>
+<li class="chapter" data-level="21.4" data-path="Sec_Linear_hypo_test.html"><a href="Sec_Linear_hypo_test.html#Sec_Linear_hypo_test:F"><i class="fa fa-check"></i><b>21.4</b> Tests for the existence of regression</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html"><i class="fa fa-check"></i><b>22</b> ANOVA Tables and F Tests</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:Intro"><i class="fa fa-check"></i><b>22.1</b> Introduction</a></li>
+<li class="chapter" data-level="22.2" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:residuals"><i class="fa fa-check"></i><b>22.2</b> The residuals</a></li>
+<li class="chapter" data-level="22.3" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:SS"><i class="fa fa-check"></i><b>22.3</b> Sums of squares</a></li>
+<li class="chapter" data-level="22.4" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:ANOVA"><i class="fa fa-check"></i><b>22.4</b> Analysis of Variance (ANOVA)</a></li>
+<li class="chapter" data-level="22.5" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:Compare"><i class="fa fa-check"></i><b>22.5</b> Comparing models</a></li>
+<li class="chapter" data-level="22.6" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:seq"><i class="fa fa-check"></i><b>22.6</b> Sequential sum of squares</a></li>
+<li class="chapter" data-level="" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:lab"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Task: Session 12</strong></span></a></li>
+<li class="chapter" data-level="" data-path="Sec_Linear_ANOVA.html"><a href="Sec_Linear_ANOVA.html#Sec_Linear_ANOVA:exer"><i class="fa fa-check"></i><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span></a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="introR.html"><a href="introR.html"><i class="fa fa-check"></i><b>23</b> Introduction to R</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="introR.html"><a href="introR.html#introR_what"><i class="fa fa-check"></i><b>23.1</b> What are R, RStudio and R Markdown?</a></li>
+<li class="chapter" data-level="23.2" data-path="introR.html"><a href="introR.html#introR_UoN"><i class="fa fa-check"></i><b>23.2</b> Starting RStudio on the UoN Network</a></li>
+<li class="chapter" data-level="23.3" data-path="introR.html"><a href="introR.html#introR_download"><i class="fa fa-check"></i><b>23.3</b> Downloading R and RStudio</a></li>
+<li class="chapter" data-level="23.4" data-path="introR.html"><a href="introR.html#introR_start"><i class="fa fa-check"></i><b>23.4</b> Getting started in R</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="Rmark.html"><a href="Rmark.html"><i class="fa fa-check"></i><b>24</b> What is R Markdown?</a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="Rmark.html"><a href="Rmark.html#Rmark_start"><i class="fa fa-check"></i><b>24.1</b> Getting started</a></li>
+<li class="chapter" data-level="24.2" data-path="Rmark.html"><a href="Rmark.html#Rmark_R"><i class="fa fa-check"></i><b>24.2</b> R in R Markdown</a></li>
+<li class="chapter" data-level="24.3" data-path="Rmark.html"><a href="Rmark.html#Rmark_text"><i class="fa fa-check"></i><b>24.3</b> Text in R markdown</a></li>
+<li class="chapter" data-level="24.4" data-path="Rmark.html"><a href="Rmark.html#Rmark_maths"><i class="fa fa-check"></i><b>24.4</b> Mathematics in R Markdown</a></li>
+<li class="chapter" data-level="24.5" data-path="Rmark.html"><a href="Rmark.html#Rmark_work"><i class="fa fa-check"></i><b>24.5</b> Worked Example</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://moodle.nottingham.ac.uk/course/view.php?id=128925" target="blank">MATH4081 Moodle Page</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Foundations of Statistics</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="rv" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">Chapter 5</span> Random Variables<a href="rv.html#rv" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="rv:overview" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Overview<a href="rv.html#rv:overview" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this Chapter we will introduce the concept of a <strong>random variable</strong> (<a href="rv.html#rv:des">Section 5.2</a>). Random variables assign numerical values to outcomes from a sample space and these can be discrete (counts), continuous (measurements on the real-line) or mixed. Key summaries for random variables are their expectation (mean) and variance, concepts that we have already seen for summarising data and which in <a href="rv.html#rv:expect">Section 5.3</a> we formalise for random variables. We introduce important classes of random variables (probability distributions), both discrete and continuous distributions. These include:</p>
+<ul>
+<li><a href="#rv:Bernoulli">Section 5.4</a> Bernoulli random variables and their extensions such as the <a href="rv.html#rv:Bernoulli:bern">Bernoulli</a>, <a href="rv.html#rv:Bernoulli:bin">Binomial</a>, <a href="rv.html#rv:Bernoulli:geom">Geometric</a> and <a href="rv.html#rv:Bernoulli:negbin">Negative Binomial</a> distributions<br />
+</li>
+<li><a href="rv.html#rv:Poisson">Section 5.5</a> Poisson distribution<br />
+</li>
+<li><a href="rv.html#rv:exponential">Section 5.6</a> Exponential random variables and their extensions such as the <a href="rv.html#rv:exponential:exp">Exponential</a>, <a href="rv.html#rv:exponential:gamma">Gamma</a>, <a href="rv.html#rv:exponential:chi">Chi-squared</a> and <a href="rv.html#rv:exponential:beta">Beta</a> distributions<br />
+</li>
+<li><a href="rv.html#rv:normal">Section 5.7</a> Normal (Gaussian) distribution</li>
+</ul>
+</div>
+<div id="rv:des" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Random variables<a href="rv.html#rv:des" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="rv:def:rv" class="def">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Random variable.</strong></span></p>
+<p>A <em>random variable</em> (r.v.) <span class="math inline">\(X\)</span> is a mapping from <span class="math inline">\(\Omega\)</span> to <span class="math inline">\(\mathbb R\)</span>, that is</p>
+<center>
+<span class="math display">\[X:\Omega \longrightarrow \mathbb{R}.\]</span>
+</center>
+</div>
+<p>For example,</p>
+<ul>
+<li><p>Let <span class="math inline">\(X\)</span> be the number of heads observed when tossing a fair coin three times.</p></li>
+<li><p>Let <span class="math inline">\(T\)</span> be the length of time you wait to be serviced by a bank teller.</p></li>
+</ul>
+<p><strong>Note:</strong> Random variables can be either discrete (<em>i.e.</em> take a finite or countable number of values), continuous, or mixed.</p>
+<p>An example of a mixed random variable is, <span class="math inline">\(R\)</span>, the amount of rain <span class="math inline">\((ml)\)</span> on a given day.</p>
+<div id="rv:def:cdf" class="def">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Cumulative distribution function.</strong></span></p>
+<p>The <em>cumulative distribution function</em> (c.d.f.) of a random variable <span class="math inline">\(X\)</span> is</p>
+<center>
+<span class="math display">\[F_X(x) = P(X \leq x) = P(\{\omega\in\Omega:X(\omega)\leq x\}).\]</span>
+</center>
+</div>
+<p>Properties of the c.d.f include</p>
+<ul>
+<li><p><span class="math inline">\(P(X&gt;x) = 1 - F_X(x)\)</span>.</p></li>
+<li><p><span class="math inline">\(P(x_1 &lt; X \leq x_2) = F_X(x_2) - F_X(x_1)\)</span>.</p></li>
+</ul>
+<p>Note the c.d.f. is defined for all random variables regardless of whether they are discrete, continuous or mixed.</p>
+<div id="rv:def:pmf" class="def">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Probability mass function.</strong></span></p>
+If <span class="math inline">\(X\)</span> is a <strong>discrete</strong> random variable, then we can define a function <span class="math inline">\(p_X(x)\)</span>, called the <em>probability mass function</em> (p.m.f.) such that<br />
+
+<center>
+<span class="math display">\[p_X(x_i) = P(X=x_i) = P(\{\omega:X(\omega)=x_i\}).\]</span>
+</center>
+</div>
+<div id="rv:ex:coin" class="ex">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Coin toss.</strong></span></p>
+<p>Let <span class="math inline">\(X\)</span> be the number of heads observed when tossing a fair coin three times. What is the p.m.f. of <span class="math inline">\(X\)</span>?</p>
+<center>
+<span class="math display">\[ p_X(x) = \begin{cases}
+1/8, \qquad \text{if $x=0$}, \\
+3/8, \qquad \text{if $x=1$}, \\
+3/8, \qquad \text{if $x=2$}, \\
+1/8, \qquad \text{if $x=3$}, \\
+0, \qquad \text{otherwise.}
+\end{cases}\]</span>
+</center>
+</div>
+<div id="rv:def:pdf" class="def">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Probability density function.</strong></span></p>
+Let <span class="math inline">\(X\)</span> be a <strong>continuous</strong> random variable. If there exists some non-negative function <span class="math inline">\(f_X\)</span> on <span class="math inline">\(\mathbb R\)</span> such that for any interval <span class="math inline">\(I\)</span>,<br />
+
+<center>
+<span class="math display">\[P(X \in I) = \int_I f_X(u) du,\]</span>
+</center>
+<p>the function <span class="math inline">\(f_X\)</span> is called the <em>probability density function</em> (p.d.f.) of <span class="math inline">\(X\)</span>.</p>
+</div>
+<p>Note that if <span class="math inline">\(F_X(x)\)</span> is the c.d.f. of a continuous random variable <span class="math inline">\(X\)</span>, then the p.d.f. of <span class="math inline">\(X\)</span> is given by
+<span class="math display">\[f_X(x) = \frac{d F_X(x)}{dx}.\]</span></p>
+Note that<br />
+
+<center>
+<span class="math display">\[ F_X(x) = P(X \leq x) = \begin{cases}
+\sum\limits_{x_i \leq x} p_X(x_i), \qquad \text{if $X$ is discrete,} \\[9pt]
+\int_{-\infty}^x f_X(u)du, \qquad \text{if $X$ is continuous.}
+\end{cases} \]</span>
+</center>
+</div>
+<div id="rv:expect" class="section level2 hasAnchor" number="5.3">
+<h2><span class="header-section-number">5.3</span> Expectation<a href="rv.html#rv:expect" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this Section we formally define the <a href="rv.html#rv:def:expect">expectation</a> (mean), <a href="rv.html#rv:def:variance">variance</a>, <a href="rv.html#rv:def:median">median</a> and <a href="rv.html#rv:def:mode">mode</a> of a random variable. We can note the similarities with the definitions of the <a href="summary.html#summary_location">measures of location</a> (mean, median and mode) and <a href="summary.html#summary_spread">variance</a> of summary statistics in <a href="summary.html#summary">Section 2</a>.</p>
+<div id="rv:def:expect" class="def">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Expectation.</strong></span></p>
+The <em>expectation</em> of a random variable <span class="math inline">\(X\)</span> is defined by<br />
+
+<center>
+<span class="math display">\[E[X] = \begin{cases}
+\sum\limits_{x_i} x_i p_X(x_i), \quad \text{if $X$ is discrete,} \\[9pt]
+\int_{-\infty}^\infty x f_X(x)dx, \quad \text{if $X$ is continuous.}
+\end{cases}\]</span>
+</center>
+</div>
+<p>Note that <span class="math inline">\(E[X]\)</span> only exists if <span class="math inline">\(E[|X|]&lt;\infty\)</span> and that <span class="math inline">\(E[X]\)</span> is a measure of the <em>centre</em> of the distribution, that is the centre of mass. We can also define expectations of functions of random variables.</p>
+<div id="rv:def:expect2" class="def">
+<br />
+If <span class="math inline">\(Y=g(X)\)</span> then the <em>expectation</em> of <span class="math inline">\(Y\)</span> is given by<br />
+
+<center>
+<span class="math display">\[\begin{align*}
+E[Y] &amp;= E[g(X)]
+&amp;= \begin{cases}
+\sum\limits_{x_i} g(x_i) p_X(x_i), \quad \text{if $X$ is discrete,} \\[9pt]
+\int_{-\infty}^\infty g(x) f_X(x) \,dx, \quad \text{if $X$ is continuous.}
+\end{cases}
+\end{align*}\]</span>
+</center>
+</div>
+<p>For constants <span class="math inline">\(c\)</span>, <span class="math inline">\(c_i\)</span> and <span class="math inline">\(d\)</span>, the following are properties of the expectation:</p>
+<ul>
+<li><span class="math inline">\(E[c]=c\)</span>;<br />
+</li>
+<li><span class="math inline">\(E[c g(X) + d]= c E[g(X)] + d\)</span>;<br />
+</li>
+<li><span class="math inline">\(E \left[ \sum\limits_{i=1}^n c_i g_i(X_i) \right] = \sum\limits_{i=1}^n c_i E[g_i(X_i)]\)</span>;<br />
+</li>
+<li>A special case of the above results is <span class="math inline">\(c_1 = \ldots =c_n =1\)</span> and <span class="math inline">\(g_i (\cdot)\)</span> is the identity transform, <span class="math inline">\(g_i (X_i) =X_i\)</span>. Then <span class="math inline">\(E \left[ \sum\limits_{i=1}^n X_i \right] = \sum\limits_{i=1}^n E \left[ X_i \right]\)</span>.</li>
+</ul>
+<div id="rv:def:variance" class="def">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Variance.</strong></span></p>
+<p>The <em>variance</em> of <span class="math inline">\(X\)</span> is</p>
+<center>
+<span class="math display">\[ \text{Var} (X) = E \left[ (X-E[X])^2 \right].\]</span>
+</center>
+<p>The <em>standard deviation</em> of <span class="math inline">\(X\)</span> is <span class="math inline">\(\sqrt{\text{Var} (X)}\)</span>.</p>
+</div>
+<p>For constants <span class="math inline">\(c\)</span>, <span class="math inline">\(c_i\)</span> and <span class="math inline">\(d\)</span>, the following are properties of the variance:</p>
+<ul>
+<li><p><span class="math inline">\(\text{Var}(X) = E[X^2] - (E[X])^2\)</span>;</p></li>
+<li><p><span class="math inline">\(\text{Var}(X) \geq 0\)</span>;</p></li>
+<li><p><span class="math inline">\(\text{Var}(cX + d) = c^2 \text{Var}(X)\)</span>;</p></li>
+<li><p>If <span class="math inline">\(X_1,\dots,X_n\)</span> are independent, then<br />
+</p>
+<center>
+<p><span class="math display">\[\text{Var} \left( \sum_{i=1}^n c_i X_i \right) = \sum_{i=1}^n c_i^2 \text{Var} (X_i).\]</span></p>
+</center></li>
+</ul>
+<div id="rv:def:median" class="def">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Median.</strong></span></p>
+<p>The <em>median</em> of <span class="math inline">\(X\)</span> is defined as <span class="math inline">\(x_{0}\)</span> such that <span class="math inline">\(F_X (x_{0}) =0.5\)</span>.</p>
+</div>
+<p>For a discrete random variable it is unlikely that there exists <span class="math inline">\(x_0\)</span> such that <span class="math inline">\(F_X (x_{0}) =0.5\)</span>. Therefore for discrete random variables the median is defined to be the smallest <span class="math inline">\(x_0\)</span> such that <span class="math inline">\(F_X (x_0) \geq 0.5\)</span>.</p>
+<div id="rv:def:mode" class="def">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Mode.</strong></span></p>
+<p>The <em>mode</em> of <span class="math inline">\(X\)</span> is the point at which <span class="math inline">\(f_X (x)\)</span> is maximised, <em>i.e.</em> mode is <span class="math inline">\(x_{0}\)</span> if and only if <span class="math inline">\(f_X(x_{0}) \geq f_X(x)\)</span> for all <span class="math inline">\(x\)</span>.</p>
+</div>
+<div id="rv:exer:cts_example" class="ex">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Continuous distribution.</strong></span></p>
+Suppose that the random variable <span class="math inline">\(X\)</span> has probability density function:<br />
+
+<center>
+<span class="math display">\[ f_X (x) = \left\{ \begin{array}{ll} k x^3 &amp; 1 \leq x \leq 2, \\
+0 &amp; \mbox{otherwise}. \end{array} \right. \]</span>
+</center>
+<center>
+<div class="figure"><span style="display:block;" id="fig:density1"></span>
+<img src="Images/density_ex.png" alt="Plot of $f_X (x)$." width="100%" />
+<p class="caption">
+Figure 5.1: Plot of <span class="math inline">\(f_X (x)\)</span>.
+</p>
+</div>
+</center>
+<ol style="list-style-type: decimal">
+<li>Show that <span class="math inline">\(k =4/15\)</span>;<br />
+</li>
+<li>Find <span class="math inline">\(P (\frac{5}{4}\le X \le \frac{7}{4})\)</span>.</li>
+<li>Compute the standard deviation of <span class="math inline">\(X\)</span>.<br />
+<em>Remember:</em> Standard deviation is the square root of the variance.<br />
+</li>
+<li>Find the median of <span class="math inline">\(X\)</span>.<br />
+</li>
+</ol>
+</div>
+<p>Attempt <a href="rv.html#rv:exer:cts_example">Example 5.3.6</a> and then watch <a href="rv.html#video10">Video 10</a> for the solutions.</p>
+<div id="video10" class="des">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Video 10: Continuous random variable</strong></span></p>
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1355621/sp/135562100/embedIframeJs/uiconf_id/13188771/partner_id/1355621?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_m4k87ypu&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_ilc0iyxo" width="640" height="420" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Continuous Distribution FINAL VERSION">
+</iframe>
+</div>
+<details>
+<summary>
+Solution to Example 5.3.6.
+</summary>
+<div class="prf">
+<ol style="list-style-type: decimal">
+<li>Remember <span class="math inline">\(\int_{-\infty}^\infty f_X (x) \, dx =1\)</span> and therefore<br />
+
+<center>
+<span class="math display">\[\begin{eqnarray*}
+1 &amp;=&amp; \int_{-\infty}^\infty f_X (x) \, dx \\
+&amp;=&amp; \int_1^2 k x^3 \, dx \\
+&amp;=&amp; k \left[ \frac{x^4}{4} \right]_1^2 \\
+&amp;=&amp; k \left(\frac{2^4}{4} -\frac{1^4}{4} \right)  = k \times \frac{15}{4}.
+\end{eqnarray*}\]</span>
+</center>
+Thus, <span class="math inline">\(k=\frac{4}{15}\)</span>.<br />
+</li>
+<li>It follows from the above that the c.d.f of <span class="math inline">\(X\)</span> is<br />
+
+<center>
+<span class="math display">\[ F_X (x) = \left\{ \begin{array}{ll} 0 &amp; \mbox{for } x&lt;1 \\ \int_1^x \frac{4}{15}y^3 \, dy = \frac{x^4-1}{15} &amp; \mbox{for } 1 \leq x \leq 2 \\  1 &amp; \mbox{for } x&gt;2  \end{array} \right. \]</span>
+</center>
+Thus
+<center>
+<span class="math display">\[\begin{eqnarray*}
+P \left(\frac{5}{4}  \leq X \leq \frac{7}{4}\right) &amp;=&amp; \frac{(7/4)^4-1}{15} - \frac{(5/4)^4-1}{15} \\
+&amp;=&amp; \frac{1}{15} \left[\left( \frac{7}{4}\right)^4 -\left( \frac{5}{4}\right)^4 \right] \\
+&amp;=&amp; \frac{37}{80} (=0.4625).
+\end{eqnarray*}\]</span>
+</center></li>
+<li>Remember that the standard deviation of <span class="math inline">\(X\)</span> is the square root of the variance. Therefore<br />
+
+<center>
+<span class="math display">\[ sd (X) = \sqrt{var(X)} = \sqrt{E[X^2]- E[X]^2}. \]</span>
+</center></li>
+</ol>
+For any <span class="math inline">\(n=1,2,\ldots\)</span>,<br />
+
+<center>
+<span class="math display">\[\begin{align*} E[X^n] &amp;= \int_{-\infty}^\infty x^n f_X(x) \, dx \\
+&amp;= \int_1^2 x^n \frac{4}{15} x^3 \, dx \\
+&amp;= \frac{4}{15} \left[\frac{x^{n+4}}{n+4} \right]_1^2 \\
+&amp;= \frac{4 (2^{n+4}-1)}{15(n+4)}. \end{align*}\]</span>
+</center>
+Therefore<br />
+
+<center>
+<span class="math display">\[\begin{align*}
+E [X] &amp;= \frac{4 (32-1)}{15 \times 5} = \frac{124}{75} = 1.6533 \\
+E [X^2] &amp;= \frac{4 (64-1)}{15 \times 6} = \frac{14}{5} = 2.8 \end{align*}\]</span>
+</center>
+Thus<br />
+
+<center>
+<span class="math display">\[ sd (X) = \sqrt{2.8 -1.6533^2} = 0.2579. \]</span>
+</center>
+<ol start="4" style="list-style-type: decimal">
+<li>The median of <span class="math inline">\(X\)</span>, <span class="math inline">\(m\)</span>, satisfies<br />
+
+<center>
+<span class="math display">\[\begin{eqnarray*}
+0.5 &amp;=&amp; P (X \leq m) = \frac{m^4 -1}{15} \\
+7.5 &amp;=&amp; m^4 -1 \\
+8.5 &amp;=&amp; m^4.
+\end{eqnarray*}\]</span>
+</center></li>
+</ol>
+Therefore<br />
+
+<center>
+<span class="math display">\[ m = (8.5)^{1/4} =1.7075. \]</span>
+</center>
+</div>
+</details>
+<p><br />
+</p>
+</div>
+<div id="rv:bernoulli" class="section level2 hasAnchor" number="5.4">
+<h2><span class="header-section-number">5.4</span> Bernoulli distribution and its extension<a href="rv.html#rv:bernoulli" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this section, we start with the <a href="rv.html#rv:Bernoulli:bern">Bernoulli</a> random variable, which is the simplest non-trivial probability distribution taking two possible values (0 or 1). In itself the Bernoulli random variable might not seem particularly exciting, but it forms a key building block in probability and statistics. We consider probability distributions which arise as extensions of the Bernoulli random variable such as the <a href="rv.html#rv:Bernoulli:bin">Binomial</a> distribution (sum of <span class="math inline">\(n\)</span> Bernoulli random variables), the <a href="rv.html#rv:Bernoulli:geom">Geometric</a> distribution (number of Bernoulli random variables until we get a 1) and the <a href="rv.html#rv:Bernoulli:negbin">Negative Binomial</a> distribution (number of Bernoulli random variables until we get our <span class="math inline">\(n^{th}\)</span> 1).</p>
+<div id="rv:Bernoulli:bern" class="section level3 hasAnchor" number="5.4.1">
+<h3><span class="header-section-number">5.4.1</span> Bernoulli distribution<a href="rv.html#rv:Bernoulli:bern" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="rv:def:Bernoulli" class="def">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Bernoulli trial.</strong></span></p>
+A <em>Bernoulli trial</em> is a simple random experiment with two outcomes: success <span class="math inline">\((1)\)</span> or failure <span class="math inline">\((0)\)</span>. The success probability is <span class="math inline">\(p\)</span>, so failure probability = <span class="math inline">\(1-p (=q)\)</span>.
+A Bernoulli random variable <span class="math inline">\(X\)</span> describes this:<br />
+
+<center>
+<span class="math display">\[\begin{eqnarray*}
+X =
+\left\{
+\begin{array}{ll}
+1 &amp; \mbox{success - probability $p$}, \\
+0 &amp; \mbox{failure - probability $q=1-p$.}
+\end{array}
+\right.
+\end{eqnarray*}\]</span>
+</center>
+</div>
+The Bernoulli distribution has probability mass function:<br />
+
+<center>
+<span class="math display">\[ p_X (x) = p^x (1-p)^{1-x} \hspace{1cm} x=0,1. \]</span>
+</center>
+<p>[If <span class="math inline">\(x =1\)</span>,
+<span class="math inline">\(p_X (1) = p^1 q^0 = p\)</span> and if <span class="math inline">\(x=0\)</span>, <span class="math inline">\(p_X (0) = p^0 q^1 = q\)</span>.]</p>
+We have that
+<center>
+<span class="math display">\[
+E[X]= [p \times 1] + [q \times 0] = p
+\]</span>
+</center>
+and<br />
+
+<center>
+<span class="math display">\[
+E[X^{2}] = [p \times 1^{2}] + [q \times 0^{2}] = p.
+\]</span>
+</center>
+Therefore<br />
+
+<center>
+<span class="math display">\[
+var (X) = E[X^{2}] - E[X]^{2} = p - p^{2} = p(1-p) =pq.
+\]</span>
+</center>
+</div>
+<div id="rv:Bernoulli:bin" class="section level3 hasAnchor" number="5.4.2">
+<h3><span class="header-section-number">5.4.2</span> Binomial Distribution<a href="rv.html#rv:Bernoulli:bin" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="rv:def:iid" class="def">
+<span style="color: rgba(207, 0, 15, 1);"><strong>Independent and identically distributed</strong></span><br />
+Two discrete random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are said to be <strong>independent and
+identically distributed</strong> (<em>i.i.d.</em>) if for all <span class="math inline">\(x, y \in \mathbb{R}\)</span>,<br />
+
+<center>
+<span class="math display">\[ P(X=x, Y=y) = P(X=x) \times P(Y=y) \hspace{0.5cm} (\mbox{independence}) \]</span>
+</center>
+and for all <span class="math inline">\(x \in \mathbb{R}\)</span>,<br />
+
+<center>
+<span class="math display">\[ P(Y=x) = P(X=x), \]</span>
+</center>
+<p>(identically distributed, <em>i.e.</em> have the same pmf.)</p>
+</div>
+<p><br />
+</p>
+<div id="rv:def:bin" class="def">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Binomial distribution.</strong></span></p>
+Consider <span class="math inline">\(n\)</span> independent Bernoulli trials, each with
+success probability <span class="math inline">\(p\)</span>. Let <span class="math inline">\(X\)</span> be the total number of successes. Then <span class="math inline">\(X\)</span> has
+a <em>Binomial</em> distribution, written<br />
+
+<center>
+<span class="math display">\[
+X \sim {\rm Bin}(n,p), \; \; \mbox{or } X \sim {\rm B}(n,p)
+\]</span>
+</center>
+and for <span class="math inline">\(k = 0, 1, \ldots, n\)</span>,<br />
+
+<center>
+<span class="math display">\[
+p_X(k) = P(X = k) = \binom{n}{k} p^{k}(1-p)^{n-k} .
+\]</span>
+</center>
+</div>
+<p>To see this: consider any particular sequence of <span class="math inline">\(k\)</span> successes and <span class="math inline">\(n-k\)</span>
+failures. Each such sequence has probability <span class="math inline">\(p^{k}(1-p)^{n-k}\)</span>, since the <span class="math inline">\(n\)</span> trials are independent.
+There are <span class="math inline">\(\binom{n}{k}\)</span> ways of choosing the positions of the <span class="math inline">\(k\)</span> successes out of <span class="math inline">\(n\)</span> trials.</p>
+<p><strong>Note:</strong>
+1. <span class="math inline">\(n\)</span> and <span class="math inline">\(p\)</span> are called the parameters of the Binomial distribution.<br />
+2. The number of trials <span class="math inline">\(n\)</span> is fixed.<br />
+3. There are only two possible outcomes: ‘success’ with probability <span class="math inline">\(p\)</span> and ‘failure’ with probability <span class="math inline">\(q =1-p\)</span>.<br />
+4. The probability of success <span class="math inline">\(p\)</span> in each independent trial is constant.</p>
+<div id="rv:lem:binomial_expectation" class="lem">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Binomial distribution: Expectation and variance.</strong></span></p>
+Let <span class="math inline">\(X \sim {\rm Bin} (n,p)\)</span>, then<br />
+
+<center>
+<span class="math display">\[ E[X]=np \hspace{0.5cm} \mbox{and} \hspace{0.5cm} var(X) = n p(1-p). \]</span>
+</center>
+</div>
+<div class="prf">
+We can write<br />
+
+<center>
+<span class="math display" id="eq:bin1">\[\begin{equation}   
+X = X_1 + X_2 + \ldots + X_n,
+\tag{5.1}  
+\end{equation}\]</span>
+</center>
+<p>where <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> are independent Bernoulli random variables each with success probability <span class="math inline">\(p\)</span>.</p>
+Therefore using properties of expectations<br />
+
+<center>
+<span class="math display">\[\begin{align*}
+E [X] &amp; = E [ X_1 + X_2 + \ldots + X_n ] \\
+&amp;=  E [ X_1 ]+ E [X_2] + \ldots + E [X_n ]  \\
+&amp; = p + p + \ldots + p = np.\end{align*}\]</span>
+</center>
+Given that the <span class="math inline">\(X_i\)</span>’s in <a href="rv.html#eq:bin1">(5.1)</a> are independent, we also have that<br />
+
+<center>
+<span class="math display">\[\begin{align*}
+var (X) &amp; = var ( X_1 + X_2 + \ldots + X_n ) \\
+&amp;= var ( X_1) + var (X_2) + \ldots + var (X_n ) \\
+&amp; = p(1-p) + p(1-p) + \ldots + p(1-p) = np(1-p).\end{align*}\]</span>
+</center>
+</div>
+<p><br />
+</p>
+The cumulative distribution function is<br />
+
+<center>
+<span class="math display">\[
+F_X (x) = P (X \leq x) = \sum_{k=0}^{[x]} \binom{n}{k} p^{k}(1-p)^{n-k},
+\]</span>
+</center>
+<p>where <span class="math inline">\([x]\)</span> is the greatest integer not greater than <span class="math inline">\(x\)</span>.</p>
+<p>An <strong>R Shiny</strong> app is provided to explore the Binomial distribution.</p>
+<p>R Shiny app: <a href="https://shiny-new.maths.nottingham.ac.uk/pmzpn/Binomial/">Binomial distribution</a></p>
+<div id="rv:ex:mc" class="ex">
+<br />
+Twenty multiple choice questions, each with 5 options. Suppose that you
+guess at random, independently for each question. Then if <span class="math inline">\(X\)</span> is the number of
+right answers,<br />
+
+<center>
+<span class="math display">\[
+X \sim Bin(20,0.2).
+\]</span>
+</center>
+Then<br />
+
+<center>
+<span class="math display">\[
+P(X = 3) = \binom{20}{3} (0.2)^{3}(0.8)^{17} =0.2053,
+\]</span>
+</center>
+and<br />
+
+<center>
+<span class="math display">\[
+P(X \leq 3) = \sum_{k=0}^{3} \binom{20}{k} (0.2)^{k}(0.8)^{20-k} = 0.4114.
+\]</span>
+</center>
+</div>
+</div>
+<div id="rv:Bernoulli:geom" class="section level3 hasAnchor" number="5.4.3">
+<h3><span class="header-section-number">5.4.3</span> Geometric Distribution<a href="rv.html#rv:Bernoulli:geom" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="rv:def:geometric" class="def">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Geometric distribution.</strong></span></p>
+Consider a sequence of independent Bernoulli trials each with success probability <span class="math inline">\(p\)</span>. Let <span class="math inline">\(Y\)</span> denote the number of trials needed for the first success to appear. Then <span class="math inline">\(Y\)</span> has a <em>Geometric</em> distribution with parameter <span class="math inline">\(p\)</span>, written <span class="math inline">\(Y \sim Geom(p)\)</span>, and<br />
+
+<center>
+<span class="math display">\[
+p_Y (k) = (1-p)^{k-1}p, \; \; \; k = 1, 2, 3, \ldots .
+\]</span>
+</center>
+</div>
+<p><em>To see this:</em> If the <span class="math inline">\(k^{th}\)</span> trial is the first success then the first <span class="math inline">\(k-1\)</span> trials must have
+been failures. Probability of this is <span class="math inline">\((1-p)^{k-1}p\)</span>.</p>
+Note that<br />
+
+<center>
+<span class="math display">\[
+\sum_{k=1}^\infty p_Y (k)=\sum_{k=1}^\infty (1-p)^{k-1}p=p\sum_{i=0}^\infty (1-p)^i=\frac{p}{1-(1-p)}=1,
+\]</span>
+</center>
+<p>so a success eventually occurs with probability <span class="math inline">\(1\)</span>.</p>
+<div id="geometric_expectation" class="lem">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Geometric distribution: Expectation and variance.</strong></span></p>
+Let <span class="math inline">\(Y \sim {\rm Geom} (p)\)</span>, then<br />
+
+<center>
+<span class="math display">\[ E[Y]= \frac{1}{p} \hspace{0.5cm} \mbox{and} \hspace{0.5cm} var(Y) = \frac{1-p}{p^2}. \]</span>
+</center>
+</div>
+<div class="prf">
+First step: Let <span class="math inline">\(q=1-p\)</span> and write
+<center>
+<span class="math display">\[\begin{eqnarray*}
+E[Y] &amp; = &amp; \sum_{k=1}^{\infty} k P(Y=k) \\ &amp; = &amp; \sum_{k=1}^{\infty} k (1-p)^{k-1}p \\
+&amp; = &amp; p \sum_{k=1}^{\infty} k q^{k-1} \end{eqnarray*}\]</span>
+</center>
+Note that <span class="math inline">\(k q^{k-1}\)</span> is the derivative of <span class="math inline">\(q^k\)</span> with respect to <span class="math inline">\(q\)</span>. Hence,
+<center>
+<span class="math display">\[\begin{eqnarray*}
+E[Y] &amp; = &amp; p \sum_{k=1}^{\infty} \frac{{\rm d} \;}{{\rm d}q} \left\{ q^{k} \right\}.
+\end{eqnarray*}\]</span>
+</center>
+We can interchange the order of summation and differentiation (we won’t go into the technical requirements):
+<center>
+<span class="math display">\[\begin{eqnarray*}
+E [Y] &amp; = &amp; p \frac{{\rm d} \;}{{\rm d}q} \left( \sum_{k=1}^{\infty} q^k\right) \\
+&amp; = &amp; p \frac{{\rm d} \;}{{\rm d}q} \left( \frac{q}{1-q}\right),
+\end{eqnarray*}\]</span>
+</center>
+<p>since <span class="math inline">\(\sum_{k=1}^\infty x^k = x/(1-x)\)</span> if <span class="math inline">\(|x| &lt;1\)</span>.</p>
+Therefore
+<center>
+<span class="math display">\[\begin{eqnarray*}
+E [Y] &amp; = &amp; p \frac{(1)(1-q)- q(-1)}{(1-q)^2}\\
+&amp; = &amp; \frac{p}{p^2} = \frac{1}{p}.
+\end{eqnarray*}\]</span>
+</center>
+By a similar method, we obtain
+<center>
+<span class="math display">\[
+E[Y(Y-1)] =  \frac{2(1-p)}{p^{2}}.
+\]</span>
+</center>
+Since
+<span class="math display" id="eq:sec">\[\begin{equation}
+E[Y(Y-1)]= E[Y^2-Y] = E[Y^2] -E[Y],
+\tag{5.2}
+\end{equation}\]</span>
+we have that
+<center>
+<span class="math display">\[
+var(Y) = E[Y(Y-1)] + E[Y] - E[Y]^{2} = \frac{1-p}{p^{2}}.
+\]</span>
+</center>
+</div>
+</div>
+<div id="rv:Bernoulli:negbin" class="section level3 hasAnchor" number="5.4.4">
+<h3><span class="header-section-number">5.4.4</span> Negative binomial Distribution<a href="rv.html#rv:Bernoulli:negbin" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="rv:def:neg_binom" class="def">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Negative binomial distribution.</strong></span></p>
+Consider a sequence of independent Bernoulli trials, each with success probability <span class="math inline">\(p\)</span>. If <span class="math inline">\(W\)</span> is
+the number of trials needed until <span class="math inline">\(r\)</span> successes have occurred then <span class="math inline">\(W\)</span> has a <em>Negative
+Binomial</em> distribution, <span class="math inline">\(W \sim {\rm Neg Bin} (r,p)\)</span>, with probability mass function
+<center>
+<span class="math display">\[
+p_W (k) = \binom{k-1}{r-1}p^{r}(1-p)^{k-r} \; \; \; k = r, r+1, \ldots
+\]</span>
+</center>
+</div>
+<p><em>To see this:</em> We must have the <span class="math inline">\(k^{th}\)</span> trial is successful and that it is the <span class="math inline">\(r^{th}\)</span> success. Therefore we have <span class="math inline">\(r-1\)</span> successes in first <span class="math inline">\(k-1\)</span> trials, the locations of which can be chosen in <span class="math inline">\(\binom{k-1}{r-1}\)</span> ways.</p>
+<div id="rv:lem:neg_binom_expectation" class="lem">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Negative binomial distribution: Expectation and variance.</strong></span></p>
+Let <span class="math inline">\(W \sim {\rm Neg Bin} (r,p)\)</span>, then
+<center>
+<span class="math display">\[ E[W]= \frac{r}{p} \hspace{0.5cm} \mbox{and} \hspace{0.5cm} var(W) =  \frac{r(1-p)}{p^2}. \]</span>
+</center>
+</div>
+<div class="prf">
+Note that we can write
+<center>
+<span class="math display">\[
+W = Y_{1} + Y_{2} + \ldots + Y_{r},
+\]</span>
+</center>
+<p>where <span class="math inline">\(Y_1\)</span> is the number of trials until the first success and, for <span class="math inline">\(i=2,3,\dots,r\)</span>, <span class="math inline">\(Y_i\)</span> is the number of trials after the <span class="math inline">\((i-1)^{st}\)</span> success until the <span class="math inline">\(i^{th}\)</span> success.</p>
+We observe that <span class="math inline">\(Y_1, Y_2,\dots,Y_r\)</span> are independent <span class="math inline">\({\rm Geom}(p)\)</span> random variables, so
+<center>
+<span class="math display">\[
+E[Y_1]= \frac{1}{p} \qquad\mbox{and}\qquad var(Y_1)= \frac{1-p}{p^2},
+\]</span>
+</center>
+whence
+<center>
+<span class="math display">\[
+E[W] = E[Y_{1} + Y_{2} +\ldots + Y_{r}] =E[Y_{1}]+E[Y_{2}]+\ldots+E[Y_{r}]  = \frac{r}{p},
+\]</span>
+</center>
+and
+<center>
+<span class="math display">\[
+var(W) = var(Y_{1} + Y_{2} +\ldots +Y_{r}) =var(Y_{1})+var(Y_{2})+\ldots+var(Y_{r}) = \frac{r(1-p)}{p^{2}}.
+\]</span>
+</center>
+</div>
+<p><br />
+</p>
+<p>The negative binomial distribution <span class="math inline">\(W \sim {\rm Neg Bin} (r,p)\)</span> is the sum of <span class="math inline">\(r\)</span> independent geometric, <span class="math inline">\(Y \sim {\rm Geom} (p)\)</span> distributions in the same way that the binomial distribution <span class="math inline">\(X \sim {\rm Bin} (n,p)\)</span> is the sum of <span class="math inline">\(n\)</span> independent Bernoulli random variables with success probability <span class="math inline">\(p\)</span>.</p>
+<p>An <strong>R Shiny</strong> app is provided to explore the Negative Binomial distribution.</p>
+<p>R Shiny app: <a href="https://shiny-new.maths.nottingham.ac.uk/pmzpn/NegBin/">Negative Binomial distribution</a></p>
+<p><a href="rv.html#rv:exer:crazy_golf">Example 5.4.10</a> draws together the different Bernoulli-based distributions and demonstrates how they are used to answer different questions of interest.</p>
+<div id="rv:exer:crazy_golf" class="ex">
+<span style="color: rgba(207, 0, 15, 1);"><strong>Crazy golf.</strong></span><br />
+<br />
+
+<center>
+<div class="figure"><span style="display:block;" id="fig:golf1"></span>
+<img src="Images/crazygolf1.jpg" alt="Crazy golf picture." width="80%" />
+<p class="caption">
+Figure 5.2: Crazy golf picture.
+</p>
+</div>
+</center>
+<p>A child plays a round of crazy golf. The round of golf consists of 9 holes. The number of shots the child takes at each
+hole is geometrically distributed with success probability 0.25.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Calculate the probability that the child gets a ‘hole in
+one’ on the first hole. (A ‘hole in one’ means the child only takes
+one shot on that hole.)<br />
+</li>
+<li>Calculate the probability that the child takes more than five shots on the first hole.<br />
+</li>
+<li>Calculate the probability that the child gets three `hole in one’ during their round.</li>
+<li>Calculate the mean and variance for the total number of shots the child takes.<br />
+</li>
+<li>Calculate the probability that the child takes 36 shots in completing their round.<br />
+</li>
+</ol>
+</div>
+<p>Attempt <a href="rv.html#rv:exer:crazy_golf">Example 5.4.10 (Crazy golf)</a> and then watch <a href="rv.html#video11">Video 11</a> for the solutions.</p>
+<div id="video11" class="des">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Video 11: Crazy Golf Example</strong></span></p>
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1355621/sp/135562100/embedIframeJs/uiconf_id/13188771/partner_id/1355621?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_n6lfsnjm&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_xpthkbxs" width="640" height="420" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Crazy Golf FINAL VERSION">
+</iframe>
+</div>
+<details>
+<summary>
+Solution to Example 5.4.10.
+</summary>
+<div class="prf">
+<p>Let <span class="math inline">\(X_i\)</span> denote the number of shots taken on hole <span class="math inline">\(i\)</span>. Then <span class="math inline">\(X_i \sim {\rm Geom} (0.25)\)</span>.</p>
+<ol style="list-style-type: lower-alpha">
+<li>A ‘hole in one’ on the first hole is the event <span class="math inline">\(\{ X_1 =1\}\)</span>. Therefore</li>
+</ol>
+<center>
+<span class="math display">\[ P(\mbox{Hole in one}) = P(X_1 =1) =0.25. \]</span>
+</center>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>More than five shots on the first hole is the event <span class="math inline">\(\{X_1 &gt;5\}\)</span>. Therefore</li>
+</ol>
+<center>
+<span class="math display">\[ P(X_1 &gt;5) =0.75^5 = 0.2373. \]</span>
+</center>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>This is a binomial question since there are <span class="math inline">\(n=9\)</span> holes and on each hole there is <span class="math inline">\(p=P(X_1 =1) =0.25\)</span> of obtaining a hole in one. Let <span class="math inline">\(Y \sim {\rm Bin} (9,0.25)\)</span> denote the number of holes in one in a round, then</li>
+</ol>
+<center>
+<span class="math display">\[ P(Y=3) = \binom{9}{3} (0.25)^3 (0.75)^6 =0.2336. \]</span>
+</center>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>The total number of shots taken is</li>
+</ol>
+<center>
+<span class="math display">\[Z = X_1 + X_2 + \ldots +X_9 \sim {\rm Neg Bin} (9,0.25). \]</span>
+</center>
+<p>Thus the mean number of shots taken is <span class="math inline">\(E[Z] = \frac{9}{0.25} = 36\)</span> and the variance of the number of shots is <span class="math inline">\(var (Z) = \frac{9 (1-0.25)}{0.25^2} =108\)</span>.<br />
+(e) The probability that the child takes exactly 36 (mean number of) shots is</p>
+<center>
+<span class="math display">\[ P(Z=36) = \binom{36-1}{9-1} (0.25)^9 (0.75)^{27} = 0.0380. \]</span>
+</center>
+</div>
+</details>
+</div>
+</div>
+<div id="rv:Poisson" class="section level2 hasAnchor" number="5.5">
+<h2><span class="header-section-number">5.5</span> Poisson distribution<a href="rv.html#rv:Poisson" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The Poisson distribution is often used to model
+‘random’ events - <em>e.g.</em> hits on a website; traffic accidents; customers
+joining a queue etc.</p>
+<p>Suppose that events occur at rate <span class="math inline">\(\lambda &gt; 0\)</span> per unit time. Divide the time interval <span class="math inline">\([0,1)\)</span>
+into <span class="math inline">\(n\)</span> small equal parts of length <span class="math inline">\(1/n\)</span>.</p>
+<center>
+<span class="math display">\[
+[0,1) = \left[ 0, \frac{1}{n} \right) \cup \left[ \frac{1}{n}, \frac{2}{n} \right) \cup \ldots \cup \left[ \frac{i}{n},\frac{i+1}{n} \right)
+\cup \ldots \cup \left[ \frac{n-1}{n},1 \right).
+\]</span>
+</center>
+<p>Assume that each interval can have either zero or one event, independently of other intervals, and</p>
+<center>
+<span class="math display">\[
+P \left[ \mathrm{1~event~in} \left[ \frac{i}{n}, \frac{i+1}{n} \right) \right] = \frac{\lambda}{n}.
+\]</span>
+</center>
+<center>
+<div class="figure"><span style="display:block;" id="fig:pois1"></span>
+<img src="Images/pois1.png" alt="Four events (red crosses) in 50 sub-intervals of [0,1]." width="100%" />
+<p class="caption">
+Figure 5.3: Four events (red crosses) in 50 sub-intervals of [0,1].
+</p>
+</div>
+</center>
+Let <span class="math inline">\(X\)</span> be the number of events in the time interval <span class="math inline">\([0,1)\)</span>.
+Then
+<center>
+<span class="math display">\[ X \sim \mathrm{Bin} (n, \lambda/n) \]</span>
+</center>
+and letting <span class="math inline">\(n \to \infty\)</span>, (the number of intervals grows but the chance of observing an event in a given interval decreases), we have that
+<center>
+<span class="math display">\[\begin{eqnarray*}
+P (X=k) &amp; = &amp; \binom{n}{k} \left( \frac{\lambda}{n} \right)^{k} \left( 1 - \frac{\lambda}{n}
+\right)^{n-k} \\
+&amp; = &amp; \frac{n (n-1) \ldots (n-k+1)}{k!} \times \frac{\lambda^{k}}{n^k} \times \left( 1 - \frac{\lambda}{n}
+\right)^{n-k} \\
+&amp; = &amp; \frac{n (n-1) \ldots (n-k+1)}{n^k} \times \frac{\lambda^{k}}{k!}\times
+\frac{ (1 - \lambda / n)^n}{(1 - \lambda / n )^k}  \\
+&amp; = &amp; 1 \left(1 - \frac{1}{n} \right) \cdots \left(1 - \frac{(k-1)}{n} \right) \times \frac{\lambda^k}{k!}
+\times \frac{ (1 - \lambda / n)^n}{(1 - \lambda / n )^k}  \\
+&amp; \rightarrow &amp; 1 \times  \frac{\lambda^k}{k!} \times \exp(-\lambda)
+\; \; \mbox{ as $n \to \infty$, for fixed $k$}.
+\end{eqnarray*}\]</span>
+</center>
+<div id="rev:def:Poisson" class="def">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Poisson distribution</strong></span></p>
+<p>Let <span class="math inline">\(X\)</span> be a <strong>discrete</strong> random variable with parameter <span class="math inline">\(\lambda &gt;0\)</span> and p.m.f.</p>
+<center>
+<span class="math display">\[P(X=x) = \frac{\lambda^x}{x!} \exp(-\lambda) \hspace{1cm} (x=0,1,\ldots).\]</span>
+</center>
+<p>Then <span class="math inline">\(X\)</span> is said to follow a <strong>Poisson</strong> distribution with parameter <span class="math inline">\(\lambda\)</span>, denoted <span class="math inline">\(X \sim {\rm Po} (\lambda)\)</span>.</p>
+</div>
+<div id="rev:lem:poisson_expectation" class="lem">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Poisson distribution: Expectation and variance.</strong></span></p>
+<p>Let <span class="math inline">\(X \sim {\rm Po} (\lambda)\)</span>, then</p>
+<center>
+<span class="math display">\[ E[X]= \lambda \hspace{0.5cm} \mbox{and} \hspace{0.5cm} var(X) =  \lambda. \]</span>
+</center>
+</div>
+<div class="prf">
+By definition of expectation,
+<center>
+<span class="math display">\[
+E[X] = \sum_{x=0}^\infty x P(X=x) = \sum_{x=1}^\infty x P(X=x), \]</span>
+</center>
+<p>since <span class="math inline">\(0 \times P(X=0) =0\)</span>.</p>
+<p>Now</p>
+<center>
+<span class="math display">\[\begin{eqnarray*}
+E[X] &amp;=&amp; \sum_{x=1}^\infty x \times \frac{\lambda^x}{x!} \exp(-\lambda) \\
+&amp;=&amp; \exp(-\lambda) \sum_{x=1}^\infty \frac{x \lambda^x}{x!} = \lambda \exp(-\lambda) \sum_{x=1}^\infty \frac{ \lambda^{x-1}}{(x-1)!}. \end{eqnarray*}\]</span>
+</center>
+<p>Using a change of variable <span class="math inline">\(k=x-1\)</span>,</p>
+<center>
+<span class="math display">\[ E[X]= \lambda \exp(-\lambda) \sum_{k=0}^\infty \frac{ \lambda^k}{k!} = \lambda \exp(-\lambda) \exp(\lambda) =\lambda. \]</span>
+</center>
+Similarly, we can show that
+<center>
+<span class="math display">\[ E[X(X-1)] = \sum_{x=0}^\infty x (x-1) \left( \frac{\lambda^x}{x!} \exp(-\lambda) \right) = \lambda^2.  \]</span>
+</center>
+<p>Therefore, as noted in <a href="rv.html#geometric_expectation">Lemma 5.4.7</a> <a href="rv.html#eq:sec">(5.2)</a>, we have that <span class="math inline">\(E[X^2]=E[X(X-1)] + E[X]\)</span> giving</p>
+<center>
+<span class="math display">\[\begin{eqnarray*}
+var(X) &amp;=&amp; E[X(X-1)] + E[X] - E[X]^2 \\
+&amp;=&amp;  \lambda^2 + \lambda - \lambda^2 = \lambda.
+\end{eqnarray*}\]</span>
+</center>
+</div>
+</div>
+<div id="rv:exponential" class="section level2 hasAnchor" number="5.6">
+<h2><span class="header-section-number">5.6</span> Exponential distribution and its extensions<a href="rv.html#rv:exponential" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this section we start with the <a href="rv.html#rv:exponential:exp">Exponential</a> random variable which is an important continuous distribution that can take positive values (on the range <span class="math inline">\([0,\infty)\)</span>). The Exponential distribution is the continuous analogue of the <a href="rv.html#rv:Bernoulli:geom">Geometric</a> distribution. The sum of exponential distributions leads to the <a href="https://en.wikipedia.org/wiki/Erlang_distribution">Erlang distribution</a> which is a special case of the <a href="rv.html#rv:exponential:gamma">Gamma distribution</a>. Another special case of the Gamma distribution is the <a href="rv.html#rv:exponential:chi"><span class="math inline">\(\chi^2\)</span> (Chi squared) distribution</a> which is important in statistics. Finally, we consider the <a href="rv.html#rv:exponential:beta">Beta distribution</a> which is continuous distribution taking values on the range <span class="math inline">\((0,1)\)</span> and can be constructed from Gamma random variables via a transformation. (See <a href="Transform.html#Transform">Section 14</a> for details on transformations.)</p>
+<div id="rv:exponential:exp" class="section level3 hasAnchor" number="5.6.1">
+<h3><span class="header-section-number">5.6.1</span> Exponential distribution<a href="rv.html#rv:exponential:exp" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Let <span class="math inline">\(X\)</span> denote the total number of hits on a website in time <span class="math inline">\(t\)</span>.
+Let <span class="math inline">\(\lambda\)</span> - rate of hits per unit time, and so, <span class="math inline">\(\lambda t\)</span> -
+rate of hits per time <span class="math inline">\(t\)</span>.</p>
+<p>A suitable model as we have observed in <a href="rv.html#rv:Poisson">Section 5.5</a> for <span class="math inline">\(X\)</span> is <span class="math inline">\({\rm Po} (\lambda t)\)</span>.</p>
+Let <span class="math inline">\(T\)</span> denote the time, from a fixed point, until the first hit. Note that <span class="math inline">\(T\)</span> is
+continuous <span class="math inline">\(0 &lt; T &lt; \infty\)</span> whilst the number of hits <span class="math inline">\(X\)</span> is
+discrete. Then <span class="math inline">\(T &gt; t\)</span> if and only if <span class="math inline">\(X=0\)</span>. Hence,
+<center>
+<span class="math display">\[  P(T &gt; t) = P (X=0) = \exp(-\lambda t) \]</span>
+</center>
+and so,
+<center>
+<span class="math display">\[ P (T \leq t) = 1 - \exp(-\lambda t) \; \; \; (t &gt; 0). \]</span>
+</center>
+Therefore the cumulative distribution function of T is
+<center>
+<span class="math display">\[ F_T (t) = \left\{ \begin{array}{ll} 0 &amp; t &lt; 0 \\ 1 - \exp(-\lambda
+t) &amp; t \geq 0 \end{array} \right. \]</span>
+</center>
+Differentiating <span class="math inline">\(F_T (t)\)</span> with respect to <span class="math inline">\(t\)</span> gives
+<center>
+<span class="math display">\[ f_T (t) = \left\{ \begin{array}{ll} 0 &amp; t &lt; 0 \\ \lambda \exp(- \lambda t) &amp; t \geq 0 \end{array} \right. \]</span>
+</center>
+<div id="rv:def:exponential" class="def">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Exponential distribution</strong></span></p>
+<p>A random variable <span class="math inline">\(T\)</span> is said to have an exponential distribution
+with parameter <span class="math inline">\(\lambda &gt; 0\)</span>, written <span class="math inline">\(T \sim {\rm Exp} (\lambda)\)</span> if its
+c.d.f. is given by
+<span class="math display">\[ F_T (t) = \left\{ \begin{array}{ll} 1- e^{- \lambda t} &amp; t&gt;0 \\
+0 &amp; t \leq 0, \end{array} \right. \]</span>
+and its p.d.f. is
+<span class="math display">\[ f_T (t) = \frac{d \;}{dt} F_T (t) = \left\{ \begin{array}{ll} \lambda
+e^{- \lambda t} &amp; t&gt;0 \\
+0 &amp; t \leq 0 \end{array} \right. \]</span></p>
+</div>
+<div id="rv:lem:exponential_expectation" class="lem">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Exponential distribution: Expectation and variance.</strong></span></p>
+<p>Let <span class="math inline">\(T \sim {\rm Exp} (\lambda)\)</span>, then
+<span class="math display">\[ E[T]= \frac{1}{\lambda} \hspace{0.5cm} \mbox{and} \hspace{0.5cm} var(T) = \frac{1}{\lambda^2}. \]</span></p>
+</div>
+<div class="prf">
+The expectation of <span class="math inline">\(T\)</span> is
+<center>
+<span class="math display">\[ E[T] = \int_{-\infty}^\infty t f_T (t) \, dt = \int_0^\infty t
+\lambda e^{- \lambda t} \, dt. \]</span>
+</center>
+Using integration by parts, we have that
+<center>
+<span class="math display">\[\begin{eqnarray*} E[T] &amp;=&amp; \left[ t \times - e^{-\lambda t} \right]_0^\infty -
+\int_0^\infty - e^{-\lambda t} \, dt \\
+&amp;=&amp; (0-0) + \left[ - \frac{1}{\lambda} e^{-\lambda t}
+\right]_0^\infty  = \frac{1}{\lambda}.\end{eqnarray*}\]</span>
+</center>
+Similarly, by using integration parts twice,
+<center>
+<span class="math display">\[ E[T^2] = \int_0^\infty
+t^2 \lambda e^{- \lambda t} \, dx = \frac{2}{\lambda^2}. \]</span>
+</center>
+Therefore
+the variance of <span class="math inline">\(T\)</span> is
+<center>
+<span class="math display">\[ var (T) = E[T^2] - E[T]^2 = \frac{2}{\lambda^2} -
+\frac{1}{\lambda^2} = \frac{1}{\lambda^2}. \]</span>
+</center>
+</div>
+<p><br />
+</p>
+</div>
+<div id="rv:exponential:gamma" class="section level3 hasAnchor" number="5.6.2">
+<h3><span class="header-section-number">5.6.2</span> Gamma distribution<a href="rv.html#rv:exponential:gamma" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Suppose that we want to know, <span class="math inline">\(W\)</span>, the time until the <span class="math inline">\(m^{th}\)</span> <span class="math inline">\((m=1,2,\ldots)\)</span> hit on a website. Then <span class="math display">\[W=T_1 + T_2 + \ldots + T_m \]</span>
+where <span class="math inline">\(T_i\)</span> is the time from the <span class="math inline">\((i-1)^{st}\)</span> hit on the website until the <span class="math inline">\(i^{th}\)</span> hit on the website.</p>
+<center>
+<div class="figure"><span style="display:block;" id="fig:gamma1"></span>
+<img src="Images/Gamma1.png" alt="Illustration with $m=3$, $W=T_1 +T_2 +T_3$." width="100%" />
+<p class="caption">
+Figure 5.4: Illustration with <span class="math inline">\(m=3\)</span>, <span class="math inline">\(W=T_1 +T_2 +T_3\)</span>.
+</p>
+</div>
+</center>
+<p>Note that <span class="math inline">\(T_1,T_2, \ldots\)</span> are independent and identically distributed <a href="rv.html#rv:def:iid">i.i.d.</a> according to <span class="math inline">\(T \sim {\rm Exp} (\lambda)\)</span>. That is, <span class="math inline">\(W\)</span> is the sum of <span class="math inline">\(m\)</span> exponential random variables with parameter <span class="math inline">\(\lambda\)</span>. Then <span class="math inline">\(W\)</span> follows a Gamma distribution with <span class="math inline">\(W \sim {\rm Gamma} (m,\lambda)\)</span>.</p>
+<div id="rv:def:gamma_rv" class="def">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Gamma distribution</strong></span></p>
+A random variable <span class="math inline">\(X\)</span> is said to have a Gamma distribution with
+parameters <span class="math inline">\(\alpha, \beta &gt; 0\)</span>, written <span class="math inline">\(X \sim {\rm Gamma} (\alpha, \beta)\)</span>
+if its p.d.f. is given by
+<center>
+<span class="math display">\[ f_X (x) = \left\{ \begin{array}{ll} \frac{\beta^\alpha}{\Gamma (\alpha)}
+x^{\alpha -1} \exp(- \beta x) &amp; x&gt;0 \\
+0 &amp; x \leq 0, \end{array} \right. \]</span>
+</center>
+<p>where <span class="math inline">\(\Gamma (\alpha) = \int_0^\infty y^{\alpha -1} \exp(-y) \, dy\)</span>.</p>
+</div>
+Note that if <span class="math inline">\(\alpha\)</span> is an integer <span class="math inline">\(\Gamma (\alpha) = (\alpha -1)!\)</span>. Also <span class="math inline">\(\Gamma \left( \frac{1}{2} \right) = \sqrt{\pi}\)</span> and for
+<span class="math inline">\(\alpha &gt; 1\)</span>,
+<center>
+<span class="math display">\[ \Gamma (\alpha) = (\alpha -1) \Gamma (\alpha -1). \]</span>
+</center>
+<p>By definition, for <span class="math inline">\(\alpha =1\)</span>, <span class="math inline">\(X \sim {\rm Exp} (\beta)\)</span> and for <span class="math inline">\(\alpha \in \mathbb{N}\)</span>, the Gamma distribution is given by the sum of <span class="math inline">\(\alpha\)</span> exponential random variables. The special case where <span class="math inline">\(\alpha\)</span> is integer is sometimes referred to as the <strong>Erlang distribution</strong>. However, the gamma distribution is defined for positive, real-valued <span class="math inline">\(\alpha\)</span>.</p>
+<p>The <span class="math inline">\(\alpha\)</span> parameter is known as the <em>shape</em> parameter and determines the shape of the Gamma distribution. In particular, the shape varies dependent on whether <span class="math inline">\(\alpha &lt;1\)</span>, <span class="math inline">\(\alpha =1\)</span> or <span class="math inline">\(\alpha &gt;1\)</span>.</p>
+<ul>
+<li><span class="math inline">\(\alpha &lt;1\)</span>, the modal value of <span class="math inline">\(X\)</span> is at 0 and <span class="math inline">\(f(x) \to \infty\)</span> as <span class="math inline">\(x \downarrow 0\)</span> (<span class="math inline">\(x\)</span> tends to 0 from above).<br />
+</li>
+<li><span class="math inline">\(\alpha =1\)</span>, the exponential distribution. The modal value of of <span class="math inline">\(X\)</span> is at 0 and <span class="math inline">\(f(0)=\beta\)</span>.<br />
+</li>
+<li><span class="math inline">\(\alpha &gt;1\)</span>, <span class="math inline">\(f(0)=0\)</span> and the modal value of <span class="math inline">\(X\)</span> is at <span class="math inline">\(\frac{\alpha-1}{\beta}\)</span>.</li>
+</ul>
+The <span class="math inline">\(\beta\)</span> parameter is known as the <em>scale</em> parameter. It does not affect the shape of the Gamma distribution but has the property that if <span class="math inline">\(U \sim {\rm Gamma} (\alpha,1)\)</span>, then <span class="math inline">\(X\)</span> has the same distribution as <span class="math inline">\(U/\beta\)</span>. This can be written as
+<center>
+<span class="math display">\[ X \stackrel{D}{=} \frac{U}{\beta} \sim \frac{1}{\beta} {\rm Gamma} (\alpha,1). \]</span>
+</center>
+<div id="rv:def:eqd" class="def">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Equality in distribution</strong></span></p>
+Two random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are said to be <em>equal in distribution</em>, denoted <span class="math inline">\(X \stackrel{D}{=} Y\)</span>, if for all <span class="math inline">\(x \in \mathbb{R}\)</span>,
+<center>
+<span class="math display">\[ P(X \leq x) = P(Y \leq x). \]</span>
+</center>
+<p>That is, <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> have the same c.d.f., or equivalently, <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> have the same p.d.f. (p.m.f.) if <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are continuous (discrete).</p>
+</div>
+<p>An <strong>R Shiny</strong> app is provided to explore the Gamma distribution.</p>
+<p>R Shiny app: <a href="https://shiny-new.maths.nottingham.ac.uk/pmzpn/Gamma/">Gamma distribution</a></p>
+<div id="rv:lem:gamma_expectation" class="lem">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Gamma distribution: Expectation and variance.</strong></span></p>
+If <span class="math inline">\(X \sim {\rm Gamma} (\alpha, \beta)\)</span> then
+<center>
+<span class="math display">\[
+E[X] = \frac{\alpha}{\beta}, \; \; \; var(X) = \frac{\alpha}{\beta^{2}}.
+\]</span>
+</center>
+</div>
+<div class="prf">
+<p>The proof is straightforward if <span class="math inline">\(\alpha =m \in \mathbb{N}\)</span> since then <span class="math inline">\(X= T_1 +T_2 + \ldots +T_m\)</span>, where the <span class="math inline">\(T_i\)</span> are <em>i.i.d.</em> according to <span class="math inline">\(T \sim {\rm Exp} (\beta)\)</span>. (Compare with the proof of <a href="rv.html#rv:lem:neg_binom_expectation">Lemma 5.4.9</a> for the mean and variance of the negative binomial distribution.)</p>
+<p>We omit the general proof for <span class="math inline">\(\alpha \in \mathbb{R}^+\)</span>, which can be proved by integration by parts.</p>
+</div>
+We have noted that the Gamma distribution arises as the sum of exponential distributions. More general if <span class="math inline">\(X_1 \sim {\rm Gamma} (\alpha_1, \beta)\)</span> and <span class="math inline">\(X_2 \sim {\rm Gamma} (\alpha_2, \beta)\)</span> are independent gamma random variables with a common scale parameter <span class="math inline">\(\beta &gt;0\)</span>, then
+<center>
+<span class="math display">\[
+X_1 + X_2 \sim {\rm Gamma} (\alpha_1 + \alpha_2, \beta).
+\]</span>
+</center>
+</div>
+<div id="rv:exponential:chi" class="section level3 hasAnchor" number="5.6.3">
+<h3><span class="header-section-number">5.6.3</span> Chi squared distribution<a href="rv.html#rv:exponential:chi" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+The chi squared (<span class="math inline">\(\chi^2\)</span>) distribution is a special case of the Gamma distribution which plays an important role in statistics. For <span class="math inline">\(k \in \mathbb{N}\)</span>, if
+<center>
+<span class="math display">\[ X \sim {\rm Gamma} \left(\frac{k}{2}, \frac{1}{2} \right) \]</span>
+</center>
+then <span class="math inline">\(X\)</span> is said to follow a chi squared distribution with <span class="math inline">\(k\)</span> degrees of freedom. Note that <span class="math inline">\(X\)</span> has probability density function
+<center>
+<span class="math display">\[ f_X (x) = \left\{ \begin{array}{ll} \frac{x^{\frac{k}{2}-1} \exp\left(-\frac{x}{2}\right)}{2^{\frac{k}{2}} \Gamma \left( \frac{k}{2}\right)} &amp; x&gt;0 \\
+0 &amp; x \leq 0, \end{array} \right. \]</span>
+</center>
+<p>with <span class="math inline">\(E[X] =k\)</span> and <span class="math inline">\(var(X) =2k\)</span>.</p>
+</div>
+<div id="rv:exponential:beta" class="section level3 hasAnchor" number="5.6.4">
+<h3><span class="header-section-number">5.6.4</span> Beta distribution<a href="rv.html#rv:exponential:beta" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+Suppose that <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are <strong>independent</strong> random variables such that <span class="math inline">\(X \sim {\rm Gamma} (\alpha, \gamma)\)</span> and <span class="math inline">\(Y \sim {\rm Gamma} (\beta, \gamma)\)</span> for some <span class="math inline">\(\alpha, \beta, \gamma &gt;0\)</span>. Note that both <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> have the same scale parameter <span class="math inline">\(\gamma\)</span>. Let
+<center>
+<span class="math display">\[ Z = \frac{X}{X+Y},\]</span>
+</center>
+<p>the proportion of the sum of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> accounted for by <span class="math inline">\(X\)</span>. Then <span class="math inline">\(Z\)</span> will take values on the range <span class="math inline">\([0,1]\)</span> and <span class="math inline">\(Z\)</span> follows a Beta distribution with parameters <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>.</p>
+<div id="rv:def:beta" class="def">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Beta distribution</strong></span></p>
+A random variable <span class="math inline">\(Z\)</span> is said to have a Beta distribution with
+parameters <span class="math inline">\(\alpha, \beta &gt; 0\)</span>, written <span class="math inline">\(Z \sim {\rm Beta} (\alpha, \beta)\)</span> if its pdf is given by
+<center>
+<span class="math display">\[ f_Z (z) = \left\{ \begin{array}{ll} \frac{\Gamma (\alpha + \beta)}{
+\Gamma (\alpha) \Gamma (\beta)} z^{\alpha -1} (1- z)^{\beta -1} &amp; 0 &lt; z &lt; 1 \\
+0 &amp; \mbox{otherwise.} \end{array} \right. \]</span>
+</center>
+</div>
+Note that if <span class="math inline">\(Z \sim {\rm Beta} (\alpha, \beta)\)</span>, then
+<center>
+<span class="math display">\[ E[Z] = \frac{\alpha}{\alpha+\beta} \hspace{.5cm} \mbox{and} \hspace{.5cm} var (Z) = \frac{\alpha \beta}{(\alpha + \beta)^2 (\alpha + \beta +1)}.  \]</span>
+</center>
+The special case where <span class="math inline">\(\alpha = \beta =1\)</span>, <span class="math inline">\(f_Z (z)=1\)</span> <span class="math inline">\((0&lt;z&lt;1)\)</span> and <span class="math inline">\(Z\)</span> is uniformly distributed on <span class="math inline">\([0,1]\)</span> denoted <span class="math inline">\(Z \sim U(0,1)\)</span>. That is,
+<center>
+<span class="math display">\[ {\rm Beta} (1,1) \stackrel{D}{=} U(0,1). \]</span>
+</center>
+<p>An <strong>R Shiny</strong> app is provided to explore the Beta distribution.</p>
+<p>R Shiny app: <a href="https://shiny-new.maths.nottingham.ac.uk/pmzpn/Beta/">Beta distribution</a></p>
+<p><a href="rv.html#rv:exer:catch_bus">Example 5.6.7 (Catching a bus)</a> draws together the different Exponential-based distributions and demonstrates how they are used to answer different questions of interest.</p>
+<div id="rv:exer:catch_bus" class="ex">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Catching a bus.</strong></span></p>
+<center>
+<div class="figure"><span style="display:block;" id="fig:bus"></span>
+<img src="Images/bus.jpg" alt="Bus picture." width="80%" />
+<p class="caption">
+Figure 5.5: Bus picture.
+</p>
+</div>
+</center>
+<p>Suppose that the time (in minutes) between buses arriving at a bus stop follows an Exponential distribution, <span class="math inline">\(Y \sim {\rm Exp} (0.5)\)</span>. Given you arrive at the bus stop just as one bus departs:</p>
+<ol style="list-style-type: lower-alpha">
+<li>Calculate the probability that you have to wait more than 2
+minutes for the bus.<br />
+</li>
+<li>Calculate the probability that you have to wait more than 5
+minutes for the bus given that you wait more than 3 minutes.<br />
+</li>
+<li>Given that the next two buses are full, what is the probability you have to wait more than 6 minutes for a bus (the third bus to arrive)?<br />
+</li>
+<li>What is the probability that the time until the third bus arrives is more than double the time until the second bus arrives?<br />
+</li>
+</ol>
+</div>
+<p>Attempt <a href="rv.html#rv:exer:catch_bus">Example 5.6.7 (Catching a bus)</a> and then watch <a href="rv.html#video12">Video 12</a> for the solutions.</p>
+<div id="video12" class="des">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Video 12: Catching a bus</strong></span></p>
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1355621/sp/135562100/embedIframeJs/uiconf_id/13188771/partner_id/1355621?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_vtwjyiai&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_aw89rvp6" width="640" height="420" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Catch The Bus FINAL VERSION">
+</iframe>
+</div>
+<details>
+<summary>
+Solution to Example 5.6.7.
+</summary>
+<div class="prf">
+For an exponential random variable, <span class="math inline">\(X \sim {\rm Exp} (\beta)\)</span>, we have that for any <span class="math inline">\(x&gt;0\)</span>,
+<center>
+<span class="math display">\[ P(X &gt;x) = 1 - P(X \leq x) = 1- \{ 1 -\exp(-\beta x) \} = \exp(-\beta x).\]</span>
+</center>
+<ol style="list-style-type: lower-alpha">
+<li>Since <span class="math inline">\(Y \sim {\rm Exp} (0.5)\)</span>,
+<center>
+<span class="math display">\[ P(Y &gt;2) = \exp (-0.5(2)) = \exp(-1) =0.3679.\]</span>
+</center></li>
+<li>Note that <span class="math inline">\(\{Y&gt;5\}\)</span> implies that <span class="math inline">\(\{Y &gt; 3\}\)</span>. Therefore
+<center>
+<span class="math display">\[ P(Y&gt;5|Y&gt;3) = \frac{P(Y &gt;5)}{P(Y&gt;3)} = \frac{\exp(-0.5(5))}{\exp(-0.5(3))} = \exp(-1) =0.3679.\]</span>
+</center>
+Therefore
+<center>
+<span class="math display">\[ P(Y &gt; 5 |Y &gt;3) = P(Y&gt;2). \]</span>
+</center>
+This property is known as the <strong>memoryless</strong> property of the exponential distribution, for any <span class="math inline">\(s,t&gt;0\)</span>,
+<center>
+<span class="math display">\[ P(Y &gt; s+t| Y&gt;s) = P(Y &gt;t).\]</span>
+</center></li>
+<li>The time, <span class="math inline">\(W\)</span>, until the third bus arrives is <span class="math inline">\(W \sim {\rm Gamma} (3,0.5)\)</span>. Therefore
+<center>
+<span class="math display">\[ f_W (w) = \frac{0.5^3}{(3-1)!} w^{3-1} \exp(-0.5 w)  \hspace{1cm} (w&gt;0), \]</span>
+</center>
+and
+<center>
+<span class="math display">\[ F_W (w) = 1- \exp (-0.5 w) \left[ 1 + 0.5 w + \frac{(0.5w)^2}{2} \right]. \]</span>
+</center></li>
+</ol>
+Hence,<br />
+
+<center>
+<span class="math display">\[P(W&gt;6) = 1 -F_W(6) = \exp(-0.5(6)) \left[ 1 +0.5(6) + \frac{(0.5\times 6)^2}{2} \right] = 0.4232.\]</span>
+</center>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>This question involves the beta distribution. Let <span class="math inline">\(Z\)</span> denote the time until the second bus arrives and let <span class="math inline">\(T\)</span> denote the time between the second and third bus arriving. Then we want <span class="math display">\[P(Z+T&gt;2Z). \]</span>
+Rearranging <span class="math inline">\(Z+T &gt;2 Z\)</span>, we have that this is equivalent to
+<center>
+<span class="math display">\[\frac{1}{2}&gt; \frac{Z}{Z+T},\]</span>
+</center>
+where
+<center>
+<span class="math display">\[\frac{Z}{Z+T} = U \sim {\rm Beta} (2,1)\]</span>
+</center>
+with <span class="math inline">\(U\)</span> having p.d.f.
+<center>
+<span class="math display">\[ f_U (u) = \frac{(2+1-1)!}{(2-1)! (1-1)!} u^{2-1} (1-u)^{1-1} = 2u \hspace{1cm} (0&lt;u&lt;1).\]</span>
+</center>
+Hence
+<center>
+<span class="math display">\[\begin{eqnarray*} P(Z+T&gt;2Z) &amp;=&amp;P(U &lt; 0.5)  \\ &amp;=&amp; \int_0^{0.5} 2 u \, du \\ &amp;=&amp; \left[ u^2 \right]_0^{0.5} =0.25.
+\end{eqnarray*}\]</span>
+</center></li>
+</ol>
+</div>
+</details>
+</div>
+</div>
+<div id="rv:normal" class="section level2 hasAnchor" number="5.7">
+<h2><span class="header-section-number">5.7</span> Normal (Gaussian) Distribution<a href="rv.html#rv:normal" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="rv:def:normal" class="def">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Normal (Gaussian) distribution.</strong></span></p>
+<span class="math inline">\(X\)</span> is said to have a normal distribution, <span class="math inline">\(X \sim N(\mu, \sigma^{2})\)</span>, if it has p.d.f.
+<center>
+<span class="math display">\[
+f_X (x) = \frac{1}{\sqrt{2 \pi} \, \sigma} \exp \left( - \frac{1}{2 \sigma^2} [x-\mu]^2 \right), \quad \quad  x \in \mathbb{R},
+\]</span>
+</center>
+<p>where <span class="math inline">\(\mu \in \mathbb{R}\)</span> and <span class="math inline">\(\sigma &gt; 0\)</span>.</p>
+</div>
+The parameters <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span> of the normal distribution specify the mean and standard deviation with
+<center>
+<span class="math display">\[ E[X] = \int_{- \infty}^{\infty} x f_X(x) \; dx = \mu\]</span>
+</center>
+and
+<center>
+<span class="math display">\[ E[X^2] =  \int_{- \infty}^{\infty} x^{2} f_X(x) \; dx = \sigma^{2} + \mu^{2}\]</span>
+</center>
+giving
+<center>
+<span class="math display">\[ var (X) = E[X^2] - E[X]^2 = \sigma^2.\]</span>
+</center>
+<p>The normal distribution is symmetric about its mean <span class="math inline">\(\mu\)</span> with the p.d.f. decreasing as <span class="math inline">\([x-\mu]^2\)</span> increases. Therefore the median and mode of the normal distribution are also equal to <span class="math inline">\(\mu\)</span>. See Figure <a href="rv.html#fig:normalpdf">5.6</a> for the p.d.f. and c.d.f. of <span class="math inline">\(N(0,1)\)</span>.</p>
+<div id="rv:def:normal_cdf" class="def">
+<p><br />
+The c.d.f. of the normal distribution <span class="math inline">\(X \sim N(\mu,\sigma^2)\)</span> is
+<span class="math display">\[ F_X(x) = \int_{-\infty}^x f(y) \;dy = \int_{-\infty}^x \frac{1}{\sqrt{2 \pi} \sigma} \exp \left( - \frac{1}{2 \sigma^2} [y-\mu]^2 \right) \;dy, \]</span>
+and has no analytical solution. (<em>i.e.</em> We cannot solve the integral.)</p>
+</div>
+<p>How do we proceed with the Normal distribution if we cannot compute its c.d.f.?</p>
+<p>The simplest solution is to use a statistical package such as <strong>R</strong> to compute probabilities (c.d.f.) for the Normal distribution. This can be done using the <code>pnorm</code> function. However, it is helpful to gain an understanding of the Normal distribution and how to compute probabilities (c.d.f.) for the Normal distribution using the good old-fashioned method of Normal distribution tables.</p>
+<p>The starting point is to define the <em>standard normal distribution</em>, <span class="math inline">\(Z \sim N(0,1)\)</span>. We can then show that for any <span class="math inline">\(X \sim N(\mu,\sigma^2)\)</span> and <span class="math inline">\(a, b \in \mathbb{R}\)</span>, <span class="math inline">\(P(a &lt; X&lt;b)\)</span> can be rewritten as
+<span class="math display">\[ P(a &lt;X &lt;b) = P(c &lt;Z&lt;d) = P(Z&lt;d) - P(Z&lt;c)\]</span>
+where <span class="math inline">\(c\)</span> and <span class="math inline">\(d\)</span> are functions of <span class="math inline">\((a,\mu,\sigma)\)</span> and <span class="math inline">\((b,\mu,\sigma)\)</span>, respectively. It is thus sufficient to know the c.d.f. of <span class="math inline">\(Z\)</span>. Note that when <span class="math inline">\(Z\)</span> is used to define a normal distribution it will always be reserved for the standard normal distribution.</p>
+<p>Traditionally, probabilities for <span class="math inline">\(Z\)</span> are obtained from <em>Normal tables</em>, tabulated values of <span class="math inline">\(P(Z&lt;z)\)</span> for various values of <span class="math inline">\(z\)</span>. Typically, <span class="math inline">\(P(Z &lt;z)\)</span> for <span class="math inline">\(z=0.00,0.01,\ldots,3.99\)</span> are reported with the observation <span class="math display">\[P(Z &lt;-z) = 1-P(Z&lt;z)\]</span> used to obtain probabilities for negative values.</p>
+<p>A normal table will usually look similar to the table below.</p>
+<table>
+<colgroup>
+<col width="8%" />
+<col width="14%" />
+<col width="14%" />
+<col width="14%" />
+<col width="14%" />
+<col width="14%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>z</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th><span class="math inline">\(\cdots\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0.0</td>
+<td>0.5</td>
+<td>0.504</td>
+<td>0.508</td>
+<td>0.512</td>
+<td>0.516</td>
+<td><span class="math inline">\(\cdots\)</span></td>
+</tr>
+<tr class="even">
+<td>0.1</td>
+<td>0.5398</td>
+<td>0.5438</td>
+<td>0.5478</td>
+<td>0.5517</td>
+<td>0.5557</td>
+<td><span class="math inline">\(\cdots\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\vdots\)</span></td>
+<td><span class="math inline">\(\vdots\)</span></td>
+<td><span class="math inline">\(\vdots\)</span></td>
+<td><span class="math inline">\(\vdots\)</span></td>
+<td><span class="math inline">\(\vdots\)</span></td>
+<td><span class="math inline">\(\vdots\)</span></td>
+<td><span class="math inline">\(\ddots\)</span></td>
+</tr>
+<tr class="even">
+<td>1.2</td>
+<td>0.8849</td>
+<td>0.8869</td>
+<td>0.8888</td>
+<td>0.8907</td>
+<td>0.8925</td>
+<td><span class="math inline">\(\cdots\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\vdots\)</span></td>
+<td><span class="math inline">\(\vdots\)</span></td>
+<td><span class="math inline">\(\vdots\)</span></td>
+<td><span class="math inline">\(\vdots\)</span></td>
+<td><span class="math inline">\(\vdots\)</span></td>
+<td><span class="math inline">\(\vdots\)</span></td>
+<td><span class="math inline">\(\ddots\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>The first column, labelled <span class="math inline">\(z\)</span>, increments in units of <span class="math inline">\(0.1\)</span>. Columns 2 to 11 are headed 0 through to 9. To find <span class="math inline">\(P(Z &lt;z) = P(Z&lt;r.st)\)</span> where <span class="math inline">\(z=r.st\)</span> and <span class="math inline">\(r,s,t\)</span> are integers between 0 and 9, inclusive, we look down the <span class="math inline">\(z\)</span> column to the row <span class="math inline">\(r.s\)</span> and then look along the row to the column headed <span class="math inline">\(t\)</span>. The entry in row “<span class="math inline">\(r.s\)</span>” and column “<span class="math inline">\(t\)</span>” is <span class="math inline">\(P(Z&lt;r.st)\)</span>. For example, <span class="math inline">\(P(Z &lt;1.22) = 0.8888\)</span>.</p>
+<div id="standard_normal" class="def">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Standard Normal distribution.</strong></span></p>
+<p>If <span class="math inline">\(\mu = 0\)</span> and <span class="math inline">\(\sigma = 1\)</span> then <span class="math inline">\(Z \sim N(0,1)\)</span> has a <em>standard normal</em> distribution with p.d.f.
+<span class="math display">\[
+\phi(x) = \frac{1}{\sqrt{2 \pi}} \, {\rm e}^{-x^{2}/2 }, \; \; \; x \in \mathbb{R},
+\]</span>
+and c.d.f.
+<span class="math display">\[
+\Phi (x)  = \int_{- \infty}^{x} \frac{1}{\sqrt{2 \pi}} \, {\rm e}^{-y^{2}/2 } \; dy
+\]</span>
+Note the notation <span class="math inline">\(\phi (\cdot)\)</span> and <span class="math inline">\(\Phi (\cdot)\)</span> which are commonly used for the p.d.f. and c.d.f. of <span class="math inline">\(Z\)</span>.</p>
+</div>
+<center>
+<div class="figure"><span style="display:block;" id="fig:normalpdf"></span>
+<img src="_main_files/figure-html/normalpdf-1.png" alt="Standard normal, Z~N(0,1), p.d.f. and c.d.f." width="70%" />
+<p class="caption">
+Figure 5.6: Standard normal, Z~N(0,1), p.d.f. and c.d.f.
+</p>
+</div>
+</center>
+<div id="rv:lem:tranform_normal" class="lem">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Transformation of a Normal random variable.</strong></span></p>
+<p>If <span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span> and <span class="math inline">\(Y=aX+b\)</span> then
+<span class="math display">\[ Y \sim N (a \mu +b, a^2 \sigma^2).\]</span></p>
+</div>
+<p>An immediate Corollary of <a href="rv.html#rv:lem:tranform_normal">Lemma 5.7.4</a> is that if <span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span>, then
+<span class="math display">\[ \frac{X - \mu}{\sigma} = Z \sim N(0,1).\]</span>
+This corresponds to setting <span class="math inline">\(a=1/\sigma\)</span> and <span class="math inline">\(b=-\mu/\sigma\)</span> in <a href="rv.html#rv:lem:tranform_normal">Lemma 5.7.4</a>.</p>
+Hence, for any <span class="math inline">\(x \in \mathbb{R}\)</span>,
+<center>
+<span class="math display">\[ P (X \leq x) = P \left( \frac{X-\mu}{\sigma} \leq \frac{x-\mu}{\sigma} \right) = P \left( Z \leq \frac{x-\mu}{\sigma} \right) = \Phi \left( \frac{x-\mu}{\sigma} \right).\]</span>
+</center>
+<div id="rv:def:normal_quantile" class="def">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Percentage points</strong></span></p>
+<p>The inverse problem of finding for a given <span class="math inline">\(q\)</span> <span class="math inline">\((0&lt;q&lt;1)\)</span>, the value of <span class="math inline">\(z\)</span> such that <span class="math inline">\(P(Z &lt; z)=q\)</span> is often tabulated for important choices of <span class="math inline">\(q\)</span>. The function <code>qnorm</code> in <strong>R</strong> performs this function for general <span class="math inline">\(X \sim N(\mu,\sigma^2)\)</span>.</p>
+</div>
+<div id="rv:def:normal_sums" class="def">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Sums of Normal random variables</strong></span></p>
+Suppose that <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> are <em>independent</em> normal random variables with <span class="math inline">\(X_i \sim N(\mu_i, \sigma_i^2)\)</span>. Then for <span class="math inline">\(a_1, a_2, \ldots, a_n \in \mathbb{R}\)</span>,
+<center>
+<span class="math display">\[ Y = \sum_{i=1}^n a_i X_i \sim N \left( \sum_{i=1}^n a_i \mu_i, \sum_{i=1}^n a_i^2 \sigma_i^2 \right).\]</span>
+</center>
+</div>
+<p><br />
+</p>
+<div id="rv:exer:lemonade" class="ex">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Lemonade dispenser</strong></span></p>
+<p>Suppose that the amount of lemonade dispensed by a machine into a cup is
+normally distributed with mean <span class="math inline">\(250 \, ml\)</span> and standard deviation <span class="math inline">\(5\, ml\)</span>. Suppose that the cups used for the lemonade are normally
+distributed with mean <span class="math inline">\(260 \, ml\)</span> and standard deviation <span class="math inline">\(4 \, ml\)</span>.</p>
+<ol style="list-style-type: lower-alpha">
+<li>What is the probability that the lemonade overflows the cup?<br />
+</li>
+<li>What is the probability that the total lemonade in 8 cups exceeds <span class="math inline">\(1970 ml\)</span>?<br />
+</li>
+</ol>
+</div>
+<p>Attempt <a href="rv.html#rv:exer:lemonade">Example 5.7.7 (Lemonade dispenser)</a> and then watch <a href="rv.html#video13">Video 13</a> for the solutions.</p>
+<div id="video13" class="des">
+<p><span style="color: rgba(207, 0, 15, 1);"><strong>Video 13: Lemonade dispenser</strong></span></p>
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1355621/sp/135562100/embedIframeJs/uiconf_id/13188771/partner_id/1355621?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_prbx0h86&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_b8rberim" width="640" height="420" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Lemonade Example FINAL VERSION">
+</iframe>
+</div>
+<details>
+<summary>
+Solution to Example 5.7.7
+</summary>
+<div class="prf">
+<ol style="list-style-type: lower-alpha">
+<li>Let <span class="math inline">\(L\)</span> and <span class="math inline">\(C\)</span> denote the amount of lemonade dispensed and the size of a cup (in <span class="math inline">\(ml\)</span>), respectively. Then <span class="math inline">\(L \sim N(250,5^2)\)</span> and <span class="math inline">\(C \sim N(260,4^2)\)</span>, and we want:
+<center>
+<span class="math display">\[ P(C &lt;L) = P(C-L &lt;0).\]</span>
+</center>
+Note that <span class="math inline">\(C-L\)</span> follows a normal distribution (use <a href="rv.html#rv:def:normal_sums">Definition 5.7.6. Sums of Normal random variables</a> with <span class="math inline">\(n=2\)</span>, <span class="math inline">\(X_1 =C\)</span>, <span class="math inline">\(X_2=L\)</span>, <span class="math inline">\(a_1 =1\)</span> and <span class="math inline">\(a_2 =-1\)</span>) with <span class="math inline">\(C-L \sim N(260-250,25+16) = N(10,41)\)</span>.</li>
+</ol>
+Therefore, if <span class="math inline">\(Y \sim N(10,41)\)</span>,
+<center>
+<span class="math display">\[ P(C&lt;L) = P(Y &lt;0) = P \left( \frac{Y-10}{\sqrt{41}} &lt; \frac{0-10}{\sqrt{41}} \right) = \Phi \left(-1.56 \right) = 0.0594.\]</span>
+</center>
+<p>Note that the answer is given by <code>pnorm(-1.56)</code> and for the answer rounded to 4 decimal places <code>round(pnorm(-1.56),4)</code>.</p>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Let <span class="math inline">\(L_i \sim N(250,5^2)\)</span> denote the total number of lemonade dispensed into the <span class="math inline">\(i^{th}\)</span> cup. Then the total amount of lemonade dispensed into 8 cups is <span class="math inline">\(S = L_1 + L_2 + \ldots + L_8 \sim N (2000,200)\)</span>. Therefore
+<center>
+<span class="math display">\[ P(S &gt;1970) = P \left( \frac{S -2000}{\sqrt{200}} &gt;\frac{1970 -2000}{\sqrt{200}} \right) = P(Z&gt;-2.12) = 1 - \Phi (-2.12) = 0.9830. \]</span>
+</center></li>
+</ol>
+</div>
+</details>
+<p><br />
+</p>
+</div>
+<div id="prob:lab" class="section level2 unnumbered hasAnchor">
+<h2><span style="color: rgba(15, 0, 207, 1);"><strong>Student Exercises</strong></span><a href="rv.html#prob:lab" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Attempt the exercises below.</p>
+<div id="exer5:1" class="exer">
+<p><br />
+Let <span class="math inline">\(X\)</span> be a continuous random variable with pdf
+<span class="math display">\[ f_X(x)= \left\{ \begin{array}{ll} k x^3 &amp; \text{if } 0&lt;x&lt;1, \\
+k e^{1-x} &amp; \text{if } x \ge 1, \\
+0 &amp; \text{otherwise.} \end{array} \right.\]</span></p>
+<ol style="list-style-type: lower-alpha">
+<li>Evaluate <span class="math inline">\(k\)</span> and find the (cumulative) distribution function of <span class="math inline">\(X\)</span>.<br />
+</li>
+<li>Calculate <span class="math inline">\(P (0.5&lt;X&lt;2)\)</span> and <span class="math inline">\(P(X&gt;2|X&gt;1)\)</span>.</li>
+</ol>
+</div>
+<details>
+<summary>
+Solution to Exercise 5.1.
+</summary>
+<div id="Question01_2" class="ans">
+<ol style="list-style-type: lower-alpha">
+<li>Since <span class="math inline">\(f\)</span> is a pdf, <span class="math inline">\(\int_{-\infty}^\infty f(x) dx=1\)</span>. Thus,
+<span class="math display">\[ \int_0^1 k x^3 dx + \int_1^\infty k e^{1-x} dx = 1 \quad\Rightarrow\quad
+k\left(\frac{1}{4}+1\right) = 1 \quad\Rightarrow\quad k=\frac{4}{5}.\]</span>
+Recall that <span class="math inline">\(F_X(x)=\int_{-\infty}^x f(t) dt\)</span>. Thus, <span class="math inline">\(F_X(x)=0\)</span> if <span class="math inline">\(x\le0\)</span>. If <span class="math inline">\(0&lt;x&lt;1\)</span>, then
+<center>
+<span class="math display">\[ F_X(x) = \int_0^x \frac{4}{5} t^3 dt = \frac{x^4}{5} \]</span>
+</center>
+and, if <span class="math inline">\(x&gt;1\)</span>, then
+<center>
+<span class="math display">\[ F_X(x) = \int_0^1 \frac{4}{5} t^3 dt + \int_1^x \frac{4}{5} e^{1-t} dt = \frac{1}{5} + \frac{4}{5} (1-e^{1-x}) = 1-\frac{4}{5}e^{1-x}.\]</span>
+</center>
+Thus,
+<center>
+<span class="math display">\[ F_X(x) = \begin{cases} 0 &amp; \text{if } x\le0, \\ \frac{x^4}{5} &amp; \text{if } 0&lt;x\le1, \\ 1-\frac{4}{5}e^{1-x} &amp; \text{if } x&gt;1. \end{cases} \]</span>
+</center>
+Below are plots of <span class="math inline">\(f_X(x)\)</span> and <span class="math inline">\(F_X (x)\)</span> on the range <span class="math inline">\((0,5)\)</span>.</li>
+</ol>
+<center>
+<img src="_main_files/figure-html/unnamed-chunk-113-1.png" width="672" /><img src="_main_files/figure-html/unnamed-chunk-113-2.png" width="672" />
+</center>
+<ol start="2" style="list-style-type: lower-alpha">
+<li><center>
+<span class="math display">\[\begin{eqnarray*}
+P( 1/2&lt;X&lt;2 ) &amp;=&amp; \int_{1/2}^2 f_X(x) dx = \int_{1/2}^1 \frac{4}{5}x^3 dx + \int_1^2 \frac{4}{5} e^{1-x} dx \\
+&amp;=&amp; \left[\frac{x^4}{5}\right]_{1/2}^1 + \left[-\frac{4}{5}e^{1-x}\right]_1^2 = \frac{3}{16}+\frac{4}{5}(1-e^{-1}) \\
+&amp;=&amp; 0.6932.
+\end{eqnarray*}\]</span>
+</center>
+Since
+<center>
+<span class="math display">\[ P(X&gt;2)= \int_2^\infty \frac{4}{5}  e^{1-x} dx = \left[-\frac{4}{5} e^{1-x} \right]_2^\infty = \frac{4}{5} e^{-1} \]</span>
+</center>
+and
+<center>
+<span class="math display">\[ P(X&gt;1) = \int_1^\infty \frac{4}{5} e^{1-x} dx = \left[-\frac{4}{5} e^{1-x} \right]_1^\infty = \frac{4}{5} ,\]</span>
+</center>
+we have
+<center>
+<span class="math display">\[ P(X&gt;2|X&gt;1)= \frac{P(X&gt;2,X&gt;1)}{P(X&gt;1)} = \frac{P(X&gt;2)}{P(X&gt;1)}= e^{-1} =0.3679.\]</span>
+</center></li>
+</ol>
+</div>
+</details>
+<p><br />
+</p>
+<div id="exer5:2" class="exer">
+<p><br />
+The time that a butterfly lives after emerging from its chrysalis is a random variable <span class="math inline">\(T\)</span>, and the probability that it survives for more than <span class="math inline">\(t\)</span> days is equal to <span class="math inline">\(36/(6+t)^2\)</span> for all <span class="math inline">\(t&gt;0\)</span>.</p>
+<ol style="list-style-type: lower-alpha">
+<li>What is the probability that it will die within six days of emerging?<br />
+</li>
+<li>What is the probability that it will live for between seven and fourteen days?<br />
+</li>
+<li>If it has lived for seven days, what is the probability that it will live at least seven more days?<br />
+</li>
+<li>If a large number of butterflies emerge on the same day, after how many days would you expect only <span class="math inline">\(5\%\)</span> to be alive?<br />
+</li>
+<li>Find the pdf of <span class="math inline">\(T\)</span>.<br />
+</li>
+<li>Calculate the mean life of a butterfly after emerging from its chrysalis.<br />
+</li>
+</ol>
+</div>
+<details>
+<summary>
+Solution to Exercise 5.2.
+</summary>
+<div id="Question01_3" class="ans">
+<ol style="list-style-type: lower-alpha">
+<li><span class="math inline">\(P(T \leq 6) = 1-P (T&gt;6) = 1-\frac{36}{12^2} = \frac{3}{4}\)</span>.<br />
+</li>
+<li><span class="math inline">\(P(7&lt;T\le14)= P(T&gt;7)-P(T&gt;14) = \frac{36}{13^2}-\frac{36}{20^2} = \frac{2079}{16900}=0.1230.\)</span><br />
+</li>
+<li><span class="math inline">\(P(T&gt;14|T&gt;7)= \frac{P(T&gt;14,T&gt;7)} {P(T&gt;7)}=\frac{P(T&gt;14)} {P(T&gt;7)} =\left(\frac{13}{20}\right)^2=0.4225.\)</span><br />
+</li>
+<li>Let <span class="math inline">\(d\)</span> be the number of days after only which 5% of the butterflies are expected to be alive. Then, <span class="math inline">\(P(T&gt;d)=1/20\)</span>. Thus,
+<center>
+<span class="math display">\[\begin{eqnarray*}
+\frac{36}{(6+d)^2}= \frac{1}{20} \quad &amp;\Rightarrow&amp; \quad (6+d)^2=20\times36 \quad \Rightarrow \quad 6+d = 12\sqrt5 \\
+\quad &amp;\Rightarrow&amp; \quad d=12\sqrt5-6=20.83.
+\end{eqnarray*}\]</span>
+</center></li>
+<li>Let <span class="math inline">\(f_T\)</span> and <span class="math inline">\(F_T\)</span> be the pdf and distribution function of <span class="math inline">\(T\)</span>, respectively. Then, for <span class="math inline">\(t&gt;0\)</span>,
+<center>
+<span class="math display">\[ F_T(t)= P(T\le t) = 1-P(T&gt;t) = 1- \frac{36}{(6+t)^2},\]</span>
+</center>
+so
+<center>
+<span class="math display">\[ f_T(t)= \frac{d \;}{dt} F_T(t)=\frac{72}{(6+t)^3}.\]</span>
+</center>
+Clearly, <span class="math inline">\(f_T(t)=0\)</span> for <span class="math inline">\(t\le0\)</span>.<br />
+</li>
+<li><center>
+<span class="math display">\[E[T]=\int_{-\infty}^\infty t f_T(t) dt = \int_0^\infty \dfrac{72t}{(6+t)^3}dt.\]</span>
+</center>
+Substituting <span class="math inline">\(x=6+t\)</span> gives
+<center>
+<span class="math display">\[ E[T]=\int_6^\infty \frac{72(x-6)}{x^3}dx=\left[-\frac{72}{x}+\frac{3\times72}{x^2}\right]_6^\infty=6.\]</span>
+</center></li>
+</ol>
+</div>
+</details>
+<p><br />
+</p>
+<div id="exer5:3" class="exer">
+<p><br />
+A type of chocolate bar contains, with probability <span class="math inline">\(0.1\)</span>, a prize voucher.
+Whether or not a bar contains a voucher is independent of other bars. A hungry
+student buys 8 chocolate bars. Let <span class="math inline">\(X\)</span> denote the number of vouchers that she finds.</p>
+<ol style="list-style-type: lower-alpha">
+<li>What sort of distribution does <span class="math inline">\(X\)</span> have?<br />
+</li>
+<li>How likely is it that the student finds no vouchers?<br />
+</li>
+<li>How likely is it that she finds at least two vouchers?<br />
+</li>
+<li>What is the most likely number of vouchers that she finds?</li>
+</ol>
+<p>A second student keeps buying chocolate bars until he finds a voucher. Let <span class="math inline">\(Y\)</span>
+denote the number of bars he buys.</p>
+<ol start="5" style="list-style-type: lower-alpha">
+<li>What is the probability mass function of <span class="math inline">\(Y\)</span>?<br />
+</li>
+<li>How likely is it that the student buys more than 5 bars?<br />
+</li>
+<li>What is <span class="math inline">\(E[Y]\)</span>?</li>
+<li>If each bar costs 35p, what is the expected cost to the student?</li>
+</ol>
+<p>A third student keeps buying chocolate bars until they find 4 vouchers. In
+doing so, they buys a total of <span class="math inline">\(W\)</span> bars.</p>
+<ol style="list-style-type: lower-roman">
+<li>What is the distribution of <span class="math inline">\(W\)</span>?<br />
+</li>
+</ol>
+<ol start="10" style="list-style-type: lower-alpha">
+<li>What is the probability that this student buys exactly 10 bars?<br />
+</li>
+</ol>
+</div>
+<details>
+<summary>
+Solutions to Exercise 5.3.
+</summary>
+<div id="Question01_4_a" class="ans">
+<ol style="list-style-type: lower-alpha">
+<li><span class="math inline">\(X \sim {\rm Bin} (8,0.1)\)</span>.<br />
+</li>
+<li><span class="math inline">\(P(X=0) = (0.9)^8 = 0.4305\)</span>.<br />
+</li>
+<li><center>
+<span class="math display">\[P(X \geq 2) = 1 - P(X =0) - P(X=1) = 1 - (0.9)^8 - 8(0.9)^7(0.1) = 0.1869.\]</span>
+</center></li>
+<li><span class="math inline">\(X=0\)</span> Since the probability mass function has only one maximum, and
+<span class="math inline">\(0.4305= P(X=0) &gt; P(X=1) =0.3826\)</span>.<br />
+</li>
+<li><span class="math inline">\(Y \sim {\rm Geom}(0.1)\)</span>, so <span class="math inline">\(P(Y=k) = (0.9)^{k-1}(0.1), \; \; k=1, 2, 3, \ldots\)</span>.<br />
+</li>
+<li><span class="math inline">\(P(Y &gt;5) =0.9^5\)</span> (the probability of starting with 5 failures), so <span class="math inline">\(P(Y &gt; 5) =0.5905\)</span>.<br />
+</li>
+<li>For a <span class="math inline">\({\rm Geom}(p)\)</span>, the mean is <span class="math inline">\(1/p\)</span>, so <span class="math inline">\(E [Y] = 1/(0.1) = 10\)</span>.<br />
+</li>
+<li>Cost (in pence) is <span class="math inline">\(35Y\)</span>, so <span class="math inline">\(E [35Y]= 35E [Y] = 350p\)</span>, or £3.50.<br />
+</li>
+<li><span class="math inline">\(W\)</span> is negative binomial with parameters 4 and 0.1. <span class="math inline">\(W \sim {\rm Neg Bin} (4,0.1)\)</span>.<br />
+</li>
+<li><span class="math inline">\(P(W=10) = \binom{9}{3} (0.1)^4 (0.9)^6 = 0.004464\)</span>.<br />
+</li>
+</ol>
+</div>
+</details>
+<p><br />
+</p>
+<div id="exer5:4" class="exer">
+<p><br />
+A factory produces nuts and bolts on two independent machines. The external diameter of the bolts is normally distributed with mean 0.5 cm and the internal diameter of the nuts is normally distributed with mean 0.52 cm. The two machines have the same variance which is determined by the rate of production. The nuts and bolts are produced at rate which corresponds to a standard deviation <span class="math inline">\(\sigma=0.01\)</span> cm and a third machine fits each nut on to the corresponding bolt as they are produced, provided the diameter of the nut is strictly greater than that of the bolt, otherwise it rejects both.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Find the probability that a typical pair of nut and bolt is rejected.<br />
+</li>
+<li>If successive pairs of nut and bolt are produced independently, find the probability that in 20 pairs of nut and bolt at least 1 pair is rejected.<br />
+</li>
+<li>The management wishes to reduce the probability that a typical pair of nut and bolt is rejected to 0.01. What is the largest value of <span class="math inline">\(\sigma\)</span> to achieve this?</li>
+</ol>
+</div>
+<details>
+<summary>
+Solutions to Exercise 5.4.
+</summary>
+<div id="Question01_5" class="ans">
+<ol style="list-style-type: lower-alpha">
+<li>Let <span class="math inline">\(X\)</span> denote the internal diameter of a typical nut and <span class="math inline">\(Y\)</span> denote the external diameter of a typical bolt. Then <span class="math inline">\(X \sim N(0.52,0.01^2)\)</span> and <span class="math inline">\(Y \sim N(0.50,0.01^2)\)</span>.<br />
+A pair of nut and bolt is rejected if <span class="math inline">\(W=X-Y\le 0\)</span>. Since <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent, <span class="math inline">\(W \sim N(0.52-0.50, 0.01^2+0.01^2)=N(0.02, 0.0002)\)</span>. Thus the probability that a pair is rejected is
+<center>
+<span class="math display">\[P(W \le 0)=P\left(\frac{W-0.02}{\sqrt{0.0002}} \le \frac{0-0.02}{\sqrt{0.0002}} \right)=P(Z \le -\sqrt{2}), \]</span>
+</center>
+where <span class="math inline">\(Z=(W-0.02)/\sqrt{0.0002} \sim N(0,1)\)</span>.</li>
+</ol>
+<p>Hence the required probability is <span class="math inline">\(\Phi(-\sqrt{2})= 0.0786\)</span> using <code>pnorm(-sqrt(2))</code>.</p>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>The probability that no pair is rejected is <span class="math inline">\((1-0.0786)^{20}\)</span>, since successive pairs are produced independently, so the probability that at least one pair is rejected is <span class="math inline">\(1-(1-0.0786)^{20}= 0.8055\)</span>.<br />
+</li>
+<li>Arguing as in (a), the probability a pair is rejected is <span class="math inline">\(\Phi(-0.02/(\sqrt{2}\sigma))\)</span>. We want <span class="math inline">\(c\)</span> such that <span class="math inline">\(\Phi(c)=0.01\)</span> which gives <span class="math inline">\(c = -2.3263\)</span>. (This is given by <code>qnorm(0.01)</code>).
+Therefore we require <span class="math display">\[-0.02/(\sqrt{2}\sigma) \le -2.3623 \iff \sigma \le 0.02/(2.362 \times \sqrt{2})= 0.0060.\]</span> Hence the largest value of <span class="math inline">\(\sigma\)</span> is 0.0060.</li>
+</ol>
+</div>
+</details>
+<p><br />
+</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="prob.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="jointdis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/05-P2_Random-Variables.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -1,0 +1,264 @@
+# Interval Estimation {#Interval_Estimation}
+
+## Introduction {#Interval_Estimation:intro}
+
+In this section, we will explore the concept of an interval estimate. We have seen how the [Method of Moments](#MLE:moments), [Maximum Likelihood Estimation](#MLE:MLE) and [Least Squares](#Sec_LinearI:line) can be used to find *point* estimates of parameters. These estimates often have desirable properties such as unbiasedness (the average value of the sample estimate of the parameter is the true population parameter) and consistency (the sample estimate of the parameter converges to the true population parameter as the sample size tends to infinity). However, for finite samples our sample estimate of the parameter will rarely be equal to the true population parameter. Therefore we construct interval estimates, which allow us to quantify our (un)certainty about parameters.
+
+We start with an exercise for you to attempt to construct intervals which you believe contain the true answer. This will provide motivation for the construction of [**confidence intervals**](#Interval_Estimation:CI).
+
+
+## Confident? {#Interval_Estimation:confident}
+
+The board game **Confident?** gets players to give an interval for a numerical answer.
+
+The player with the **shortest** interval containing the **correct** answer wins a point.
+
+Do you think you would be good at this? 
+
+Attempt the following four questions: [Confident? Questions](https://forms.office.com/r/LckVnbns6s)
+
+After you have attempted the questions, watch [Video 26](#video26) for the answers. The video includes discussion of steps for constructing intervals and how we begin to construct confidence intervals. 
+
+```{asis, include=knitr::is_html_output()}
+:::{.des #video26}
+<span style="color: rgba(207, 0, 15, 1);">**Video 26: Confident?**</span>  
+
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1355621/sp/135562100/embedIframeJs/uiconf_id/13188771/partner_id/1355621?iframeembed=true&playerId=kaltura_player&entry_id=1_19m8fvez&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_djk6fz24" width="640" height="420" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Confident FINAL VERSION"></iframe>
+:::
+```
+
+```{asis, include=knitr::is_latex_output()}
+Watch [\textcolor{blue}{Video 26: Confident?}](https://mediaspace.nottingham.ac.uk/media/Confident+FINAL+VERSION/1_19m8fvez)
+```  
+
+## Confidence intervals {#Interval_Estimation:CI}
+
+If we are interested in estimating a given parameter $\theta$ we can find some estimator $T(\mathbf{X})$ using some appropriate method, for example [Method of Moments](#MLE:moments), [Maximum Likelihood Estimation](#MLE:MLE) or [Least Squares Estimation](#Sec_LinearI:line). $T(\mathbf{X})$ is called a point estimator since the estimate of $\theta$ that we report is one particular point in the parameter space.
+
+For example, when we are interested in estimating the percentage of UK residents who are in favour of the Government's policies, we can collect a random sample of UK residents and compute the sample proportion of the people in favour of the policies. We then report that the Government has, say, a 54\% approval rating.
+
+The difficulty that arises, though, is what does 54\% mean? How exact is our estimate? The point estimator does not give us that information. Instead it is helpful to also include information about the variability of the estimate given, and that will depend both upon the true underlying variance of the population and the sampling distribution of the estimator that we use.
+
+We have 2 options:  
+
+1. Report the value of the estimate and the standard deviation of the estimate, which is often called the **standard error** of the estimate.  For example, the Government has a 54\% approval rating with a 2\% standard error.  
+2. Construct an interval estimate for the parameter which incorporates both information about the point estimate, its standard error, and the sampling distribution of the estimator.  For example, a 95\% confidence interval for the Government's approval rating is 52.4\% to 55.6\%.  
+
+:::{.def #Interval_Estimation:def:CI}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Definition 18.3.1.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Confidence Interval**</span>  
+
+Let $\alpha \in [0,1]$ be a fixed value. A $100(1-\alpha)\%$ *confidence interval* for the parameter $\theta$ is an interval constructed from a random sample such that if we were to repeat the experiment a large number of times the interval would contain the true value of $\theta$ in $100(1-\alpha)\%$ of the cases.
+:::
+
+Note that the interval will depend on the value of the estimate and the sampling distribution of the estimator.
+
+:::{.ex #Interval_Estimation:ex:CI_normal_known}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Example 18.3.2.}
+```
+\
+Suppose that $x_1,x_2,\dots,x_n$ is a random sample from a normal distribution with mean $\theta$ and known variance $\sigma_0^2$. Construct a $100(1-\alpha)\%$ confidence interval for $\theta$.
+:::
+
+Watch [Video 27](#video27) for the construction of the confidence interval for $\theta$. 
+
+```{asis, include=knitr::is_html_output()}
+:::{.des #video27}
+<span style="color: rgba(207, 0, 15, 1);">**Video 27: Confidence interval for $\theta$.**</span>  
+
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1355621/sp/135562100/embedIframeJs/uiconf_id/13188771/partner_id/1355621?iframeembed=true&playerId=kaltura_player&entry_id=1_ff9ijz9t&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_ubbfafbl" width="640" height="420" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Confidence Interval FINAL VERSION"></iframe>
+:::
+``` 
+ 
+```{asis, include=knitr::is_latex_output()}
+Watch [\textcolor{blue}{Video 27: Confidence interval for $\theta$}](https://mediaspace.nottingham.ac.uk/media/Confidence+Interval+FINAL+VERSION/1_ff9ijz9t)
+```   
+ 
+<details><summary>Construction of confidence interval for $\theta$.</summary>
+:::{.ans}
+First, we need a point estimator for $\theta$, the mean of the normal distribution. The Method of Moments estimator and MLE for $\theta$ are both $\hat{\theta}=\bar{x}$, the sample mean.
+
+Next we determine the sampling distribution of the estimator $\hat{\theta}$. Since $X_1,X_2,\dots,X_n$ is a random sample from a normal distribution, it follows that  
+<center>
+$$\hat{\theta} = \frac{1}{n} \sum_{i=1}^n X_i = \bar{X} \sim N \left( \theta, \frac{\sigma_0^2}{n} \right).$$
+</center>
+
+We want to find endpoints $\hat{\theta}_1$ and $\hat{\theta}_2$ such that 
+
+<center>
+$$P \left( \hat{\theta}_1 \leq \theta \leq \hat{\theta}_2 \right) = 1-\alpha. $$
+</center>
+
+Note that $\hat{\theta}_1$ and $\hat{\theta}_2$ are random values which are determined by the random sample.
+
+Note that there exist an infinite number of $100(1-\alpha)\%$ confidence intervals for $\theta$.  We would like to chose the one that is *best*, that is, the one for which the length of the interval $\hat{\theta}_2-\hat{\theta}_1$ is the shortest. This will be the interval which is symmetric around $\theta$ if the distribution of $\hat{\theta}$ is symmetric.
+\
+
+Since $\hat{\theta} = \bar{X} \sim N \left( \theta, \frac{\sigma_0^2}{n} \right)$, if we standardise, then we can obtain the normal distribution  
+<center>
+$$ \frac{\bar{X}-\theta}{\sigma_0/\sqrt{n}} \sim N \left( 0,1 \right)$$  
+</center>  
+and so
+<center>  
+$$ P \left( -z_{\alpha/2} \leq \frac{\bar{X}-\theta}{\sigma_0/\sqrt{n}} \leq z_{\alpha/2} \right) =1-\alpha, $$   
+</center>
+where $z_\beta$ satisfies $P (Z > z_\beta) = \beta$. The symmetry of the normal distribution means that also $P(Z < - z_\beta) = \beta$.
+
+Solving for $\theta$ we get,
+
+<center>
+\begin{align*}
+P \left( -z_{\alpha/2} \cdot \frac{\sigma_0}{\sqrt{n}} \leq \bar{X} - \theta \leq z_{\alpha/2} \cdot \frac{\sigma_0}{\sqrt{n}} \right) &= 1-\alpha \\[3pt]
+P \left( -\bar{X} -z_{\alpha/2} \cdot \frac{\sigma_0}{\sqrt{n}} \leq -\theta \leq -\bar{X} +z_{\alpha/2} \cdot \frac{\sigma_0}{\sqrt{n}} \right) &= 1-\alpha \\[3pt]
+P \left( \bar{X} -z_{\alpha/2} \cdot \frac{\sigma_0}{\sqrt{n}} \leq \theta \leq \bar{X} +z_{\alpha/2} \cdot \frac{\sigma_0}{\sqrt{n}} \right) &= 1-\alpha
+\end{align*}
+</center>
+
+Therefore, a $100(1-\alpha)\%$ confidence interval for $\theta$, where $\theta$ is the mean of a normal distribution with known variance $\sigma_0^2$ is  
+<center>
+$$ \left( \bar{x} -z_{\alpha/2} \cdot \frac{\sigma_0}{\sqrt{n}}, \bar{x} +z_{\alpha/2} \cdot \frac{\sigma_0}{\sqrt{n}} \right).$$  
+</center>
+:::
+</details>
+\
+
+:::{.ex #Interval_Estimation:ex:CI_normal_unknown}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Example 18.3.3.}
+```
+\
+Suppose that $x_1,x_2,\dots,x_n$ is a random sample from a normal distribution with mean $\theta$ and unknown variance $\sigma^2$. Construct a $100(1-\alpha)\%$ confidence interval for $\theta$.
+:::
+
+:::{.ans}
+
+Again we use $\hat{\theta} = \bar{x}$, since $\bar{x}$ is the minimum variance unbiased estimator of $\theta$.  
+
+We know that $\bar{X} \sim N \left( \theta, \frac{\sigma^2}{n} \right)$, so 
+<center>
+$$\frac{\bar{X}-\theta}{\sigma/\sqrt{n}} \sim N(0,1),$$  
+</center>  
+but now the variance $\sigma^2$ is unknown. Hence if we want to find the confidence interval for $\theta$, we need to estimate $\sigma$. It is known that $\frac{\bar{X}-\theta}{s/\sqrt{n}} \sim t_{n-1}$ where $s^2$ is the sample variance. Therefore  
+<center>
+$$ P \left( -t_{n-1,\alpha/2} \leq \frac{\bar{X}-\theta}{s/\sqrt{n}} \leq t_{n-1,\alpha/2} \right) = 1-\alpha.$$
+</center>
+
+Isolating $\theta$ we get,
+
+<center>
+$$ P \left( \bar{X} -t_{n-1,\alpha/2} \cdot \frac{s}{\sqrt{n}} \leq \theta \leq \bar{X} +t_{n-1,\alpha/2} \cdot \frac{s}{\sqrt{n}} \right) = 1-\alpha.$$
+</center>
+
+Therefore a $100(1-\alpha)\%$ confidence interval for $\theta$, where $\theta$ is the mean of the normal distribution with unknown variance $\sigma^2$, is given by
+<center>  
+$$\left( \bar{x} - t_{n-1,\alpha/2} \frac{s}{\sqrt{n}}, \bar{x} + t_{n-1,\alpha/2} \cdot \frac{s}{\sqrt{n}} \right). $$  
+</center>  
+:::
+
+We make a few observations about the confidence intervals constructed in [Example 18.3.2](#Interval_Estimation:ex:CI_normal_known) and [Example 18.3.3](#Interval_Estimation:ex:CI_normal_unknown)
+
+- The sample mean $\bar{x}$ (maximum likelihood estimator/method of moments estimator) is contained in our confidence intervals and in these cases the confidence interval is symmetric about $\bar{x}$.  
+- The confidence intervals become smaller with $n$. That is, the more data (information) we have, the smaller the confidence interval becomes. Specifically, the confidence intervals decrease at rate $1/\sqrt{n}$. Therefore if we increase the sample size to $4 n$ we will (approximately) half the length of the confidence interval. The exact impact on the confidence interval will depend on the sample mean, and if the variance is unknown, sample variance.  
+- As $\alpha$ becomes smaller, $z_{\alpha/2}$ ($t_{n-1,\alpha/2}$) and $1- \alpha$ become larger. That is, the width of the confidence interval increases as we increase the level of confidence. We will explore in [Session 10: Confidence intervals and hypothesis testing](#Sec_Hypo_Test:lab) the effect of $\alpha$ on the confidence interval.  
+- The $t$-distribution has *fatter* tails than the normal distribution and has *fatter* tails for smaller values of $n$. Mathematically, for any $0 <  \alpha <1$ and for any $n < m$, we have that  
+<center>
+$$ z_{\alpha/2} < t_{m-1,\alpha/2} < t_{n-1,\alpha/2}. $$   
+</center>  
+That is, the confidence intervals are wider the smaller $n$ is in the case of an unknown variance. This is a consequence of us being less certain about the population variance for smaller values of $n$. Note that as $n \to \infty$, $t_{n-1,\alpha/2} \to z_{\alpha/2}$ as the uncertainty in the variance decreases.  
+
+
+
+
+
+
+
+
+## Asymptotic distribution of the MLE {#Interval_Estimation:MLE}
+
+Let $\hat{\theta}$ be the MLE of $\theta$. Recall that $\hat{\theta} \rightarrow N \left( \theta, \frac{1}{I(\theta)} \right)$ as $n \rightarrow \infty$.  Consequently we can construct an approximate $100(1-\alpha)\%$ confidence interval for $\theta$, however since $\theta$ is unknown we will also need to approximate $\frac{1}{I(\theta)}$ with the observed information $$I_0(\hat{\theta}) = E \left[ - \frac{d^2 l(\theta)}{d \theta^2}\right] \Bigg|_{\theta = \hat{\theta}}.$$
+
+Consequently,
+<center>  
+$$ P\left(-z_{\alpha/2} \leq \frac{\hat{\theta}-\theta}{ \sqrt{ \frac{1}{I_0(\hat{\theta})} }} \leq z_{\alpha/2} \right) = 1-\alpha ,$$  
+</center>  
+and an approximate $100(1-\alpha)\%$ confidence interval for $\theta$ is given by  
+<center>  
+$$ \left( \hat{\theta} - z_{\alpha/2} \sqrt{ \frac{1}{I_0(\hat{\theta})} }, \hat{\theta} + z_{\alpha/2} \sqrt{ \frac{1}{I_0(\hat{\theta})} } \right).$$  
+</center>  
+This method is extremely useful since it is often quite straightforward to evaluate the MLE and the observed information. Nonetheless it is an approximation, and should only be trusted for large values of $n$, though the quality of the approximation will vary from model to model.
+
+:::{.ex  #Interval_Estimation:ex:CI_mle_exponential}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Example 18.4.1.}
+```
+\
+Consider $Y_1,Y_2,\dots,Y_n \sim \text{Exp}(\theta^{-1})$ independently.  Construct an approximate 95\% confidence interval for $\theta$.
+:::
+
+:::{.ans}
+For each of the $Y_i$, some $y_i>0$ is observed and we have
+
+<center>
+$$ f(y_i|\theta) = \theta^{-1} e^{-y_i/\theta}. $$
+</center>
+Thus calculating the likelihood and log-likelihood functions:
+
+<center>
+\begin{align*}
+L(\theta) &= \prod\limits_{i=1}^n f(y_i | \theta)  \\
+&= \theta^{-n} e^{-\sum\limits_{i=1}^n y_i/\theta} \\
+l(\theta) &= -n\log\theta - \sum\limits_{i=1}^n \frac{y_i}{\theta}
+\end{align*}
+</center>
+which is maximised by
+
+<center>
+$$ \hat{\theta}=\sum_{i=1}^n \frac{y_i}{n}=\bar{y}. $$
+</center>
+Now,
+
+<center>
+$$ \frac{d^2l(\theta)}{d\theta^2} = \frac{n}{\theta^2} - \frac{2\sum_{i=1}^n y_i}{\theta^3} $$
+</center>
+so that
+
+<center>
+$$ I_0(\hat{\theta}) = -\left(\frac{n}{\bar{y}^2}-\frac{2n\bar{y}}{\bar{y}^3}\right)
+=\frac{n}{\bar{y}^2}.$$
+</center>
+Hence, an approximate 95\% confidence interval for $\theta$ is
+
+<center>
+$$ \left( \bar{y} - 1.96 \times \sqrt{\frac{\bar{y}^2}{n}}, \bar{y}+ 1.96 \times \sqrt{\frac{\bar{y}^2}{n}} \right)  = \bar{y} \left( 1- \frac{1.96}{\sqrt{n}}, 1+ \frac{1.96}{\sqrt{n}} \right).$$
+</center>
+:::
+\
+
+:::{.ex #Interval_Estimation:ex:CI_mle_normal}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Example 18.4.2.}
+```
+\
+Consider $Y_1,Y_2,\ldots,Y_n \sim N(\theta,1)$ independently.  Construct an approximate 95\% confidence interval for $\theta$.  
+:::
+
+:::{.ans}
+As noted in [Section 10.3, Example 10.3.7](#MLE:MLE), we showed that $\hat{\theta} = \bar{y}$ and  
+
+<center>
+$$ \frac{d^2l(\theta)}{d\theta^2}=-n.$$
+</center>
+Hence, $I_0(\hat{\theta})=n$, and a 95\% confidence interval for $\theta$ is
+
+<center> 
+$$ \left( \bar{y} - 1.96 \times \sqrt{\frac{1}{n}}, \bar{y} + 1.96 \times \sqrt{\frac{1}{n}} \right). $$
+</center>  
+:::
+\
+
+Note that the confidence interval constructed in [Example 18.4.2](#Interval_Estimation:ex:CI_mle_normal) coincides with the confidence interval constructed in [Example 18.3.2](#Interval_Estimation:ex:CI_normal_known) with $\sigma_0^2 =1$. This is because the MLE, $\hat{\theta}$, satisfies $\hat{\theta} = \bar{Y} \sim N(\theta, 1/n)$.
+
+

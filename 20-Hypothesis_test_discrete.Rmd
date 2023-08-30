@@ -1,0 +1,554 @@
+# Hypothesis Testing Discrete Data {#Hypo_Test_Discrete}
+
+## Introduction {#Hypo_Test_Discrete:intro}
+
+In [Section 19 (Hypothesis Testing)](#Sec_Hypo_Test) we have studied hypothesis testing for normal random variables and through the central limit theorem sums (and means) of random variables. The normal distribution is a continuous distribution and there are many situations where we want to compare hypotheses with data or distributions which are discrete. These include:-  
+
+- Fitting a discrete probability distribution to data. [Goodness-of-fit](#Hypo_Test_Discrete:GoF)
+- [Testing independence](#Hypo_Test_Discrete:Independence) between two discrete variables (contingency tables).  
+
+## Goodness-of-fit motivating example {#Hypo_Test_Discrete:motivate}
+
+We start with a motivating example.
+
+:::{.ex #Hypo_Test_Discrete:ex:filmstars}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Example 20.2.1.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Film stars.**</span> 
+\
+A film studio wants to decide which actor or actress to hire for the main role in a series of movies.
+
+They have a shortlist of 5 and decide to ask the public who their favourite actor or actress is.
+
+1,000 people are randomly selected and asked who their favourite actor or actress is from the shortlist of 5.
+
+**Results:**
+
+<center>
+|Preferred Actor | 1   |   2 |   3 |   4 | 5   |
+|----------------|-----|-----|-----|-----|-----|
+|Frequency       | 225 | 189 | 201 | 214 | 171 |
+</center>
+
+An investor in the film claims "There is no difference in who the public prefer we should hire the cheapest!"
+
+Does the data support the investor's claim?
+:::
+
+We work through testing the investor's claim via a series of steps.
+
+<span style="color: rgba(207, 0, 15, 1);">**Step 1**</span>   
+Interpret what the investor's claim represents statistically.
+
+"No difference in who the public prefers" means that if we choose an individual at random from the population they are equally likely to choose each of the five actors/actresses. That is, probability 1/5 of each actor/actress being chosen.
+
+<span style="color: rgba(207, 0, 15, 1);">**Step 2**</span>    
+What would we <span style="color: rgba(15, 0, 207, 1);">**expect**</span> to observe in the data if the investor's claim is true?  
+
+The investor's claim has led us to a <span style="color: rgba(15, 0, 207, 1);">**model**</span> where each actor/actress has probability 1/5 of being selected by a member of the public. Therefore when 1000 people are asked, we would expect each actor/actress to receive:  
+<center>  
+\[ 1000 \times \frac{1}{5} = 200 \mbox{ votes}. \]
+</center>  
+
+Thus based on the <span style="color: rgba(15, 0, 207, 1);">**model**</span> of the investor's claim:  
+<center>
+Preferred Actor | 1   |   2 |   3 |   4 | 5 
+----------------|-----|-----|-----|-----|-----
+Frequency       | 225 | 189 | 201 | 214 | 171
+Expected        | 200 | 200 | 200 | 200 | 200  
+</center>
+
+<span style="color: rgba(207, 0, 15, 1);">**Step 3**</span>  
+Is what we <span style="color: rgba(15, 0, 207, 1);">**observe**</span> (Frequency) in the data consistent with what we <span style="color: rgba(15, 0, 207, 1);">**expect**</span> (Expected) to see if the investor's claim is a good model?  
+
+In hypothesis testing language, should we reject or not the null hypothesis:  
+
+$H_0$: All actors equally popular. 
+
+In favour of the alternative hypothesis:
+
+$H_1$: There is a difference in popularity between at least two actors. 
+
+To compare competing hypotheses we require a <span style="color: rgba(15, 0, 207, 1);">**test statistic**</span> and a <span style="color: rgba(15, 0, 207, 1);">**sampling distribution**</span> for the test statistic under the assumption that the null hypothesis is true.
+
+<span style="color: rgba(207, 0, 15, 1);">**Test Statistic**</span>  
+
+For each outcome (actor), let $O_i$ and $E_i$ denote the number of <span style="color: rgba(15, 0, 207, 1);">**observed**</span> and <span style="color: rgba(15, 0, 207, 1);">**expected**</span> votes for actor $i$.
+
+The test statistic $\chi_{obs}^2$ is  
+<center>
+\[ \chi^2_{obs} = \sum_i \frac{(O_i - E_i)^2 }{E_i}. \]
+</center>
+
+For the actors example,
+<center>
+\[ \chi^2_{obs} = \frac{(225-200)^2}{200} +\frac{(189-200)^2}{200} + \ldots + \frac{(171-200)^2}{200} = 8.92. \]
+</center>
+
+<span style="color: rgba(207, 0, 15, 1);">**Sampling distribution**</span>  
+
+We reject $H_0$ at a significance level $\alpha$  if
+<center>
+\[ \chi^2_{obs} \geq \chi^2_{\nu, \alpha}, \]
+</center>
+where $\chi^2_{\nu, \alpha}$ is the $(1- \alpha) 100 \%$ quantile of the $\chi^2$ distribution with $\nu$ degrees of freedom and 
+<center>  
+\[ \nu = \mbox{Number of categories} - 1 =5-1=4. \]  
+</center>
+
+Thus if $X$ is a $\chi^2$ distribution with $\nu$ degrees of freedom  then  
+<center> 
+\[ \mathrm{P} \left(X \leq \chi^2_{\nu, \alpha}  \right) = 1- \alpha \]
+</center>
+or equivalently,
+<center>
+\[ \mathrm{P} \left(X > \chi^2_{\nu, \alpha}  \right) =  \alpha. \]
+</center>
+
+Since $\chi^2_{4,0.05} = `r round(qchisq(0.95,4),3)`$, we **do not reject** the null hypothesis at a $5 \%$ significance level. That is, the investor's claim of all actors being equally popular is reasonable given the observed data.
+
+## Goodness-of-fit {#Hypo_Test_Discrete:GoF}
+
+We describe the general procedure for testing the goodness-of-fit of a probability distribution to data using the $\chi$-squared distribution.
+
+Suppose that we have $N$ independent observations, $y_1, y_2, \ldots, y_N$ from an unknown probability distribution, $Y$. Suppose that there are $n$ categories covering the possible outcomes and for $i=1,2,\ldots, n$, let $\mathcal{C}_i$ denote category $i$. For example, we could have $\mathcal{C}_i = \{ y = i\}$, the observations equal to $i$, or $\mathcal{C}_i = \{ a_i < y \leq b_i\}$, the observations equal in the range $(a_i, b_i]$.
+
+For $i=1,2,\ldots, n$, let 
+<center>
+\[ O_i = \# \{y_j \in \mathcal{C}_i\}, \]   
+</center>
+the number of data points <span style="color: rgba(15, 0, 207, 1);">**observed**</span> in category $i$.
+
+We propose a probability distribution $X$ for the unknown probability distribution, $Y$. This gives us our null hypothesis:
+
+$H_0$: $Y =X$
+
+with the alternative hypothesis
+
+$H_1$: $Y \neq X$.
+
+Under the null hypothesis, we calculate for each category $i$, the <span style="color: rgba(15, 0, 207, 1);">**expected**</span> number of observations we would expect to belong to category $i$. That is, for $i=1,2,\ldots,n$,  
+<center>
+\[ E_i = N \times \mathrm{P} (X \in \mathcal{C}_i). \]
+</center>
+
+We compute the test statistic $\chi_{obs}^2$ is  
+<center>  
+\[ \chi^2_{obs} = \sum_i \frac{(O_i - E_i)^2 }{E_i}, \]
+</center>
+and the number of degrees of freedom, $\nu = n -1$.
+
+We choose a significance level $\alpha$ and reject the null hypothesis at the significance level if  
+<center>
+\[ \chi^2_{obs} > \chi^2_{\nu, 1-\alpha}.\]
+</center>
+
+<span style="color: rgba(207, 0, 15, 1);">**Important points**</span>
+
+1. The test statistic, under the null hypothesis, does *not exactly* follow a $\chi^2$ distribution. As with the central limit theorem, the test statistic is approximately $\chi^2$ distributed with the approximation becoming better as the amount of data in each category increases.  
+2. For discrete data it will often be natural to choose $\mathcal{C}_i = \{y = i\}$, whereas for continuous data we have considerable flexibility in choosing the number of categories and the category intervals. The considerations on choice of categories for goodness-of-fit testing are not dissimilar to the considerations on choice of bins for histograms.  
+3. The expected frequencies in each category should not be too small with a rule of thumb that $E_i \geq 5$. If some of the expected frequencies are less than 5 then we pool categories such that the expected frequency of the two (or more) categories combined is greater than or equal to 5.  
+4. We will often want to fit a probability distribution $X$ from a given family of probability distributions (*e.g.* Poisson, Gamma) without necessarily *a priori* choosing the parameters of the distribution. For example, we might choose to fit a Poisson distribution with mean $\lambda$ to a data set and use the sample mean, $\bar{y}$, as the choice of $\lambda$. The goodness-of-fit procedure is as above except that we reduce the number of degrees of freedom by 1 for each parameter we estimate from the data,  
+<center>
+\[ \nu = \# \mbox{Categories} -1 - \# \mbox{Estimated Parameters}.  \]  
+</center>
+
+```{r, echo=FALSE}
+O=c(700,180,6)
+N=sum(O)
+A=c(2,1,0)
+nu=length(O)-1-1
+p=sum(A*O)/(2*N)
+prob=c(p^2,2*p*(1-p),(1-p)^2)
+E=round(N*prob,2)
+diff=round((O-E)^2/E,4)
+chi_test=sum(diff)
+alpha=0.05
+chi_crit=round(qchisq(1-alpha,nu),4)
+p_val=round(1-pchisq(chi_test,nu),4)
+```
+
+
+:::{.ex #Hypo_Test_Discrete:ex:alleles}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Example 20.3.1.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Alleles.**</span> 
+\
+Each person is one of the following genotypes $A/A$, $A/S$ or $S/S$.
+
+The observed frequencies in a population of $N=`r N`$ are:  
+<center>
+\[ A/A: `r O[1]`, \hspace{1cm} A/S: `r O[2]`, \hspace{1cm} S/S: `r O[3]` \]  
+</center>
+
+<span style="color: rgba(15, 0, 207, 1);">**Hypothesis:**</span>  
+The proportion of people with each genotype is
+<center>
+\[ p^2, \; 2 p (1-p) \mbox{ and } (1-p)^2, \]
+</center>
+where $p$ is the proportion of alleles that are of type $A$.  
+
+Is this a reasonable model for the data?
+:::
+
+Watch [Video 30](#video30) for the worked solutions to [Example 20.3.1 (Alleles)](#Hypo_Test_Discrete:ex:alleles)
+
+```{asis, include=knitr::is_html_output()}
+:::{.des #video30}
+<span style="color: rgba(207, 0, 15, 1);">**Video 30: Alleles**</span>  
+
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1355621/sp/135562100/embedIframeJs/uiconf_id/13188771/partner_id/1355621?iframeembed=true&playerId=kaltura_player&entry_id=1_bcyakzbp&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_4av1yu9c" width="640" height="420" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Allele Example FINAL VERSION"></iframe>
+:::
+```
+
+```{asis, include=knitr::is_latex_output()}
+Watch [\textcolor{blue}{Video 30: Alleles}](https://mediaspace.nottingham.ac.uk/media/Allele+Example+FINAL+VERSION/1_bcyakzbp)
+```  
+
+<details><summary>Solution to Example 20.3.1: Alleles.</summary>
+:::{.sol #allele_sol}
+
+We start with finding a suitable choice for $p$.
+
+We can estimate by $p$ by $\hat{p}$ the proportion of alleles of type $A$ in the population:
+<center>
+\[\hat{p}= \frac{2 \times `r O[1]` + `r O[2]`}{2 \times `r N`} = `r round(p,4)`. \]
+</center>
+This is the MLE for $p$.
+
+Therefore the probabilities for each genotype are:
+<center>
+\begin{eqnarray*}
+\mathrm{P} (A/A) &=&p^2 = `r p`^2 = `r round(prob[1],4)` \\
+\mathrm{P} (A/S) &=& 2p(1-p) = 2\times  `r p` \times (1-`r p`)= `r round(prob[2],4)` \\
+\mathrm{P} (S/S) &=&(1-p)^2 = (1-`r p`)^2 = `r round(prob[3],4)`.
+\end{eqnarray*}
+</center>
+
+Multiply the probabilities by $N=`r N`$ to give the <span style="color: rgba(15, 0, 207, 1);">**expected**</span> numbers for each genotype:  
+<center>
+\begin{eqnarray*}
+A/A: N \mathrm{P} (A/A) &=& `r N` \times `r round(prob[1],4)` = `r E[1]` \\
+A/S: N \mathrm{P} (A/S)  &=& `r N` \times `r round(prob[2],4)` = `r E[2]` \\
+S/S: N \mathrm{P} (S/S) &=& `r N` \times `r round(prob[3],4)` = `r E[3]`.
+\end{eqnarray*}
+</center>
+
+The test statistics is  
+<center>
+\begin{eqnarray*} \chi^2_{obs} &=& \sum_i \frac{(O_i - E_i)^2}{E_i} \\
+&=& \frac{(`r O[1]`-`r E[1]`)^2}{`r E[1]`} + \frac{(`r O[2]`-`r E[2]`)^2}{`r E[2]`} + \frac{(`r O[3]`-`r E[3]`)^2}{`r E[3]`}  \\
+&=& `r diff[1]` + `r diff[2]` + `r diff[3]` =  `r chi_test`. \end{eqnarray*}  
+</center>
+
+Since we have $n=3$ categories and estimated 1 parameter $(p)$, we have that the degrees of freedom is:
+<center>
+\[ \nu = `r length(O)` - 1 -1 = `r nu`. \]
+</center>
+
+At $`r alpha`\%$ significance level: $\chi^2_{`r nu`,`r alpha`} = `r chi_crit`$.
+
+Since, $\chi^2_{obs} < \chi^2_{`r nu`,`r alpha`}$,
+there is no evidence to reject the null hypothesis.
+
+The $p$-value is `r p_val` (=$\mathrm{P} (W > \chi^2_{obs})$), where $W$ is a $\chi$-square distribution with $\nu =`r nu`$.
+::: 
+</details>
+
+## Testing Independence {#Hypo_Test_Discrete:Independence}
+
+Suppose that we have two categorical variables, $A$ and $B$, where $A$ can take $m_A$ possible values and $B$ can take $m_B$ possible values. 
+
+Suppose that we have $N$ observations with each observation belonging to one of the $m_A$ categories of variable $A$ and one of the $m_B$ categories of variable $B$. For $i=1,2,\ldots, m_A$ and $j=1,2,\ldots,m_B$, let $O_{ij}$ denote the number of observations which belong to category $i$ of variable $A$ **and** category $j$ of variable $B$.
+
+For example, variable $A$ could be hair colour with categories:  
+1 - Brown  
+2 - Black  
+3 - Blonde  
+and variable $B$ could be eye colour with categories:  
+1 - Brown  
+2 - Blue  
+3 - Green  
+
+Then $N$ will be the total number of observations and $O_{32}$ will be the number of observations (people) with Blonde hair and Blue eyes.
+
+We often want to test the null hypothesis that the variables $A$ and $B$ are independent. For example, in the above scenario, the hypothesis that hair colour and eye colour are independent.
+
+<span style="color: rgba(207, 0, 15, 1);">**What does independence look like?**</span>
+
+Let $p_{i \cdot}$ denote the probability that an individual in the population will belong to category $i$ of variable $A$ and let $p_{\cdot j}$  denote the probability that an individual in the population will belong to category $j$ of variable $B$. Then if variables $A$ and $B$ are <span style="color: rgba(15, 0, 207, 1);">**independent**</span>, the probability of individual belonging <span style="color: rgba(15, 0, 207, 1);">**both**</span> to category $i$ of variable $A$ and category $j$ of variable $B$ is  
+<center>
+\[ p_{i \cdot} \times p_{\cdot j}. \]  
+</center>
+
+Let 
+<center>
+\[N_{i \cdot} = \sum_{j=1}^{m_B} O_{ij}\] 
+</center>  
+denote the total number of observations with variable $A$ in category $i$ and similarly let  
+<center>  
+\[N_{\cdot j} = \sum_{i=1}^{m_A} O_{ij}\]  
+</center>
+denote the total number of observations with variable $B$ in category $j$. 
+ 
+We can estimate $p_{i \cdot}$  by  
+<center>  
+\[ \hat{p}_{i \cdot} = \frac{N_{i \cdot}}{N} \]  
+</center>
+and $p_{\cdot j}$  by 
+<center>
+\[ \hat{p}_{\cdot j} = \frac{N_{\cdot j}}{N}. \]  
+</center>
+
+This will give an estimate of  
+<center>  
+\[ \hat{p}_{i \cdot} \times \hat{p}_{\cdot j} = \frac{N_{i \cdot}}{N} \times  \frac{N_{\cdot j}}{N} = \frac{N_{i \cdot} N_{\cdot j}}{N^2} \]  
+</center>
+for the probability of an individual  belonging <span style="color: rgba(15, 0, 207, 1);">**both**</span> to category $i$ of variable $A$ and category $j$ of variable $B$ under the null hypothesis of independence between variables $A$ and $B$. 
+
+Therefore under the null hypothesis of independence the <span style="color: rgba(15, 0, 207, 1);">**expected**</span> number of observations belonging to category $i$ of variable $A$ and category $j$ of variable $B$ is  
+<center>
+\[ E_{ij} = N \times\hat{p}_{i \cdot} \times \hat{p}_{\cdot j} = \frac{N_{i \cdot} N_{\cdot j}}{N}.  \]
+</center>
+
+The test statistic $\chi_{obs}^2$ is again the sum of the square of the difference between the observed, $O_{ij}$, and the expected, $E_{ij}$, values divided by the expected values. That is,  
+<center>
+\[ \chi^2_{obs} = \sum_{i=1}^{m_A} \sum_{j=1}^{m_B} \frac{(O_{ij} - E_{ij})^2 }{E_{ij}}. \]  
+</center>
+
+The number of degrees of freedom is 
+<center>
+\[ \nu = (m_A -1) (m_B-1). \]  
+</center>
+We reject the null hypothesis of independence between the variables $A$ and $B$ in favour of the alternative hypothesis that the variables $A$ and $B$ are dependent at a significance level $\alpha$, if  
+<center>
+\[ \chi^2_{obs} > \chi^2_{\nu, \alpha}.\]  
+</center>
+
+:::{.ex #Hypo_Test_Discrete:ex:school} 
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Example 20.4.1.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**School children.**</span>  
+\
+A school take part in a study which involves recording the eye
+colour and hair colour of each child.  
+<center>
+\[
+\begin{array}{cc|ccc} \mbox{Observed} & & & \mbox{Eye } & \\ & & \mbox{Brown} & \mbox{Blue} & \mbox{Green} \\ \hline &\mbox{Brown} & 117 & 14 & 21 \\ \mbox{Hair} & \mbox{Black} & 56 & 3& 11 \\  & \mbox{Blonde} & 17 & 41 & 19 \end{array} 
+\]  
+</center>  
+The hypothesis which we wish to test
+is:  
+<center>
+<span style="color: rgba(15, 0, 207, 1);">**Are eye and hair colour independent?**</span>
+</center>
+:::
+\
+
+:::{.sol #school_example}
+The first step is to compute the row and column totals which give the total number of individuals with each hair colour and each eye colour, respectively.
+
+<center>
+\[  \begin{array}{cc|ccc|c} &  &  &  \mbox{Eye} &  \\ &  &  \mbox{Brown} &  \mbox{Blue} &  \mbox{Green} &  \mbox{Total}\\ \hline &  \mbox{Brown} & 117 &  14 &  21&  152 \\ \mbox{Hair} &  \mbox{Black} &  56 &  3&  11&  70 \\ &  \mbox{Blonde} & 17 &  41 &  19 &  70 \\ \hline &  \mbox{Total} &  190 &  58 &  51 &  299 \end{array}. \]
+</center>
+
+Then using $E_{ij} = N_{i \cdot} N_{\cdot j}/N$, we can compute the expected number of individuals in each category under the assumption of independence.
+
+For example, the expected number of people with brown hair and brown eyes is  
+<center>
+\[ E_{11} = \frac{N_{i \cdot} N_{\cdot j}}{N} = \frac{152 \times 190}{299} = 96.6. \]  
+</center>
+
+Therefore  
+<center>
+\[  \begin{array}{cc|ccc|c} \mbox{Expected} &  &  & \mbox{Eye} &  \\ &  &  \mbox{Brown} &  \mbox{Blue} &  \mbox{Green} &  \mbox{Total}\\ \hline &  \mbox{Brown} &  96.6&  29.5 &  25.9&  152 \\ \mbox{Hair} &  \mbox{Black} &  44.5 &  13.6 &  11.9 &  70 \\ &  \mbox{Blonde} &  48.9 &  14.9 &  13.2 &  77 \\ \hline &  \mbox{Total} &  190 &  58 &  51 &  299 \end{array}. \]  
+</center>
+
+We can the compute the differences between the observed and expected values. 
+For example, for brown hair (hair category 1)  and blue eyes (eye category 2), we have that:  
+<center>  
+\[ \frac{(O_{12} - E_{12})^2}{E_{12}} = \frac{(14-29.5)^2}{29.5} = 8.14. \]  
+</center>
+
+Therefore
+<center> 
+\[  \begin{array}{cc|ccc} \frac{(O -E)^2}{E} &  &  & \mbox{Eye} \\ 
+& &  \mbox{Brown} &  \mbox{Blue} &  \mbox{Green} \\ \hline &  \mbox{Brown} &  4.31 &  8.14 &  0.93 \\ \mbox{Hair} &  \mbox{Black} &  2.97 &  8.26 &  2.55 \\ &  \mbox{Blonde} &  20.81 &  45.72 &  2.55 \end{array},\]  
+</center> 
+giving the test statistic to be  
+<center> 
+\[ \chi_{obs}^2 = \sum_{i=1}^3 \sum_{j=1}^3 \frac{(O_{ij} - E_{ij})^2}{E_{ij}}= 93.76. \]  
+</center> 
+
+Under the null hypothesis (independence), the test statistic approximately follow a $\chi^2$ distribution with  
+<center> 
+\[\nu = (m_A -1) (m_B-1) = (3-1)\times (3-1) =4 \] 
+</center> 
+degrees of freedom. 
+
+Given that for a $0.1%$ significance level $(\alpha=0.001)$, the critical value for the $\chi^2$ distribution is $\chi^2_{4, 0.001} =18.467$, there is very strong evidence to reject the null hypothesis. That is, there is very strong evidence that hair colour and eye colour are dependent.  
+:::
+
+## <span style="color: rgba(15, 0, 207, 1);">**Task: Session 11**</span>  {- #Hypo_Test_Discrete:lab}
+
+Attempt the **R Markdown** file for Session 11:  
+[Session 11: Goodness-of-fit](https://moodle.nottingham.ac.uk/course/view.php?id=134982#section-2)
+
+## <span style="color: rgba(15, 0, 207, 1);">**Student Exercises**</span>  {- #Hypo_Test_Discrete:exer}
+
+Attempt the exercises below. 
+
+:::{.exer #exer20.1}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Exercise 20.1.}
+```
+\
+The following data give the frequency distribution of the size of casual groups of people on a spring afternoon in a park. 
+<center>
+\[ \begin{array}{l|cccccc} \mbox{Size of Group} & 1 & 2 & 3 & 4 & 5 & 6 \\ \hline \mbox{Frequency} & 1486 & 694 & 195 & 37 & 10 & 1 \end{array} \]
+</center>
+
+A suggested model for the probability $p_r$ of a group of size $r$ is
+<center>
+\[ p_r = \frac{\mu^r \exp(-\mu)}{r! [1- \exp(-\mu)]}, \hspace{1cm} r=1,2,\ldots, \]
+</center>
+where $\mu$ is estimated to be 0.89 for this data set. 
+
+Does this give a good fit to the data?
+:::
+
+```{asis, include=knitr::is_html_output()}
+<details><summary>Solution to Exercise 20.1.</summary>
+:::{.ans #Question_S20_1} 
+The total number of groups is 
+<center>
+\[ 1486+694+195+37+10+1 = 2423, \]
+</center>
+and the fitted model is 
+<center>
+\[ p_r = \frac{\mu^r \exp(-\mu)}{r! [1- \exp(-\mu)]} \]
+</center>
+with $\mu=0.89$, and so the expected frequenct of a group of size $r$ is $2423 p_r = 1688.3 \frac{(0.89)^r}{r!}$. The expected frequencies are:
+<center>
+\[ \begin{array}{l|cccccc} \mbox{Size of Group} & 1 & 2 & 3 & 4 & 5 & \geq 6 \\ \hline \mbox{Observed Frequency} & 1486 & 694 & 195 & 37 & 10 & 1 \\
+\mbox{Expected Frequency} & 1502.6 & 668.7 & 198.4 & 44.1 & 7.9 & 1.3 \end{array} \]
+</center>
+Note that we have made the last group "$\geq 6$". To ensure no expected frequencies less than 5, we combine groups "5" and "$\geq 6$" to make the group "$\geq 5$" with expected frequency 9.2 and observed frequency 11.  
+There are now 5 groups and the degrees of freedom for the test is  
+<center>
+\[ \nu = \# \mbox{Groups} -1 - \# \mbox{Parameters} = 5 -1-1 =3.\]
+</center>  
+The test statistic is
+<center>
+\[ \chi^2_{obs} = \frac{(1486 -1502.6)^2}{1502.6} +\frac{(694-668.7)^2}{668.7} + \ldots + 
+\frac{(11-9.2)^2}{9.2} =2.712.\]
+</center>   
+Test $H_0$: Probability model is a good fit, with $\alpha =0.05$. We reject $H_0$ if $\chi^2_{obs} \geq \chi^2_{3,0.05} = 7.815$. Therefore we do not reject $H_0$ at the $5\%$ significance level.
+
+**NB.** The probability model  <center>
+\[ p_r = \frac{\mu^r \exp(-\mu)}{r! [1- \exp(-\mu)]}, \hspace{1cm} r=1,2,\ldots, \]
+</center>
+is known as the zero-truncated Poisson distribution.
+:::
+</details>
+```
+\
+
+:::{.exer #exer20.2}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Exercise 20.2.}
+```
+\
+In order to test the lifetime of small batteries used to power clocks, 40 batteries were chosen at random and tested. Their times (in months) in failure were 
+<center>
+\[ \begin{array}{rrrrrrrrrr} 18& 11& 25& 36& 40& 72& 33& 51& 1& 12 \\
+46& 28& 87& 75& 24& 11& 23& 13& 45& 2 \\
+40& 79& 14& 59& 1& 7& 39& 54& 16& 3 \\
+8& 2& 52& 20& 9& 6& 7& 26& 31& 38 \end{array} \]
+</center>
+
+The manufacturer claims that the lifetimes, $X$, have an exponential distribution with mean 30 months. If we assume this, calculate $a$, $b$, $c$ and $d$ such that 
+<center>
+\begin{eqnarray*} \frac{1}{5} &=& P(0 < X <a) = P(a<X<b) = P(b < X <c) \\
+&=& P(c < X< d) = P(d < X < \infty). 
+\end{eqnarray*} 
+</center>
+Construct a table of expected and observed frequencies for the above five intervals and hence test the manufacturer's claim by using a goodness-of-fit test at the $5\%$ level.
+:::
+
+```{asis, include=knitr::is_html_output()}
+<details><summary>Solution to Exercise 20.2.</summary>
+:::{.ans #Question_S20_2} 
+Need to solve $F(x) = 1- \exp(-\lambda x) = p$, where $\lambda = 1/30$ for $p$ taking the values $\frac{1}{5}, \; \frac{2}{5}, \; \frac{3}{5}, \; \frac{4}{5}$. Hence 
+<center>
+\[ x = - \frac{1}{\lambda} \log (1-p) = - 30 \log (1-p), \]  
+</center>
+so $a=6.7$, $b=15.3$, $c=27.5$ and $d=48.3$.  
+Observed frequencies are:
+<center>
+\[ \begin{array}{c|c|c|c|c} 0-6.7 & 6.7-15.3 & 15.3-27.5 & 27.5-48.3 & 48.3+ \\
+\hline 6 & 9 & 7 & 10 & 8 \end{array}. \]
+</center>
+The expected number in each cell is $40 \times \frac{1}{5} =8$. The test statistic is:
+<center>
+\[ \chi^2_{obs} = \frac{(6 -8)^2}{8} +\frac{(9-8)^2}{8} + \ldots + 
+\frac{(8-8)^2}{8} =1.25.\]
+</center>   
+The degrees of freedom is $\nu = 5-1=4$.  
+Now $\chi^2_{4,0.05} =  9.488$, so the test is not significant at a $5\%$ significance level and we do not reject $H_0$. No reason to suppose that the manufacturer's claim is incorrect.
+:::
+</details>
+```
+\
+
+
+
+
+
+:::{.exer #exer20.3}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Exercise 20.3.}
+```
+\
+In a clinical trial to test the effect of a new drug for influenza, 164 people with the condition were split into two equal groups, one of which was given the drug, the
+other a placebo. The table below indicates the response of the treatments.
+<center>
+\[ \begin{array}{l|ccc} & \mbox{Helped} & \mbox{Harmed} & \mbox{No effect} \\
+\hline \mbox{Drug} & 50 & 10 & 22 \\
+\mbox{Placebo} & 42 & 12 & 28 \end{array} \]
+</center>
+Test the hypothesis that the drug is no different from the placebo.
+:::
+
+```{asis, include=knitr::is_html_output()}
+<details><summary>Solution to Exercise 20.3.</summary>
+:::{.ans #Question_S20_3} 
+The marginal totals are:
+<center>
+\[ \begin{array}{l|ccc|c} & \mbox{Helped} & \mbox{Harmed} & \mbox{No effect} & \mbox{Total} \\
+\hline \mbox{Drug} & 50 & 10 & 22 & 82 \\
+\mbox{Placebo} & 42 & 12 & 28 & 82 \\ \hline \mbox{Total} & 92 &  22 & 50 & 164 \end{array}. \]
+</center>
+Therefore the expected frequencies are:
+<center>
+\[ \begin{array}{l|ccc} & \mbox{Helped} & \mbox{Harmed} & \mbox{No effect} \\
+\hline \mbox{Drug} & 46 & 11 & 25 \\
+\mbox{Placebo} & 46 & 11 & 25 \end{array} \]
+</center>
+Hence $\frac{(O_{ij} -E_{ij})^2}{E_{ij}}$ for each cell is
+<center>
+\[ \begin{array}{l|ccc} & \mbox{Helped} & \mbox{Harmed} & \mbox{No effect} \\
+\hline \mbox{Drug} & \frac{16}{46} & \frac{1}{11} & \frac{9}{25} \\
+\mbox{Placebo} & \frac{16}{46} & \frac{1}{11} & \frac{9}{25} \end{array} \]
+</center>
+The test statistic is
+<center>
+\[ \chi^2_{obs} = 2 \left(\frac{16}{46} + \frac{1}{11} + \frac{9}{25} \right) =1.5975  \]
+</center>  
+The degrees of freedom are $(r-1)(c-1)=(2-1)(3-1)=2$ and the critical value is $\chi^2_{2,0.05} = 5.991$ at the $5\%$ significance level. Therefore accept $H_0$, that the drug is no different from placebo, *i.e.* there is no evidence that the response from the drug is different from the placebo.
+:::
+</details>
+```

@@ -1,0 +1,786 @@
+# ANOVA Tables and F Tests {#Sec_Linear_ANOVA}
+
+## Introduction {#Sec_Linear_ANOVA:Intro}
+
+In this section we will focus on the sources of variation in a linear model and how these can be used to determine the most appropriate linear model. We start in [Section 22.2](#Sec_Linear_ANOVA:residuals) by considering the residuals of the linear model and properties of the residuals. In [Section 22.3](#Sec_Linear_ANOVA:SS), we introduce the total sum-of-squares <span style="color: rgba(15, 0, 207, 1);">**SStot**</span> which is a measure of the total amount of variation in the model. This is comprised of two components: the regression sum-of-squares, <span style="color: rgba(15, 0, 207, 1);">**SSreg**</span>, which measures the variability in the observations that is captured by the model and the residual sum-of-squares, <span style="color: rgba(15, 0, 207, 1);">**SSres**</span>, which measures the unexplained variability in the observations. In [Section 22.4](#Sec_Linear_ANOVA:ANOVA), we introduce ANOVA tables for summarising variability in the model and testing null hypotheses. In particular, we consider the Fuel Consumption example, introduced in [Section 21.2](#Sec_Linear_hypo_test:single), and show how the conclusions obtained in [Section 21.4](#Sec_Linear_hypo_test:F) can be presented in the form of an ANOVA table.
+ In [Section 22.5](#Sec_Linear_ANOVA:Compare), we consider two linear models for a given data set, where one model is *nested* within the other model. This allows us to compare two models which lie between the full model (includes all variables) and the null model (excludes all variables). Finally, in [Section 22.6](#Sec_Linear_ANOVA:seq) we extend the comparison of nested models to sequential sum-of-squares to find the most appropriate model out of a range of nested linear models. 
+
+## The residuals {#Sec_Linear_ANOVA:residuals}
+
+Consider the linear model 
+<center>
+$$\mathbf{y} = \mathbf{Z}\mathbf{\beta} + \mathbf{\epsilon}. $$ 
+</center> 
+
+Recall the following model notation:
+
+- $E[\mathbf{\epsilon}] = \mathbf{0}$;  
+- $\text{Var}(\mathbf{\epsilon}) = \sigma^2\mathbf{I}_n$;  
+- $\hat{\mathbf{\beta}} = (\mathbf{Z}^T\mathbf{Z})^{-1} \mathbf{Z}^T\mathbf{y}$ is the *LSE* of $\mathbf{\beta}$;  
+- $\hat{\mathbf{y}} = \mathbf{Z}\hat{\mathbf{\beta}}$ is the $n \times 1$ vector of *fitted values*;  
+- $\hat{\mathbf{y}} = \mathbf{P}\mathbf{y}$, where $\mathbf{P} = \mathbf{Z}(\mathbf{Z}^T\mathbf{Z})^{-1} \mathbf{Z}^T$.  
+
+Let $\mathbf{r} = \hat{\mathbf{\epsilon}} = \mathbf{y} - \hat{\mathbf{y}}$ be the $n \times 1$ vector of *residuals*.  Note that  
+<center>  
+\begin{align*}
+\mathbf{r} &= \mathbf{\hat{\epsilon}} \\ 
+&= \mathbf{y}-\mathbf{\hat{y}} \\ 
+&= \mathbf{y}-\mathbf{Z}\mathbf{\hat{\beta}} \\
+&= \mathbf{y} - \mathbf{P} \mathbf{y} \\
+&= (\mathbf{I}_n - \mathbf{P}) \mathbf{y},
+\end{align*}  
+</center>  
+where $\mathbf{I}_n - \mathbf{P}$ is symmetric, idempotent and has trace $(\mathbf{I}_n - \mathbf{P}) = \text{rank}(\mathbf{I}_n-\mathbf{P})\mathbf{y} = n-p$. Note that $\text{rank}(\mathbf{I}_n-\mathbf{P})\mathbf{y} = n-p$ denotes the degrees of freedom of the residuals and is equal to the number of observations, $n$, minus the number of coefficients (parameters), $p$.
+
+:::{.thm #Sec_Linear_ANOVA:thm:orthogonal}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Theorem 22.2.1.}
+```
+\
+The vector of fitted values is orthogonal to the vector of residuals, that is
+$$\hat{\mathbf{y}}^T \hat{\mathbf{\epsilon}} = \hat{\mathbf{\epsilon}}^T \hat{\mathbf{y}} = 0.$$
+:::
+
+Details of the proof can be omitted. 
+
+<details><summary>Proof of Theorem 22.2.1.</summary>
+:::{.prf}
+
+<center>
+\begin{align*}
+\hat{\mathbf{y}}^T \hat{\mathbf{\epsilon}} &= (\mathbf{P}\mathbf{y})^T (\mathbf{I}_n - \mathbf{P}) \mathbf{y} \\
+&= \mathbf{y}^T \mathbf{P}^T (\mathbf{I}_n - \mathbf{P}) \mathbf{y} \\
+&= \mathbf{y}^T \mathbf{P}^T \mathbf{y} - \mathbf{y}^T \mathbf{P}^T \mathbf{P} \mathbf{y} \\
+&= \mathbf{y}^T \mathbf{P} \mathbf{y} - \mathbf{y}^T \mathbf{P} \mathbf{P} \mathbf{y} \\
+&= \mathbf{y}^T \mathbf{P} \mathbf{y} - \mathbf{y}^T \mathbf{P} \mathbf{y} \\
+&= 0,
+\end{align*}
+</center>
+using that $\mathbf{P}$ is orthogonal ($\mathbf{P}^T = \mathbf{P}$) and  idempotent ($\mathbf{P}^2 =\mathbf{P}$).
+:::
+</details>
+
+Therefore, $\mathbf{y}$ can be written as a linear combination of orthogonal vectors:  
+<center>  
+$$\mathbf{y} = \hat{\mathbf{y}} + \hat{\mathbf{\epsilon}}.$$  
+</center>  
+The normal linear model assumes $\mathbf{\epsilon} \sim N(\mathbf{0}, \sigma^2 \mathbf{I}_n)$.  We would expect the sample residuals, $\hat{\mathbf{\epsilon}}$ to exhibit many of the properties of the error terms. The properties of $\hat{\mathbf{\epsilon}}$ can be explored via graphical methods as in [Section 16.6](#Sec_LinearI:line) and [Lab 9: Linear Models](#Sec_Linear_LSE:lab).
+
+
+
+## Sums of squares {#Sec_Linear_ANOVA:SS}
+
+Let $y_i$ be the $i^{th}$ observation, $\hat{y}_i$ be the $i^{th}$ fitted value and $\bar{y}$ be the mean of the observed values.
+
+```{r,echo=FALSE}
+x=seq(1,9)
+y=c(-2.6,0.3,-0.6,0.8,-1.9,4,2.2,-2.1,3.1)
+plot(x,y,xlab="X",ylab="Y",xlim=c(0,10),ylim=c(-4,4),col="blue",pch=20)
+u=lm(y~x)
+abline(h=mean(y),lty=2,col="blue")
+lines(c(0,10),u$coefficients[1]+u$coefficients[2]*c(0,10),col="blue")
+```
+
+:::{.lem #Sec_Linear_ANOVA:lem:deviance}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Lemma 22.3.1.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Model Deviance**</span>  
+\
+The model deviance is given by 
+<center>
+$$D =  \sum_{i=1}^n (y_i - \hat{y}_i)^2 + \sum_{i=1}^n (\hat{y}_i - \bar{y})^2.$$
+</center>
+:::
+
+:::{.prf}
+We have
+<center>
+\begin{align*}
+(y_i - \bar{y}) &= (y_i - \hat{y}_i) + (\hat{y}_i - \bar{y}), \\[3pt]
+\implies \qquad (y_i - \bar{y})^2 &= \left[ (y_i - \hat{y}_i) + (\hat{y}_i - \bar{y}) \right]^2 \\[3pt]
+&= (y_i - \hat{y}_i)^2 + (\hat{y}_i - \bar{y})^2 + 2(y_i - \hat{y}_i)(\hat{y}_i - \bar{y}), \\[3pt]
+\implies \qquad \sum\limits_{i=1}^n (y_i - \bar{y})^2 &= \sum\limits_{i=1}^n (y_i - \hat{y}_i)^2 + \sum\limits_{i=1}^n (\hat{y}_i - \bar{y})^2 + 2 \sum\limits_{i=1}^n (y_i - \hat{y}_i)(\hat{y}_i - \bar{y}).
+\end{align*}
+</center>
+Now,
+<center>
+\begin{align*}
+\sum\limits_{i=1}^n (y_i - \hat{y}_i)(\hat{y}_i - \bar{y}) &= \sum\limits_{i=1}^n (y_i - \hat{y}_i )\hat{y}_i - \sum\limits_{i=1}^n (y_i - \hat{y}_i)\bar{y} \\[3pt]
+&= \sum\limits_{i=1}^n \hat{\epsilon}_i\hat{y}_i - \bar{y} \sum\limits_{i=1}^n \hat{\epsilon}_i \\[3pt]
+&= \hat{\mathbf{\epsilon}}^T \hat{\mathbf{y}} - \bar{y} \sum\limits_{i=1}^n \hat{\epsilon}_i \\[3pt]
+&= 0-0 \\[3pt]
+&= 0,
+\end{align*}
+</center>
+using that $\hat{\mathbf{\epsilon}}$ and $\hat{\mathbf{y}}$ are orthogonal, and that $\sum\limits_{i=1}^n \hat{\epsilon}_i = 0$ is one of the normal equations.  Therefore,
+<center>
+$$\sum\limits_{i=1}^n \left(y_i - \bar{y} \right)^2 = \sum\limits_{i=1}^n \left( y_i - \hat{y}_i \right) ^2 + \sum\limits_{i=1}^n \left( \hat{y}_i - \bar{y} \right)^2.$$
+</center>
+:::
+\
+
+:::{.def #Sec_Linear_ANOVA:def:SStot}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Definition 22.3.2.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Total sum of squares**</span>  
+\
+Define $\text{SStot} = \sum\limits_{i=1}^n (y_i - \bar{y})^2$ as the <span style="color: rgba(15, 0, 207, 1);">**total sum of squares**</span>.  This is proportional to the total variability in $y$ since $\text{SStot} = (n-1) \text{Var}(y)$.  It does not depend on the choice of predictor variables in $\mathbf{Z}$.
+:::
+\
+
+:::{.def #Sec_Linear_ANOVA:def:SSres}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Definition 22.3.3.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Residual sum of squares**</span>  
+\
+Define $\text{SSres} = \sum\limits_{i=1}^n (y_i - \hat{y}_i)^2$ as the <span style="color: rgba(15, 0, 207, 1);">**residual sum of squares**</span>.  This is a measure of the amount of variability in $y$ the model was unable to explain.  This is equivalent to the deviance of the model, that is $\text{SSres} = D$.
+:::
+\
+
+:::{.def #Sec_Linear_ANOVA:def:SSreg}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Definition 22.3.4.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Regression sum of squares**</span>  
+\ 
+Define $\text{SSreg} = \sum\limits_{i=1}^n (\hat{y}_i - \bar{y})^2$ as the <span style="color: rgba(15, 0, 207, 1);">**regression sum of squares**</span>.  This is the difference between $\text{SStot}$ and $\text{SSres}$ and is a measure of the amount of variability in $y$ the model was able to explain.
+:::
+
+From our above derivations, note 
+<center>
+\begin{align*}
+\sum\limits_{i=1}^n (y_i - \bar{y})^2 &= \sum\limits_{i=1}^n (y_i - \hat{y}_i)^2 + \sum\limits_{i=1}^n (\hat{y}_i - \bar{y})^2 \\
+\text{SStot} &= \text{SSres} + \text{SSreg}
+\end{align*} 
+</center>
+
+:::{.def #Sec_Linear_ANOVA:def:CoD}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Definition 22.3.5.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Coefficient of determination**</span>  
+\
+The *coefficient of determination* is
+<center>
+$$R^2 = \frac{\text{SSreg}}{\text{SStot}}.$$
+</center>
+:::
+
+The coefficient of determination measures the proportion of variability explained by the regression. Additionally note that:
+
+- $0 \leq R^2 \leq 1$;  
+- $R^2 = 1 - \frac{\text{SSres}}{\text{SStot}}$;  
+- $R^2$ is often used as a measure of how well the regression model fits the data: the larger $R^2$ is, the better the fit. One needs to be careful in interpreting what "large" is on a case-by-case basis.  
+
+:::{.def #Sec_Linear_ANOVA:def:CoD_adjusted}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Definition 22.3.6.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Adjusted $R^2$**</span>  
+\
+The *adjusted* $R^2$ is  
+<center>
+$$R_{\text{adj}}^2 = 1 - \frac{\text{SSres}/(n-p)}{\text{SStot}/(n-1)}.$$  
+</center>
+:::
+
+The adjusted $R^2$ is often used to compare the fit of models with different numbers of parameters.
+
+Under the null hypothesis model, $Y_i = \beta_0 + \epsilon_i$ and $\bar{y} = \hat{y}_i$. In this special case,  
+<center>
+\begin{align*}
+\text{SStot} = \text{SSres} &= D, \\
+\text{SSreg} &= 0, \\ 
+R^2 = R_{\text{adj}}^2 &= 0.
+\end{align*}
+</center>
+
+## Analysis of Variance (ANOVA)  {#Sec_Linear_ANOVA:ANOVA}
+
+Recall from [Section 21.4](#Sec_Linear_hypo_test:F) that the $F$ statistic used in the test for the existence of regression is
+$$F = \frac{(D_0 - D_1)/(p-1)}{D_1/(n-p)},$$
+where $D_1$ and $D_0$ are the model deviances or SSres under the alternative and null hypotheses respectively.  We noted above that $D_0$, the deviance under the null hypothesis is equivalent to SStot under any model.
+
+:::{.def #Sec_Linear_ANOVA:def:MSreg}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Definition 22.4.1.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Mean square regression**</span>  
+\
+The <span style="color: rgba(15, 0, 207, 1);">**mean square regression**</span> is the numerator in the $F$ statistic,
+<center>
+$$\text{MSreg} = \frac{D_0 - D_1}{p-1} = \frac{\text{SStot} - \text{SSres}}{p-1} = \frac{\text{SSreg}}{p-1}.$$
+</center>
+:::
+
+:::{.def #Sec_Linear_ANOVA:def:MSreg}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Definition 22.4.2.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Mean square residual**</span>  
+\
+The <span style="color: rgba(15, 0, 207, 1);">**mean square residual**</span> is the denominator in the $F$ statistic,
+<center>
+$$\text{MSres} = \frac{D_1}{n-p} = \frac{\text{SSres}}{n-p}.$$
+</center>
+:::
+
+Note the mean square residual is an unbiased estimator of $\sigma^2$. Similarly, the <span style="color: rgba(15, 0, 207, 1);">**residual standard error**</span>, $\text{RSE} = \sqrt{\text{MSres}}$ is an unbiased estimate of $\sigma$.
+
+The quantities involved in the calculation of the $F$ statistic are usually displayed in an ANOVA table:
+
+|   Source   | Degrees of Freedom | Sum of Squares      | Mean Square                                | F Statistic |
+|   :---:    |       :---:        |     :---:           |                 :---:                      |     :---:   |
+| Regression |       $p-1$        |     $\text{SSreg}$  | $\text{MSreg} = \dfrac{\text{SSreg}}{p-1}$ |     $F = \dfrac{\text{MSreg}}{\text{MSres}}$   |
+| Residual   |        $n-p$        |     $\text{SSres}$  | $\text{MSres} = \dfrac{\text{SSres}}{n-p}$ |        |
+| Total      |        $n-1$        |     $\text{SStot}$  |  |  |
+
+:::{.ex #Sec_Linear_ANOVA:ex:fuel_ex}  
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Definition 22.4.3.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Fuel consumption (continued)**</span>
+\ 
+For the data in [Section 21.2, Example 21.2.1 (Fuel Consumption)](#Sec_Linear_hypo_test:single) the model
+$$\text{fuel} = \beta_0 + \beta_1 \text{dlic} + \beta_2 \text{tax} + \beta_3 \text{inc} + \beta_4 \text{road}$$
+was fitted to the $n=51$ observations with residual standard error, $\text{RSE} = 64.8912$.  Summary statistics show $\text{Var}(\text{fuel}) = 7913.88$.  Complete an ANOVA table and compute $R^2$ for the fitted model.
+:::
+
+We have
+
+- Note $p-1=4$, $n-p=46$ and $n-1=50$;  
+- $\text{SStot} = (n-1)\text{Var}(\text{fuel}) = 50 \times 7913.88 = 395694$;  
+- $\text{MSres} = \text{RSE}^2 = 64.8912^2 = 4210.87$;  
+- $\text{SSres} = (n-p)\text{MSres} = 46 \times 4210.87 = 193700$;  
+- $\text{SSreg} = \text{SStot} - \text{SSres} = 395694-193700 = 201994$;  
+- $\text{MSreg} = \text{SSreg}/(p-1) = 201994/4 = 50498.50$;  
+- $F = \text{MSreg}/\text{MSres} = 50498.5/4210.87 = 11.99$.  
+
+Hence the completed ANOVA table is
+
+| Source | Degrees of Freedom | Sum of Squares | Mean Square | F statistic |
+| :---: | :---: | :---: | :---: | :---: |
+|Regression | $4$ | $201994$ | $50498.50$ | $11.99$ |
+|Residual   | $46$ | $193700$ | $4210.87$ | |
+|Total      | $50$ | $395694$ | | |
+
+We compare the computed $F$-statistic, 11.99, with a $F_{p-1,n-p} =F_{4,46}$ distribution to obtain a $p$-value of $9.331 \times 10^{-7} = P(F_{4,46} >11.99)$. That is, if the null hypothesis (no regression parameters $\beta_1 = \ldots = \beta_4 =0$) were true, there is probability $9.331 \times 10^{-7}$ (just under one in a million) of observing an $F$-statistic larger than 11.99.
+
+
+Finally, $R^2 = \frac{\text{SSreg}}{\text{SStot}} = \frac{201994}{395694} = 0.5105$.
+
+
+## Comparing models {#Sec_Linear_ANOVA:Compare}
+
+Consider two models, $M_1$ and $M_2$, where $M_2$ is a simplification of $M_1$.  For example, 
+<center>
+\begin{align*}
+M_1: & \quad Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_3 + \beta_4 X_4 + \epsilon, \\
+M_2: & \quad Y = \beta_0 + \beta_2 X_2 + \beta_4 X_4 + \epsilon.
+\end{align*}
+</center>
+
+The residual sum of squares from model $M_1$ will always be less then $M_2$, but we can test the hypotheses:
+$$ H_0: \beta_1 = \beta_3 = 0 \quad \text{ vs. } \quad H_1: \beta_1 \neq 0 \text{ or } \beta_3 \neq 0 $$
+at significance level $\alpha$ to test if removing these terms significantly increases the residual sum of squares.
+
+Let $D_1 = \sum\limits_{i=1}^n (y_i - \hat{y}_i)^2$ be the model deviance, or SSres, for model $M_1$.
+
+Let $D_2 = \sum\limits_{i=1}^n (y_i - \hat{y}_i)^2$ be the model deviance, or SSres, for model $M_2$.
+
+The *decision rule* is to reject $H_0$ if
+$$ F = \frac{(D_2 - D_1) / q}{D_1 / (n-p)} > F_{q,n-p,\alpha},$$
+where $n$ is the number of observations, $p$ is the number of parameters in $M_1$ and $q$ is the number of parameters that are fixed to reduce $M_1$ to $M_2$.
+
+For the example above, $p = 5$ and $q = 2$.
+
+Watch [Video 32](#video32) for a work through of comparing models using the $F$-distribution. The video uses [Example 22.5.1 (Fuel consumption - continued)](#Sec_Linear_ANOVA:ex:fuel_exII) given below.
+
+```{asis, include=knitr::is_html_output()}
+:::{.des #video32}
+<span style="color: rgba(207, 0, 15, 1);">**Video 32: Model comparison.**</span>  
+
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/1355621/sp/135562100/embedIframeJs/uiconf_id/13188771/partner_id/1355621?iframeembed=true&playerId=kaltura_player&entry_id=1_dhza0pb9&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_gp0264uy" width="640" height="420" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Model Comparison FINAL VERSION"></iframe>
+:::
+```
+
+```{asis, include=knitr::is_latex_output()}
+Watch [\textcolor{blue}{Video 32: Model comparison}](https://mediaspace.nottingham.ac.uk/media/Model+Comparison+FINAL+VERSION/1_dhza0pb9)
+``` 
+
+:::{.ex #Sec_Linear_ANOVA:ex:fuel_exII}  
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Example 22.5.1.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Fuel consumption (continued)**</span>
+\
+Let Model 1 be
+$$ \text{fuel} = \beta_0 + \beta_1 \text{dlic} + \beta_2 \text{tax} + \beta_3 \text{inc} + \beta_4 \text{road},$$
+and let Model 2 be
+$$ \text{fuel} = \beta_0 + \beta_1 \text{dlic} + \beta_3 \text{inc}.$$
+The residual sum of squares is $193700$ for Model 1 and $249264$ for Model 2.  Test which model fits the data better.
+:::
+
+
+:::{.ans}
+The question is equivalent to testing the hypotheses:
+<center>
+$$ H_0: \beta_2 = \beta_4 = 0 \quad \text{ vs. } \quad H_1: \beta_2 \neq 0 \text{ or } \beta_4 \neq 0,$$
+</center>
+at $\alpha = 0.05$.  The decision rule is to reject $H_0$ if
+
+<center>
+$$ F = \frac{(D_2 - D_1) / q}{D_1 / (n-p)} > F_{q,n-p,\alpha} = F_{2,46,0.05} = 3.20.$$
+</center>
+Substituting in the data gives,
+
+<center>
+$$ F = \frac{(249264 - 193700)/2}{193700/(51-5)} = 6.598.$$
+</center>
+Consequently, we will reject $H_0$. Model 1 fits the data better at $\alpha = 0.05$. 
+
+We note that the $p$-value is $0.0048 = P(F_{2,46} >6.598)$, which gives very strong support in favour of Model 1.
+:::
+\
+
+Let's consider the more general case where the basic model $M_1$ is 
+<center>
+$$Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_{p-1} X_{p-1} + \epsilon.$$
+</center>
+
+Denote
+<center>
+$$ \text{SSreg}(M_1) = \sum_{i=1}^n (\hat{y}_i - \bar{y})^2 = R(\beta_1,\beta_2,\dots,\beta_{p-1} | \beta_0),$$
+</center>
+assuming there is a constant in the model.
+
+Our goal is to build a regression model which *best* describes the response variable. Hence we would like to explain as much of the variance in $Y$ as possible, yet keep the model as simple as possible. This is known as the <span style="color: rgba(15, 0, 207, 1);">**Principle of Parsimony**</span>.  Consequently we want to determine which explanatory variables are worthwhile to include in the final model.
+
+The idea is that explanatory variables should be included in the model if the extra portion of the regression sum of squares, called the extra sum of squares, which arises from their inclusion in the model is relatively large compared to the unexplained variance in the model, residual sum of squares.
+
+Consider a second model $M_2$ which is a simplification of $M_1$, specifically  
+<center>
+$$Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_{k-1} X_{k-1} + \epsilon,$$
+</center>
+where $k < p$.  Then  
+<center>  
+$$\text{SSreg}(M_2) = R(\beta_1,\beta_2,\dots,\beta_{k-1} | \beta_0).$$  
+</center>
+
+:::{.def #Sec_Linear_ANOVA:def:ess}  
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Definition 22.5.2.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Extra sum of squares**</span>
+\
+The *extra sum of squares* due to the inclusion of the terms $\beta_k X_k + \cdots + \beta_{p-1} X_{p-1}$ in the model is  
+<center>  
+$$\text{SSreg}(M_1) - \text{SSreg}(M_2).$$  
+</center>  
+It is denoted  
+<center>  
+$$R(\beta_k,\dots,\beta_{p-1} | \beta_0,\beta_1,\dots,\beta_{k-1}) = R(\beta_1,\beta_2,\dots,\beta_{p-1} | \beta_0) - R(\beta_1,\beta_2,\dots,\beta_{k-1} | \beta_0). $$  
+</center>
+:::
+
+The extra sum of squares has $q=p-k$ degrees of freedom, where $q$ is the number of explanatory variables added to the reduced model to make the full model.
+
+We can test the hypotheses:
+
+- $H_0:$ The reduced model, $M_2$, best describes the data;  
+- $H_1:$ The full model, $M_1$, best describes the data.  
+
+The <span style="color: rgba(15, 0, 207, 1);">**decision rule**</span> is to reject $H_0$ if 
+<center>
+$$ F = \frac{R(\beta_k,\dots,\beta_{p-1} |\beta_0,\dots,\beta_{k-1})/q}{\text{SSres}(M_1)/(n-p)} > F_{q,n-p,\alpha}.$$  
+</center>  
+
+Rejecting $H_0$ implies the full model describes the data better, so we should include the variables $X_k,\dots,X_{p-1}$ in our model.
+
+The test for the existence of regression is a special case of this type of test, where  
+<center>
+$$H_0: \beta_1=\beta_2=\cdots=\beta_p=0,$$   
+</center>  
+that is, the reduced model is $Y = \beta_0 + \epsilon$. Note that $\text{SSreg}(M_1) = R(\beta_1,\beta_2,\dots,\beta_{p-1} | \beta_0 )$ is the extra sum of squares in this case.
+
+## Sequential sum of squares {#Sec_Linear_ANOVA:seq}
+
+:::{.def  #Sec_Linear_ANOVA:def:sss}  
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Definition 22.6.1.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Sequential sum of squares**</span>
+\
+The *sequential sum of squares* for each $j$, denoted $\text{SSseq}_{i}$, is  
+<center>
+$$R(\beta_j | \beta_0,\beta_1,\dots,\beta_{j-1}) = R(\beta_1,\beta_2,\dots,\beta_j | \beta_0) - R(\beta_1,\beta_2,\dots,\beta_{j-1} | \beta_0) $$  
+</center>
+and is the extra sum of squares that one incurs by adding the explanatory variable $X_j$ to the model given that $X_1,\dots,X_{j-1}$ are already present.
+:::
+
+The sequential sum of squares is often given in addition to the basic ANOVA table.
+
+| Source | Degrees of Freedom | Sequential Sum of Squares | Mean Square | F statistic |
+| :---: | :---: | :---: | :---: | :---: |
+| $X_1$ | $\text{df}_1$ | $\text{SSseq}_1$ | $\text{MSseq}_1 = \frac{\text{SSseq}_1}{\text{df}_1}$ | $F = \frac{\text{MSseq}_1}{\text{MSres}}$ |
+| $X_2$ | $\text{df}_2$ | $\text{SSseq}_2$ | $\text{MSseq}_2 = \frac{\text{SSseq}_2}{\text{df}_2}$ | $F = \frac{\text{MSseq}_2}{\text{MSres}}$ |
+| $\vdots$  | $\vdots$ | $\vdots$ | $\vdots$ | $\vdots$ |
+| $X_{p-1}$ | $\text{df}_{p-1}$ | $\text{SSseq}_{p-1}$ | $\text{MSseq}_{p-1} = \frac{\text{SSseq}_{p-1}}{\text{df}_{p-1}}$ | $F = \frac{\text{MSseq}_{p-1}}{\text{MSres}}$ |
+| Residuals | $n-p$ | $\text{SSres}$ | $\text{MSres} = \frac{\text{SSres}}{n-p}$ | |
+
+Note that given the sequential sum of squares, one can calculate  
+<center>
+$$R(\beta_j,\beta_{j+1},\dots,\beta_k | \beta_0,\beta_1,\dots,\beta_{j-1}) = \sum\limits_{i=j}^k \text{SSseq}_i.$$  
+</center>
+However, one cannot calculate the nonsequential sums of squares in this manner, such as  
+<center>  
+$$R(\beta_1,\beta_3,\beta_5 | \beta_0,\beta_2,\beta_4).$$
+</center>  
+
+
+Note that in the fuel example 
+<center>  
+$$ \text{SSreg} = R(\beta_1 | \beta_0) + R(\beta_2 | \beta_0,\beta_1) + R(\beta_3 | \beta_0,\beta_1,\beta_2) + R(\beta_4 | \beta_0,\beta_1,\beta_2,\beta_3).$$  
+</center>  
+
+:::{.def  #Sec_Linear_ANOVA:def:sss}  
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Definition 22.6.2.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Partial sum of squares**</span>
+\
+The *partial sum of squares* for each $j$ is
+\begin{align*}
+R(\beta_j | \beta_0,\beta_1,&\dots,\beta_{j-1},\beta_{j+1},\dots,\beta_{p-1}) \\
+&=  R(\beta_1,\beta_2,\dots,\beta_{p-1} | \beta_0) - R(\beta_1,\dots,\beta_{j-1},\beta_{j+1},\dots,\beta_{p-1} | \beta_0)
+\end{align*}
+and is the extra sum of squares that one incurs by adding the explanatory variable $X_j$ to the model given that $X_1,\dots,X_{j-1},X_{j+1},\dots,X_{p-1}$ are already present.
+:::
+
+Note that the $F$ test for testing the hypotheses:  
+<center>  
+$$ H_0: \beta_j = 0 \quad \text{ vs. } \quad H_1: \beta_j \neq 0 $$  
+</center>
+at level $\alpha$, is equivalent to the $t$ test for the individual parameter since $t_{n-p}^2 = F_{1,n-p}$.
+
+```{r,echo=FALSE}
+options(scipen=99)
+
+#library(alr4) # Set library
+
+#data("fuel2001") # Load in fuel data
+
+#X=read.csv("datasets/Fuel2001.csv",row.names = 1)
+
+X=matrix(0,ncol=9,nrow=51)
+X=as.data.frame(X)
+row.names(X)=c("AL","AK","AZ","AR","CA","CO","CT","DE","DC","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA",
+"ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR",
+"PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY")
+
+colnames(X)=c("Drivers","FuelC","Income","Miles","MPC","Pop","Tax","Dlic","Fuel")  
+
+X$Drivers=c(3559897,472211,3550367,1961883,21623793,3287922,2650374,564099,328094,12743403
+,5833802,787820,896666,7809500,4116924,1978748,1871301,2756634,2718209,942556
+,3451966,4610666,6976982,2961236,1859487,3862300,683351,1267284,1420714,941829
+,5715089,1231701,11014805,5884651,455921,7736115,2172394,2534464,8226202,660435
+,2849885,544997,4188317,13045727,1495887,515348,4920753,4237845,1316955,3667497,370713)
+
+X$FuelC=
+c(2382507,235400,2428430,1358174,14691753,2048664,1458279,382043,148769,7471117
+,4693703,404684,609051,5015217,3120985,1475812,1236951,2085629,2151437,590093
+,2460545,2720510,4904689,2545530,1476477,2958880,467567,812247,945643,662475
+,3911837,885829,5536612,4060592,334544,5028276,1751701,1487269,5024671,399113
+,2217141,402472,2837567,10637488,945531,331183,3765718,2622633,818516,2418289
+,321847)
+
+X$Income=c(23.471,30.064,25.578,22.257,32.275,32.949,40.640,31.255,37.383,28.145,27.940,28.221,24.180
+,32.259,27.011,26.723,27.816,24.294,23.334,25.623,33.872,37.992,29.612,32.101,20.993,27.445
+,22.569,27.829,30.529,33.332,36.983,22.203,34.547,27.194,25.068,28.400,23.517,28.350,29.539
+,29.685,24.321,26.115,26.239,27.871,23.907,26.901,31.162,31.528,21.915,28.232,27.230)
+
+X$Miles=c(94440,13628,55245,98132,168771,85854,20910,5814,1534,117299,115534,4278,46310,
+138359,94038,113437,134725,78914,60829,22672,30622,35408,121790,132280,73701,124324
+,69503,92766,38658,15508,36175,59883,112961,101195,86591,117267,112694,66784,119985
+,6053,66167,83560,87826,300767,42208,14291,70721,80985,36997,112663,27292)
+
+X$MPC=c(12737.00,7639.16,9411.55,11268.40,8923.89,9722.73,9021.35,10891.30,6555.94,9531.23
+,13248.60,7108.75,10879.40,8239.09,12916.90,10258.40,10656.70,11301.70,9505.31,11320.00
+,9673.67,8310.86,9959.45,10728.30,12286.80,12012.80,10965.00,10567.40,9796.15,
+9923.45
+,8099.59,12571.40,6876.49,11186.00,11322.40,9371.29,12612.90,9907.26,8092.07,7625.00
+,11469.60,11298.90,11610.60,10458.40,11291.30,15688.40,10259.50,8981.59,10946.10,10337.40,17494.90)
+
+X$Pop=c(3451586,457728,3907526,2072622,25599275,3322455,2651452,610269,468575,12741821
+,6250708,949184,969166,9530327,4682392,2281002,2058489,3161283,3394854,1010273
+,4085342,5008007,7628170,3782817,2160165,4292175,701423,1314974,1537896,960593
+,6545471,1370134,14797284,6291182,502176,8789530,2665966,2673283,9693987,827474
+,3115130,577391,4445987,15618097,1598531,479265,5529436,4552631,1455370,4156609
+,381882)
+
+X$Tax=c(18.00,8.00,18.00,21.70,18.00,22.00,25.00,23.00,20.00,13.60,7.50,16.00,25.00,19.00,15.00,20.00
+,21.00,16.40,20.00,22.00,23.50,21.00,19.00,20.00,18.40,17.00,27.00,24.50,24.75,19.50,10.50,18.50
+,22.00,24.10,21.00,22.00,17.00,24.00,26.00,29.00,16.00,22.00,20.00,20.00,24.50,20.00,17.50,23.00
+,25.65,27.30,14.00)
+
+X$Dlic=c(103.13801,103.16411,90.85972,94.65706,84.47033,98.96062,99.95934,92.43448
+,70.01953,100.01242,93.33026,82.99971,92.51934,81.94367,87.92352,86.74907
+,90.90653,87.19985,80.06851,93.29716,84.49638,92.06589,91.46338,78.28124
+,86.08079,89.98468,97.42352,96.37331,92.38037,98.04662,87.31364,89.89639
+,74.43802,93.53808,90.78909,88.01512,81.48619,94.80717,84.85881,79.81338
+,91.48527,94.38959,94.20444,83.52956,93.57885,107.52882,88.99195,93.08562
+,90.48936,88.23291,97.07527)
+
+X$Fuel=c(690.2644,514.2792,621.4751,655.2927,573.9129,616.6115,549.9926,626.0239,317.4924,586.3461
+,750.9074,426.3494,628.4279,526.2377,666.5365,647.0016,600.9024,659.7413,633.7348,584.0926
+,602.2862,543.2321,642.9706,672.9191,683.5020,689.3661,666.5978,617.6905,614.8940,689.6521
+,597.6403,646.5273,374.1641,645.4418,666.1887,572.0756,657.0605,556.3455,518.3286,482.3269
+,711.7331,697.0528,638.2311,681.1001,591.4999,691.0227,681.0311,576.0697,562.4109,581.7937
+,842.7918)
+
+#X=transform(X,Dlic=100*Drivers/Pop,Fuel=1000*FuelC/Pop,Income=Income/1000) 
+# Transform covariates
+
+
+# Model k (Mk) includes variables 1,2,..,k with M0 denoting the null model.
+
+# Fitting the models sequentially from the null model M0 to the full model M4.
+
+M0=lm(Fuel~1,data=X)
+M1=lm(Fuel~Dlic,data=X)
+M2=lm(Fuel~Dlic+Tax,data=X)
+M3=lm(Fuel~Dlic+Tax+Income,data=X)
+M4=lm(Fuel~Dlic+Tax+Income+log(Miles),data=X)
+
+# Sequential sum-of-squares
+
+SS1=round(sum(M0$residuals^2)-sum(M1$residuals^2),0)
+SS2=round(sum(M1$residuals^2)-sum(M2$residuals^2),0)
+SS3=round(sum(M2$residuals^2)-sum(M3$residuals^2),0)
+SS4=round(sum(M3$residuals^2)-sum(M4$residuals^2),0)
+SSres=round(sum(M4$residuals^2),0)
+
+MSres=round(sum(M4$residuals^2)/M4$df.residual,0)
+
+
+Q2=lm(Fuel~Dlic+Income+log(Miles),data=X) # Fit linear model without tax
+
+SQ2=round(sum(Q2$residuals^2),0)
+
+F_stat=round((sum(Q2$residuals^2)-sum(M4$residuals^2))/MSres,2) # F-statistic
+
+#1-pf(F_stat,1,M4$df.residual) # p-value - equivalent to the p-value in the table
+
+```
+
+
+:::{.ex  #Sec_Linear_ANOVA:ex:fuel_exIII}  
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Example 22.6.3.}
+```
+<span style="color: rgba(207, 0, 15, 1);">**Fuel consumption (continued)**</span>
+\  
+For the data in [Section 21.2, Example 21.2.1 (Fuel Consumption)](#Sec_Linear_hypo_test:single), we have the following ANOVA output table:  
+
+| Source    | Degrees of Freedom | Sequential Sum of Square | Mean Square |
+| :--:    | :---: | :---: | :---: |
+| dlic      |  1 |  `r SS1` | `r SS1` |
+| tax       |  1 |  `r SS2` | `r SS2` |
+| inc       |  1 |  `r SS3` | `r SS3` |
+| road      |  1 |  `r SS4` | `r SS4` |
+| Residuals | `r M4$df.residual` | `r SSres` |  `r MSres` |
+
+We want to test the following hypotheses:
+
+- $H_0: \quad  Y = \beta_0 + \beta_1 \text{dlic} + \beta_2 \text{tax} + \epsilon$;  
+- $H_1: \quad Y = \beta_0 + \beta_1 \text{dlic} + \beta_2 \text{tax} + \beta_3 \text{inc} + \beta_4 \text{road} + \epsilon$.  
+:::
+\
+
+The decision rule is to reject $H_0$ if  
+<center>
+$$ F = \frac{R(\beta_3,\beta_4 | \beta_0,\beta_1,\beta_2)/2}{\text{SSres}/(n-p)} > F_{2,n-p,0.05}$$
+</center>
+where  
+<center>
+\begin{align*}
+R(\beta_3,\beta_4 | \beta_0,\beta_1,\beta_2) &= R(\beta_3 | \beta_0,\beta_1,\beta_2) + R (\beta_4 | \beta_0,\beta_1,\beta_2,\beta_3) \\
+&= 61408 + 34573 \\
+&= 95981.
+\end{align*} 
+</center>
+Hence,
+$$F = \frac{95981/2}{4211} = 11.40 > F_{2,46,0.05} = 3.20.$$
+Therefore we will reject $H_0$ at $\alpha = 0.05$. Including the variables *inc* and *road* significantly improves the model. The $p$-value is    $P(F_{2,46} > 11.40) = 9.53 \times 10^{-5}$.
+
+To compare the linear models:
+
+- $H_0: \quad  Y = \beta_0 + \beta_1 \text{dlic}  + \beta_3 \text{inc} + \beta_4 \text{road} + \epsilon$;  
+- $H_1: \quad Y = \beta_0 + \beta_1 \text{dlic} + \beta_2 \text{tax} + \beta_3 \text{inc} + \beta_4 \text{road} + \epsilon$   
+
+is equivalent to the hypotheses: $H_0 : \beta_2 = 0$ vs. $H_1: \beta_2 \neq 0$.
+
+The residual sum-of-squares under $H_0$ and $H_1$ are `r SQ2` and `r SSres`, respectively. Since the residual degrees of freedom under the full model is `r M4$df.residual` the $F$-statistic is:  
+<center>  
+$$ F = \frac{`r SQ2` - `r SSres`}{`r SSres`/`r M4$df.residual`} = `r F_stat`.$$  
+</center>  
+
+The $p$-value is ${\rm P} (F_{1,46} > `r F_stat`) = `r 1- round(pf((sum(Q2$residuals^2)-sum(M4$residuals^2))/MSres,1,M4$df.residual),4)`$ which coincides with the $p$-value for testing $\beta_2 =0$ in [Section 21.2, Example 21.2.1 (Fuel Consumption)](#Sec_Linear_hypo_test:single).
+
+## <span style="color: rgba(15, 0, 207, 1);">**Task: Session 12**</span>  {- #Sec_Linear_ANOVA:lab}
+
+Attempt the **R Markdown** file for Session 12:  
+[Session 12: Linear Models II](https://moodle.nottingham.ac.uk/course/view.php?id=134982#section-2)
+
+## <span style="color: rgba(15, 0, 207, 1);">**Student Exercises**</span>  {- #Sec_Linear_ANOVA:exer}
+
+Attempt the exercises below. 
+
+:::{.exer #exer22.1}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Exercise 22.1.}
+```
+\
+The following R output is from the analysis of 43 years of weather records in California.  10 values denoted {i?} for $i=1,\dots,10$ have been removed.  What are the 10 missing values?
+
+````{verbatim}
+Call:
+lm(formula = BSAAM ~ APMAM + OPRC)
+
+Residuals:
+     Min       1Q   Median       3Q      Max
+-21893.1  -6742.5   -654.1   6725.7  27061.8
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)
+(Intercept)  16703.9     5033.7   3.318  0.00194 **
+APMAM          815.0      501.6   1.625  0.11206
+OPRC          4589.7      309.0    {1?}     {3?} {4?}
+---
+Signif. codes:   0 *** 0.001 ** 0.01 * 0.05 . 0.1   1
+
+Residual standard error: 9948 on {2?} degrees of freedom
+Multiple R-squared: {7?},     Adjusted R-squared: 0.848
+F-statistic: {8?} on {9?} and {10?} DF,  p-value: < 2.2e-16
+
+Analysis of Variance Table
+
+Response: BSAAM
+
+          Df     Sum Sq    Mean Sq F value    Pr(>F)
+APMAM      1 1.5567e+09 1.5567e+09  15.730 0.0002945 ***
+OPRC       1 2.1836e+10 2.1836e+10    {6?} < 2.2e-16 ***
+Residuals 40 3.9586e+09       {5?}
+---
+Signif. codes: 0   *** 0.001 ** 0.01 * 0.05 . 0.1 1
+````
+:::
+
+```{asis, include=knitr::is_html_output()}
+<details><summary>Solution to Exercise 22.1.</summary>
+:::{.ans #Question_S22_1} 
+1. $t = \dfrac{\hat{\beta}_j}{\text{SE}(\hat{\beta}_j)} = \dfrac{4589.7}{309.0} = 14.852$.  
+2. $\text{df} = n-p = 43-3 =40$.  
+3. $p = P(|t_{40}|>14.583) = 2P(t_{40}>14.853) < 0.001$.  
+4. $p$-values less than 0.001 have significance code ***.  
+5. $\text{MSres} = \dfrac{\text{SSres}}{n-p} = \dfrac{3.9586\times10^9}{40} = 9.8965 \times 10^7$.  
+6. $F = \dfrac{ R(\beta_2|\beta_0,\beta_1)/q }{ \text{SSres}/(n-p) } = \dfrac{2.1836 \times 10^{10}}{9.8965 \times 10^7} = 220.644$.  
+7. $\text{SSreg} = 1.5567 \times 10^9 + 2.1836 \times 10^{10} = 2.3393\times 10^{10}$ and \
+$\text{SStot} = \text{SSreg}+\text{SSres} = 2.3393\times 10^{10} + 3.9586 \times 10^9 = 2.7351 \times 10^{10}$ so $R^2 = \dfrac{\text{SSreg}}{\text{SStot}} = \dfrac{2.3393\times 10^{10}}{2.7351 \times 10^{10}} = 0.855$.  
+8. $F = \dfrac{(D_0-D_1)/(p-1)}{D_1/(n-p)} = \dfrac{(2.7351\times 10^{10} - 3.9586 \times 10^9)/2}{3.9586 \times 10^9/40} = 118.19$  
+9. $p-1 = 2$.  
+10. $n-p = 40$.  
+:::
+</details>
+```
+\
+
+:::{.exer #exer22.2}
+```{asis, include=knitr::is_latex_output()} 
+\textcolor{red}{Exercise 22.2.}
+```
+\
+An experiment was conducted to find out how long is a piece of string.  Six pieces of string were measured along with their colour.
+<center>
+$$\begin{array}{c|l}
+\mbox{Length} & \mbox{Colour} \\ \hline
+9 & \mbox{Orange} \\
+28 & \mbox{Grey} \\
+8 & \mbox{Pink} \\
+31 & \mbox{Grey} \\
+6 & \mbox{Pink} \\
+11 & \mbox{Orange}
+\end{array} $$
+</center>
+
+a. Write down an appropriate model to test for an association between colour and the length of string.  Hence write down the design matrix.  
+b. Find the least squares estimates for the parameters in your model.  You may find the following inverse helpful: 
+<center>
+$$\begin{pmatrix} 6 & 2 & 2 \\ 2 & 2 & 0 \\ 2 & 0 & 2 \end{pmatrix}^{-1} = \frac{1}{2} \begin{pmatrix} 1 & -1 & -1 \\ -1 & 2 & 1 \\ -1 & 1 & 2 \end{pmatrix}.$$
+</center>  
+c. Find the fitted values and residuals for your model.  
+d. Calculate the ANOVA table and then use it to test the hypothesis that colour affects the length of string.  
+:::
+
+```{asis, include=knitr::is_html_output()}
+<details><summary>Solution to Question 2.</summary>
+:::{.ans #Question_S22_2} 
+a. An appropriate model is 
+<center> 
+$$ y_i = \begin{cases} \alpha + \epsilon_i & \text{if the string is orange,} \\ \alpha + \beta + \epsilon_i & \text{if the string is grey,} \\ \alpha+\gamma + \epsilon_i & \text{if the string is pink.} \end{cases}$$  
+</center>
+Hence the design matrix for $\mathbf{y} = (9, 28, 8, 31, 6, 11)^T$ and $\mathbf{\beta} = (\alpha, \beta, \gamma)^T$ is  
+<center>
+$$ \mathbf{Z} = \begin{bmatrix}
+1 & 0 & 0 \\
+1 & 1 & 0 \\
+1 & 0 & 1 \\
+1 & 1 & 0 \\
+1 & 0 & 1 \\
+1 & 0 & 0 \end{bmatrix}.$$  
+</center>  
+b. The least squares estimate is $\hat{\mathbf{\beta}} = (\mathbf{Z}^T\mathbf{Z})^{-1} \mathbf{Z}^T\mathbf{y}$ where  
+<center>
+$$\mathbf{Z}^T\mathbf{Z} = \begin{pmatrix} 6 & 2 & 2 \\ 2 & 2 & 0 \\ 2 & 0 & 2 \end{pmatrix} \qquad \text{and} \qquad \mathbf{Z}^T\mathbf{y} = \begin{pmatrix} 93 \\ 59 \\ 14 \end{pmatrix}.$$  
+</center>  
+Hence  
+<center>  
+$$ \hat{\mathbf{\beta}} = (\mathbf{Z}^T\mathbf{Z})^{-1} \mathbf{Z}^T\mathbf{y} = \begin{pmatrix} 1 & -1 & -1 \\ -1 & 2 & 1 \\ -1 & 1 & 2 \end{pmatrix} \begin{pmatrix} 93 \\ 59 \\ 14 \end{pmatrix} = \begin{pmatrix} 10 \\ 19.5 \\ -3 \end{pmatrix}.$$  
+</center>  
+c. The fitted values and residuals are  
+<center>  
+$$ \hat{\mathbf{y}} = \mathbf{Z}\mathbf{\hat{\beta}} = \begin{bmatrix}
+1 & 0 & 0 \\
+1 & 1 & 0 \\
+1 & 0 & 1 \\
+1 & 1 & 0 \\
+1 & 0 & 1 \\
+1 & 0 & 0 \end{bmatrix} \begin{pmatrix} 10 \\ 19.5 \\ -3 \end{pmatrix} = \begin{bmatrix}
+10 \\ 29.5 \\ 7 \\ 29.5 \\ 7 \\ 10 \end{bmatrix} \quad \text{and} \quad \hat{\mathbf{\epsilon}} = \mathbf{y} - \hat{\mathbf{y}} = \begin{bmatrix}
+-1 \\ -1.5 \\ 1 \\ 1.5 \\ -1 \\ 1 \end{bmatrix}$$  
+</center>  
+respectively.  
+d. There are $n=6$ observations and $p=3$ parameters.  The sums of squares are  
+<center>  
+\begin{eqnarray*}
+\text{SStot} &=& (n-1)\text{Var}(y) = \sum_{i=1}^n y_i^2 - \frac{1}{n} \left(\sum_{i=1}^n y_i\right)^2 = 2047 - \frac{93^2}{6} = 605.5 \\
+\text{SSres} &=& \hat{\epsilon}^T \hat{\epsilon} = (-1)^2 + (-1.5)^2 + 1^2 + 1.5^2 +(-1)^2 + 1^2 = 8.5 \\
+\text{SSreg} &=& \text{SStot}-\text{SSres} = 605.5-8.5 = 597
+\end{eqnarray*}  
+</center>
+Hence the ANOVA table is
+<center>
+\[ \begin{array}{l|r|r|r|r}
+\mbox{Source} & \mbox{Df} & \mbox{Sum Sq} & \mbox{Mean Sq} & \mbox{F} \\ \hline
+\mbox{Regression} & 2& 597.0 & 298.500 & 105.35\\
+\mbox{Residual}   & 3 & 8.5 & 2.833 & \\ \hline
+\mbox{Total}      & 5 & 605.5 & &
+\end{array} \]
+</center>  
+The test for the existence of regression has statistic $F=105.35$ and critical value $F_{2,3,0.05} = 9.55$.  Hence, we reject the null hypothesis and conclude that colour does affect the length of a piece of string.
+:::
+</details>
+```
